@@ -1,13 +1,12 @@
 import json
 import argparse
 import os
-import openai
 from stqdm import stqdm
 from utils import dotdict
 
 
 from prompts import critic_zero_shot_prompt, critic_few_shot_prompt, critic_format_constrain
-from model import gpt, OPENAI_API_KEY
+from model import gpt
 
 completion_tokens = 0
 prompt_tokens = 0
@@ -24,10 +23,8 @@ def critic_response_parse(critic_outputs):
 
 def run(args):
 
-    if args.get('openai_api_key') is None:
-        openai.api_key = OPENAI_API_KEY
-    else:
-        openai.api_key = args.openai_api_key
+    # No need to set API keys here as they're already set in model.py
+    # Just proceed with the rest of the function
     critic_dir = f"src/logs/{args.auditor_dir}/critic_{args.backend}_{args.temperature}_{args.num_critic}_{args.shot}"
 
     for filename in stqdm(os.listdir(f"src/logs/{args.auditor_dir}")):
@@ -84,7 +81,7 @@ def run(args):
 
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview'], default='gpt-4-turbo-preview')
+    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview', 'deepseek-r1', 'deepseek-reasoner'], default='gpt-4-turbo-preview')
     args.add_argument('--temperature', type=float, default=0)
     args.add_argument('--dataset', type=str, choices=['CVE'], default="CVE")
     args.add_argument('--auditor_dir', type=str, default="auditor_gpt-4_0.7_top3_1") #The auditor output directory

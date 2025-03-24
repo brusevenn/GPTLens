@@ -1,42 +1,74 @@
 import time
-import openai
 import os
-from utils import dotdict
+from openai import OpenAI
 
-
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY') #"Enter your openai API key"
+DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 completion_tokens = 0
 prompt_tokens = 0
 
+# Initialize Deepseek client
+deepseek_client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
+
+# Initialize OpenAI client
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
 def gpt(prompt, model, temperature=0.7, max_tokens=4000, n=1, stop=None) -> list:
     messages = [{"role": "user", "content": prompt}]
-    if model == "gpt-4":
-        pass
-        time.sleep(30) # to prevent speed limitation exception
     return chatgpt(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
-
-def chatgpt(messages, model, temperature, max_tokens, n, stop) -> list:
+def chatgpt(messages, model, temperature=0.0, max_tokens=4000, n=1, stop=None) -> list:
     global completion_tokens, prompt_tokens
     outputs = []
+
+    # Check which client to use based on model name
+    # OpenAI models start with "gpt-", while Deepseek models don't
+    if model.startswith("gpt-"):
+        client = openai_client
+    else:
+        client = deepseek_client
+        #mapping model name if its r1
+        if model == "deepseek-r1":
+            model = "deepseek-reasoner"
+    
     while n > 0:
-        cnt = min(n, 20)
-        n -= cnt
-        res = openai.chat.completions.create(model=model, messages=messages, temperature=temperature, max_tokens=max_tokens,
-                                           n=cnt, stop=stop)
-        outputs.extend([choice.message.content for choice in res.choices])
-        # log completion tokens
+        batch_size = min(n, 20)
+        n -= batch_size
+        
+        res = client.chat.completions.create(
+            model=model,
+            messages=messages,
+            max_tokens=max_tokens,
+            stop=stop
+        )
+        
+        outputs.append(res.choices[0].message.content)
+        
         completion_tokens += res.usage.completion_tokens
         prompt_tokens += res.usage.prompt_tokens
+    
     return outputs
 
-
-def gpt_usage(backend="gpt-4"):
+def gpt_usage(backend="deepseek-r1"):
     global completion_tokens, prompt_tokens
-    if backend == "gpt-4":
-        cost = completion_tokens / 1000 * 0.06 + prompt_tokens / 1000 * 0.03
-    elif backend == "gpt-4-turbo-preview":
-        cost = completion_tokens / 1000 * 0.03 + prompt_tokens / 1000 * 0.01
-    elif backend == "gpt-3.5-turbo":
-        cost = completion_tokens / 1000 * 0.002 + prompt_tokens / 1000 * 0.0015
+    
+    # If the backend is an OpenAI model
+    if backend.startswith("gpt-"):
+        # OpenAI pricing varies per model
+        if "gpt-4" in backend:
+            # GPT-4 pricing (approximate)
+            input_cost = prompt_tokens / 1000000 * 10.0  # $10 per 1M tokens (approximate)
+            output_cost = completion_tokens / 1000000 * 30.0  # $30 per 1M tokens (approximate)
+        else:
+            # GPT-3.5 pricing (approximate)
+            input_cost = prompt_tokens / 1000000 * 0.5  # $0.5 per 1M tokens (approximate)
+            output_cost = completion_tokens / 1000000 * 1.5  # $1.5 per 1M tokens (approximate)
+    else:
+        # Deepseek Reasoner pricing (standard rate), not off peak discount rates. 
+        # Input: $0.55 per 1M tokens
+        # Output: $2.19 per 1M tokens
+        input_cost = prompt_tokens / 1000000 * 0.55
+        output_cost = completion_tokens / 1000000 * 2.19
+        
+    cost = input_cost + output_cost
     return {"completion_tokens": completion_tokens, "prompt_tokens": prompt_tokens, "cost": cost}

@@ -6,8 +6,7 @@ from tqdm import tqdm
 from utils import dotdict
 from stqdm import stqdm
 
-import openai
-from model import gpt, gpt_usage, OPENAI_API_KEY
+from model import gpt, gpt_usage
 from prompts import auditor_prompt, auditor_format_constrain
 from prompts import topk_prompt1, topk_prompt2
 
@@ -53,10 +52,8 @@ def solve(args, code):
 
 def run(args):
 
-    if args.get('openai_api_key') is None:
-        openai.api_key = OPENAI_API_KEY
-    else:
-        openai.api_key = args.openai_api_key
+    # No need to set API keys as they were previously here as they're already set in model.py
+    # Just proceeding with the rest of the function
 
     with open("data/CVE_label/CVE2description.json", "r") as f:
         CVE2description = json.load(f)
@@ -72,7 +69,7 @@ def run(args):
         description = CVE2description[CVE_index]
         file_name = "-".join(CVE_index.split("-")[1:]) + ".sol"
 
-        with open("data/CVE_clean/" + file_name, "r") as f:
+        with open(f"{args.data_dir}/" + file_name, "r") as f:
             code = f.read()
         # remove space
         code = remove_spaces(code)
@@ -96,9 +93,10 @@ def run(args):
 
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview'], default='gpt-4-turbo-preview')
+    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview', 'deepseek-r1', 'deepseek-reasoner'], default='gpt-4-turbo-preview')
     args.add_argument('--temperature', type=float, default=0.7)
     args.add_argument('--dataset', type=str, default="CVE")
+    args.add_argument('--data_dir', type=str, default="data_full/CVE_clean")
     args.add_argument('--topk', type=int, default=5) # the topk per each auditor
     args.add_argument('--num_auditor', type=int, default=1)
 
