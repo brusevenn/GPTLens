@@ -1,0 +1,14 @@
+{
+  "case_ids": [
+    "acb-ed91d999871cd8ae"
+  ],
+  "code_sha": "89d641d5f74e73e7fd5b8093314bf0090b1f44e5",
+  "dataset": "actoolbench154",
+  "id": "proj-71980e138b0c2109",
+  "input_identity": "d74aa38698a9228f32777b3528af9df6a0e3d6c250c3708769d8e2041ecf132e",
+  "manifest_sha256": "9c74d0a6c647543e80cced49044639b7a8c40e241fc8593c21e574210584b5fa",
+  "phase": "formal",
+  "prompt_layout": "baseline",
+  "status": "NOT_RUN_PROVIDER_STOP",
+  "tool": "GPTLens"
+}
