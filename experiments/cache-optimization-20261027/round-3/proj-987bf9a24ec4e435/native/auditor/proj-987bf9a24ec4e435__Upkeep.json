@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_formPOL",
+    "code": "function _formPOL( IERC20 tokenA, IERC20 tokenB, uint256 amountWETH) internal {\n        uint256 wethAmountPerToken = amountWETH >> 1;\n        uint256 amountA = pools.depositSwapWithdraw( weth, tokenA, wethAmountPerToken, 0, block.timestamp );\n        uint256 amountB = pools.depositSwapWithdraw( weth, tokenB, wethAmountPerToken, 0, block.timestamp );\n        tokenA.safeTransfer( address(dao), amountA );\n        tokenB.safeTransfer( address(dao), amountB );\n        dao.formPOL(tokenA, tokenB, amountA, amountB);\n    }",
+    "vulnerability": "Zero-slippage swaps enable sandwich attacks",
+    "reason": "In `_formPOL`, the contract calls `pools.depositSwapWithdraw` twice with `minAmountOut` set to 0. Because `performUpkeep` is permissionless, an attacker can front-run the transaction by manipulating the pool reserves (e.g., via large swaps) so that the Upkeep's swaps execute at extremely unfavorable prices. The attacker then back-runs to profit from the price impact. This drains value from the DAO's POL formation, as the contract receives far fewer tokens than fair market value. The function is used by `step3` and `step4` with significant WETH amounts, making the attack highly profitable.",
+    "file_name": "proj-987bf9a24ec4e435__Upkeep.sol"
+  },
+  {
+    "function_name": "step5",
+    "code": "function step5() public onlySameContract {\n        uint256 wethBalance = weth.balanceOf( address(this) );\n        if ( wethBalance == 0 ) return;\n        uint256 amountSALT = pools.depositSwapWithdraw( weth, salt, wethBalance, 0, block.timestamp );\n        salt.safeTransfer(address(saltRewards), amountSALT);\n    }",
+    "vulnerability": "Zero-slippage swap to SALT enables sandwich attacks",
+    "reason": "`step5` swaps the entire remaining WETH balance for SALT using `pools.depositSwapWithdraw` with `minAmountOut=0`. An attacker can sandwich this swap by manipulating the pool before and after `performUpkeep` is called. Since the deadline is `block.timestamp`, the transaction is always valid, and the zero minimum output allows the pool to return an arbitrarily low amount of SALT. The attacker profits from the price manipulation, while the Upkeep contract receives less SALT for `saltRewards`, reducing rewards for stakers. This is a classic MEV attack that is easily executable on a public mempool.",
+    "file_name": "proj-987bf9a24ec4e435__Upkeep.sol"
+  },
+  {
+    "function_name": "step11",
+    "code": "function step11() public onlySameContract {\n        uint256 releaseableAmount = VestingWallet(payable(exchangeConfig.teamVestingWallet())).releasable(address(salt));\n        VestingWallet(payable(exchangeConfig.teamVestingWallet())).release(address(salt));\n        salt.safeTransfer( exchangeConfig.managedTeamWallet().mainWallet(), releaseableAmount );\n    }",
+    "vulnerability": "Team vesting SALT can be permanently locked via direct release",
+    "reason": "The team vesting wallet's beneficiary is the Upkeep contract, and its `release(address token)` function is public. An attacker can call `teamVestingWallet.release(salt)` directly to transfer vested SALT to Upkeep. Then, when `step11` is executed, it calculates `releaseableAmount` before calling `release`; because the tokens were already released, `releasable(salt)` returns 0. Consequently, `step11` transfers 0 SALT to the managed team wallet, leaving the released SALT permanently stuck in the Upkeep contract. There is no rescue function in Upkeep to recover these tokens. An attacker can repeat this for each vesting period, permanently locking all team-vested SALT at minimal cost, causing irreversible loss of funds to the team.",
+    "file_name": "proj-987bf9a24ec4e435__Upkeep.sol"
+  }
+]

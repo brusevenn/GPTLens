@@ -1,0 +1,14 @@
+{
+  "code_sha": "7e65b5370b768d4ff9472b26027a693a51b6eab0",
+  "job_timeout": 1200,
+  "layout": "prefix_stable_v2",
+  "project_id": "proj-1342319724ccb055",
+  "request_timeout": 300,
+  "retries": 0,
+  "round": 2,
+  "source_hashes": [
+    "6d64713fecde96a1e139f39f5e30525882cca7a3a744bd4458d1437767eb1fad"
+  ],
+  "started_utc": "2026-10-27T07:46:39.302085+00:00",
+  "tool": "GPTLens"
+}

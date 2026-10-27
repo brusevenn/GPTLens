@@ -1,0 +1,3 @@
+{"input_file": "proj-8b65cfc4735dcd5e__Configurator.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-8b65cfc4735dcd5e__Configurator.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-8b65cfc4735dcd5e", "case_ids": ["acb-39713acf018b62f8", "acb-c44c9b12d5ad42ea"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,87 @@
+{
+  "case_ids": [
+    "acb-5816e25cdefae6b2"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 124,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-c695ebe78e0b8349/source_code/config.json",
+      "sha256": "8e3f61900aa7f431d3a46df18ee8ce3d8f303b127aeb7c764e94b5b1d7088064"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T07:52:36.199069+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-c695ebe78e0b8349__YVault.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-c695ebe78e0b8349__YVault.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-c695ebe78e0b8349__YVault.sol",
+      "normalized_sha256": "8d88e0ec3fdd28b39a7ad28137fa495ff6fb7fd96cf8c092cbaf68b4936af91e",
+      "ranker_output": "ranker/proj-c695ebe78e0b8349__YVault.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 37917,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-c695ebe78e0b8349/source_code/YVault.sol",
+      "source_sha256": "2b6d969e5e91a97ccf12902cc174200b11f8f0671276da6a780b1fd4c371e965",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-c695ebe78e0b8349",
+  "project_source_file_count": 1,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T07:46:39.624816+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T07:52:36.199080+00:00",
+  "usage": {
+    "completion_tokens": 60493,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 4696,
+    "prompt_tokens": 5592,
+    "request_attempt_count": 2,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

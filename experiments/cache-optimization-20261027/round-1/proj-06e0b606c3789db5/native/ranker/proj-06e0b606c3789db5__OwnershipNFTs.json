@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function _onTransferReceived(\n        address _sender,\n        address _from,\n        address _to,\n        uint256 _tokenId\n    ) internal {\n        if (_to.code.length == 0) return;\n        bytes4 data = IERC721TokenReceiver(_to).onERC721Received(\n            _sender,\n            _from,\n            _tokenId,\n            \"\"\n        );\n        require( data != IERC721TokenReceiver.onERC721Received.selector, \"bad nft transfer received data\" );\n    }",
+    "correctness": 9,
+    "criticism": "This is a real and clear logic error in the shown code. ERC721 requires a contract receiver to return `IERC721TokenReceiver.onERC721Received.selector`; accepting only `data != selector` is exactly inverted. As a result, compliant receivers cause `safeTransferFrom` to revert, while non-compliant or malicious receivers returning the wrong value pass. This breaks safe-transfer semantics and can cause denial of service for legitimate contract recipients or NFT lockups/bypass if a user sends to an unsafe receiver. It is not an unconditional theft primitive because the sender must still initiate the transfer to such a receiver, so severity and profitability are moderate rather than maximal.",
+    "file_name": "proj-06e0b606c3789db5__OwnershipNFTs.sol",
+    "final_score": 7.0,
+    "function_name": "_onTransferReceived",
+    "profitability": 4,
+    "reason": "The require statement checks `data != IERC721TokenReceiver.onERC721Received.selector`, which is the opposite of the ERC721 standard. A compliant receiver contract returns the magic selector and should be accepted, but this code reverts in that case. Conversely, any contract returning an incorrect value (including a malicious contract) passes the check. This completely breaks safe transfer semantics: `safeTransferFrom` to correct receivers always reverts, while non-compliant or malicious contracts are accepted. An attacker can deploy a contract that returns an incorrect value but can still transfer the NFT out, tricking users into believing safe transfer succeeded while bypassing the intended receiver check. This can lead to NFT lockups or theft when users interact with malicious contracts that would otherwise fail a correct check.",
+    "severity": 6,
+    "vulnerability": "Inverted ERC721 receiver check"
+  },
+  {
+    "code": "function _transfer(\n        address _from,\n        address _to,\n        uint256 _tokenId\n    ) internal {\n        _requireAuthorised(_from, _tokenId);\n        SEAWATER.transferPositionEEC7A3CD(_tokenId, _from, _to);\n    }",
+    "correctness": 5,
+    "criticism": "The reasoning is plausible only under assumptions not shown in the supplied snippet: that this contract maintains `getApproved[_tokenId]`, that `_requireAuthorised` accepts that stale approval after ownership changes, and that `SEAWATER.transferPositionEEC7A3CD` does not clear or check approvals itself. The shown `_transfer` merely delegates to SEAWATER, so the absence of a clearing statement here is not sufficient alone to prove an exploitable stale approval. If the assumption is true, the impact is serious because a previously approved address could move a token after it changes hands, enabling NFT theft. However, the attacker must have been approved while the old owner owned the token, and the actual approval lifecycle may be handled by SEAWATER. Therefore correctness is moderate, severity is high if true, and profitability is conditional but potentially high.",
+    "file_name": "proj-06e0b606c3789db5__OwnershipNFTs.sol",
+    "final_score": 5.75,
+    "function_name": "_transfer",
+    "profitability": 6,
+    "reason": "The `_transfer` function performs a transfer but never clears `getApproved[_tokenId]`. `_requireAuthorised` checks `msg.sender == getApproved[_tokenId]` alongside ownership. After a token is transferred to a new owner, any address previously approved by the old owner remains approved. That stale approved address can later call `transferFrom(newOwner, attacker, tokenId)`. The `_requireAuthorised` call will pass because `msg.sender == getApproved[_tokenId]` is true, and the subsequent `ownerOf(tokenId) == _from` check passes because `_from` is the current owner. The attacker can thus transfer the token to themselves, stealing it. This is a real-world exploitable NFT theft.",
+    "severity": 7,
+    "vulnerability": "Stale approval not cleared on transfer"
+  },
+  {
+    "code": "function transferFrom(\n        address _from,\n        address _to,\n        uint256 _tokenId\n    ) external payable {\n        _transfer(_from, _to, _tokenId);\n    }",
+    "correctness": 5,
+    "criticism": "The shown `_transfer` indeed contains no ERC721 `Transfer` event emission, so the code likely violates ERC721 event requirements if this contract is the token contract. However, the claim that this alone enables severe double-spending or theft is overstated: the external `SEAWATER.transferPositionEEC7A3CD` call may emit its own event, and marketplaces that verify `ownerOf`/approval during atomic settlement will not simply pay because stale logs say the attacker owns the token. Missing events can confuse indexers and enable fraudulent listings or integration failures, but direct financial loss requires an additional vulnerable off-chain process or stale approval/operator condition. Thus correctness is partial, severity is moderate, and profitability is low.",
+    "file_name": "proj-06e0b606c3789db5__OwnershipNFTs.sol",
+    "final_score": 3.75,
+    "function_name": "transferFrom",
+    "profitability": 1,
+    "reason": "The `transferFrom` function (and all transfer entry points) delegates to `_transfer`, which never emits the required ERC721 `Transfer` event. Off-chain indexers, wallets, and marketplaces rely on `Transfer` events to track ownership changes. An attacker can transfer an NFT to another address they control without any event being emitted. A marketplace that relies solely on event logs will still believe the attacker owns the NFT, allowing the attacker to list and sell it again. The buyer or marketplace may pay for an NFT that the attacker no longer owns, resulting in financial loss. This missing event enables double-spending and breaks ERC721 compliance, making it a severe integration vulnerability exploitable in real-world DeFi/NFT marketplaces.",
+    "severity": 4,
+    "vulnerability": "Missing Transfer event emission"
+  }
+]

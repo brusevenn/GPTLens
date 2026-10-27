@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 _amount) public noContract(msg.sender) {\n    require(_amount > 0, \"INVALID_AMOUNT\");\n    uint256 balanceBefore = balance();\n    token.safeTransferFrom(msg.sender, address(this), _amount);\n    uint256 supply = totalSupply();\n    uint256 shares;\n    if (supply == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount * supply) / balanceBefore;\n    }\n    _mint(msg.sender, shares);\n    emit Deposit(msg.sender, _amount);\n}",
+    "vulnerability": "First depositor inflation attack (donation attack)",
+    "reason": "The deposit function calculates shares based on the vault's total assets (balanceBefore) before the deposit. An attacker can be the first depositor, deposit 1 wei, and receive 1 share. They then donate a large amount of the underlying token directly to the vault (or controller/strategy) to inflate the total assets without increasing the total supply. When a victim deposits, the share calculation `shares = (_amount * supply) / balanceBefore` rounds down, often to zero, because balanceBefore is artificially inflated. The victim receives zero shares and loses their deposit, while the attacker can later withdraw their single share to claim all assets, including the victim's deposit. This is a well-known ERC4626-style inflation attack and is directly exploitable for profit.",
+    "file_name": "proj-c695ebe78e0b8349__YVault.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 _amount) public noContract(msg.sender) {\n    require(_amount > 0, \"INVALID_AMOUNT\");\n    uint256 balanceBefore = balance();\n    token.safeTransferFrom(msg.sender, address(this), _amount);\n    uint256 supply = totalSupply();\n    uint256 shares;\n    if (supply == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount * supply) / balanceBefore;\n    }\n    _mint(msg.sender, shares);\n    emit Deposit(msg.sender, _amount);\n}",
+    "vulnerability": "Fee-on-transfer token accounting error",
+    "reason": "The deposit function mints shares based on the requested `_amount` without verifying the actual amount of tokens received by the vault. If the underlying token charges a transfer fee (fee-on-transfer or deflationary token), the vault receives less than `_amount`, but the depositor is still credited with shares as if the full `_amount` was received. This dilutes existing shareholders and allows an attacker to profit: they deposit a fee-on-transfer token, receive shares based on the pre-fee amount, and then withdraw more tokens than they actually contributed, at the expense of other depositors. The contract does not measure the balance before and after the transfer to account for the fee.",
+    "file_name": "proj-c695ebe78e0b8349__YVault.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 _amount) public noContract(msg.sender) {\n    require(_amount > 0, \"INVALID_AMOUNT\");\n    uint256 balanceBefore = balance();\n    token.safeTransferFrom(msg.sender, address(this), _amount);\n    uint256 supply = totalSupply();\n    uint256 shares;\n    if (supply == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount * supply) / balanceBefore;\n    }\n    _mint(msg.sender, shares);\n    emit Deposit(msg.sender, _amount);\n}",
+    "vulnerability": "Reentrancy via external call before state update",
+    "reason": "The deposit function performs an external call to `token.safeTransferFrom` before updating the contract state (minting shares). This violates the checks-effects-interactions pattern. If the underlying token has a callback mechanism (e.g., ERC777 or a malicious token with transfer hooks), an attacker can reenter the vault during the `safeTransferFrom` call. The `noContract` modifier is insufficient as a reentrancy guard: it only checks `extcodesize(msg.sender)` and can be bypassed by a contract calling from its constructor (where `extcodesize` is 0) or by a whitelisted contract. A reentrant call can manipulate the share price or perform additional deposits/withdrawals before the original deposit's shares are minted, potentially allowing the attacker to steal funds or mint excessive shares. This is a severe reentrancy vulnerability.",
+    "file_name": "proj-c695ebe78e0b8349__YVault.sol"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-1342319724ccb055__InvestmentManager.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "ValueError"
+}

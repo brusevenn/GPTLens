@@ -1,0 +1,25 @@
+{
+  "cache": {
+    "error_count": 0,
+    "exact_cache_rate": 0.0,
+    "known_usage_totals": {
+      "completion_tokens": 32060,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 4663,
+      "prompt_tokens": 4663
+    },
+    "missing_usage": 0,
+    "observed_cache_rate": 0.0,
+    "physical_attempts": 2,
+    "provider_stop": false,
+    "responses": 2,
+    "target_met": false
+  },
+  "code_sha": "7e65b5370b768d4ff9472b26027a693a51b6eab0",
+  "ended_utc": "2026-10-27T07:46:39.283934+00:00",
+  "exit_code": 0,
+  "project_id": "proj-8b65cfc4735dcd5e",
+  "round": 1,
+  "status": "FINISHED",
+  "tool": "GPTLens"
+}
