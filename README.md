@@ -6,11 +6,9 @@ If you find this repository useful, please give us a star! Thank you: )
 
 ## Getting Start
 
-### Step 0: Set up your GPT-4 API
+### Step 0: Configure the LLM API
 
-Get GPT-4 API from https://platform.openai.com/account/api-keys
-
-Replace OPENAI_API = "Enter your openai API key" in src/model.py (line 4) with your API key.
+Install dependencies with `pip install -r requirements.txt`. Configure the repository-local `.env` with `DEEPSEEK_API_KEY`, `DEEPSEEK_BASE_URL`, `DEEPSEEK_MODEL`, and `CADG_LLM_PROVIDER=deepseek`. For the authorized comparison experiment, the API client fixes DeepSeek Flash, high reasoning effort, thinking enabled, 65,536 max tokens, 300-second request timeout, and zero automatic retries. The client does not send temperature or top_p.
 
 ### Step 1: Preprocess your own dataset
 
@@ -25,13 +23,12 @@ python pre_process.py --data_dir="../data/CVE" # replace CVE with your onw datas
 ### Step 2: Run Auditor
 
 ```sh
-python run_auditor.py --backend=gpt-4 --temperature=0.7 --topk=3 --num_auditor=1 --data_dir="../data/CVE_clean"
+python run_auditor.py --backend=gpt-4 --topk=3 --num_auditor=1 --data_dir="../data/CVE_clean"
 ```
 
 | Parameter      | Description                                                     |
 |----------------|-----------------------------------------------------------------|
 | `backend`      | The version of GPT                                              |
-| `temperature`  | The hyper-parameter that controls the randomness of generation. |
 | `topk`         | Identify k vulnerabilities per each auditor                     |
 | `num_auditor`  | The total number of independent auditors.                       |
 | `data_dir`     | The directory for storing preprocessed smart contracts.         |
@@ -40,12 +37,11 @@ python run_auditor.py --backend=gpt-4 --temperature=0.7 --topk=3 --num_auditor=1
 ### Step 3: Run Critic
 
 ```sh
-python run_critic.py --backend=gpt-4 --temperature=0 --auditor_dir="auditor_gpt-4_0.7_top3_1" --num_critic=1 
+python run_critic.py --backend=gpt-4 --auditor_dir="auditor_gpt-4_0_top3_1" --num_critic=1
 ```
 | Parameter     | Description                                                    |
 |---------------|----------------------------------------------------------------|
 | `backend`     | The version of GPT                                             |
-| `temperature` | The hyper-parameter that controls the randomness of generation. |
 | `auditor_dir` | The directory of logs outputted by the auditor.                |
 | `num_critic`  | The total number of independent critics.                       |
 | `shot`        | Whether few shot or zero shot prompt.                          |
@@ -109,3 +105,17 @@ This repo will be continuously updated to make generation more consistent and ro
 
 If you have any questions, you can either open an issue or contact me (sihaohu@gatech.edu), and I will reply as soon as I see the issue or email.
 
+
+## ACToolBench comparison runner (Ubuntu 22.04)
+
+The repository package at `datasets/actoolbench-cleaned-154/` contains 154 case records mapped to 121 source projects and 694 unique Solidity files. GPTLens natively audits Solidity files independently and does not resolve sibling imports; the harness therefore runs each unique source file once inside its project group, then maps its file outputs back to all associated case IDs. This is 121 project jobs, not 694 dataset cases, and it does not repeat a source call for cases sharing a project.
+
+Do not pass the manifests, input index, hash sidecars, or evaluation labels to the model. The harness validates the index/source SHA-256 mapping and reads only indexed source files. Each project job runs the native Auditor, Critic, and default Ranker, saving stage outputs/statuses and a project-result record. Parent orchestration controls global concurrency 2 and the 1,200-second project-case deadline.
+
+From the repository root, after the environment and repository-local `.env` are configured:
+
+```sh
+python scripts/benchmark.py --project-id <project_id> --output experiments/comparison-20261027-deepseek-high/<project_id> --prompt-layout baseline
+```
+
+`project_id` must come from `datasets/actoolbench-cleaned-154/tools/gptlens/input-index.json`. The `prefix_stable` prompt layout is an optional cache-diagnostic variant that reorders fixed native GPTLens instructions before the variable source text without changing the prompt wording or detector workflow. Never use it to rerun a project already included in a diagnostic or formal run.

@@ -1,62 +1,68 @@
-import json
 import argparse
+import json
 import os
+from pathlib import Path
+
 
 def rank_by_score(json_list):
     return sorted(json_list, key=lambda x: x["final_score"], reverse=True)
 
+
+def score_findings(critic_output_list, strategy="default"):
+    scored = []
+    for item in critic_output_list:
+        finding = dict(item)
+        correctness = float(finding["correctness"])
+        severity = float(finding["severity"])
+        profitability = float(finding["profitability"])
+        if strategy == "default":
+            final_score = 0.5 * correctness + 0.25 * severity + 0.25 * profitability
+        elif strategy == "customize":
+            raise ValueError("GPTLens customize rank strategy is not implemented")
+        else:
+            raise ValueError("Please choose correct scoring strategy")
+        finding["final_score"] = final_score
+        scored.append(finding)
+    return rank_by_score(scored)
+
+
 def run(args):
-    # output file
-    ranker_dir = f"ranker_{args.strategy}"
-
-    for filename in os.listdir(os.path.join("logs", args.auditor_dir, args.critic_dir)):
-        if not filename.endswith("json"):
+    input_dir = Path(args.input_dir) if args.input_dir else Path("logs") / args.auditor_dir / args.critic_dir
+    output_dir = Path(args.output_dir) if args.output_dir else input_dir / f"ranker_{args.strategy}"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    errors = []
+    ranked_count = 0
+    for path in sorted(input_dir.glob("*.json")):
+        # Stage status sidecars are metadata, not critic findings.
+        if not path.is_file() or path.name.endswith(".status.json"):
             continue
-        filepath = os.path.join("logs",  args.auditor_dir, args.critic_dir, filename)
-        with open(filepath, "r") as f:
-            critic_output_list = json.load(f)
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(value, list):
+                raise ValueError("Critic output must be a JSON list")
+            ranked = score_findings(value, args.strategy)
+            target = output_dir / path.name
+            temp = target.with_suffix(target.suffix + ".tmp")
+            temp.write_text(json.dumps(ranked, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            os.replace(temp, target)
+            ranked_count += 1
+        except Exception as error:
+            errors.append((path.name, type(error).__name__))
+    if errors:
+        raise RuntimeError(f"Ranker failed for {len(errors)} file(s): {errors}")
+    print(json.dumps({"status": "complete", "ranked_files": ranked_count}))
 
-        for i in range(len(critic_output_list)):
-            bug_info = critic_output_list[i]
-            correctness = float(bug_info["correctness"])
-            severity = float(bug_info["severity"])
-            profitability = float(bug_info["profitability"])
 
-            # overall score
-            if args.strategy == "default":
-                # naive weighted function
-                final_score = 0.5 * correctness + 0.25 * severity + 0.25 * profitability
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", type=str, choices=["CVE", "ACToolBench154"], default="CVE")
+    parser.add_argument("--auditor_dir", type=str, default="auditor_gpt-4_0.7_top3_1")
+    parser.add_argument("--critic_dir", type=str, default="critic_gpt-4_0_1")
+    parser.add_argument("--input-dir", type=str, default=None)
+    parser.add_argument("--output-dir", type=str, default=None)
+    parser.add_argument("--strategy", type=str, default="default", choices=["default", "customize"])
+    return parser.parse_args(argv)
 
-            elif args.strategy == "customize":
-                # TODO: add your scoring function
-                pass
-            else:
-                raise Exception("Please choose correct strategy for scoring...")
 
-            bug_info.update({"final_score": final_score})
-
-        # Rank based on scores
-        ranker_output_list = rank_by_score(critic_output_list)
-        filepath = os.path.join("logs", args.auditor_dir, args.critic_dir, ranker_dir, filename)
-        # dump the file
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-
-        with open(filepath, 'w') as f:
-            json.dump(ranker_output_list, f, indent=4)
-
-    print("Ranking finished...")
-
-def parse_args():
-    args = argparse.ArgumentParser()
-    args.add_argument('--dataset', type=str, choices=['CVE'], default="CVE")
-    args.add_argument('--auditor_dir', type=str, default="auditor_gpt-4_0.7_top3_1") #The auditor output directory
-    args.add_argument('--critic_dir', type=str, default="critic_gpt-4_0_1") #The critic output directory
-    args.add_argument('--strategy', type=str, default="default", choices=["default", "customize"])
-
-    args = args.parse_args()
-    return args
-
-if __name__ == '__main__':
-    args = parse_args()
-    print(args)
-    run(args)
+if __name__ == "__main__":
+    run(parse_args())
