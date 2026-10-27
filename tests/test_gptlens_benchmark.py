@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -106,6 +107,42 @@ class GPTLensProjectHarnessTests(unittest.TestCase):
             ranked = json.loads((out / row["ranker_output"]).read_text())
             self.assertEqual(ranked[0]["final_score"], 7.25)
             self.assertFalse((out / "requests.jsonl").exists())
+
+    def test_shared_provider_stop_marker_skips_all_model_requests(self):
+        index = json.loads((ROOT / "datasets/actoolbench-cleaned-154/tools/gptlens/input-index.json").read_text())
+        project = next(row for row in index["projects"] if row["source_file_count"] == 1)
+        with tempfile.TemporaryDirectory() as temp:
+            marker = Path(temp) / "provider-stop.json"
+            marker.write_text(json.dumps({"status": "STOPPED_AUTH_OR_PAYMENT_ERROR"}))
+            output = Path(temp) / "result"
+            with patch.dict(os.environ, {"EXPERIMENT_GLOBAL_STOP_FILE": str(marker)}):
+                with patch.object(benchmark.run_auditor, "run", side_effect=AssertionError("must not call model")):
+                    code, result = benchmark.run_project(project["project_id"], output, "baseline", 30)
+            self.assertEqual(code, 2)
+            self.assertEqual(result["file_results"][0]["status"], "NOT_RUN_GLOBAL_PROVIDER_STOP")
+            self.assertFalse((output / "requests.jsonl").exists())
+
+    def test_shared_provider_stop_after_auditor_prevents_critic_call(self):
+        index = json.loads((ROOT / "datasets/actoolbench-cleaned-154/tools/gptlens/input-index.json").read_text())
+        project = next(row for row in index["projects"] if row["source_file_count"] == 1)
+        finding = {"function_name": "f", "code": "function f() public {}", "vulnerability": "x", "reason": "fixture"}
+        with tempfile.TemporaryDirectory() as temp:
+            marker = Path(temp) / "provider-stop.json"
+            output = Path(temp) / "result"
+            def fake_auditor(args):
+                stem=Path(args.input_file).stem
+                run_auditor._write_json(Path(args.output_dir)/f"{stem}.json",[finding])
+                run_auditor._write_json(Path(args.output_dir)/f"{stem}.status.json",{"status":"complete","finding_count":1})
+                marker.write_text(json.dumps({"status":"STOPPED_AUTH_OR_PAYMENT_ERROR"}))
+            with patch.dict(os.environ, {"EXPERIMENT_GLOBAL_STOP_FILE": str(marker)}):
+                with patch.object(benchmark.run_auditor,"run",side_effect=fake_auditor):
+                    with patch.object(benchmark.run_critic,"run",side_effect=AssertionError("critic must not call model")):
+                        code,result=benchmark.run_project(project["project_id"],output,"baseline",30)
+            self.assertEqual(code,2)
+            row=result["file_results"][0]
+            self.assertEqual(row["auditor_status"]["status"],"complete")
+            self.assertEqual(row["critic_status"]["status"],"NOT_RUN_GLOBAL_PROVIDER_STOP")
+            self.assertEqual(row["status"],"INCOMPLETE_GLOBAL_PROVIDER_STOP")
 
     def test_auth_payment_error_halts_but_plain_rate_limit_is_recorded(self):
         self.assertTrue(benchmark._has_global_auth_error({

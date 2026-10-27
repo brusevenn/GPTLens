@@ -220,6 +220,22 @@ def _file_record(item: dict) -> dict:
     }
 
 
+def _global_provider_stop_path() -> Path | None:
+    value = os.environ.get("EXPERIMENT_GLOBAL_STOP_FILE")
+    return Path(value) if value else None
+
+
+def _mark_global_provider_stop() -> None:
+    path = _global_provider_stop_path()
+    if path is None:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists():
+        temp = path.with_name(path.name + f".tmp-{os.getpid()}")
+        temp.write_text(json.dumps({"status": "STOPPED_AUTH_OR_PAYMENT_ERROR", "tool": "GPTLens"}) + "\n")
+        os.replace(temp, path)
+
+
 def _has_global_auth_error(record: dict) -> bool:
     for stage_key in ("auditor_status", "critic_status"):
         status = record.get(stage_key, {})
@@ -324,6 +340,14 @@ def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
         os.environ["EXPERIMENT_PROMPT_LAYOUT"] = prompt_layout
 
         for row, item in zip(files, plan["files"]):
+            global_stop = _global_provider_stop_path()
+            if global_stop is not None and global_stop.exists():
+                row.update(status="NOT_RUN_GLOBAL_PROVIDER_STOP", error_type="GlobalProviderStop")
+                row["auditor_status"] = {"status": "NOT_RUN_GLOBAL_PROVIDER_STOP"}
+                row["critic_status"] = {"status": "NOT_RUN_GLOBAL_PROVIDER_STOP"}
+                row["ranker_status"] = {"status": "NOT_RUN_GLOBAL_PROVIDER_STOP"}
+                save()
+                continue
             current_file = row
             current_stage = "preprocess"
             row["status"] = "RUNNING"
@@ -367,6 +391,7 @@ def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
                 if _has_global_auth_error(row):
                     meta["status"] = "STOPPED_AUTH_OR_PAYMENT_ERROR"
                     meta["execution_status"] = meta["status"]
+                    _mark_global_provider_stop()
                     for pending in files:
                         if pending["status"] == "PENDING":
                             pending["status"] = "NOT_RUN_GLOBAL_PROVIDER_STOP"
@@ -382,6 +407,13 @@ def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
                 output_dir=str(dirs["critic"]), case_id=None, auditor_dir="",
                 num_critic=1, shot="few", prompt_layout="prefix_stable" if prompt_layout=="prefix_stable_v2" else prompt_layout,
             )
+            global_stop = _global_provider_stop_path()
+            if global_stop is not None and global_stop.exists():
+                row.update(status="INCOMPLETE_GLOBAL_PROVIDER_STOP", error_type="GlobalProviderStop")
+                row["critic_status"] = {"status": "NOT_RUN_GLOBAL_PROVIDER_STOP"}
+                row["ranker_status"] = {"status": "NOT_RUN_GLOBAL_PROVIDER_STOP"}
+                save()
+                continue
             try:
                 run_critic.run(critic_args)
             except Exception as error:
@@ -396,6 +428,7 @@ def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
                 if _has_global_auth_error(row):
                     meta["status"] = "STOPPED_AUTH_OR_PAYMENT_ERROR"
                     meta["execution_status"] = meta["status"]
+                    _mark_global_provider_stop()
                     for pending in files:
                         if pending["status"] == "PENDING":
                             pending["status"] = "NOT_RUN_GLOBAL_PROVIDER_STOP"
