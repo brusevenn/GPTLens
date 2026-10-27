@@ -17,7 +17,11 @@ def prompt_wrap(prompt, format_constraint, code, topk, prompt_layout="baseline")
     fixed_suffix = format_constraint + topk_prompt1.format(topk=topk) + topk_prompt2
     if prompt_layout == "baseline":
         return prompt + code + fixed_suffix
-    if prompt_layout == "prefix_stable":
+    if prompt_layout in {"prefix_stable", "prefix_stable_v2"}:
+        if prompt_layout == "prefix_stable_v2":
+            heading = "Smart contract code:\n\n"
+            if prompt.endswith(heading):
+                return prompt[:-len(heading)] + fixed_suffix + heading + code
         return prompt + fixed_suffix + code
     raise ValueError(f"Unsupported prompt layout: {prompt_layout}")
 
@@ -118,7 +122,7 @@ def parse_args(argv=None):
     parser.add_argument("--case_id", type=str, default=None)
     parser.add_argument("--topk", type=int, default=3)
     parser.add_argument("--num_auditor", type=int, default=1)
-    parser.add_argument("--prompt-layout", choices=["baseline", "prefix_stable"], default="baseline")
+    parser.add_argument("--prompt-layout", choices=["baseline", "prefix_stable", "prefix_stable_v2"], default="baseline")
     return parser.parse_args(argv)
 
 

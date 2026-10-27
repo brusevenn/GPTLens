@@ -235,7 +235,7 @@ def _has_global_auth_error(record: dict) -> bool:
 
 def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
                 timeout_seconds: int = 1200, index_path: Path | None = None) -> tuple[int, dict]:
-    if prompt_layout not in ("baseline", "prefix_stable"):
+    if prompt_layout not in ("baseline", "prefix_stable", "prefix_stable_v2"):
         raise ValueError("prompt_layout must be baseline or prefix_stable")
     if timeout_seconds <= 0:
         raise ValueError("timeout_seconds must be positive")
@@ -380,7 +380,7 @@ def run_project(project_id: str, output: Path, prompt_layout: str = "baseline",
             critic_args = argparse.Namespace(
                 backend="gpt-4", input_dir=None, input_file=str(auditor_file),
                 output_dir=str(dirs["critic"]), case_id=None, auditor_dir="",
-                num_critic=1, shot="few", prompt_layout=prompt_layout,
+                num_critic=1, shot="few", prompt_layout="prefix_stable" if prompt_layout=="prefix_stable_v2" else prompt_layout,
             )
             try:
                 run_critic.run(critic_args)
@@ -447,7 +447,7 @@ def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-id", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--prompt-layout", choices=("baseline", "prefix_stable"), default="baseline")
+    parser.add_argument("--prompt-layout", choices=("baseline", "prefix_stable", "prefix_stable_v2"), default="baseline")
     parser.add_argument("--timeout-seconds", type=int, default=1200)
     parser.add_argument("--input-index", default=None)
     return parser.parse_args(argv)
