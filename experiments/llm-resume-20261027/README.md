@@ -7,3 +7,7 @@ The resume plan records every case and project disposition. Only project groups 
 Protocol: deepseek-flash, high reasoning, thinking enabled, max output 65,536 tokens, 300-second request timeout, 1,200-second project timeout, concurrency 2, no temperature/top_p overrides. Prompt layout is prefix_stable_v2; cache-hit rate is not a gate for this continuation.
 
 The job folders retain native tool outputs, request/response/error logs, stdout/stderr, and per-project receipts. case-records.json, execution-summary.json, and resume-seal.json are written after the queue terminates. No vulnerability scoring is performed in the detector run.
+
+## Synchronized ACTaint phase
+
+The research owner subsequently authorized a temporary combined concurrency ceiling of 3 while ACTaint runs alongside GPTLens. GPTLens remains at two project workers; ACTaint is configured for one worker. The shared provider-stop marker still halts both queues on authentication/payment errors. No previous request group is replayed.
