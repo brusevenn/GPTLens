@@ -1,0 +1,117 @@
+{
+  "case_ids": [
+    "acb-0e1a4fe478896088",
+    "acb-40cc8cc7c0543549",
+    "acb-5f2e0a38886e48c7",
+    "acb-793ca1309ed900be"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 141,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-72984255e16aa0c1/source_code/config.json",
+      "sha256": "7217dbaf1626cd711127b694efe05aa306e738cd1a8eccfb6176403152a595bb"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T11:54:42.339123+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-72984255e16aa0c1__FollowNFT.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-72984255e16aa0c1__FollowNFT.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-72984255e16aa0c1__FollowNFT.sol",
+      "normalized_sha256": "a8aef0db884a2b562be1a84ca8ca4a2924a1d7038da94aa944fb2cfcfca7fa87",
+      "ranker_output": "ranker/proj-72984255e16aa0c1__FollowNFT.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 199152,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-72984255e16aa0c1/source_code/FollowNFT.sol",
+      "source_sha256": "b015f9b6c478fbe091a4338e4f7d1756aa651884c98bfd6cd34e63eca7ea043e",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-72984255e16aa0c1__LensHandles.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-72984255e16aa0c1__LensHandles.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-72984255e16aa0c1__LensHandles.sol",
+      "normalized_sha256": "1af2f552f615e37c8c03cee272876ca1b497d9547429eb7364d8b65081280c1f",
+      "ranker_output": "ranker/proj-72984255e16aa0c1__LensHandles.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 149163,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-72984255e16aa0c1/source_code/LensHandles.sol",
+      "source_sha256": "a67adb99d7464bfa1c69b858878523ea8fa9db742303b0d25dae05ad057700c3",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-72984255e16aa0c1",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T11:42:50.019081+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T11:54:42.339141+00:00",
+  "usage": {
+    "completion_tokens": 134932,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 66750,
+    "prompt_tokens": 68030,
+    "request_attempt_count": 3,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

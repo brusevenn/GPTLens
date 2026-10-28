@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-49ff192b5017d11c__Bonding.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "ValueError"
+}

@@ -1,0 +1,5 @@
+{"input_file": "proj-aad2bbc711eb3f0a__AURA.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aad2bbc711eb3f0a__AURA.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aad2bbc711eb3f0a__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-aad2bbc711eb3f0a", "case_ids": ["acb-3b9e2aae018e8f06"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

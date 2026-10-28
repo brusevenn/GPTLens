@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(address _from, address _to, uint256 _value) onlyPayloadSize(2 * 32) returns (bool success) {\n    if (_value == 0) {\n        return false;\n    }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Reversed checks enable theft via underflow",
+    "reason": "The conditions `fromBalance <= _value` and `allowance <= _value` are reversed; they should be `>=`. The overflow check `balances[_to] + _value > balances[_to]` is also reversed, and `!overflowed` requires an overflow. An attacker can call `transferFrom(attacker, victim, 2**256 - k)` where k is the amount to steal. Since _value is huge, the reversed balance and allowance checks pass even with zero allowance. The addition overflows, so `!overflowed` is true. The function then subtracts _value from attacker (underflows, increasing balance by k) and adds _value to victim (overflows, decreasing balance by k). This allows the attacker to steal any amount from any holder without approval.",
+    "file_name": "proj-b7ee8293723fb6f6__DimonCoin.sol"
+  },
+  {
+    "function_name": "distributeFUD",
+    "code": "function distributeFUD(address[] addresses, uint256 _value, uint256 _ethbal) onlyOwner {\n    for (uint i = 0; i < addresses.length; i++) {\n        if (getEthBalance(addresses[i]) < _ethbal) {\n            continue;\n        }\n        balances[owner] -= _value;\n        balances[addresses[i]] += _value;\n        Transfer(owner, addresses[i], _value);\n    }\n}",
+    "vulnerability": "Owner mint via unchecked subtraction underflow",
+    "reason": "The function subtracts `_value` from `balances[owner]` without checking if the owner has sufficient balance. If `_value` exceeds the owner's balance, the subtraction underflows, setting the owner's balance to a huge number. The function then adds `_value` to each recipient. The owner can call this with a `_value` larger than their balance to mint unlimited tokens to arbitrary addresses, while their own balance becomes astronomically large. This breaks the total supply and allows the owner to dilute holders or steal value.",
+    "file_name": "proj-b7ee8293723fb6f6__DimonCoin.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(address _from, address _to, uint256 _value) onlyPayloadSize(2 * 32) returns (bool success) {\n    if (_value == 0) {\n        return false;\n    }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Incorrect payload size allows short address attack",
+    "reason": "The `onlyPayloadSize(2 * 32)` modifier checks for at least 68 bytes, but `transferFrom` requires 4 + 3*32 = 100 bytes. This allows calls with short payloads, such as those from improperly padded addresses (short address attack). An attacker can craft a transaction that causes a caller (e.g., an exchange) to invoke `transferFrom` with shifted arguments. Because the contract only checks minimum length, the EVM decodes `_value` from a shifted position, potentially setting it to a huge number. This can trigger the overflow path in `transferFrom` and lead to unintended token transfers or theft. The modifier should use `3 * 32` instead of `2 * 32`.",
+    "file_name": "proj-b7ee8293723fb6f6__DimonCoin.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "redeem",
+    "code": "function redeem(uint256 shares, address receiver, address owner) public nonReentrant returns (uint256 assets) {\n    require(shares != 0, \"please provide amount\");\n    assets = previewRedeem(shares);\n    return _withdraw(assets, shares, receiver, owner);\n}",
+    "vulnerability": "Missing allowance/owner check allows arbitrary burn of shares and theft",
+    "reason": "The redeem function passes the caller-supplied owner to _withdraw, which calls _burn(owner, shares) without ever checking that msg.sender is the owner or has allowance over the owner's shares. An attacker can call redeem(victimBalance, attacker, victim), burning the victim's vault shares and sending the resulting assets directly to the attacker. The same missing authorization exists in withdraw, so any holder's shares can be burned by an arbitrary caller and the underlying assets stolen.",
+    "file_name": "proj-424da07d41309706__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 assets, address receiver) public nonReentrant returns (uint256 shares) {\n    require(!emergencyShutdown, \"Cannot deposit during emergency shutdown\");\n    require(assets != 0, \"please provide amount\");\n    uint256 _pool = totalAssets();\n    require(_pool + assets <= tvlCap, \"vault is full!\");\n    shares = previewDeposit(assets);\n    IERC20Metadata(asset).safeTransferFrom(msg.sender, address(this), assets);\n    _mint(receiver, shares);\n    emit Deposit(msg.sender, receiver, assets, shares);\n}",
+    "vulnerability": "First-depositor share inflation attack due to zero-share minting",
+    "reason": "convertToShares returns assets when totalSupply == 0, but after a 1 wei deposit an attacker can donate underlying tokens directly to the vault to inflate freeFunds. A victim's subsequent deposit can then mint 0 shares because assets.mulDivDown(_totalSupply, freeFunds) rounds down, and deposit does not require shares > 0. The attacker, holding the only share, can redeem it and receive the victim's deposit plus the donation, stealing the victim's funds. This is the classic ERC4626 inflation attack enabled by no virtual shares and no minimum-share check.",
+    "file_name": "proj-424da07d41309706__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "withdraw",
+    "code": "function withdraw(uint256 assets, address receiver, address owner) external nonReentrant returns (uint256 shares) {\n    require(assets != 0, \"please provide amount\");\n    shares = previewWithdraw(assets);\n    _withdraw(assets, shares, receiver, owner);\n    return shares;\n}",
+    "vulnerability": "Zero-share withdrawal drains vault when totalSupply is zero",
+    "reason": "When totalSupply() == 0, previewWithdraw returns 0 for any assets amount. withdraw then calls _withdraw(assets, 0, receiver, owner). _withdraw calls _burn(owner, 0), which succeeds for any non-zero owner because burning 0 requires no balance, and then transfers assets to receiver without burning any shares. If the vault ever has totalSupply == 0 while still holding assets (for example, all shares are redeemed but lockedProfit remains in the vault), any attacker can call withdraw with assets equal to the vault's balance and steal all remaining funds.",
+    "file_name": "proj-424da07d41309706__MainContractFlattened.sol"
+  }
+]

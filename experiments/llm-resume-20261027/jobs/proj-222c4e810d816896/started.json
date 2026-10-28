@@ -1,0 +1,25 @@
+{
+  "automatic_retries": 0,
+  "case_ids": [
+    "acb-c0b5572a7c1a1059"
+  ],
+  "case_timeout_seconds": 1200,
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "95ddec17badc41365a3a6d103b1d4d585b266afd3c4cb0fe3cc870c623987397",
+  "dataset": "ACToolBench154",
+  "input_identity": "e4d94644c5e110bdefe558950a47dbe24ad67b6ddcca054f97dbfcabcc88ceec",
+  "max_tokens": 65536,
+  "prior_request_attempts": 0,
+  "project_id": "proj-222c4e810d816896",
+  "prompt_layout": "prefix_stable_v2",
+  "reasoning_effort": "high",
+  "request_timeout_seconds": 300,
+  "source_hashes": [
+    "108cd482e5bb7c0108a520bf628d96e439bfdc0fb920bdbd33b632a7d1908f9d"
+  ],
+  "started_utc": "2026-10-27T10:15:18.855292+00:00",
+  "thinking": {
+    "type": "enabled"
+  },
+  "tool": "GPTLens"
+}

@@ -1,0 +1,114 @@
+{
+  "case_ids": [
+    "acb-a09ce990683a40b5"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 21964,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-43d618cac604b1a8/source_code/config.json",
+      "sha256": "8fbade1a6cd55df8454d89ce411da9ba8331b1312165e30aa525d8eb36b65b5a"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T10:52:57.912720+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 1,
+        "input_file": "proj-43d618cac604b1a8__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 1,
+        "input_file": "proj-43d618cac604b1a8__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-43d618cac604b1a8__MainContractFlattened.sol",
+      "normalized_sha256": "c721bcc3f8091cdd679aaeca487c6490318c666019cddd50ee2c1e03def93f09",
+      "ranker_output": "ranker/proj-43d618cac604b1a8__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 1,
+        "status": "complete"
+      },
+      "source_bytes": 16283,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-43d618cac604b1a8/source_code/MainContractFlattened.sol",
+      "source_sha256": "6d1a95086e726264bca68cb1b7c9eb6c0eaa36dc489bf6642e4c07fae308a1c2",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-43d618cac604b1a8__Token.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-43d618cac604b1a8__Token.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-43d618cac604b1a8__Token.sol",
+      "normalized_sha256": "66ee454a40f4a23f5c599690f3ae734b656f5904c3fdbe0f0ccb9299b380e414",
+      "ranker_output": "ranker/proj-43d618cac604b1a8__Token.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 16226,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-43d618cac604b1a8/source_code/Token.sol",
+      "source_sha256": "c11e4908ec21c06e2e967cde3b9f376e7952805b23bb61fe43d7036857e7bc85",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-43d618cac604b1a8",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T10:51:02.675733+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T10:52:57.912733+00:00",
+  "usage": {
+    "completion_tokens": 24200,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 3478,
+    "prompt_tokens": 5526,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

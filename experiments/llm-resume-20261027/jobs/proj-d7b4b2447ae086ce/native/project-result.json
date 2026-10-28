@@ -1,0 +1,411 @@
+{
+  "case_ids": [
+    "acb-d08cac1b44a28bcf"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 150598,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/config.json",
+      "sha256": "15135e408c12e47698b265c74b9a272b257e23faad52f4532acf3ce7b8a706b9"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T15:18:21.815379+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__MainContractFlattened.sol",
+      "normalized_sha256": "bf3efdb11fa5e43ea39255e206d0f09485e6af61357cd6ff1433f7c3c9aeee9a",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 119448,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/MainContractFlattened.sol",
+      "source_sha256": "6a72899a31b3c279b1742a2249021c4544995773c93f121bf320c5c030aed45e",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CErc20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CErc20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__CErc20.sol",
+      "normalized_sha256": "e43ae287de28fb650f6d791a7d2054f05eead9394dc33f2d5ee4891529a8afe5",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__CErc20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 9982,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/CErc20.sol",
+      "source_sha256": "3336a16d353baf1634876ae1041a2e4efec4ce0a3991afaa7df4026f140141f9",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CErc20Delegate.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CErc20Delegate.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__CErc20Delegate.sol",
+      "normalized_sha256": "d52a63f3a970dfe34f8f0c4539be3b2937a52e983d8a861215547f1ce1306ecd",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__CErc20Delegate.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1222,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/CErc20Delegate.sol",
+      "source_sha256": "9e4f5b92705c66f910bd0c38600bede344b592f1655a07e63a6ecfad45275a3b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CToken.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CToken.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__CToken.sol",
+      "normalized_sha256": "ba06a4723c8667311b83af7f51d7e5c4c15a8ef5dbca0cbbe084c476e39fd83b",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__CToken.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 66096,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/CToken.sol",
+      "source_sha256": "787add22a59cd3bd26aad1f61342c099077f9cbb1b0e14522b91060eafb584ea",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.sol",
+      "normalized_sha256": "2c316ac14f4b602fea551e65b5c1f3e5a591f8caba4f120d395ee2edba42bb56",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 10058,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/CTokenInterfaces.sol",
+      "source_sha256": "a9ea77a303ce6bf9e2b179574ce9968394db8c492704c2030b288029478073d1",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CarefulMath.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__CarefulMath.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__CarefulMath.sol",
+      "normalized_sha256": "b23575bedd975501e107be213b8c1b9cc6273d4c8a27a18fc767c6f83870e5c3",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__CarefulMath.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2192,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/CarefulMath.sol",
+      "source_sha256": "dcb5b6857f6455d1daf77feb84a4cd11d3fb191fbc8097315479e88308f89083",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.sol",
+      "normalized_sha256": "cab9db2940ac4dd4aa87cc9f3032ff262e66a966b33edcb691f1071dd34e8ff5",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2587,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/ComptrollerInterface.sol",
+      "source_sha256": "cb5865c24fbaf27a484b2d723172eede37694a4af38ff89a5c3447e22ad26170",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__EIP20Interface.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__EIP20Interface.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__EIP20Interface.sol",
+      "normalized_sha256": "fd51b311d745b0730a47cce4a49db71040881ee849e6a686c0a2c6ae754deae1",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__EIP20Interface.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2621,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/EIP20Interface.sol",
+      "source_sha256": "bc2ecd2927c202aab91222af287c07503cb348d8a96da3d368f195648356c4b7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.sol",
+      "normalized_sha256": "4553f4c733057f69ff71cb671f1947ba411b4df555367b3c492332aa8fc341ed",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2727,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/EIP20NonStandardInterface.sol",
+      "source_sha256": "918d5790253d16e1b5221918d040399ad3598aec848b6a9007428965fe57e058",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ErrorReporter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ErrorReporter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__ErrorReporter.sol",
+      "normalized_sha256": "71a3f2a38f6a35fdb65fde138a6601803df10dc1204b32cf07db0c7695566f88",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__ErrorReporter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 7685,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/ErrorReporter.sol",
+      "source_sha256": "b8a2e67f14e1fdc7b1eaa2df734a23497220ea5051cf2ffae97456785b2658bf",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__Exponential.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__Exponential.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__Exponential.sol",
+      "normalized_sha256": "9dd98b9a47ec19e700cc0162401b7f977f3867d1445335d9838ea5eb096833f3",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__Exponential.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 6975,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/Exponential.sol",
+      "source_sha256": "35cd0b89d935713f89f679190d92764519f5afeb08accec6f813f6b7a0db5f4e",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ExponentialNoError.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__ExponentialNoError.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__ExponentialNoError.sol",
+      "normalized_sha256": "74b37676514ec7eed4b0bdb576e2db803ed0f8f602689064eb8689bf1f605db9",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__ExponentialNoError.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 6578,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/ExponentialNoError.sol",
+      "source_sha256": "418ae000ba621eb3e8ef0e4f2347310f0c2e5f3bb75b183681d8bf67c7c14b11",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__InterestRateModel.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-d7b4b2447ae086ce__contracts__InterestRateModel.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-d7b4b2447ae086ce__contracts__InterestRateModel.sol",
+      "normalized_sha256": "4be5b54d08dc13540b2fa391e218acd6cae4520e6e27d39279f4c3dbabb03346",
+      "ranker_output": "ranker/proj-d7b4b2447ae086ce__contracts__InterestRateModel.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1326,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d7b4b2447ae086ce/source_code/contracts/InterestRateModel.sol",
+      "source_sha256": "8bba52751bf2ca58e1d47012d0879a69d73e49c3de841bee79e3dfb5387b2433",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-d7b4b2447ae086ce",
+  "project_source_file_count": 13,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T15:08:33.078405+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T15:18:21.815394+00:00",
+  "usage": {
+    "completion_tokens": 112275,
+    "prompt_cache_hit_tokens": 5246,
+    "prompt_cache_miss_tokens": 29352,
+    "prompt_tokens": 34598,
+    "request_attempt_count": 13,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

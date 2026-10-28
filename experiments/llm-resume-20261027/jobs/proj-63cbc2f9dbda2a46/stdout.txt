@@ -1,0 +1,5 @@
+{"input_file": "proj-63cbc2f9dbda2a46__LiquidationDistributor.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-63cbc2f9dbda2a46__LiquidationDistributor.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-63cbc2f9dbda2a46__Pool.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-63cbc2f9dbda2a46__Pool.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-63cbc2f9dbda2a46", "case_ids": ["acb-223f375a4994b2f7", "acb-9c71014e20192220"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

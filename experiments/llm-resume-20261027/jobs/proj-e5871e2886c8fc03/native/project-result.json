@@ -1,0 +1,115 @@
+{
+  "case_ids": [
+    "acb-90ff9cb9a3b3af83",
+    "acb-dbc4a13462fe3d29"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 165,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-e5871e2886c8fc03/source_code/config.json",
+      "sha256": "863cd5e85210ef870845c37a95b807ad0981b812671a3712035f43fbc86fe111"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T15:44:26.526121+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e5871e2886c8fc03__BurnFlashStakeDeposit.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e5871e2886c8fc03__BurnFlashStakeDeposit.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-e5871e2886c8fc03__BurnFlashStakeDeposit.sol",
+      "normalized_sha256": "85bbb7d70aae40bc6cb7fc26329f0e65bb43c24232638f5fc938b13bec95dce0",
+      "ranker_output": "ranker/proj-e5871e2886c8fc03__BurnFlashStakeDeposit.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 15073,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-e5871e2886c8fc03/source_code/BurnFlashStakeDeposit.sol",
+      "source_sha256": "47f9be5456eb8da9dc52b31229179bedc869a095d266d51e16a8b34ef783481b",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e5871e2886c8fc03__FlashGovernanceArbiter.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e5871e2886c8fc03__FlashGovernanceArbiter.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-e5871e2886c8fc03__FlashGovernanceArbiter.sol",
+      "normalized_sha256": "5f1f9b7cb5276aa49521cd03fab14803c98479f236a1beb16e87a23c3f61b029",
+      "ranker_output": "ranker/proj-e5871e2886c8fc03__FlashGovernanceArbiter.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 78400,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-e5871e2886c8fc03/source_code/FlashGovernanceArbiter.sol",
+      "source_sha256": "006520d047cd5872350e98cca88e492de2563bdec50800a2f020fb1bd76cff7b",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-e5871e2886c8fc03",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T15:38:44.001213+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T15:44:26.526132+00:00",
+  "usage": {
+    "completion_tokens": 59818,
+    "prompt_cache_hit_tokens": 2176,
+    "prompt_cache_miss_tokens": 23767,
+    "prompt_tokens": 25943,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

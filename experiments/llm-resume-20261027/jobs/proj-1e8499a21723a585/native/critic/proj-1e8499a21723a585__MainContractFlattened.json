@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "changeRewardPerNode",
+    "vulnerability": "Missing access control on rewardPerDay setter",
+    "criticism": "The provided setter indeed has no access-control modifier, so any external caller can overwrite rewardPerDay. The reasoning is directionally correct, but it assumes the claim functions actually compute payouts directly from rewardPerDay and that the contract holds enough AURUM for a drain; those functions and the contract balance are not shown. If those assumptions hold, an attacker can set an extreme reward rate, create or use a node, and claim against the pool. Severity is high because it corrupts core reward accounting and can lead to full pool depletion. Profitability is high for an external attacker when the pool is funded, though it is bounded by the contract's AURUM balance and any undisclosed claim limits. The score is reduced slightly because the full exploit path depends on unshown claim logic.",
+    "correctness": 8,
+    "severity": 9,
+    "profitability": 8,
+    "reason": "The function lacks the onlyOwner modifier. Any attacker can set rewardPerDay to an arbitrarily large value. They can then create or use an existing node and call claimAllNodesReward or claimNodeReward to drain AURUM from the contract. This is directly exploitable and can result in the loss of all AURUM held by the pool.",
+    "code": "    function changeRewardPerNode(uint256 _rewardPerDay) external {\n        rewardPerDay = _rewardPerDay;\n    }",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "changeNodePrice",
+    "vulnerability": "Missing access control on nodePrice setter",
+    "criticism": "The setter code confirms that nodePrice can be changed without any access-control check, so any external attacker can set it to zero or another abusive value. The reasoning that this enables free or cheap node creation is correct. However, the claim that this drains the reward pool depends on the undisclosed reward-claim logic, rewardPerDay, per-account maxNodes limits, and the contract's AURUM balance. Free nodes may still accrue only according to existing reward parameters and may require time or multiple accounts to extract value. Severity is high because pricing can be trivially disabled and the reward economics broken. Profitability is high if the claim functions are funded and usable, but not fully proven from the snippet alone.",
+    "correctness": 8,
+    "severity": 8,
+    "profitability": 8,
+    "reason": "The function lacks the onlyOwner modifier. Any attacker can set nodePrice to 0. They can then call createNode with the maximum allowed count to obtain nodes for free. These nodes accrue rewards based on rewardPerDay, allowing the attacker to claim AURUM from the contract without any initial payment, draining the reward pool.",
+    "code": "    function changeNodePrice(uint256 newNodePrice) external {\n        nodePrice = newNodePrice;\n    }",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "createNode",
+    "vulnerability": "No upper bound on teamFee allows contract AURUM balance drain",
+    "criticism": "The arithmetic concern is valid: createNode receives only price from the caller, then transfers operationsPrice = price*teamFee/feeDenominator to teamWallet. If teamFee can exceed feeDenominator and teamWallet can be controlled by the owner, the contract may transfer out more AURUM than it received, consuming its pre-existing balance. However, the reasoning relies on setTeamFees lacking an upper bound and on teamWallet being controllable, neither of which is shown in the provided code. It is also primarily an owner/privileged rug vector rather than an external attacker path unless those setters are themselves unprotected. The actual loss is limited by the contract's AURUM balance and transfer success. Thus correctness is plausible but not fully proven; severity is high under a malicious-owner or compromised-owner trust model; profitability for an external attacker is low/uncertain.",
+    "correctness": 7,
+    "severity": 7,
+    "profitability": 2,
+    "reason": "In createNode, operationsPrice is calculated as price*teamFee/feeDenomiator and transferred to teamWallet. The owner can set teamFee greater than feeDenomiator via setTeamFees (which lacks an upper bound) and set teamWallet to their own address. Then when createNode is called, the contract transfers more AURUM to teamWallet than it received from the user, using the contract's existing AURUM balance. This allows the owner to drain the reward pool.",
+    "code": "    function createNode(uint256 count) external {\n        require(count > 0, \"Count should be not 0\");\n        address account = msg.sender;\n        require(nodeOwners[account] + count <= maxNodes, \"Count Limited\");\n        uint256 price = nodePrice * count;\n        uint256 operationsPrice = price*teamFee/feeDenomiator;\n        AURUM.transferFrom(account, address(this), price);\n        AURUM.transfer(teamWallet, operationsPrice);\n        for (uint256 i = 0; i < count; i ++) {\n            _nodesOfUser[account].push(\n                NodeEntity({\n                    nodeId: (totalNodesCreated + 1),\n                    creationTime: block.timestamp + i,\n                    lastClaimTime: block.timestamp + i\n                })\n            );\n            nodeOwners[account]++;\n            totalNodesCreated++;\n        }\n    }",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  }
+]

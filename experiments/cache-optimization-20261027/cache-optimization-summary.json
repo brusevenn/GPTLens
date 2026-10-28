@@ -1,0 +1,75 @@
+{
+  "full_run_resumed": false,
+  "rounds": [
+    {
+      "concurrency": 2,
+      "error_count": 0,
+      "exact_cache_rate": 0.08262506724045185,
+      "known_usage_totals": {
+        "completion_tokens": 62208,
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 8527,
+        "prompt_tokens": 9295
+      },
+      "missing_usage": 0,
+      "observed_cache_rate": 0.08262506724045185,
+      "physical_attempts": 4,
+      "project_ids": [
+        "proj-8b65cfc4735dcd5e",
+        "proj-06e0b606c3789db5"
+      ],
+      "provider_stop": false,
+      "responses": 4,
+      "round": 1,
+      "round_finished_utc": "2026-10-27T07:46:39.293597+00:00",
+      "target_met": false
+    },
+    {
+      "concurrency": 2,
+      "error_count": 0,
+      "exact_cache_rate": 0.12136810023704707,
+      "known_usage_totals": {
+        "completion_tokens": 128334,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 12973,
+        "prompt_tokens": 14765
+      },
+      "missing_usage": 0,
+      "observed_cache_rate": 0.12136810023704707,
+      "physical_attempts": 4,
+      "project_ids": [
+        "proj-c695ebe78e0b8349",
+        "proj-1342319724ccb055"
+      ],
+      "provider_stop": false,
+      "responses": 4,
+      "round": 2,
+      "round_finished_utc": "2026-10-27T07:52:59.928852+00:00",
+      "target_met": false
+    },
+    {
+      "concurrency": 1,
+      "error_count": 0,
+      "exact_cache_rate": 0.10344628528545864,
+      "known_usage_totals": {
+        "completion_tokens": 76765,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 15531,
+        "prompt_tokens": 17323
+      },
+      "missing_usage": 0,
+      "observed_cache_rate": 0.10344628528545864,
+      "physical_attempts": 4,
+      "project_ids": [
+        "proj-3a5bc65f96317f51",
+        "proj-987bf9a24ec4e435"
+      ],
+      "provider_stop": false,
+      "responses": 4,
+      "round": 3,
+      "round_finished_utc": "2026-10-27T08:00:18.857911+00:00",
+      "target_met": false
+    }
+  ],
+  "status": "DIAGNOSTIC_COMPLETE"
+}

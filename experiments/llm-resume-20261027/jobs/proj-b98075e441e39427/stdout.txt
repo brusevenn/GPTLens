@@ -1,0 +1,39 @@
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__Math.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__Math.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b98075e441e39427__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b98075e441e39427__contracts__RewardsHypervisor.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b98075e441e39427__contracts__RewardsHypervisor.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b98075e441e39427__contracts__interfaces__IVisor.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b98075e441e39427__contracts__interfaces__IVisor.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b98075e441e39427__contracts__vVISR.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b98075e441e39427__contracts__vVISR.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-b98075e441e39427", "case_ids": ["acb-40eb39be71cf0eb1"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 19, "failed_files": 0, "request_log": "requests.jsonl"}

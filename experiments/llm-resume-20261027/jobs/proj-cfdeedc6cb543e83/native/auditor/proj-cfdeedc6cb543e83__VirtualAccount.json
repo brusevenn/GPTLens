@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "payableCall",
+    "code": "function payableCall(PayableCall[] calldata calls) public payable returns (bytes[] memory returnData) {\n        uint256 valAccumulator;\n        uint256 length = calls.length;\n        returnData = new bytes[](length);\n        PayableCall calldata _call;\n        for (uint256 i = 0; i < length;) {\n            _call = calls[i];\n            uint256 val = _call.value;\n            unchecked {\n                valAccumulator += val;\n            }\n            bool success;\n            if (isContract(_call.target)) (success, returnData[i]) = _call.target.call{value: val}(_call.callData);\n            if (!success) revert CallFailed();\n            unchecked { ++i; }\n        }\n        if (msg.value != valAccumulator) revert CallFailed();\n    }",
+    "vulnerability": "Missing access control allows anyone to transfer ERC20 tokens held by the VirtualAccount.",
+    "reason": "The payableCall function is public and lacks the requiresApprovedCaller modifier. An attacker can call payableCall with a single call targeting an ERC20 token contract, using callData for transfer(attacker, amount). Since the call originates from the VirtualAccount, the token contract sees msg.sender as the VirtualAccount and executes the transfer, allowing the attacker to steal any ERC20 tokens held by the VirtualAccount without authorization.",
+    "file_name": "proj-cfdeedc6cb543e83__VirtualAccount.sol"
+  },
+  {
+    "function_name": "payableCall",
+    "code": "function payableCall(PayableCall[] calldata calls) public payable returns (bytes[] memory returnData) {\n        uint256 valAccumulator;\n        uint256 length = calls.length;\n        returnData = new bytes[](length);\n        PayableCall calldata _call;\n        for (uint256 i = 0; i < length;) {\n            _call = calls[i];\n            uint256 val = _call.value;\n            unchecked {\n                valAccumulator += val;\n            }\n            bool success;\n            if (isContract(_call.target)) (success, returnData[i]) = _call.target.call{value: val}(_call.callData);\n            if (!success) revert CallFailed();\n            unchecked { ++i; }\n        }\n        if (msg.value != valAccumulator) revert CallFailed();\n    }",
+    "vulnerability": "Missing access control allows anyone to transfer ERC721 tokens held by the VirtualAccount.",
+    "reason": "Because payableCall is publicly callable without the requiresApprovedCaller modifier, an attacker can make the VirtualAccount call an ERC721 token contract with transferFrom(address(this), attacker, tokenId). The ERC721 contract sees msg.sender as the VirtualAccount, matching the from address, and transfers the NFT to the attacker. This allows theft of any ERC721 tokens held by the VirtualAccount.",
+    "file_name": "proj-cfdeedc6cb543e83__VirtualAccount.sol"
+  },
+  {
+    "function_name": "payableCall",
+    "code": "function payableCall(PayableCall[] calldata calls) public payable returns (bytes[] memory returnData) {\n        uint256 valAccumulator;\n        uint256 length = calls.length;\n        returnData = new bytes[](length);\n        PayableCall calldata _call;\n        for (uint256 i = 0; i < length;) {\n            _call = calls[i];\n            uint256 val = _call.value;\n            unchecked {\n                valAccumulator += val;\n            }\n            bool success;\n            if (isContract(_call.target)) (success, returnData[i]) = _call.target.call{value: val}(_call.callData);\n            if (!success) revert CallFailed();\n            unchecked { ++i; }\n        }\n        if (msg.value != valAccumulator) revert CallFailed();\n    }",
+    "vulnerability": "Missing access control allows arbitrary external calls on behalf of the VirtualAccount, enabling theft of assets from integrated protocols.",
+    "reason": "The payableCall function allows any caller to make the VirtualAccount execute arbitrary calls to any contract. If the VirtualAccount has assets deposited in or approved to an external protocol (e.g., a lending market, DEX, or vault), an attacker can invoke that protocol's withdrawal or transfer functions with the VirtualAccount as msg.sender. This can drain native ETH, ERC20, ERC721, or other assets from those protocols to the attacker, even though the VirtualAccount itself may not hold the assets directly.",
+    "file_name": "proj-cfdeedc6cb543e83__VirtualAccount.sol"
+  }
+]

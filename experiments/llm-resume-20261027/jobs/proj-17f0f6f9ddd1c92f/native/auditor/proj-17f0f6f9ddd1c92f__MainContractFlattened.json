@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "EAI_TokenERC20",
+    "code": "    function EAI_TokenERC20( uint256 initialSupply, string tokenName, string tokenSymbol ) public {\n        totalSupply = initialSupply * 10 ** uint256(decimals);\n        balanceOf[msg.sender] = totalSupply;\n        name = tokenName;\n        symbol = tokenSymbol;\n    }",
+    "vulnerability": "Missing constructor due to name mismatch, allowing anyone to mint tokens and reset supply",
+    "reason": "The contract is named EAI_TokenERC, but the initialization function is named EAI_TokenERC20. In Solidity 0.4.24, a constructor must have the exact same name as the contract. Therefore, EAI_TokenERC20 is a regular public function that can be called by anyone at any time. It sets totalSupply to initialSupply * 10**8 and assigns that entire supply to balanceOf[msg.sender]. An attacker can call this function repeatedly to mint unlimited tokens to their own address, overwrite totalSupply, and change the token name/symbol. This allows them to inflate balances, sell minted tokens on exchanges, drain liquidity, or destroy the token's accounting. This is a critical vulnerability.",
+    "file_name": "proj-17f0f6f9ddd1c92f__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {\n        require(_value <= allowance[_from][msg.sender]);\n        allowance[_from][msg.sender] -= _value;\n        _transfer(_from, _to, _value);\n        return true;\n    }",
+    "vulnerability": "Missing approve function makes allowance always zero, breaking transferFrom and burnFrom",
+    "reason": "The contract defines an allowance mapping and uses it in transferFrom and burnFrom, but never implements an approve function to set allowances. In Solidity 0.4.24, a public mapping only generates a getter; it does not allow external contracts or users to set values. As a result, allowance[_from][msg.sender] is always zero for all addresses. Therefore, transferFrom and burnFrom will always revert for any non-zero _value. This breaks ERC20 compliance and prevents any contract or user from using the standard allowance mechanism. Tokens sent to contracts that rely on transferFrom can become permanently locked, and integrations expecting standard ERC20 behavior will fail. This is a severe functional vulnerability that can be exploited to trap funds or cause denial of service in DeFi protocols.",
+    "file_name": "proj-17f0f6f9ddd1c92f__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "burn",
+    "code": "    function burn(uint256 _value) public returns (bool success) {\n        require(balanceOf[msg.sender] >= _value);\n        balanceOf[msg.sender] -= _value;\n        totalSupply -= _value;\n        emit Burn(msg.sender, _value);\n        return true;\n    }",
+    "vulnerability": "Integer underflow in totalSupply due to missing check, allowing massive supply inflation",
+    "reason": "The burn function reduces totalSupply by _value without checking that totalSupply >= _value. It only requires that the caller's balance is at least _value. Due to the missing constructor bug, it is possible to create a state where a holder's balance exceeds totalSupply. For example, an attacker can first mint a large balance via EAI_TokenERC20, transfer some tokens to a second address, then call EAI_TokenERC20 again to reset totalSupply to a small value while the second address retains its large balance. The second address can then call burn with a value greater than totalSupply but less than or equal to its balance. This causes totalSupply to underflow to 2^256 - 1, creating an astronomically large total supply. An attacker can intentionally trigger this to manipulate totalSupply-based calculations, crash the token's price, or grief exchanges and users. This is a severe integer underflow vulnerability.",
+    "file_name": "proj-17f0f6f9ddd1c92f__MainContractFlattened.sol"
+  }
+]

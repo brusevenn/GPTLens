@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-d7b4b2447ae086ce__contracts__EIP20Interface.sol",
+  "stage": "auditor",
+  "status": "no_findings",
+  "finding_count": 0
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "mint",
+    "code": "function mint() public returns (bool) {\n    _mint( msg.sender, 100000000000000000 );\n    return true;\n}",
+    "vulnerability": "Unrestricted minting",
+    "reason": "The mint() function is declared public and lacks any access control modifier. Any external account can call it repeatedly, each time minting 100000000000000000 units to their own address. This allows an attacker to create an unlimited number of tokens, dilute existing holders, and dump the inflated supply on exchanges or DeFi protocols, causing severe financial damage. This is a critical inflation vulnerability.",
+    "file_name": "proj-43d618cac604b1a8__Token.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint() public returns (bool) {\n    _mint( msg.sender, 100000000000000000 );\n    return true;\n}",
+    "vulnerability": "No maximum supply cap",
+    "reason": "The mint() function can be called arbitrarily often and there is no check on the total supply. Even if access were restricted, the absence of a supply cap means the token can be inflated without limit. Combined with public access, any attacker can continuously mint new tokens, destroying scarcity and manipulating the token's market value. This allows infinite inflation and is highly beneficial to an attacker.",
+    "file_name": "proj-43d618cac604b1a8__Token.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address spender, uint256 amount) public virtual override returns (bool) {\n    _approve(_msgSender(), spender, amount);\n    return true;\n}",
+    "vulnerability": "ERC20 approve race condition",
+    "reason": "The approve() function directly sets the allowance to amount. If a user changes an existing allowance from A to B, a malicious spender can front-run the change by spending the old allowance A before the transaction is mined, and then spend the new allowance B after the update. For example, if Alice approves Bob for 100 tokens and then submits a transaction to reduce it to 50, Bob can spend 100 tokens first and then another 50 after the approval is updated, totaling 150 tokens. This allows the spender to exceed the intended allowance and steal tokens. Although increaseAllowance and decreaseAllowance are provided as safe alternatives, the vulnerable approve() remains available and exploitable.",
+    "file_name": "proj-43d618cac604b1a8__Token.sol"
+  }
+]

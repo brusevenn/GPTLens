@@ -1,0 +1,5 @@
+{"input_file": "proj-b7ee8293723fb6f6__DimonCoin.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b7ee8293723fb6f6__DimonCoin.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b7ee8293723fb6f6__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b7ee8293723fb6f6__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-b7ee8293723fb6f6", "case_ids": ["acb-67cc607ff5d869bf"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,9 @@
+stage=critic
+input_id=data/ACToolBench154/proj-d79ac252134863ee__contracts__SimplePriceOracle.sol
+error_type=RuntimeError
+Traceback (most recent call last):
+  File "$REPO/scripts/benchmark.py", line 418, in run_project
+    run_critic.run(critic_args)
+  File "$REPO/src/run_critic.py", line 135, in run
+    raise RuntimeError(f"Critic failed for {errors} input(s); per-input statuses were saved")
+RuntimeError: Critic failed for 1 input(s); per-input statuses were saved

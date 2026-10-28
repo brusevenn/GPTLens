@@ -1,0 +1,115 @@
+{
+  "case_ids": [
+    "acb-860337c836004529"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 47201,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-a6c36a55c19a84c2/source_code/config.json",
+      "sha256": "9c9dd9a659ab3a6f3c0a0748d46dbcb6292c0045b5e9f28d8a970102268dd104"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T13:25:04.423804+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a6c36a55c19a84c2__AnyswapV4Router.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a6c36a55c19a84c2__AnyswapV4Router.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a6c36a55c19a84c2__AnyswapV4Router.sol",
+      "normalized_sha256": "6a02d69ce26d83f90388072ddd1695b670a22c004ca9a2f64a320249494f8ee1",
+      "ranker_output": "ranker/proj-a6c36a55c19a84c2__AnyswapV4Router.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 25743,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a6c36a55c19a84c2/source_code/AnyswapV4Router.sol",
+      "source_sha256": "2257799c2a006bed76255d0f72c74a53719db2c9187692d33e2458429d7613c7",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a6c36a55c19a84c2__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-a6c36a55c19a84c2__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/39943e746b81-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-a6c36a55c19a84c2__MainContractFlattened.sol",
+      "normalized_sha256": "10f4d70d858884e2716eed1497c9d73b87444dd03b78cc7e44fab4f57abe96d3",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 25786,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a6c36a55c19a84c2/source_code/MainContractFlattened.sol",
+      "source_sha256": "483c86b36f0336bc855068fbab5c9c4d97c644d4f1d0168072e210190e32ddbd",
+      "status": "CRITIC_ERROR"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-a6c36a55c19a84c2",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T13:19:42.277589+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T13:25:04.423822+00:00",
+  "usage": {
+    "completion_tokens": 55991,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 14104,
+    "prompt_tokens": 16152,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

@@ -1,0 +1,27 @@
+{"input_file": "proj-d7b4b2447ae086ce__MainContractFlattened.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__MainContractFlattened.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CErc20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CErc20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CErc20Delegate.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CErc20Delegate.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CToken.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CToken.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CTokenInterfaces.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CarefulMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__CarefulMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ComptrollerInterface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__EIP20Interface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__EIP20Interface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__EIP20NonStandardInterface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ErrorReporter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ErrorReporter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__Exponential.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__Exponential.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ExponentialNoError.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__ExponentialNoError.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__InterestRateModel.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d7b4b2447ae086ce__contracts__InterestRateModel.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-d7b4b2447ae086ce", "case_ids": ["acb-d08cac1b44a28bcf"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 13, "failed_files": 0, "request_log": "requests.jsonl"}

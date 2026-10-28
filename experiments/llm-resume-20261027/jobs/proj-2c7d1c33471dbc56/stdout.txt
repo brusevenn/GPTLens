@@ -1,0 +1,3 @@
+{"input_file": "proj-2c7d1c33471dbc56__JoinFactory.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-2c7d1c33471dbc56__JoinFactory.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-2c7d1c33471dbc56", "case_ids": ["acb-7aa02142a5a9aac8"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

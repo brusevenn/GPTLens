@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "depositRewards",
+    "code": "function depositRewards(uint256 _amount) public payable {\n    uint256 cvxAmount = buyCvx(_amount);\n    IERC20(CVX_ADDRESS).approve(VLCVX_ADDRESS, cvxAmount);\n    ILockedCvx(VLCVX_ADDRESS).lock(address(this), cvxAmount, 0);\n    emit DepositReward(cvxPerVotium(), _amount, cvxAmount);\n}",
+    "vulnerability": "MEV sandwich due to zero slippage protection in buyCvx",
+    "reason": "The function calls buyCvx(_amount), which invokes ICrvEthPool.exchange_underlying with min_dy set to 0. An attacker can front-run the transaction to manipulate the Curve pool price, causing the contract to receive less CVX for the ETH. The attacker then back-runs to profit, while the protocol loses value. This is exploitable because depositRewards is public and is used to process potentially large reward amounts.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol"
+  },
+  {
+    "function_name": "withdraw",
+    "code": "function withdraw(uint256 _withdrawId) external override {\n    if (withdrawIdToWithdrawRequestInfo[_withdrawId].owner != msg.sender) revert NotOwner();\n    if (!this.canWithdraw(_withdrawId)) revert WithdrawNotReady();\n    if (withdrawIdToWithdrawRequestInfo[_withdrawId].withdrawn) revert AlreadyWithdrawn();\n    relock();\n    uint256 cvxWithdrawAmount = withdrawIdToWithdrawRequestInfo[_withdrawId]\n        .cvxOwed;\n    uint256 ethReceived = sellCvx(cvxWithdrawAmount);\n    cvxUnlockObligations -= cvxWithdrawAmount;\n    withdrawIdToWithdrawRequestInfo[_withdrawId].withdrawn = true;\n    (bool sent, ) = msg.sender.call{value: ethReceived}(\"\");\n    if (!sent) revert FailedToSend();\n}",
+    "vulnerability": "MEV sandwich due to zero slippage protection in sellCvx",
+    "reason": "The function calls sellCvx(cvxWithdrawAmount), which invokes ICrvEthPool.exchange_underlying with min_dy set to 0. An attacker can front-run the withdrawal to manipulate the Curve pool price, causing the user to receive less ETH for their CVX. The attacker then back-runs to profit. The function lacks any minimum ETH output parameter, making every withdrawal susceptible to sandwich attacks.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol"
+  },
+  {
+    "function_name": "ethPerCvx",
+    "code": "function ethPerCvx(bool _validate) public view returns (uint256) {\n    ChainlinkResponse memory cl;\n    try chainlinkCvxEthFeed.latestRoundData() returns (\n        uint80 roundId,\n        int256 answer,\n        uint256 ,\n        uint256 updatedAt,\n        uint80\n    ) {\n        cl.success = true;\n        cl.roundId = roundId;\n        cl.answer = answer;\n        cl.updatedAt = updatedAt;\n    } catch {\n        cl.success = false;\n    }\n    if (\n        (!_validate ||\n            (cl.success == true &&\n                cl.roundId != 0 &&\n                cl.answer >= 0 &&\n                cl.updatedAt != 0 &&\n                cl.updatedAt <= block.timestamp &&\n                block.timestamp - cl.updatedAt <= 25 hours))\n    ) {\n        return uint256(cl.answer);\n    } else {\n        revert ChainlinkFailed();\n    }\n}",
+    "vulnerability": "Unvalidated Chainlink price when _validate is false",
+    "reason": "When _validate is false, the function returns cl.answer without checking whether the Chainlink call succeeded, the roundId is valid, the answer is non-negative, or the price is fresh. If the feed fails or is stale, it returns 0 or an outdated price. This misprices vAfEth in VotiumStrategy.price(), which is used by AfEth.price() and AfEth.deposit(). An attacker can exploit a stale low price to mint excessive AfEth by depositing into SafEth, then profit when the price updates, stealing from existing holders.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol"
+  }
+]

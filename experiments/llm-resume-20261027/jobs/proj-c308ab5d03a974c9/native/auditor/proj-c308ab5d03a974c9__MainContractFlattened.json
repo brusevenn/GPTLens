@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "UBSexToken",
+    "code": "    function UBSexToken() {\n        owner = msg.sender;\n        totalSupply = 1.9 * 10 ** 26;\n        balances[owner] = totalSupply;\n    }",
+    "vulnerability": "Unprotected mint/constructor allows anyone to become owner and mint unlimited tokens.",
+    "reason": "The function `UBSexToken` is not a constructor because its name does not match the contract name `BAFCToken`. It is a public function callable by anyone. Calling it sets `owner` to `msg.sender`, sets `totalSupply` to `1.9 * 10 ** 26`, and assigns that entire supply to the caller's balance. It can be called repeatedly from different addresses, each time resetting the owner and assigning a fresh supply to the caller without reducing previous balances. This allows an attacker to mint an arbitrary number of tokens to addresses they control, become the owner, and then use owner privileges (e.g., `freezeAccount`, `switchLiquidity`) to manipulate the token. This completely breaks the token's supply and ownership model.",
+    "file_name": "proj-c308ab5d03a974c9__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "    function approve(address _spender, uint _value) unFrozenAccount {\n        if ((_value != 0) && (allowed[msg.sender][_spender] != 0)) throw;\n        allowed[msg.sender][_spender] = _value;\n        Approval(msg.sender, _spender, _value);\n    }",
+    "vulnerability": "Missing `onlyPayloadSize` modifier enables short address attack.",
+    "reason": "The `approve` function does not include the `onlyPayloadSize(2 * 32)` modifier, unlike `transfer` and `transferFrom`. This means it does not validate that `msg.data.length` is at least the expected size for an address and a uint256. A malicious actor can exploit this by providing a shortened spender address (with trailing zeros omitted) to a victim or vulnerable contract, causing the `_value` parameter to be shifted and multiplied by a power of 256. This can result in the victim unintentionally approving a much larger allowance than intended, allowing the attacker to drain the victim's tokens via `transferFrom`.",
+    "file_name": "proj-c308ab5d03a974c9__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transfer",
+    "code": "    function transfer(address _to, uint _value) onlyPayloadSize(2 * 32) unFrozenAccount onlyTransferable {\n        if (frozenAccount[_to]) {\n            InvalidAccount(_to, \"The receiver account is frozen\");\n        } else {\n            balances[msg.sender] = balances[msg.sender].sub(_value);\n            balances[_to] = balances[_to].add(_value);\n            Transfer(msg.sender, _to, _value);\n        }\n    }",
+    "vulnerability": "Silent failure when recipient is frozen allows payment bypass.",
+    "reason": "The `transfer` function checks if the recipient `_to` is frozen. If so, it only emits an `InvalidAccount` event and does not revert or return a failure status. The function then does nothing, leaving the sender's balance unchanged. Because the function does not revert and does not return a boolean, integrating contracts or users may not detect the failure and may assume the transfer succeeded. An attacker who gains owner privileges (e.g., via the `UBSexToken` vulnerability) can freeze a victim's account and then make a payment to the victim from another controlled account. The transfer silently fails, the attacker keeps the tokens and receives goods/services from the victim, while the victim's balance never increases.",
+    "file_name": "proj-c308ab5d03a974c9__MainContractFlattened.sol"
+  }
+]

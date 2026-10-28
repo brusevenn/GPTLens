@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "mint",
+    "code": "function mint(address to_, string memory questId_) public onlyMinter { _tokenIds.increment(); uint newTokenID = _tokenIds.current(); questIdForTokenId[newTokenID] = questId_; timestampForTokenId[newTokenID] = block.timestamp; _safeMint(to_, newTokenID); }",
+    "vulnerability": "Broken onlyMinter modifier allows anyone to mint receipts",
+    "reason": "The onlyMinter modifier is defined as modifier onlyMinter() { msg.sender == minterAddress; _; }. The comparison msg.sender == minterAddress is evaluated but its result is discarded; there is no require or revert. Therefore, the modifier does not restrict access at all. Any external account can call mint(to_, questId_) and create arbitrary receipts. Because receipts are used to claim rewards from quests, an attacker can mint receipts for active quests to their own address and claim the corresponding rewards, draining the quest reward pool. They can also mint unlimited receipts or mint to other addresses to grief. This is a critical unauthorized minting vulnerability.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleReceipt.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize(address receiptRenderer_, address royaltyRecipient_, address minterAddress_, uint royaltyFee_) public initializer { __ERC721_init('RabbitHoleReceipt', 'RHR'); __ERC721URIStorage_init(); __Ownable_init(); royaltyRecipient = royaltyRecipient_; minterAddress = minterAddress_; royaltyFee = royaltyFee_; ReceiptRendererContract = ReceiptRenderer(receiptRenderer_); }",
+    "vulnerability": "Public initializer can be front-run to take ownership",
+    "reason": "The initialize function is public and protected only by the initializer modifier, which prevents multiple calls but does not restrict who can call it first. If the proxy contract is deployed and initialize is not called atomically in the same transaction, an attacker can front-run the legitimate initialization. The attacker becomes the owner via __Ownable_init() and sets minterAddress, royaltyRecipient, royaltyFee, and ReceiptRendererContract to arbitrary values. As owner, the attacker can then set the quest factory, mint receipts, change royalty fees, or upgrade the renderer. This can lead to theft of rewards and royalties, and complete control of the contract. The constructor _disableInitializers() only disables initialization on the implementation contract, not on the proxy, so the proxy remains vulnerable until initialized.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleReceipt.sol"
+  },
+  {
+    "function_name": "generateAttribute",
+    "code": "function generateAttribute(string memory key, string memory value) public pure returns (string memory) { bytes memory attribute = abi.encodePacked('{', '\"trait_type\": \"', key, '\",', '\"value\": \"', value, '\"', '}'); return string(attribute); }",
+    "vulnerability": "Unescaped JSON string allows metadata injection and trait spoofing",
+    "reason": "The generateAttribute function builds a JSON string by directly concatenating the key and value parameters without escaping double quotes or other JSON metacharacters. This function is used by generateDataURI to include the user-controlled questId_ in the token metadata. If questId_ contains a double quote, an attacker can break out of the value string and inject arbitrary JSON fields or additional attributes. For example, a crafted questId_ can add a fake trait such as Rarity: Legendary. This can spoof NFT traits, deceive buyers, and potentially increase the perceived value of the NFT. The attack is possible because questId_ is stored from the mint function and is not sanitized; anyone can create a quest with a malicious ID if the quest factory allows arbitrary strings, or directly call mint due the broken onlyMinter modifier. The resulting malformed or inflated JSON can mislead marketplaces and users.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleReceipt.sol"
+  }
+]

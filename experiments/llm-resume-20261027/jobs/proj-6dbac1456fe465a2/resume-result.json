@@ -1,0 +1,30 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-6dbac1456fe465a2",
+  "case_ids": [
+    "acb-744cdd02208a262f",
+    "acb-9835454d49e10a38"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "5843e5234fba92fae28f7d4b7384e15ca728bafea090d1a77e51e8195632f625",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T11:32:08.939260+00:00",
+  "exit_code": 0,
+  "input_identity": "7abac5e1903208b9c9fa6eb61f03c710b272822c23678995603fe17a610e616e",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-6dbac1456fe465a2",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "Registry.sol",
+      "dd2481c373c1638767325712b1f29e67a641d9a212da3f44c49d4dec56e3b0eb"
+    ]
+  ],
+  "source_hashes": [
+    "dd2481c373c1638767325712b1f29e67a641d9a212da3f44c49d4dec56e3b0eb"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

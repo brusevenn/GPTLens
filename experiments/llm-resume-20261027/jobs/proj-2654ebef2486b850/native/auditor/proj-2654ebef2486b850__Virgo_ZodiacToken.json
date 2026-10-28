@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "fallback",
+    "code": "function() payable { if (!purchasingAllowed) { throw; } if (msg.value < 1 finney * MINfinney) { return; } owner.transfer(msg.value); totalContribution += msg.value; uint256 tokensIssued = (msg.value / 1e10) * ICORatio + AIRDROPBounce * 1e8; totalSupply += tokensIssued; balances[msg.sender] += tokensIssued; Transfer(address(this), msg.sender, tokensIssued); }",
+    "vulnerability": "Free token mint due to zero minimum and unconditional bonus tokens",
+    "reason": "MINfinney is initialized to 0, so the check `msg.value < 1 finney * MINfinney` evaluates to `msg.value < 0`, which is false even when msg.value is 0. The fallback then unconditionally adds `AIRDROPBounce * 1e8` (50,000,000 tokens with 8 decimals) to the caller's balance. An attacker can repeatedly call the fallback with zero ETH to mint an unlimited number of tokens for free, diluting the token supply and stealing value from legitimate holders.",
+    "file_name": "proj-2654ebef2486b850__Virgo_ZodiacToken.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(address _from, address _to, uint256 _value) returns (bool success) { if(msg.data.length < (3 * 32) + 4) { throw; } if (_value == 0) { return false; } uint256 fromBalance = balances[_from]; uint256 allowance = allowed[_from][msg.sender]; bool sufficientFunds = fromBalance <= _value; bool sufficientAllowance = allowance <= _value; bool overflowed = balances[_to] + _value > balances[_to]; if (sufficientFunds && sufficientAllowance && !overflowed) { balances[_to] += _value; balances[_from] -= _value; allowed[_from][msg.sender] -= _value; Transfer(_from, _to, _value); return true; } else { return false; } }",
+    "vulnerability": "Inverted balance/allowance checks and incorrect overflow check allow unauthorized token theft",
+    "reason": "The conditions `sufficientFunds` and `sufficientAllowance` use `<=` instead of `>=`, and the `overflowed` flag is inverted. For a victim with balance B, an attacker can call `transferFrom(attacker, victim, 2^256 - B)`. The addition `balances[victim] + _value` overflows to 0, making `overflowed` false. The checks pass because attacker's balance (0) <= _value and allowance (0) <= _value. Then `balances[victim] += _value` wraps to 0, and `balances[attacker] -= _value` underflows to B. Thus the attacker steals the victim's entire token balance without any allowance. This can drain any holder, including large holders, and the underflow of `allowed` also corrupts allowances.",
+    "file_name": "proj-2654ebef2486b850__Virgo_ZodiacToken.sol"
+  },
+  {
+    "function_name": "setAIRDROPBounce",
+    "code": "function setAIRDROPBounce(uint _newPrice) { if (msg.sender != owner) { throw; } AIRDROPBounce = _newPrice; }",
+    "vulnerability": "Owner can set arbitrary AIRDROPBounce to mint unlimited tokens",
+    "reason": "The owner-only function `setAIRDROPBounce` allows setting `AIRDROPBounce` to any uint256 without an upper bound. The fallback function computes `tokensIssued = ... + AIRDROPBounce * 1e8`. By setting `AIRDROPBounce` to a very large value, the owner can cause the fallback to mint an arbitrary number of tokens (or cause multiplication overflow to control the output). The owner can then call the fallback with zero ETH (since MINfinney is 0) to mint unlimited tokens to themselves, devaluing the token and rug-pulling all value from holders.",
+    "file_name": "proj-2654ebef2486b850__Virgo_ZodiacToken.sol"
+  }
+]

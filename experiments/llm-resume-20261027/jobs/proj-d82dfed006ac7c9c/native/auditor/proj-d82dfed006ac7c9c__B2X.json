@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "distributeToken",
+    "code": "function distributeToken(address[] addresses, uint256 _value) {\n        for (uint i = 0; i < addresses.length; i++) {\n            balances[msg.sender] -= _value;\n            balances[addresses[i]] += _value;\n            Transfer(msg.sender, addresses[i], _value);\n        }\n    }",
+    "vulnerability": "Integer underflow allows arbitrary token minting",
+    "reason": "The distributeToken function subtracts _value from balances[msg.sender] without verifying that the sender has a sufficient balance. In Solidity 0.4.4, unsigned integer underflow wraps around to 2^256-1. An attacker can call distributeToken with a _value greater than their balance (or with multiple addresses such that the total exceeds their balance). This causes balances[msg.sender] to underflow to a huge number. The attacker can then transfer these newly created tokens to any address, effectively minting arbitrary tokens and destroying the token economy. The function is public and unrestricted, making it exploitable by anyone with a small or zero initial token balance.",
+    "file_name": "proj-d82dfed006ac7c9c__B2X.sol"
+  },
+  {
+    "function_name": "owned",
+    "code": "function owned() public {\n        owner = msg.sender;\n    }",
+    "vulnerability": "Public ownership takeover due to wrong constructor name",
+    "reason": "The function owned() is intended to be the constructor for the Owned contract, but its name is owned (lowercase) while the contract is Owned (capital O). In Solidity, constructor names must match the contract name exactly, including case. Therefore, owned() is a regular public function that can be called by anyone at any time. It sets owner = msg.sender. An attacker can call owned() to become the owner and then call transferOwnership to transfer ownership to any address. This completely breaks the access control model, allowing anyone to hijack ownership at will. Any current or future privileged functions protected by onlyOwner would be compromised.",
+    "file_name": "proj-d82dfed006ac7c9c__B2X.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _value) returns (bool success) {\n        allowed[msg.sender][_spender] = _value;\n        Approval(msg.sender, _spender, _value);\n        return true;\n    }",
+    "vulnerability": "ERC20 approve race condition (double-spending allowance)",
+    "reason": "The approve function allows changing an allowance from a non-zero value to another non-zero value without using a two-step process or checking the current allowance. A malicious spender can front-run a legitimate allowance change. For example, if Alice calls approve(Bob, 100), Bob can spend 100. If Alice later calls approve(Bob, 200), Bob can front-run the second transaction by spending the original 100, then after the approval is mined, spend another 200, resulting in 300 spent total. This known ERC20 race condition can lead to double-spending of allowances, which may be exploited by a malicious spender to drain more funds than the owner intended to authorize.",
+    "file_name": "proj-d82dfed006ac7c9c__B2X.sol"
+  }
+]

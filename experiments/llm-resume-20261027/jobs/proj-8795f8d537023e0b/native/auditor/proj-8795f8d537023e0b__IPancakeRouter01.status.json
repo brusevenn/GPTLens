@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-8795f8d537023e0b__IPancakeRouter01.sol",
+  "stage": "auditor",
+  "status": "no_findings",
+  "finding_count": 0
+}

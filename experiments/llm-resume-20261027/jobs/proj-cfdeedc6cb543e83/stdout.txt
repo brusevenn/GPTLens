@@ -1,0 +1,5 @@
+{"input_file": "proj-cfdeedc6cb543e83__RootPort.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-cfdeedc6cb543e83__RootPort.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-cfdeedc6cb543e83__VirtualAccount.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-cfdeedc6cb543e83__VirtualAccount.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-cfdeedc6cb543e83", "case_ids": ["acb-a742eece31ce41ca", "acb-dffcbc87bac7bb69"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 2, "request_log": "requests.jsonl"}

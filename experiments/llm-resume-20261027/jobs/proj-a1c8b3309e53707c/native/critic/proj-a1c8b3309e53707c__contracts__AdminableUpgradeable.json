@@ -1,0 +1,13 @@
+[
+  {
+    "function_name": "__Adminable_init",
+    "vulnerability": "Unprotected public initializer allows anyone to become owner and admin",
+    "criticism": "The reasoning is largely correct but conditional. A public initializer protected only by the initializer modifier is not automatically exploitable if deployment and initialization are performed atomically and the implementation contract is disabled from initialization. However, because this function is public virtual and sets both Ownable owner and DEFAULT_ADMIN_ROLE to _msgSender(), an attacker who calls it first on an uninitialized proxy can become owner/admin and gain full privileged control. The initializer modifier prevents repeat initialization but does not prevent front-running the first call. The reasoning correctly notes the need for atomic initialization and _disableInitializers(), but the code snippet alone does not prove that the constructor lacks this protection. Severity is high when the proxy is left uninitialized because full administrative takeover can lead to fund theft, upgrades, or privileged state changes. Profitability is high if the contract holds value or controls valuable permissions, though it is not guaranteed in every deployment.",
+    "correctness": 8,
+    "severity": 8,
+    "profitability": 7,
+    "reason": "The __Adminable_init function is declared public and only protected by the initializer modifier. If the contract or its proxy is deployed without atomically calling this initializer in the same transaction, an attacker can front-run the legitimate initialization call and execute __Adminable_init first. This sets the attacker as both the owner and the DEFAULT_ADMIN_ROLE, granting them full privileged access to all functions protected by onlyOwnerOrAdmin. Additionally, because there is no constructor calling _disableInitializers(), the implementation contract itself can be initialized by an attacker, potentially enabling further attacks if the implementation contains self-destruct or delegatecall functionality. The correct practice is to make base initializers internal and expose a single public initializer in the final contract, and to call _disableInitializers() in the constructor of the implementation.",
+    "code": "function __Adminable_init() public virtual initializer {\n        OwnableUpgradeable.__Ownable_init();\n        AccessControlUpgradeable.__AccessControl_init();\n        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());\n    }",
+    "file_name": "proj-a1c8b3309e53707c__contracts__AdminableUpgradeable.sol"
+  }
+]

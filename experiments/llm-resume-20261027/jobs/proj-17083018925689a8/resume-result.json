@@ -1,0 +1,29 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-17083018925689a8",
+  "case_ids": [
+    "acb-7a46c5a963d98ebc"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "6741e4b8c583c3f3ee71dd9916457dbe99dd575cba1fc3bf17d1dd702d89b4ad",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T10:01:53.240503+00:00",
+  "exit_code": 2,
+  "input_identity": "1aee4663ac67c1e92669b7f439370841753f7eb5b987641198c1c1a2cf60a8fc",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-17083018925689a8",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "AlgebraPool.sol",
+      "c25fda342859e1a4a44db72de829c076183c80854098610c05f2812372cc5e85"
+    ]
+  ],
+  "source_hashes": [
+    "c25fda342859e1a4a44db72de829c076183c80854098610c05f2812372cc5e85"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-d2b659b60ad6925d",
+  "case_ids": [
+    "acb-4b207274fefab4f1"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "058bc5adf69e723b563537a54bc652a8450cb8a0374d7bd7c411bd7b3ae272af",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:00:47.056062+00:00",
+  "exit_code": 2,
+  "input_identity": "444410fb6eca4b53c46491633b50d2c56c21d65b0ddbb37bc374a7b5f6d036a9",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-d2b659b60ad6925d",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "DxBurnToken.sol",
+      "cbae471db064082bb4f33bbe50f67d51da393fc05201d75d418a390428cb6b6c"
+    ],
+    [
+      "MainContractFlattened.sol",
+      "046753b93654afc292dc162035e4ccaef444433e2284d1e79eb755784a6db462"
+    ]
+  ],
+  "source_hashes": [
+    "046753b93654afc292dc162035e4ccaef444433e2284d1e79eb755784a6db462",
+    "cbae471db064082bb4f33bbe50f67d51da393fc05201d75d418a390428cb6b6c"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

@@ -1,0 +1,11 @@
+{"input_file": "proj-97e5691b34335ab9__EthVault.impl.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-97e5691b34335ab9__EthVault.impl.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-97e5691b34335ab9__EthVault.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-97e5691b34335ab9__EthVault.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-97e5691b34335ab9__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-97e5691b34335ab9__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-97e5691b34335ab9__MultiSigWallet.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-97e5691b34335ab9__MultiSigWallet.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-97e5691b34335ab9__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-97e5691b34335ab9__SafeMath.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-97e5691b34335ab9", "case_ids": ["acb-73c8758464d9e257"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 5, "failed_files": 1, "request_log": "requests.jsonl"}

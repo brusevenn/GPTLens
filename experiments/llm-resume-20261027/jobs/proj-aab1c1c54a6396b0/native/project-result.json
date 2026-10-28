@@ -1,0 +1,114 @@
+{
+  "case_ids": [
+    "acb-6211080fc9b8efed"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 15485,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-aab1c1c54a6396b0/source_code/config.json",
+      "sha256": "0b417f0cf4bb4981114414b12a512c9032574feb6d2a46a4a53762bdb2d8b6d4"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T13:39:58.783905+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-aab1c1c54a6396b0__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-aab1c1c54a6396b0__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-aab1c1c54a6396b0__MainContractFlattened.sol",
+      "normalized_sha256": "015ad168ffeb673220d1abe2cbd392efe7bfce6ffa51224c0dbf8a53755bbb74",
+      "ranker_output": "ranker/proj-aab1c1c54a6396b0__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 9847,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-aab1c1c54a6396b0/source_code/MainContractFlattened.sol",
+      "source_sha256": "dc094ed4d2c24aa12a99ff6441f7766bcc2485fe22ccc06db35b24cf4d11dcce",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-aab1c1c54a6396b0__NewIntelTechMedia.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-aab1c1c54a6396b0__NewIntelTechMedia.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-aab1c1c54a6396b0__NewIntelTechMedia.sol",
+      "normalized_sha256": "56ef75d59f3883198b2d6e367532047b94523d2ee7d3e7daf63ee9dbb7a4bf9f",
+      "ranker_output": "ranker/proj-aab1c1c54a6396b0__NewIntelTechMedia.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 9758,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-aab1c1c54a6396b0/source_code/NewIntelTechMedia.sol",
+      "source_sha256": "5bb829f9fcae4b16eeed1749413bea0e7a14ca4d85f4f41c59e6536f2c7a7686",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-aab1c1c54a6396b0",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T13:34:22.876039+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T13:39:58.783918+00:00",
+  "usage": {
+    "completion_tokens": 59502,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 3996,
+    "prompt_tokens": 6044,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

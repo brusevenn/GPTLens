@@ -1,0 +1,3 @@
+{"input_file": "proj-1657ccfa72539c65__Automator.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-1657ccfa72539c65__Automator.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-1657ccfa72539c65", "case_ids": ["acb-5e779b1fc034f664"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 1, "failed_files": 1, "request_log": "requests.jsonl"}

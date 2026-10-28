@@ -1,0 +1,3 @@
+{"input_file": "proj-987bf9a24ec4e435__Upkeep.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-987bf9a24ec4e435__Upkeep.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-987bf9a24ec4e435", "case_ids": ["acb-6d0cf7429c660215"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

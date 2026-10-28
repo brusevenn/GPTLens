@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-88234ccc822eacc4__PublicVault.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

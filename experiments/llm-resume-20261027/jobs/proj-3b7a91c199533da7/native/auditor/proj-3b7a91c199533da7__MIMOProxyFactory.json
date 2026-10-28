@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "batch",
+    "code": "function batch(bytes[] calldata calls, bool revertOnFail) external payable {\n    for (uint256 i = 0; i < calls.length; i++) {\n        (bool success, bytes memory result) = address(this).delegatecall(calls[i]);\n        if (!success && revertOnFail) {\n            _getRevertMsg(result);\n        }\n    }\n}",
+    "vulnerability": "Reentrancy/msg.value reuse in batch",
+    "reason": "The batch function is payable and uses delegatecall to address(this) in a loop. Since delegatecall preserves msg.value, each inner call sees the full ETH sent to batch. If a batched call invokes a payable function that credits msg.value (e.g., execute targeting a payable module), an attacker can get credited multiple times with the same ETH. This allows double-spending of msg.value and can lead to theft of funds from the proxy or integrated protocols.",
+    "file_name": "proj-3b7a91c199533da7__MIMOProxyFactory.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize() external initializer {\n    minGasReserve = 5_000;\n    owner = msg.sender;\n    emit TransferOwnership(address(0), msg.sender);\n}",
+    "vulnerability": "Uninitialized implementation contract takeover",
+    "reason": "The MIMOProxy implementation contract (mimoProxyBase) is not initialized during factory deployment. An attacker can call initialize() on the implementation and become its owner. They can then call execute() to delegatecall a selfdestruct contract, destroying the implementation. Since all clones delegatecall to this implementation, they will stop functioning, locking all funds in all proxies (pre-Cancun or on chains without EIP-6780).",
+    "file_name": "proj-3b7a91c199533da7__MIMOProxyFactory.sol"
+  },
+  {
+    "function_name": "execute",
+    "code": "function execute(address target, bytes calldata data) public payable override returns (bytes memory response) {\n    if (owner != msg.sender) {\n        bytes4 selector;\n        assembly {\n            selector := calldataload(data.offset)\n        }\n        if (!_permissions[msg.sender][target][selector]) {\n            revert CustomErrors.EXECUTION_NOT_AUTHORIZED(owner, msg.sender, target, selector);\n        }\n    }\n    if (target.code.length == 0) {\n        revert CustomErrors.TARGET_INVALID(target);\n    }\n    address owner_ = owner;\n    uint256 stipend = gasleft() - minGasReserve;\n    bool success;\n    (success, response) = target.delegatecall{ gas: stipend }(data);\n    if (owner_ != owner) {\n        revert CustomErrors.OWNER_CHANGED(owner_, owner);\n    }\n    emit Execute(target, data, response);\n    if (!success) {\n        if (response.length > 0) {\n            assembly {\n                let returndata_size := mload(response)\n                revert(add(32, response), returndata_size)\n            }\n        } else {\n            revert CustomErrors.EXECUTION_REVERTED();\n        }\n    }\n}",
+    "vulnerability": "Insufficient owner change check in execute",
+    "reason": "The execute function uses delegatecall to an arbitrary target and only checks if the owner changed after the call. A malicious target can temporarily change the owner to an attacker-controlled address, perform actions that rely on the proxy's owner (e.g., call external contracts that authorize based on owner()), and then restore the original owner before returning. The check passes, but the attacker has already stolen funds or performed unauthorized actions. This allows an authorized envoy to bypass the intended restrictions if they can get permission to call a malicious or exploitable target.",
+    "file_name": "proj-3b7a91c199533da7__MIMOProxyFactory.sol"
+  }
+]

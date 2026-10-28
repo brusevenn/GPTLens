@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setReward",
+    "code": "function setReward( address rewardSender, uint256 amount, uint256 remain, uint256 price ) public { if (reward[rewardSender].length == 0) { rewardKeys.push(rewardSender); } reward[rewardSender].push( RewardData(rewardSender, amount, remain, price, block.timestamp) ); _totalRemainCnt += remain; }",
+    "vulnerability": "Missing access control allows arbitrary reward creation",
+    "reason": "setReward has no access control and no validation that rewardSender is authorized or that amount/remain correspond to real deposited rewards. An attacker can call setReward(attacker, hugeAmount, hugeRemain, chosenPrice) to create an arbitrary reward record for themselves and increase _totalRemainCnt by hugeRemain. generateReward will then compute a release for that record and credit waitRelease[attacker]; releaseCoin(attacker) returns that amount. In any real deployment where the returned release amount is used to mint or transfer tokens, the attacker can mint/claim arbitrary rewards; even otherwise it corrupts all accounting and can be used to drain reward pools.",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  },
+  {
+    "function_name": "generateReward",
+    "code": "function generateReward(uint256 coinPrice) public { coinPrice = coinPrice == 0 ? 1 * 10**_decimals : coinPrice; for (uint256 i = 0; i < rewardKeys.length; i++) { for (uint256 j = 0; j < reward[rewardKeys[i]].length; j++) { if (reward[rewardKeys[i]][j].remain == 0) { continue; } uint256 pawnPrice = reward[rewardKeys[i]][j].price; uint256 targetRelease = reward[rewardKeys[i]][j].amount.mul( _mineDaliyRatio ) / 100; uint256 fixMineCoin = targetRelease.mul(_fixMineCoinRatio).div( 100 ); uint256 sameCoinValue = ( ((targetRelease - fixMineCoin) * pawnPrice).div(coinPrice) ); uint256 release = sameCoinValue + fixMineCoin; if (reward[rewardKeys[i]][j].remain < release) { release = reward[rewardKeys[i]][j].remain; } if (waitRelease[rewardKeys[i]] != 0) { waitRelease[rewardKeys[i]] += release; } else { waitRelease[rewardKeys[i]] = release; } if (historyTotal[rewardKeys[i]] != 0) { historyTotal[rewardKeys[i]] += release; } else { historyTotal[rewardKeys[i]] = release; } reward[rewardKeys[i]][j].remain = reward[rewardKeys[i]][j].remain - release; history[rewardKeys[i]].push( RewardHistory( release, sameCoinValue, fixMineCoin, coinPrice, block.timestamp ) ); _totalMineCnt += release; emit CoinReward( rewardKeys[i], release, coinPrice, sameCoinValue, fixMineCoin ); } } }",
+    "vulnerability": "Repeated calls bypass daily release and drain rewards immediately",
+    "reason": "generateReward is public and has no time check or per-period release guard. It computes targetRelease = amount * _mineDaliyRatio / 100 on every call and reduces remain, so anyone can call it repeatedly in the same block or transaction. A reward recipient, or an attacker who first created a reward via setReward, can loop calls until remain is zero, unlocking the entire reward immediately instead of over daily periods. This bypasses the intended daily mining ratio and can drain rewards early.",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  },
+  {
+    "function_name": "releaseCoin",
+    "code": "function releaseCoin(address sender) public returns (uint256) { uint256 release = waitRelease[sender]; waitRelease[sender] = 0; _totalRemainCnt -= release; return release; }",
+    "vulnerability": "Arbitrary sender parameter allows unauthorized reward release",
+    "reason": "releaseCoin accepts an arbitrary sender parameter and does not require sender == _msgSender(). Anyone can call releaseCoin(victim) to set waitRelease[victim] to zero and subtract the pending amount from _totalRemainCnt. The victim loses the pending release; if an integration uses the returned amount to pay the caller, the attacker can also redirect the victim's payout to themselves. This is a missing authorization vulnerability that allows arbitrary users to destroy or steal pending rewards.",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  }
+]

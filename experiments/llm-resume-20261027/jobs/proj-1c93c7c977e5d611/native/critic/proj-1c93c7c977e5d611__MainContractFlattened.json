@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "_burn",
+    "vulnerability": "Public burn can brick contract",
+    "criticism": "The core unit-mismatch observation is valid: subtracting the same _value from the reflection balance _rOwned and from the token supply _tTotal is incorrect, and if _tTotal becomes zero then any _getRate division by _tTotal can revert. However, the reasoning overstates exploitability. It assumes _burn is reachable through a public burn(uint256) function, which is not shown here, and assumes a small holder will have _rOwned >= _tTotal. That is not universally true and depends on the reflection rate and distribution. The claim that any tiny holder can do this is therefore too strong. The bricking is also not necessarily permanent if the owner can call mint to restore _tTotal. Profit from shorting or extortion is speculative; there is no direct on-chain profit. Correctness is moderate because the underlying accounting bug is real but the exploit narrative is not fully proven. Severity is high if public burn exists and the condition is reachable, because it can cause a broad denial of service. Profitability is low.",
+    "correctness": 6,
+    "severity": 7,
+    "profitability": 1,
+    "reason": "The `_burn` function is called by the public `burn(uint256)` function. It subtracts `_value` from `_rOwned[_who]` (a reflection amount) and from `_tTotal` (a token amount) using the same `_value`. However, `_rOwned` is scaled by the current reflection rate, which is typically enormous. The only check is `_value <= _rOwned[_who]`, so any holder with even a tiny token balance can pass `_value = _tTotal` because `_tTotal` is much smaller than their `_rOwned`. This sets `_tTotal` to zero while only deducting a negligible amount from the attacker's `_rOwned`. With `_tTotal == 0`, `_getRate()` divides by zero, causing all transfers, balance checks, and other rate-dependent functions to revert. This permanently bricks the token. An attacker can trigger this with any minimal balance, causing a severe denial-of-service and potentially profiting through short positions or extortion.",
+    "code": "function _burn(address _who, uint256 _value) internal {\n    require(_value <= _rOwned[_who]);\n    _rOwned[_who] = _rOwned[_who].sub(_value);\n    _tTotal = _tTotal.sub(_value);\n    emit Transfer(_who, address(0), _value);\n}",
+    "file_name": "proj-1c93c7c977e5d611__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mint",
+    "vulnerability": "Unlimited owner mint",
+    "criticism": "The reasoning is largely correct. The onlyOwner mint has no supply cap and also updates _rOwned by the raw amount without scaling by the current reflection rate and without updating _rTotal. This breaks reflection accounting and can inflate or distort balances, allowing a malicious or compromised owner to mint arbitrary tokens and sell them into liquidity. The phrase about diluting existing holders proportionally is somewhat imprecise because holders' nominal token balances can change when the rate changes, but the value dilution and accounting corruption are real. The main limitation is privilege: an unprivileged external attacker cannot call mint. Correctness is high for the code-level flaws. Severity is high if the owner is untrusted, but it is an owner-privileged rug risk rather than a permissionless exploit. Profitability for an external attacker is zero; owner profitability exists only under the malicious-owner model.",
+    "correctness": 8,
+    "severity": 7,
+    "profitability": 0,
+    "reason": "The `mint` function allows the owner to arbitrarily increase `_tTotal` without any cap. It also adds the raw `amount` to `_rOwned[account]` without scaling by the current reflection rate and without updating `_rTotal`. Because `_rOwned` is meant to be a reflection amount, this incorrect accounting decreases the rate `_rTotal / _tTotal` and dilutes all existing holders proportionally. A malicious or compromised owner can mint an unlimited supply to themselves, then sell the minted tokens on a DEX, draining liquidity and stealing value from other holders. The lack of `_rTotal` update further breaks the reflection system, potentially causing the sum of balances to exceed the total supply and enabling additional inflation.",
+    "code": "function mint(address account, uint256 amount) onlyOwner() public {\n    _tTotal = _tTotal.add(amount);\n    _rOwned[account] = _rOwned[account].add(amount);\n    emit Transfer(address(0), account, amount);\n}",
+    "file_name": "proj-1c93c7c977e5d611__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "updateFee",
+    "vulnerability": "Uncapped fees allow 100% theft",
+    "criticism": "The reasoning is mostly correct under the stated assumptions. updateFee has no upper bounds, and since _CHARITY_FEE = _charityFee * 10, setting _charityFee to 1000 can produce _CHARITY_FEE = 10000 and take 100% of a transfer if _getTBasics divides by 10000. If the owner can also set the charity address to itself, this is a severe rug-pull backdoor; setting total fees above 100% can also cause underflow and revert transfers, creating denial of service. The main caveats are that setAsCharityAccount and the exact fee formula are not in the snippet, and the exploit requires onlyOwner privilege. Correctness is high with those assumptions. Severity is high because it can steal transfer amounts or block transfers. Profitability is zero for an unprivileged external attacker; it is high only for a malicious owner.",
+    "correctness": 8,
+    "severity": 8,
+    "profitability": 0,
+    "reason": "The `updateFee` function has no upper bound on the fee parameters. The fee calculation in `_getTBasics` computes `tCharity = (tAmount * _CHARITY_FEE) / 10000`. Since `_CHARITY_FEE = _charityFee * 10`, setting `_charityFee = 1000` makes `_CHARITY_FEE = 10000`, resulting in `tCharity = tAmount`. This means 100% of every transfer is taken as a charity fee. The owner can first call `setAsCharityAccount` to set `FeeAddress` to their own address, then set the charity fee to 100%. Any transfer between non-charity addresses will redirect the entire amount to the owner's `FeeAddress`, while the recipient receives nothing. This is a severe rug-pull backdoor that allows the owner to steal all tokens from users. Additionally, setting total fees above 100% can cause underflows and revert transfers, leading to denial-of-service.",
+    "code": "function updateFee(uint256 _txFee,uint256 _burnFee,uint256 _charityFee) onlyOwner() public{\n    _TAX_FEE = _txFee* 10;\n    _BURN_FEE = _burnFee * 10;\n    _CHARITY_FEE = _charityFee* 10;\n    ORIG_TAX_FEE = _TAX_FEE;\n    ORIG_BURN_FEE = _BURN_FEE;\n    ORIG_CHARITY_FEE = _CHARITY_FEE;\n}",
+    "file_name": "proj-1c93c7c977e5d611__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "case_id": null,
+  "input_file": "proj-e7864677dc9f4dcb__MainContractFlattened.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "APIStatusError",
+  "http_status": 402,
+  "provider_error_code": "invalid_request_error"
+}

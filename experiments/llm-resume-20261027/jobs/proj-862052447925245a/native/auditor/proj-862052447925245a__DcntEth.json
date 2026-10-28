@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setRouter",
+    "code": "function setRouter(address _router) public {\n    router = _router;\n}",
+    "vulnerability": "Unprotected setRouter allows arbitrary router takeover",
+    "reason": "The setRouter function lacks any access control (e.g., onlyOwner). Any external account can call setRouter and set the router variable to an arbitrary address, including their own address. The router address is then used by the onlyRouter modifier on the mint and burn functions. An attacker can call setRouter(attackerAddress) to become the router, and subsequently call mint to create unlimited tokens or burn to destroy any holder's tokens. Even if the owner initially sets a legitimate router, an attacker can overwrite it at any time, completely compromising the token's supply and balances.",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(address _to, uint256 _amount) public onlyRouter {\n    _mint(_to, _amount);\n}",
+    "vulnerability": "Infinite token minting via hijacked router",
+    "reason": "The mint function is intended to be callable only by the router contract. However, because setRouter is public and unrestricted, any attacker can first call setRouter(attackerAddress) to become the router, then call mint(attackerAddress, arbitraryAmount). This allows the attacker to mint an unlimited number of DcntEth tokens to themselves, diluting all existing holders and enabling them to drain any liquidity pools or protocols that trust this token. The onlyRouter modifier provides no security because the router can be arbitrarily changed by anyone.",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  },
+  {
+    "function_name": "burn",
+    "code": "function burn(address _from, uint256 _amount) public onlyRouter {\n    _burn(_from, _amount);\n}",
+    "vulnerability": "Arbitrary token burning via hijacked router",
+    "reason": "The burn function is intended to be callable only by the router contract. Because setRouter has no access control, an attacker can call setRouter(attackerAddress) and then call burn(victimAddress, amount) for any victim and any amount up to the victim's balance. This lets the attacker destroy any holder's tokens at will, causing direct financial loss to victims and potentially manipulating the token supply. The onlyRouter modifier is ineffective because the router can be reassigned by any external account.",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  }
+]

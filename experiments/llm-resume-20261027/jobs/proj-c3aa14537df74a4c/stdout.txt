@@ -1,0 +1,2 @@
+{"input_file": "proj-c3aa14537df74a4c__DelegateToken.sol", "status": "error", "error_type": "RuntimeError"}
+{"project_id": "proj-c3aa14537df74a4c", "case_ids": ["acb-cf0df114e5efb9b2"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 1, "failed_files": 1, "request_log": "requests.jsonl"}

@@ -1,0 +1,3 @@
+{"input_file": "proj-06e0b606c3789db5__OwnershipNFTs.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-06e0b606c3789db5__OwnershipNFTs.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-06e0b606c3789db5", "case_ids": ["acb-49369c8a71135fab"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

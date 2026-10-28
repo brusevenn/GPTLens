@@ -1,0 +1,26 @@
+{
+  "changed_files": [],
+  "normalized_utc": "2026-10-28T02:18:36.026736+00:00",
+  "originals_backup_scope": "separate controller backup on the authorized Ubuntu host; deliberately outside both Git repositories",
+  "previous_seal_sha256": "890aebf955ee42cf18509b15aa5596f43d50798e887d933da1bd1f03e6c29027",
+  "replacement_rules": [
+    {
+      "input": "tool repository-root prefixes",
+      "output": "tool-specific repository placeholder"
+    },
+    {
+      "input": "comparison-run workspace prefix",
+      "output": "comparison-run placeholder"
+    },
+    {
+      "input": "shared account storage-root prefix",
+      "output": "shared-root placeholder"
+    },
+    {
+      "input": "user home-directory prefix",
+      "output": "home placeholder"
+    }
+  ],
+  "schema": "RUNTIME_PATH_NORMALIZATION_V1",
+  "tool": "GPTLens"
+}

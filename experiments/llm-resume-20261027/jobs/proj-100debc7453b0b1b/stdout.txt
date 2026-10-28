@@ -1,0 +1,3 @@
+{"input_file": "proj-100debc7453b0b1b__WildcatMarketConfig.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-100debc7453b0b1b__WildcatMarketConfig.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-100debc7453b0b1b", "case_ids": ["acb-627da2f312d0081a", "acb-d4064f3a4f52f9f5"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 1, "failed_files": 1, "request_log": "requests.jsonl"}

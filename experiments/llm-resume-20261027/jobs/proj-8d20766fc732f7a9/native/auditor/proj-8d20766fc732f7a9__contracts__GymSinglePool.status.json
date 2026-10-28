@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-8d20766fc732f7a9__contracts__GymSinglePool.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

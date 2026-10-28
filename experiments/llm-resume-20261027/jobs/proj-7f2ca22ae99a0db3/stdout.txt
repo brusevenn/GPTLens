@@ -1,0 +1,33 @@
+{"input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7f2ca22ae99a0db3__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabySmartRouter.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabySmartRouter.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-7f2ca22ae99a0db3__hardhat__console.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-7f2ca22ae99a0db3__hardhat__console.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-7f2ca22ae99a0db3", "case_ids": ["acb-3f8e2290a20abc91"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 16, "failed_files": 1, "request_log": "requests.jsonl"}

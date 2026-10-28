@@ -1,0 +1,5 @@
+{"input_file": "proj-4681bde04cc701c1__RabbitHoleReceipt.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-4681bde04cc701c1__RabbitHoleReceipt.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-4681bde04cc701c1__RabbitHoleTickets.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-4681bde04cc701c1__RabbitHoleTickets.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-4681bde04cc701c1", "case_ids": ["acb-500791e3b6bb86ce", "acb-a30d047dcbde9efd"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

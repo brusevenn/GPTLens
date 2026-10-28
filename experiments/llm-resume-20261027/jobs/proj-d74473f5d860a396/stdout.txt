@@ -1,0 +1,5 @@
+{"input_file": "proj-d74473f5d860a396__MultisigBase.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d74473f5d860a396__MultisigBase.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d74473f5d860a396__RemoteAddressValidator.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d74473f5d860a396__RemoteAddressValidator.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-d74473f5d860a396", "case_ids": ["acb-77baf2f28b341ece", "acb-a43fdb58953b12c5"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

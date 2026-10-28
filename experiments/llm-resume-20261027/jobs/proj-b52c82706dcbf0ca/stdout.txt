@@ -1,0 +1,19 @@
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__math__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__@openzeppelin__contracts__utils__math__SafeMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b52c82706dcbf0ca__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b52c82706dcbf0ca__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b52c82706dcbf0ca__contracts__LinearVesting.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b52c82706dcbf0ca__contracts__LinearVesting.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b52c82706dcbf0ca__contracts__interface__ILinearVesting.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b52c82706dcbf0ca__contracts__interface__ILinearVesting.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-b52c82706dcbf0ca", "case_ids": ["acb-93c781dc1720a7e1"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 9, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_update",
+    "code": "    function _update(\n        address from,\n        address to,\n        uint256 value\n    ) internal override {\n        if (!isValidTokenId(value)) {\n            super._update(from, to, value);\n        }\n        if (to == address(this) || to == erc721) {\n            transform(value);\n        } else {\n            if (isValidTokenId(value)) {\n                if (from != address(0)) {\n                    require(\n                        iERC721CheckAuth(erc721).isAuthorized(\n                            from,\n                            msg.sender,\n                            value\n                        ),\n                        \"P404: not authorized\"\n                    );\n                }\n                IERC721(erc721).safeTransferFrom(from, to, value);\n            }\n        }\n    }",
+    "vulnerability": "Unauthorized NFT burn/transform and token minting",
+    "reason": "When value is a valid tokenId and to is address(this) or erc721, _update calls transform(value) without checking that from owns the NFT or that msg.sender is authorized. transform -> _erc721ToErc20 calls IERC721Burnable(erc721).burn(tokenId) using P404Token as the caller and then mints the ERC20 reward to msg.sender. If P404Token is approved (which is required for normal P404 transform usage) or owns the NFT, any attacker can call the inherited ERC20 transfer(address(this), victimTokenId) or transfer(erc721, victimTokenId). This burns the victim's NFT and mints 9,800 P404 tokens to the attacker. This is directly exploitable and steals funds from users who approved P404Token.",
+    "file_name": "proj-17ae9f448dadfaea__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "    function approve(\n        address spender,\n        uint256 tokenIdOrValue\n    ) public override returns (bool) {\n        if (isValidTokenId(tokenIdOrValue)) {\n            IERC721(erc721).approve(spender, tokenIdOrValue);\n            return true;\n        } else {\n            return super.approve(spender, tokenIdOrValue);\n        }\n    }",
+    "vulnerability": "Arbitrary external NFT approval by any caller",
+    "reason": "For a valid tokenId, approve calls IERC721(erc721).approve(spender, tokenIdOrValue) with P404Token as msg.sender and no check that the original caller owns the NFT or is authorized. If P404Token is approved for all by a victim (a normal requirement to use P404Token's NFT transfer/transform functions), P404Token is an authorized operator for the victim's NFT. Any attacker can then call P404Token.approve(attacker, victimTokenId), causing P404Token to approve the attacker for the victim's NFT. The attacker can subsequently transfer the NFT away. This bypasses the victim's authorization and allows theft of any valid tokenId owned by users who approved P404Token.",
+    "file_name": "proj-17ae9f448dadfaea__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "setApproveForAll",
+    "code": "    function setApproveForAll(address operator, bool approved) public {\n        IERC721(erc721).setApprovalForAll(operator, approved);\n    }",
+    "vulnerability": "Unauthorized operator approval for P404Token-owned NFTs",
+    "reason": "setApproveForAll has no access control and calls IERC721(erc721).setApprovalForAll(operator, approved) with P404Token as msg.sender. Any external caller can therefore make P404Token approve an arbitrary operator for all NFTs that P404Token owns. Because P404Token accepts direct ERC721 safe transfers via onERC721Received without transforming them, NFTs can become stuck in P404Token. An attacker can call setApproveForAll(attacker, true), then transfer any stuck NFT from P404Token to themselves. This is directly exploitable and results in theft of NFTs held by the contract.",
+    "file_name": "proj-17ae9f448dadfaea__MainContractFlattened.sol"
+  }
+]

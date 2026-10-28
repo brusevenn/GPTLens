@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-0d4dfd6b80de6f04__TransactionManager.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

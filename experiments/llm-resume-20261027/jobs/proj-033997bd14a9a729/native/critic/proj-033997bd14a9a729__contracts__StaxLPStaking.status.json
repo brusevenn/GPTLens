@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-033997bd14a9a729__contracts__StaxLPStaking.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

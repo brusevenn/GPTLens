@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setProtocolRewardsPool",
+    "code": "function setProtocolRewardsPool(address addr) external checkRole(TIMELOCK) {\n    lybraProtocolRewardsPool = IProtocolRewardsPool(addr);\n    emit ProtocolRewardsPoolChanged(addr, block.timestamp);\n}",
+    "vulnerability": "Broken access control due to checkRole modifier ignoring return value",
+    "reason": "The checkRole modifier calls GovernanceTimelock.checkRole(role, msg.sender) but never requires the returned boolean to be true. Because the interface declares checkRole as returning bool, an external implementation can simply return false for unauthorized callers without reverting. In that case, the modifier does not enforce any restriction. An attacker can call setProtocolRewardsPool with their own address and then call distributeRewards. distributeRewards transfers the entire EUSD and peUSD balances held by the Configurator to lybraProtocolRewardsPool, which is now the attacker. This allows the attacker to steal all accumulated protocol rewards and any tokens held by the contract.",
+    "file_name": "proj-8b65cfc4735dcd5e__Configurator.sol"
+  },
+  {
+    "function_name": "setSafeCollateralRatio",
+    "code": "function setSafeCollateralRatio(address pool, uint256 newRatio) external checkRole(TIMELOCK) {\n    if(IVault(pool).vaultType() == 0) {\n        require(newRatio >= 160 * 1e18, \"eUSD vault safe collateralRatio should more than 160%\");\n    } else {\n        require(newRatio >= vaultBadCollateralRatio[pool] + 1e19, \"PeUSD vault safe collateralRatio should be more than bad collateralRatio\");\n    }\n    vaultSafeCollateralRatio[pool] = newRatio;\n    emit SafeCollateralRatioChanged(pool, newRatio);\n}",
+    "vulnerability": "Broken access control and missing absolute minimum safe collateral ratio for PeUSD vaults",
+    "reason": "The same broken checkRole modifier allows any caller to invoke setSafeCollateralRatio. For PeUSD vaults (vaultType != 0), the only lower bound is vaultBadCollateralRatio[pool] + 1e19. If the bad collateral ratio for a vault is still zero (not yet configured), an attacker can set the safe collateral ratio to as low as 1e19 (10%). With a 10% safe collateral ratio, the attacker can deposit a small amount of collateral into a PeUSD vault and mint nearly 10x its value in peUSD. The attacker can then sell or use the minted peUSD to drain other protocol liquidity, leaving the vault undercollateralized. Even a trusted role should not be able to set such a dangerously low ratio without an absolute minimum check.",
+    "file_name": "proj-8b65cfc4735dcd5e__Configurator.sol"
+  },
+  {
+    "function_name": "distributeRewards",
+    "code": "function distributeRewards() external {\n    uint256 peUSDBalance = peUSD.balanceOf(address(this));\n    if(peUSDBalance >= 1e21) {\n        peUSD.transfer(address(lybraProtocolRewardsPool), peUSDBalance);\n        lybraProtocolRewardsPool.notifyRewardAmount(peUSDBalance, 2);\n    }\n    uint256 balance = EUSD.balanceOf(address(this));\n    if (balance > 1e21) {\n        uint256 price = curvePool.get_dy_underlying(0, 2, 1e18);\n        if(!premiumTradingEnabled || price <= 1005000) {\n            EUSD.transfer(address(lybraProtocolRewardsPool), balance);\n            lybraProtocolRewardsPool.notifyRewardAmount(balance, 0);\n        } else {\n            EUSD.approve(address(curvePool), balance);\n            uint256 amount = curvePool.exchange_underlying(0, 2, balance, balance * price * 998 / 1e21);\n            IEUSD(stableToken).transfer(address(lybraProtocolRewardsPool), amount);\n            lybraProtocolRewardsPool.notifyRewardAmount(amount, 1);\n        }\n    }\n}",
+    "vulnerability": "Price manipulation / sandwich attack due to spot price used for slippage protection",
+    "reason": "When premiumTradingEnabled is true and the Curve spot price is above 1.005, distributeRewards swaps the entire EUSD balance for stableToken via Curve. It obtains the price with curvePool.get_dy_underlying(0, 2, 1e18) immediately before the swap and uses that same spot price to compute the minimum output: balance * price * 998 / 1e21. An attacker can use a flash loan to manipulate the Curve pool so that EUSD is temporarily cheaper (but still above the 1.005 threshold), then call distributeRewards. The contract will execute exchange_underlying with a min_dy based on the manipulated low price, receiving significantly less stableToken than the fair value. The attacker then reverses the manipulation and profits from the price difference. Because distributeRewards is callable by anyone, this is an exploitable sandwich/MEV attack that can drain value from the contract's EUSD balance.",
+    "file_name": "proj-8b65cfc4735dcd5e__Configurator.sol"
+  }
+]

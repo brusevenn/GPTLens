@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "setOwner",
+    "vulnerability": "Missing access control on setOwner",
+    "criticism": "The reasoning is correct and the flaw is direct: setOwner has no onlyOwner check and unconditionally assigns owner = _owner. Any external account can become owner, which can enable all owner-only functionality such as unlockToken, lockBalances, and any balance-upload/admin function. This is a critical ownership takeover. Correctness is high because the code plainly lacks authorization. Severity is critical because owner privileges can affect token transferability, distribution, and potentially token balances, though exact profit depends on other privileged functions not shown. Profitability is moderately high as a stepping-stone to privileged abuse, but not guaranteed from this function alone.",
+    "correctness": 9,
+    "severity": 9,
+    "profitability": 7,
+    "reason": "The setOwner function lacks the onlyOwner modifier. Any address can call it to set the owner to themselves. This allows an attacker to take over the contract, gaining access to all onlyOwner functions such as unlockToken, lockBalances, and uploadBalances. This is a critical access control flaw that completely undermines the contract's ownership model.",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "lockBalances",
+    "vulnerability": "Permanent denial-of-service via unauthorized lockBalances call",
+    "criticism": "The reasoning is conditionally correct: lockBalances itself is protected by onlyOwner, so the exploit depends entirely on the unprotected setOwner. If an attacker first takes ownership, they can set balancesUploaded = true. If no reset path exists, this can permanently block uploadBalances and token distribution, making it a real DoS. However, this is not an independent vulnerability in lockBalances; it is an impact of the setOwner flaw. Severity is high for token distribution but not necessarily whole-contract compromise. Profitability is low because it is primarily griefing/DoS rather than direct attacker gain.",
+    "correctness": 8,
+    "severity": 7,
+    "profitability": 1,
+    "reason": "Because setOwner is unprotected, an attacker can first call setOwner(attacker) to become the owner and then call lockBalances. This sets balancesUploaded to true, permanently preventing the legitimate owner from calling uploadBalances to distribute tokens. There is no function to reset balancesUploaded, so the ability to upload balances is irreversibly bricked. This is a severe denial-of-service attack against the token distribution process.",
+    "code": "function lockBalances() onlyOwner {\n    balancesUploaded = true;\n}",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "unlockToken",
+    "vulnerability": "Token lock bypass via unauthorized unlockToken call",
+    "criticism": "The reasoning is correct only because it chains through the unprotected setOwner; unlockToken itself has onlyOwner. If an attacker takes ownership, they can set locked = false and bypass the intended transfer/approval lock. This can undermine vesting, launch restrictions, or distribution controls. The severity depends on why the lock exists and whether early trading is valuable; it is not inherently a direct theft primitive. Profitability is possible if the attacker holds tokens or can trade on the resulting market movement, but it is not assured. As with lockBalances, this is a derivative impact of the setOwner flaw, not an independent access-control bug in unlockToken.",
+    "correctness": 8,
+    "severity": 5,
+    "profitability": 3,
+    "reason": "Due to the unprotected setOwner function, any attacker can become the owner and call unlockToken. This sets locked to false, prematurely enabling token transfers and approvals. This bypasses the intended token lock, which can allow early trading, destabilize the token economy, and defeat any vesting or distribution restrictions enforced by the lock.",
+    "code": "function unlockToken() onlyOwner {\n    locked = false;\n}",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,5 @@
+{"input_file": "proj-c0cd3cd11af4edb7__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c0cd3cd11af4edb7__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-c0cd3cd11af4edb7__contracts__LiquidXv2Zap.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c0cd3cd11af4edb7__contracts__LiquidXv2Zap.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-c0cd3cd11af4edb7", "case_ids": ["acb-56c867eaa5348422"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

@@ -1,0 +1,5 @@
+{"input_file": "proj-bf3f723faba9b60d__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-bf3f723faba9b60d__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-bf3f723faba9b60d__SpaceGodzilla.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-bf3f723faba9b60d__SpaceGodzilla.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-bf3f723faba9b60d", "case_ids": ["acb-111fb402424f7505"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-d92a4472b11f4077__IDXM.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "ValueError"
+}

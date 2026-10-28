@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setOwner",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "vulnerability": "Missing access control on setOwner",
+    "reason": "The setOwner function lacks the onlyOwner modifier. Any address can call it to set the owner to themselves. This allows an attacker to take over the contract, gaining access to all onlyOwner functions such as unlockToken, lockBalances, and uploadBalances. This is a critical access control flaw that completely undermines the contract's ownership model.",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "lockBalances",
+    "code": "function lockBalances() onlyOwner {\n    balancesUploaded = true;\n}",
+    "vulnerability": "Permanent denial-of-service via unauthorized lockBalances call",
+    "reason": "Because setOwner is unprotected, an attacker can first call setOwner(attacker) to become the owner and then call lockBalances. This sets balancesUploaded to true, permanently preventing the legitimate owner from calling uploadBalances to distribute tokens. There is no function to reset balancesUploaded, so the ability to upload balances is irreversibly bricked. This is a severe denial-of-service attack against the token distribution process.",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "unlockToken",
+    "code": "function unlockToken() onlyOwner {\n    locked = false;\n}",
+    "vulnerability": "Token lock bypass via unauthorized unlockToken call",
+    "reason": "Due to the unprotected setOwner function, any attacker can become the owner and call unlockToken. This sets locked to false, prematurely enabling token transfers and approvals. This bypasses the intended token lock, which can allow early trading, destabilize the token economy, and defeat any vesting or distribution restrictions enforced by the lock.",
+    "file_name": "proj-aad2bbc711eb3f0a__MainContractFlattened.sol"
+  }
+]

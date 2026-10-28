@@ -1,0 +1,2 @@
+{"input_file": "proj-4c63965ec8e8b5b5__NFTXVaultFactoryUpgradeable.sol", "status": "error", "error_type": "APIConnectionError"}
+{"project_id": "proj-4c63965ec8e8b5b5", "case_ids": ["acb-e63cbf4d02c20746"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 1, "failed_files": 1, "request_log": "requests.jsonl"}

@@ -1,0 +1,73 @@
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__IERC20MetadataUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__IERC20MetadataUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__IERC4626Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__IERC4626Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__draft-IERC1822Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__draft-IERC1822Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__ERC1967__ERC1967UpgradeUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__ERC1967__ERC1967UpgradeUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__beacon__IBeaconUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__beacon__IBeaconUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__utils__UUPSUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__proxy__utils__UUPSUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__security__PausableUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__security__PausableUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__security__ReentrancyGuardUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__security__ReentrancyGuardUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__ERC20Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__ERC20Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__ERC4626Upgradeable.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__ERC4626Upgradeable.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20MetadataUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20MetadataUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__draft-IERC20PermitUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__draft-IERC20PermitUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__StorageSlotUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__StorageSlotUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__utils__math__Math.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts__utils__math__Math.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__apolloX__IApolloX.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__apolloX__IApolloX.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__pendle__IPSwapAggregator.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__pendle__IPSwapAggregator.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__pendle__IPendleRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__pendle__IPendleRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__radiant__IFeeDistribution.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__radiant__IFeeDistribution.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__radiant__LockedBalance.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__3rd__radiant__LockedBalance.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__BasePortfolioV2.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__contracts__BasePortfolioV2.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-36288b16bacd36ec__contracts__DepositData.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__DepositData.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__RedeemData.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-36288b16bacd36ec__contracts__RedeemData.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-36288b16bacd36ec__contracts__StableCoinVault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__contracts__StableCoinVault.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-36288b16bacd36ec__contracts__interfaces__AbstractVaultV2.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__contracts__interfaces__AbstractVaultV2.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-36288b16bacd36ec__contracts__vaults__apolloX__ApolloXBscVault.sol", "status": "complete", "finding_count": 3}

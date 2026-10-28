@@ -1,0 +1,3 @@
+{"input_file": "proj-61c865b273102a93__CashManager.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-61c865b273102a93__CashManager.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-61c865b273102a93", "case_ids": ["acb-2d04e643a8fd0486"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

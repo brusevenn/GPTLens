@@ -1,0 +1,573 @@
+{
+  "case_ids": [
+    "acb-40eb39be71cf0eb1"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 74154,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/config.json",
+      "sha256": "46830207b80930ca84e1ebf74956cb65eb3bf32d583dccf2c932d30ed51c5e93"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T14:18:07.097060+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.sol",
+      "normalized_sha256": "b7b0dddc51fd6da2aff1c13e8ffd00dbaaf8b4f010d08342188324e097e57728",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__access__Ownable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2254,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/access/Ownable.sol",
+      "source_sha256": "b9f957b42bdcf3d3499be4c94558152e91658e34a1fe5a5e8f0972ce20e15ed7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.sol",
+      "normalized_sha256": "6b46dc32018958b67d5276c2f6e26c29868a6e29848e4190f68156f7b851ec08",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__cryptography__ECDSA.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 3906,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/cryptography/ECDSA.sol",
+      "source_sha256": "0c3c8f0e880bfb11298ab86b2863e7a6ce8c85e443fbf4998b8ed3b32739c853",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.sol",
+      "normalized_sha256": "3af76c0baf6e9d6aa93bd311d2fa82ef6b319ad4b5481baeba1a9b4c42dadf08",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__drafts__EIP712.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 4714,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/drafts/EIP712.sol",
+      "source_sha256": "128b338ed9d2fd87a05f1ac21700a15cd1c8fb99054be9640076dc15bf392517",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.sol",
+      "normalized_sha256": "576edcbe29226a2ba0a6c065e005f2af202d2d27acfb0db66d23fe1e25a9e923",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__drafts__ERC20Permit.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2673,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/drafts/ERC20Permit.sol",
+      "source_sha256": "f5a1eb501cf574127ad2cea3038ad050d3010989917c60dc9e45da0d5f8caa24",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.sol",
+      "normalized_sha256": "583677a3e73014e6d2ac91093f22aed2ecbb97ec0c0f266484f6a6fae6a88ad4",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__drafts__IERC20Permit.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2115,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/drafts/IERC20Permit.sol",
+      "source_sha256": "ec032179af802dd3efbf4377ab603bf5bdbfe11dbc963a319dbf3c1654f428d7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__Math.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__Math.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__math__Math.sol",
+      "normalized_sha256": "fcb23defff58294c0875a2ddf98d38e5c375f65e9441f7672a42b4ff6b5d08f0",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__math__Math.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 809,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/math/Math.sol",
+      "source_sha256": "5f2dc35987fa6e9645cf7d54e54bafd29c6b1d64ed53e9efbd50bc3448378b31",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.sol",
+      "normalized_sha256": "a6128f2844345b9e6bd975f6cde8b16ab787230926c51368b935d84ebc5bfbfa",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__math__SafeMath.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 7225,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/math/SafeMath.sol",
+      "source_sha256": "4a04d0a20a19e3ef1dcabae9cad9ba006430a4e7eec4d9b519db87999722c98a",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.sol",
+      "normalized_sha256": "7a69aaf3a90bd53a8ce1781e0db9fbd838314fe0938a7376dc38dd0cc3a8b6d9",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 10796,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "source_sha256": "eff65ebfa1cad6260b4916ce5293ed6c7231a34d2899c04227578c172990a1f8",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.sol",
+      "normalized_sha256": "f41ea8de9d94f8c12a8b60ab1c780da585c1d18a99f4c0bac49f62e5e18bc7ee",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__ERC20Snapshot.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 8087,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/token/ERC20/ERC20Snapshot.sol",
+      "source_sha256": "f88d22fb3034f86d1a428ba6c98b69d95627a355c5204116a3dc6121a9f08ade",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.sol",
+      "normalized_sha256": "1d39b96367a9809f24aa26f47831198d4c00c225a52947aa32f6a3741e374c04",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__IERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2704,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "source_sha256": "0573c2961569aa4906845d0cd428b5b7394956170054ceeaa8f8af96cd44875c",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.sol",
+      "normalized_sha256": "1ab5c524612d27a692418a593851c2621f8fa23abfeae938e75d20cc6be5795e",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__token__ERC20__SafeERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 3721,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
+      "source_sha256": "eea796f96939e7dd6119de00941717ce5772d8a942b184f5e48d2b962d0ab655",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.sol",
+      "normalized_sha256": "2404a61257aae598c4c752d510cd0b0440468c316274d9263d6ad141e96e256a",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__utils__Address.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 7819,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/utils/Address.sol",
+      "source_sha256": "11ad5e3e21434e00c4ceba1f5a977b7a68bdd7d16b849276ce4ff4495129eec7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.sol",
+      "normalized_sha256": "7a58790ae5368be742cfd04363650c06ac1645b9a97586de244f3ca8c8c5bc17",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__utils__Arrays.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1485,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/utils/Arrays.sol",
+      "source_sha256": "1232c456965d3ede071d5a057052ee32b38331c16b6f03374c61b5265920b5a8",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.sol",
+      "normalized_sha256": "0af02bfa91a23181244e77efab4cdc1df6059736685aad5ba24045829337eec9",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__utils__Context.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 941,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/utils/Context.sol",
+      "source_sha256": "9a3d1e5be0f0ace13e2d9aa1d0a1c3a6574983983ad5de94fc412f878bf7fe89",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.sol",
+      "normalized_sha256": "ef73b9df53902a10aeefa915b2c816a1487b301d4dcf198170851add58b4bdd6",
+      "ranker_output": "ranker/proj-b98075e441e39427__@openzeppelin__contracts__utils__Counters.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1519,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/@openzeppelin/contracts/utils/Counters.sol",
+      "source_sha256": "8d78ab699ba115f01c6e1a213e6a696d49c7ed26c4f49f23c2b80cb2895e8853",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__MainContractFlattened.sol",
+      "normalized_sha256": "4d758a40595ff31ec324bfc250975ae7ab2d2947a769f4dc7ede4270237107bb",
+      "ranker_output": "ranker/proj-b98075e441e39427__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 63431,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/MainContractFlattened.sol",
+      "source_sha256": "865672d0a33ae88b57b28ede4f4df99e01901a0c007586f3ed76a18b99d603da",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__contracts__RewardsHypervisor.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__contracts__RewardsHypervisor.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__contracts__RewardsHypervisor.sol",
+      "normalized_sha256": "cb2caa63384f7b670c1498b76ed1ce0c900fc724b1387769414217fb9e0cc8fc",
+      "ranker_output": "ranker/proj-b98075e441e39427__contracts__RewardsHypervisor.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 3325,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/contracts/RewardsHypervisor.sol",
+      "source_sha256": "a21c2cb94041b5e444aaaa750cef7264e2c7adc8b348d02a5a9ef0a166588ef2",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__contracts__interfaces__IVisor.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-b98075e441e39427__contracts__interfaces__IVisor.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__contracts__interfaces__IVisor.sol",
+      "normalized_sha256": "78cf43973c16a5adef6cad763704ab5ea1eadc7aef5e0ed20f830cd6875c1f95",
+      "ranker_output": "ranker/proj-b98075e441e39427__contracts__interfaces__IVisor.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 244,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/contracts/interfaces/IVisor.sol",
+      "source_sha256": "ab27a7b50b7a9e236d622bd30ecd435e8814f9fe4847c42b59b5e289cef73250",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__contracts__vVISR.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-b98075e441e39427__contracts__vVISR.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-b98075e441e39427__contracts__vVISR.sol",
+      "normalized_sha256": "4471e385f47683a693fe831725bb01fd4b7611c0cc152c75325ac03df418645f",
+      "ranker_output": "ranker/proj-b98075e441e39427__contracts__vVISR.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 1131,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-b98075e441e39427/source_code/contracts/vVISR.sol",
+      "source_sha256": "343342a7186149937b7e8d5556c420226859daafbf76bb398720f636b8cc7c02",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-b98075e441e39427",
+  "project_source_file_count": 19,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T14:05:05.150136+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T14:18:07.097074+00:00",
+  "usage": {
+    "completion_tokens": 136907,
+    "prompt_cache_hit_tokens": 6528,
+    "prompt_cache_miss_tokens": 15607,
+    "prompt_tokens": 22135,
+    "request_attempt_count": 22,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

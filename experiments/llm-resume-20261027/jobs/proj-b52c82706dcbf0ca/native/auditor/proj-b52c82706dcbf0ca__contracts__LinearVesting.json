@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "init",
+    "code": "function init(\n    IERC20 initToken,\n    uint256 initPeriods,\n    uint256 initInterval\n) public {\n    token = initToken;\n    periods = initPeriods;\n    interval = initInterval;\n    owner = _msgSender();\n}",
+    "vulnerability": "Public initialization allows anyone to become owner and overwrite token",
+    "reason": "The init function has no access control and no initialization guard. Any external account can call it at any time to set owner to msg.sender and replace token. Even if the deployer calls init first, an attacker can call init again to overwrite the owner. After becoming owner, the attacker can call setHandler, setSwitch, addLinearVesting, or simply call withdraw to drain all ERC20 tokens held by the contract, including vesting funds.",
+    "file_name": "proj-b52c82706dcbf0ca__contracts__LinearVesting.sol"
+  },
+  {
+    "function_name": "getReleasableAmount",
+    "code": "function getReleasableAmount(uint256 index) public view returns (uint256) {\n    require(index < vestingSchedules.length, \"Invalid schedule index\");\n    bool inBlocklist = blocklist[index];\n    if (inBlocklist || defaultStart == 0) {\n        return 0;\n    }\n    VestingSchedule storage schedule = vestingSchedules[index];\n    ExchangeMode exchangeMode = modes[index];\n    Info storage info = modeInfos[exchangeMode];\n    if ( block.timestamp >= (info.periods - 1).mul(info.interval).add(defaultStart) ) {\n        return schedule.amount.sub(schedule.released);\n    } else {\n        uint256 amountPerPeriod = schedule.amount.div(info.periods);\n        uint256 distributedPeriods = block.timestamp.sub(defaultStart).div( info.interval );\n        uint256 payableAmount = amountPerPeriod.mul(distributedPeriods + 1);\n        return payableAmount.sub(schedule.released);\n    }\n}",
+    "vulnerability": "Backdated vesting due to using global defaultStart instead of schedule.start",
+    "reason": "addLinearVesting stores a per-schedule start value (block.timestamp), but getReleasableAmount completely ignores schedule.start and instead uses the global defaultStart. If defaultStart is set in the past, any newly added schedule is treated as if it started at defaultStart. A beneficiary of a schedule added after defaultStart can therefore immediately release a large portion or even the full amount once the global switch is open, even though the schedule was just created. This can drain vesting funds much earlier than intended and underfund other schedules.",
+    "file_name": "proj-b52c82706dcbf0ca__contracts__LinearVesting.sol"
+  },
+  {
+    "function_name": "withdraw",
+    "code": "function withdraw(\n    IERC20 otherToken,\n    uint256 amount,\n    address receiver\n) public virtual onlyOwner {\n    uint256 currentBalance = otherToken.balanceOf(address(this));\n    require(receiver != address(0), \"receiver must not empty\");\n    require(currentBalance >= amount, \"current balance insufficient\");\n    otherToken.safeTransfer(receiver, amount);\n}",
+    "vulnerability": "Owner can withdraw any token, including the vesting token, draining scheduled funds",
+    "reason": "The withdraw function accepts an arbitrary IERC20 otherToken and does not prevent the owner from withdrawing the contract's vesting token. A malicious or compromised owner can pass the vesting token address and transfer all tokens held by the contract to themselves, including funds reserved for active vesting schedules. Combined with the public init function, an attacker can become owner and immediately use withdraw to steal all ERC20 tokens held by the contract.",
+    "file_name": "proj-b52c82706dcbf0ca__contracts__LinearVesting.sol"
+  }
+]

@@ -1,0 +1,65 @@
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__AccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__AccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__AccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__AccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__IAccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__IAccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__IAccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__access__IAccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__security__Pausable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__security__Pausable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__ERC20Burnable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__ERC20Burnable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__ERC20Pausable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__ERC20Pausable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__presets__ERC20PresetMinterPauser.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__presets__ERC20PresetMinterPauser.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Strings.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__Strings.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__introspection__ERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__introspection__ERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__introspection__IERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__introspection__IERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__structs__EnumerableSet.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__@openzeppelin__contracts__utils__structs__EnumerableSet.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-aadb542e420965a2__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__autocompound__AutocompundStaking.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__autocompound__AutocompundStaking.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__base__BaseStaking.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__base__BaseStaking.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-aadb542e420965a2__contracts__base__MintableSupplyStaking.sol", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-aadb542e420965a2__contracts__base__TaxedStaking.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__base__TaxedStaking.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-aadb542e420965a2__contracts__lib__StakingUtils.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-aadb542e420965a2__contracts__lib__StakingUtils.json", "status": "skipped_empty_findings"}

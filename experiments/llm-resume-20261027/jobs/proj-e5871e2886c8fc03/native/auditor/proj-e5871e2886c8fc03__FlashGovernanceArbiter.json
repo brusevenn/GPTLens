@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setDAO",
+    "code": "function setDAO(address dao) public {\n    require(DAO == address(0) || msg.sender == DAO || !configured, \"EK\");\n    DAO = dao;\n    flashGoverner = FlashGovernanceArbiterLike(LimboDAOLike(dao).getFlashGoverner());\n}",
+    "vulnerability": "Unauthenticated DAO takeover before configuration",
+    "reason": "The require condition allows any caller to execute setDAO when !configured. Since the constructor does not call endConfiguration, configured remains false after deployment. An attacker can call setDAO with a malicious contract, replacing the legitimate DAO and flashGoverner. The attacker can then call endConfiguration and control all onlySuccessfulProposal functions, including configureFlashGovernance, configureSecurityParameters, and burnFlashGovernanceAsset. This leads to full contract takeover and potential loss of funds.",
+    "file_name": "proj-e5871e2886c8fc03__FlashGovernanceArbiter.sol"
+  },
+  {
+    "function_name": "assertGovernanceApproved",
+    "code": "function assertGovernanceApproved(\n    address sender,\n    address target,\n    bool emergency\n) public {\n    if ( IERC20(flashGovernanceConfig.asset).transferFrom(sender, address(this), flashGovernanceConfig.amount) && pendingFlashDecision[target][sender].unlockTime < block.timestamp ) {\n        require( emergency || (block.timestamp - security.lastFlashGovernanceAct > security.epochSize), \"Limbo: flash governance disabled for rest of epoch\" );\n        pendingFlashDecision[target][sender] = flashGovernanceConfig;\n        pendingFlashDecision[target][sender].unlockTime += block.timestamp;\n        security.lastFlashGovernanceAct = block.timestamp;\n        emit flashDecision(sender, flashGovernanceConfig.asset, flashGovernanceConfig.amount, target);\n    } else {\n        revert(\"LIMBO: governance decision rejected.\");\n    }\n}",
+    "vulnerability": "Missing sender validation enables unauthorized transferFrom",
+    "reason": "The function accepts a sender parameter but never verifies msg.sender == sender. Any attacker can call assertGovernanceApproved with a victim's address as sender and emergency=true. If the victim has approved the FlashGovernanceArbiter contract (as required for normal governance functions), the attacker can force transferFrom of flashGovernanceConfig.amount from the victim to the arbiter. By using different target addresses, the attacker can repeatedly pull funds up to the victim's allowance, locking them in the contract and causing denial of service or permanent loss.",
+    "file_name": "proj-e5871e2886c8fc03__FlashGovernanceArbiter.sol"
+  },
+  {
+    "function_name": "withdrawGovernanceAsset",
+    "code": "function withdrawGovernanceAsset(address targetContract, address asset) public virtual {\n    require(\n        pendingFlashDecision[targetContract][msg.sender].asset == asset &&\n        pendingFlashDecision[targetContract][msg.sender].amount > 0 &&\n        pendingFlashDecision[targetContract][msg.sender].unlockTime < block.timestamp,\n        \"Limbo: Flashgovernance decision pending.\"\n    );\n    IERC20(pendingFlashDecision[targetContract][msg.sender].asset).transfer(\n        msg.sender,\n        pendingFlashDecision[targetContract][msg.sender].amount\n    );\n    delete pendingFlashDecision[targetContract][msg.sender];\n}",
+    "vulnerability": "Reentrancy via external token transfer",
+    "reason": "The function transfers tokens to msg.sender before deleting pendingFlashDecision[targetContract][msg.sender]. If the configured asset is an ERC777 or any token with transfer hooks, the recipient can reenter withdrawGovernanceAsset during the transfer. Because the pending decision is still present, the reentrant call will transfer the amount again. This can be repeated to drain the contract's balance of that asset, stealing other users' deposits. State should be cleared before the external call or a reentrancy guard should be used.",
+    "file_name": "proj-e5871e2886c8fc03__FlashGovernanceArbiter.sol"
+  }
+]

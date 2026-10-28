@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setOwner",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "vulnerability": "Missing access control allows anyone to take ownership",
+    "reason": "The setOwner function has no onlyOwner modifier or other access control. Any external address can call setOwner(msg.sender) and become the owner. Once the attacker is owner, they can call privileged functions such as unlockToken, setExportFee, setHoldingPeriod, lockBalances, and uploadBalances. This allows the attacker to permanently unlock the token, alter export fees, change holding periods, lock balances, and otherwise take full control of the contract, leading to financial loss or denial of service.",
+    "file_name": "proj-d92a4472b11f4077__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "setOwner",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "vulnerability": "Missing zero-address validation allows permanent denial of service",
+    "reason": "The setOwner function does not reject address(0). Any attacker can call setOwner(0) to set the owner to the zero address. Because the contract initializes locked = true and the only function that can set locked = false is unlockToken, which is protected by onlyOwner, setting owner to zero permanently prevents anyone from unlocking the token. All transfers and approvals are consequently disabled forever. This is an irreversible denial of service that any external address can trigger.",
+    "file_name": "proj-d92a4472b11f4077__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _amount) returns (bool success) {\n    require(!locked);\n    allowance[msg.sender][_spender] = _amount;\n    Approval(msg.sender, _spender, _amount);\n    return true;\n}",
+    "vulnerability": "ERC20 approve race condition allows allowance double-spending",
+    "reason": "The approve function directly overwrites the current allowance with _amount and does not require the previous allowance to be zero. A malicious spender can exploit a pending allowance change by front-running it. For example, if a victim first approves 100 tokens and later calls approve(50), the spender can front-run the second transaction to spend 100 tokens, then let the second transaction set the allowance to 50, and spend 50 more tokens. The spender receives 150 tokens for an intended total of 50 or 100. This is a real-world exploitable race condition that can steal tokens from users who change allowances.",
+    "file_name": "proj-d92a4472b11f4077__MainContractFlattened.sol"
+  }
+]

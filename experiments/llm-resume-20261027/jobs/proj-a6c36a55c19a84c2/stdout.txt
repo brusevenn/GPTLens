@@ -1,0 +1,5 @@
+{"input_file": "proj-a6c36a55c19a84c2__AnyswapV4Router.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a6c36a55c19a84c2__AnyswapV4Router.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a6c36a55c19a84c2__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a6c36a55c19a84c2__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-a6c36a55c19a84c2", "case_ids": ["acb-860337c836004529"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

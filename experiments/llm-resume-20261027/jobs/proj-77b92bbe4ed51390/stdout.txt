@@ -1,0 +1,5 @@
+{"input_file": "proj-77b92bbe4ed51390__GrimBoostVault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-77b92bbe4ed51390__GrimBoostVault.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-77b92bbe4ed51390__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-77b92bbe4ed51390__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-77b92bbe4ed51390", "case_ids": ["acb-e654b6a24b2b608b"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 2, "request_log": "requests.jsonl"}

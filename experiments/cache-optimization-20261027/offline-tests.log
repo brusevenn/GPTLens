@@ -1,0 +1,13 @@
+....................................
+----------------------------------------------------------------------
+Ran 36 tests in 0.857s
+
+OK
+{"input_file": "input.sol", "status": "error", "error_type": "TimeoutError"}
+{"input_file": "input.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "empty.json", "status": "skipped_empty_findings"}
+{"input_file": "input.json", "status": "complete", "finding_count": 1}
+{"input_file": "input.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "input.json", "status": "error", "error_type": "ValueError"}
+{"status": "complete", "ranked_files": 1}
+{"project_id": "proj-06e0b606c3789db5", "case_ids": ["acb-49369c8a71135fab"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

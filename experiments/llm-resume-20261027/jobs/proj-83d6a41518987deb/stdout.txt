@@ -1,0 +1,3 @@
+{"input_file": "proj-83d6a41518987deb__LendingLedger.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-83d6a41518987deb__LendingLedger.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-83d6a41518987deb", "case_ids": ["acb-a4dc4c33d39cdbb4", "acb-aed0a1a7a36effec"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

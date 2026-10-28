@@ -1,0 +1,5 @@
+{"input_file": "proj-b49f8ec70ad0ee40__Coinlancer.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-b49f8ec70ad0ee40__Coinlancer.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-b49f8ec70ad0ee40__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-b49f8ec70ad0ee40__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-b49f8ec70ad0ee40", "case_ids": ["acb-a7af120cb637fc4c"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

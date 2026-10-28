@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "takeStakeTax",
+    "code": "function takeStakeTax(uint256 _amount) internal virtual returns (uint256) {\n    if (taxConfiguration.hpayFee > 0 && taxConfiguration.hpayToken.balanceOf(msg.sender) < 1e18) {\n        uint256 _hpayFee = (_amount * taxConfiguration.hpayFee) / 10_000;\n        IERC20(configuration.stakingToken).safeTransferFrom(msg.sender, taxConfiguration.hpayFeeAddress, _hpayFee);\n        _amount -= _hpayFee;\n    }\n    if (taxConfiguration.stakeTax > 0) {\n        uint256 fee = (_amount * taxConfiguration.stakeTax) / 10_000;\n        IERC20(configuration.stakingToken).safeTransferFrom(msg.sender, taxConfiguration.feeAddress, fee);\n        _amount -= fee;\n    }\n    return _amount;\n}",
+    "vulnerability": "HPAY fee bypass via flash loan",
+    "reason": "The function determines whether to charge the additional HPAY fee by checking the current HPAY token balance of msg.sender: taxConfiguration.hpayToken.balanceOf(msg.sender) < 1e18. This balance can be temporarily manipulated. An attacker can flash-loan 1e18 HPAY tokens, call stake (which invokes takeStakeTax), satisfy the balance requirement and avoid the hpayFee entirely, then repay the flash loan in the same transaction. This costs only the flash loan fee (if any) and results in lost tax revenue for the protocol while benefiting the attacker. The same issue exists in takeUnstakeTax. The contract should use a time-weighted average balance, require tokens to be locked for a period, or use a snapshot mechanism instead of a spot balance check.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__TaxedStaking.sol"
+  },
+  {
+    "function_name": "takeUnstakeTax",
+    "code": "function takeUnstakeTax(uint256 _amount) internal virtual returns (uint256) {\n    if (taxConfiguration.hpayFee > 0 && taxConfiguration.hpayToken.balanceOf(msg.sender) < 1e18) {\n        uint256 _hpayFee = (_amount * taxConfiguration.hpayFee) / 10_000;\n        _balances[msg.sender] -= _hpayFee;\n        _totalSupply -= _hpayFee;\n        IERC20(configuration.stakingToken).safeTransfer(taxConfiguration.feeAddress, _hpayFee);\n        _amount -= _hpayFee;\n    }\n    if (taxConfiguration.unStakeTax > 0) {\n        uint256 fee = (_amount * taxConfiguration.unStakeTax) / 10_000;\n        _balances[msg.sender] -= fee;\n        _totalSupply -= fee;\n        IERC20(configuration.stakingToken).safeTransfer(taxConfiguration.feeAddress, fee);\n        _amount -= fee;\n    }\n    return _amount;\n}",
+    "vulnerability": "Incorrect fee recipient for hpay fee on unstake",
+    "reason": "When the hpayFee condition is met during an unstake, the function calculates _hpayFee and transfers it to taxConfiguration.feeAddress instead of taxConfiguration.hpayFeeAddress. The corresponding takeStakeTax function correctly sends the hpay fee to hpayFeeAddress. This is a clear logic error: the HPAY fee is misdirected to the owner tax address. As a result, the designated hpayFeeAddress never receives these funds, breaking the intended tokenomics and allowing the owner of feeAddress (or an attacker who compromises that address) to collect fees meant for the HPAY fee collector. The transfer should use taxConfiguration.hpayFeeAddress.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__TaxedStaking.sol"
+  },
+  {
+    "function_name": "setTax",
+    "code": "function setTax(uint256 stakeTax, uint256 unstakeTax) external onlyRole(DEFAULT_ADMIN_ROLE) {\n    require(stakeTax <= 10_000 && unstakeTax < 10_000, \"Tax cannot be greater than 100%\");\n    taxConfiguration.stakeTax = stakeTax;\n    taxConfiguration.unStakeTax = unstakeTax;\n}",
+    "vulnerability": "Allows 100% stake tax, enabling admin rug pull",
+    "reason": "The require statement uses stakeTax <= 10_000, which permits stakeTax to be exactly 10_000 (100%). If a malicious or compromised admin sets stakeTax to 10000, then takeStakeTax will transfer the entire staked amount to feeAddress and return 0. The user's staked balance is not increased, and they lose all deposited tokens. Although the admin role is privileged, this creates a severe centralization risk because the admin can unilaterally steal all future stakes with no timelock or maximum cap. The check should be stakeTax < 10_000 (or a much lower maximum) for both stakeTax and unstakeTax, and ideally the contract should include a timelock for tax changes.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__TaxedStaking.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _value) public { allowed[msg.sender][_spender] = _value; Approval(msg.sender, _spender, _value); }",
+    "vulnerability": "ERC20 approve race condition",
+    "reason": "The approve function directly overwrites the allowance. If the current allowance is non-zero and the owner changes it to another non-zero value, a malicious spender can front-run the change by spending the old allowance, then after the new approval is mined, spend the new allowance. This allows the spender to spend more tokens than the owner intended, resulting in a financial loss for the token owner. The contract includes increaseApproval and decreaseApproval as safer alternatives, but the standard approve function remains vulnerable and is likely to be used by wallets and exchanges.",
+    "file_name": "proj-aab1c1c54a6396b0__NewIntelTechMedia.sol"
+  },
+  {
+    "function_name": "transfer",
+    "code": "function transfer(address _to, uint256 _value) public { require(_to != address(0)); require(_value <= balances[msg.sender]); balances[msg.sender] = balances[msg.sender].sub(_value); balances[_to] = balances[_to].add(_value); Transfer(msg.sender, _to, _value); }",
+    "vulnerability": "Missing return value / ERC20 non-compliance",
+    "reason": "The ERC20 standard requires transfer, transferFrom, and approve to return a boolean indicating success. This implementation returns nothing. Smart contracts and protocols that use the standard IERC20 interface and expect a boolean return will revert when interacting with this token, potentially causing tokens to be locked if sent to such contracts. An attacker could create a contract that accepts these non-compliant tokens and cannot transfer them out, tricking users into depositing their tokens and permanently locking them, which is a severe interoperability and loss-of-funds risk.",
+    "file_name": "proj-aab1c1c54a6396b0__NewIntelTechMedia.sol"
+  },
+  {
+    "function_name": "pause",
+    "code": "function pause() onlyOwner whenNotPaused public { paused = true; Pause(); }",
+    "vulnerability": "Centralization / denial of service via owner pause",
+    "reason": "The contract owner can call pause() at any time to set paused = true, which blocks all transfers, transfersFrom, approvals, and allowance changes for all users. If the owner's private key is compromised or the owner acts maliciously, they can freeze the entire token economy, preventing users from selling or moving their tokens. This can be exploited to manipulate markets, cause panic, or extort token holders. The ability to pause all transfers gives a single address significant power over user funds, which is a severe centralization risk.",
+    "file_name": "proj-aab1c1c54a6396b0__NewIntelTechMedia.sol"
+  }
+]

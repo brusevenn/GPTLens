@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "claimRewardsFromVaultToPortfolioVault",
+    "code": "function claimRewardsFromVaultToPortfolioVault(\n    IFeeDistribution.RewardData[] memory claimableRewards\n) public virtual {\n    for (uint256 i = 0; i < claimableRewards.length; i++) {\n        SafeERC20.safeTransfer(\n            IERC20(claimableRewards[i].token),\n            msg.sender,\n            claimableRewards[i].amount\n        );\n    }\n}",
+    "vulnerability": "Missing access control allows arbitrary token theft",
+    "reason": "The function is declared public and lacks any access control, validation, or check that the caller is authorized to claim rewards. An attacker can call this function with an array containing the vault's token addresses (e.g., the underlying asset or any ERC20 held by the vault) and amounts up to the vault's balance. The function will then transfer those tokens directly to the attacker's address (msg.sender). This enables anyone to drain all ERC20 tokens held by the vault, including user deposits and protocol rewards, without any special privileges. This is a critical, directly exploitable vulnerability.",
+    "file_name": "proj-36288b16bacd36ec__contracts__interfaces__AbstractVaultV2.sol"
+  },
+  {
+    "function_name": "rescueFunds",
+    "code": "function rescueFunds(\n    address tokenAddress,\n    uint256 amount\n) external onlyOwner {\n    require(tokenAddress != address(0), \"Invalid token address\");\n    SafeERC20.safeTransfer(IERC20(tokenAddress), owner(), amount);\n}",
+    "vulnerability": "Privileged token drain (owner rug-pull)",
+    "reason": "The function is restricted to the owner but allows the owner to transfer any amount of any ERC20 token from the vault to the owner's address. Because the vault holds user deposits and other valuable tokens, a malicious or compromised owner can call this function to steal all tokens from the vault at any time. There is no timelock, no restriction on which tokens can be rescued, and no requirement that rescued tokens are unrelated to user funds. This creates a severe centralization risk where the owner can unilaterally drain all user assets, making the vault unsafe for users.",
+    "file_name": "proj-36288b16bacd36ec__contracts__interfaces__AbstractVaultV2.sol"
+  },
+  {
+    "function_name": "rescueFundsWithHexData",
+    "code": "function rescueFundsWithHexData(\n    address payable destination,\n    uint256 amount,\n    bytes memory hexData\n) external onlyOwner {\n    require(destination != address(0), \"Invalid destination address\");\n    require(address(this).balance >= amount, \"Insufficient balance\");\n    (bool success, ) = destination.call(hexData);\n    require(success, \"Fund transfer failed\");\n}",
+    "vulnerability": "Arbitrary external call enables complete asset theft",
+    "reason": "This onlyOwner function allows the owner to execute an arbitrary external call to any address with any calldata. The amount parameter is checked against the contract's ETH balance but is never used in the call, making the check ineffective. The owner can specify destination as an ERC20 token contract and hexData as a call to transfer the vault's tokens to an arbitrary address, effectively draining all ERC20 assets. The owner can also interact with any other contract to manipulate the vault's state or assets. This gives the owner unrestricted control over the vault's funds, constituting a critical arbitrary call vulnerability that can be used to steal all user assets.",
+    "file_name": "proj-36288b16bacd36ec__contracts__interfaces__AbstractVaultV2.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setToken",
+    "code": "function setToken(address _addr) public {\n    configuration.stakingToken = ERC20(_addr);\n    configuration.rewardsToken = ERC20(_addr);\n}",
+    "vulnerability": "Missing access control on setToken",
+    "reason": "setToken has no access control. Any attacker can change configuration.stakingToken and configuration.rewardsToken to any address. Because _balances are not tied to a token address, an attacker can first stake the legitimate token to obtain _balances, then call setToken(victimToken) to point the contract at another ERC20 held by the contract, and finally call withdraw to transfer victimToken up to their _balances. Alternatively, combined with the reentrancy in _stake, they can inflate _balances for free and then setToken to the real staking token to drain the entire contract balance. This directly steals user funds and breaks all token accounting.",
+    "file_name": "proj-aadb542e420965a2__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_stake",
+    "code": "function _stake(uint256 _amount) internal virtual override {\n    _balances[msg.sender] += _amount;\n    _totalSupply += _amount;\n    IERC20(configuration.stakingToken).safeTransferFrom(msg.sender, address(this), _amount);\n    emit Stake(msg.sender, _amount);\n}",
+    "vulnerability": "Reentrancy in _stake before transferFrom",
+    "reason": "MintableSupplyStaking._stake updates _balances[msg.sender] and _totalSupply before calling safeTransferFrom on configuration.stakingToken. Since setToken is public, an attacker can set stakingToken to a malicious ERC20 they control. The malicious transferFrom can reenter stake()/MintableSupplyStaking._stake repeatedly, increasing the attacker's _balances without actually depositing any valuable tokens. After inflating _balances, the attacker calls setToken(realToken) and withdraw(inflatedAmount) to drain realToken from the contract. This is a classic reentrancy/state-update-before-external-call vulnerability and is directly profitable.",
+    "file_name": "proj-aadb542e420965a2__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "runCompund",
+    "code": "function runCompund(uint256 batchSize) external {\n    uint256 steps;\n    uint256 totalPefromanceFee;\n    uint256 totalCompundFee;\n    uint256 currentIndex = lastCompund;\n    while (steps < batchSize) {\n        steps++;\n        (uint256 compundFee, uint256 performaceTax) = compundForAccount(stakeholders.at(currentIndex));\n        totalPefromanceFee += performaceTax;\n        totalCompundFee += compundFee;\n        currentIndex = (currentIndex + 1) % stakeholders.length();\n        if (currentIndex == lastCompund) {\n            break;\n        }\n    }\n    lastCompund = currentIndex;\n    IERC20(configuration.rewardsToken).safeTransfer(msg.sender, totalCompundFee);\n    IERC20(configuration.rewardsToken).safeTransfer(taxConfiguration.hpayFeeAddress, totalPefromanceFee);\n    emit ClaimedReward(msg.sender, totalCompundFee);\n}",
+    "vulnerability": "Fee accounting bug in runCompund drains principal",
+    "reason": "runCompund is callable by anyone and pays totalCompundFee to msg.sender and totalPefromanceFee to hpayFeeAddress using configuration.rewardsToken. However, the fee amounts were subtracted from rewards[account] before _compound, and _compound only mints the net reward (rewards[account] after fee subtraction) to the contract. The fees themselves are never minted. Therefore the transfers in runCompund are paid from the contract's existing reward token balance, which, when stakingToken == rewardsToken (or via setToken), is the staked principal of users. An attacker can call runCompund with a large batchSize to process accounts with accrued rewards, receive the compound fees, and drain user funds. The performance fee also drains to hpayFeeAddress. This makes the contract insolvent and is directly profitable to the caller.",
+    "file_name": "proj-aadb542e420965a2__MainContractFlattened.sol"
+  }
+]

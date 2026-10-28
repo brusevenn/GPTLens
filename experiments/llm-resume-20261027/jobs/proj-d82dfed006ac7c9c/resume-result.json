@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-d82dfed006ac7c9c",
+  "case_ids": [
+    "acb-4b459b5d523811e5"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "7d4bfa069d189d672b0bebe7c2ad50f1de268d3e5e5ac609d415d677b1fab278",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:19:46.770302+00:00",
+  "exit_code": 0,
+  "input_identity": "8ce7d4811e44daee78405b6d96f5b86dd5d378cd964e7281771c706534997d92",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-d82dfed006ac7c9c",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "B2X.sol",
+      "9631531fe0389832393231f3565b59c5f59c40a4c3e7d48c8cf2eea8a85acede"
+    ],
+    [
+      "MainContractFlattened.sol",
+      "e49b128017a5640e954b10d0be196fb33960e0feb4bf458a6bdddd64d4f90a35"
+    ]
+  ],
+  "source_hashes": [
+    "9631531fe0389832393231f3565b59c5f59c40a4c3e7d48c8cf2eea8a85acede",
+    "e49b128017a5640e954b10d0be196fb33960e0feb4bf458a6bdddd64d4f90a35"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

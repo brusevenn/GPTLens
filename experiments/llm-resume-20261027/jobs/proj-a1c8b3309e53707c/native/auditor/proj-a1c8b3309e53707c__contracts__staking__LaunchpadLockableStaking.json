@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "stakePendingRewards",
+    "code": "    function stakePendingRewards() external notMigrated {\n        address account = msg.sender;\n        UserInfo storage user = userInfo[account];\n        updateUserPending(account);\n        uint256 amount = user.pendingRewards;\n        user.pendingRewards = 0;\n        user.amount += amount;\n        if (!isLocked(account)) {\n            depositLockStart[account] = block.timestamp;\n            user.rewardDebt = 0;\n            emit Locked(account, amount, lockPeriod, 0);\n        }\n        updateUserDebt(account);\n        if (address(secondaryStaking) != address(0)) {\n            secondaryStaking.deposit(amount);\n        }\n        emit StakedPending(account, amount);\n    }",
+    "vulnerability": "Unbacked staking token minting via stakePendingRewards",
+    "reason": "The function converts pending reward tokens into staking token principal by increasing user.amount without transferring any reward tokens from the treasury or otherwise funding the staking contract. An attacker can accrue pending rewards, call stakePendingRewards to inflate their user.amount, and then withdraw the inflated amount from the staking contract. This drains the staking token pool and makes the contract insolvent. The exploit works even if rewardToken == stakingToken because the reward tokens remain in the treasury and are never moved to the staking contract.",
+    "file_name": "proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.sol"
+  },
+  {
+    "function_name": "receiveUpPool",
+    "code": "    function receiveUpPool(address account, uint256 amount) external {\n        require(account != address(0), 'Must specify valid account');\n        require(amount > 0, 'Must specify non-zero amount');\n        UserInfo storage user = userInfo[account];\n        uint256 newLockStartTime;\n        if (isLocked(account)) {\n            newLockStartTime = depositLockStart[account];\n        } else {\n            newLockStartTime = LaunchpadLockableStaking(msg.sender).isLocked(account) ? LaunchpadLockableStaking(msg.sender).depositLockStart(account) : block.timestamp;\n        }\n        updateDepositLockStart(account, newLockStartTime);\n        emit Locked(account, amount, lockPeriod, 0);\n        liquidityMining.stakingToken.safeTransferFrom(msg.sender, address(this), amount);\n        stakersCount += user.lastStakedAt > 0 ? 0 : 1;\n        user.amount += amount;\n        user.lastStakedAt = block.timestamp;\n        lastClaimedAt[account] = block.timestamp;\n        emit Deposit(account, amount, 0);\n        if (address(secondaryStaking) != address(0)) {\n            secondaryStaking.deposit(amount);\n        }\n    }",
+    "vulnerability": "Missing caller validation allows deposit fee bypass and lock manipulation",
+    "reason": "receiveUpPool is externally callable and does not verify that msg.sender is a legitimate pool. If the target account is already locked, any EOA can call it to add tokens without paying the deposit fee, bypassing fees.collectDepositFees. If the account is not locked, an attacker can use a malicious contract to return arbitrary isLocked/depositLockStart values, setting the account's depositLockStart to block.timestamp and locking the account's entire stake for lockPeriod. Attackers can repeatedly force-lock victims' funds with a 1 wei deposit, preventing withdrawals. The function also resets lastClaimedAt, allowing griefing of reward claims.",
+    "file_name": "proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.sol"
+  },
+  {
+    "function_name": "batchSyncLockStatus",
+    "code": "    function batchSyncLockStatus(address[] calldata addresses) external onlyOwnerOrAdmin {\n        for (uint256 i = 0; i < addresses.length; i++) {\n            address addr = addresses[i];\n            if (!isLocked(addr)) {\n                updateUserPending(addr);\n            }\n        }\n    }",
+    "vulnerability": "Reward inflation due to missing updateUserDebt",
+    "reason": "batchSyncLockStatus calls updateUserPending(addr) without subsequently calling updateUserDebt(addr). updateUserPending subtracts the old rewardDebt but does not update it, so each call adds the unaccounted accrued rewards to user.pendingRewards again. An admin can repeatedly call this for a non-locked user to inflate pendingRewards without limit. The inflated rewards can then be claimed from the treasury via claim(), draining reward tokens. This is a critical accounting bug that breaks the reward system.",
+    "file_name": "proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.sol"
+  }
+]

@@ -1,0 +1,43 @@
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__AccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__AccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__AccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__AccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__IAccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__IAccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__IAccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__access__IAccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__security__ReentrancyGuard.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__security__ReentrancyGuard.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Strings.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__Strings.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__introspection__ERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__introspection__ERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__introspection__IERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__introspection__IERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__math__Math.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__math__Math.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__structs__EnumerableSet.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__@openzeppelin__contracts__utils__structs__EnumerableSet.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-424da07d41309706__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-424da07d41309706__contracts__ReaperVaultV2.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-424da07d41309706__contracts__ReaperVaultV2.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-424da07d41309706__contracts__interfaces__IERC4626.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__contracts__interfaces__IERC4626.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__contracts__interfaces__IStrategy.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__contracts__interfaces__IStrategy.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-424da07d41309706__contracts__library__FixedPointMathLib.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-424da07d41309706__contracts__library__FixedPointMathLib.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-424da07d41309706", "case_ids": ["acb-9fda5c15bf2fef2f"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 21, "failed_files": 0, "request_log": "requests.jsonl"}

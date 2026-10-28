@@ -1,0 +1,5 @@
+{"input_file": "proj-941690dc0d249fad__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-941690dc0d249fad__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-941690dc0d249fad__MorphToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-941690dc0d249fad__MorphToken.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-941690dc0d249fad", "case_ids": ["acb-fcb2361a7db3f3b7"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

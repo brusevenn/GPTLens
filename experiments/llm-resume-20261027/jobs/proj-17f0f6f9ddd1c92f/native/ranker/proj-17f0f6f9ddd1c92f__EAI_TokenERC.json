@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function EAI_TokenERC20( uint256 initialSupply, string tokenName, string tokenSymbol ) public {\n    totalSupply = initialSupply * 10 ** uint256(decimals);\n    balanceOf[msg.sender] = totalSupply;\n    name = tokenName;\n    symbol = tokenSymbol;\n}",
+    "correctness": 8,
+    "criticism": "The core issue is credible only under the stated name mismatch: if the contract is actually named EAI_TokenERC and this function is named EAI_TokenERC20, Solidity 0.4.16 treats it as a normal public function rather than a constructor. Anyone can then call it repeatedly to overwrite totalSupply, set balanceOf[msg.sender], and change name/symbol, which is a critical arbitrary-minting and value-dilution issue. However, the reasoning contains a naming inconsistency: if the contract name is actually EAI_TokenERC20, then this is a real constructor and the vulnerability collapses. The claim of 'unlimited' minting is also overstated because values are bounded by uint256 and overflow behavior, and the function does not directly steal existing balances, though it enables theft from exchanges/protocols that accept the token. Correctness is high but conditional; severity is very high; profitability is high if the token has market value or integration.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol",
+    "final_score": 8.25,
+    "function_name": "EAI_TokenERC20",
+    "profitability": 8,
+    "reason": "The contract is named `EAI_TokenERC`, but the function intended to be the constructor is named `EAI_TokenERC20`. In Solidity 0.4.16, a constructor must have the exact same name as the contract. Therefore, `EAI_TokenERC20` is a regular public function that can be called by anyone at any time. An attacker can call it to set `totalSupply`, `balanceOf[msg.sender]`, `name`, and `symbol` to arbitrary values, effectively minting unlimited tokens to themselves and overwriting the total supply and token metadata. This is a critical, directly exploitable vulnerability that allows theft of value from any contract or exchange that accepts this token.",
+    "severity": 9,
+    "vulnerability": "Misnamed constructor allows public initialization and arbitrary token minting"
+  },
+  {
+    "code": "function EAI_TokenERC20( uint256 initialSupply, string tokenName, string tokenSymbol ) public {\n    totalSupply = initialSupply * 10 ** uint256(decimals);\n    balanceOf[msg.sender] = totalSupply;\n    name = tokenName;\n    symbol = tokenSymbol;\n}",
+    "correctness": 7,
+    "criticism": "The unchecked multiplication is real in Solidity 0.4.16, but its exploitability depends on the same public-callability bug. If this were a true constructor, only the deployer would control initialSupply during deployment. The specific arithmetic claim that the result is always a multiple of 256 assumes decimals == 8, which is not shown in the provided snippet; if decimals differs, the modular arithmetic changes. With public callability, an attacker can choose initialSupply to wrap totalSupply and balanceOf[msg.sender] to a huge value, potentially near 2^256, but this is largely redundant with the direct arbitrary-assignment flaw. It can still break integrations that rely on totalSupply, but it is not an independent arbitrary-mint primitive. Correctness is moderate because of the condition and assumption; severity is high when combined with the public initialization; profitability is moderate because it mostly duplicates the first exploit.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol",
+    "final_score": 6.75,
+    "function_name": "EAI_TokenERC20",
+    "profitability": 6,
+    "reason": "The calculation `totalSupply = initialSupply * 10 ** uint256(decimals);` does not use SafeMath. In Solidity 0.4.16, integer multiplication wraps modulo 2^256. Because `decimals` is 8, the multiplier is 10^8 = 2^8 * 5^8, so the product is always a multiple of 256. An attacker can pass a carefully chosen large `initialSupply` to cause an overflow, resulting in `totalSupply` and `balanceOf[msg.sender]` being set to an arbitrary multiple of 256, potentially close to 2^256 - 256. This allows the attacker to mint an enormous amount of tokens in a single transaction. Combined with the public callability of this function, it is a severe integer overflow vulnerability that can be directly exploited to mint near-infinite tokens.",
+    "severity": 7,
+    "vulnerability": "Integer overflow in token initialization due to unchecked multiplication"
+  },
+  {
+    "code": "function burn(uint256 _value) public returns (bool success) {\n    require(balanceOf[msg.sender] >= _value);\n    balanceOf[msg.sender] -= _value;\n    totalSupply -= _value;\n    emit Burn(msg.sender, _value);\n    return true;\n}",
+    "correctness": 7,
+    "criticism": "The burn function indeed lacks a totalSupply >= _value check, so totalSupply can underflow if and only if the normal invariant totalSupply >= balanceOf[msg.sender] has already been broken. The reasoning correctly identifies that public initialization can create such a state by leaving an old holder's balance larger than a later-reset totalSupply. Without that prerequisite, the balance check alone would normally prevent underflow. The claim that the attacker can set totalSupply to virtually any value is somewhat overstated unless the attacker has a sufficiently large balance; nevertheless, underflow can produce a huge manipulated totalSupply and break external protocols that trust this value. This is a derivative issue rooted in the misnamed public initializer rather than a standalone burn bug, and direct profitability is indirect. Correctness is good but dependent; severity is high but secondary; profitability is moderate to low.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol",
+    "final_score": 6.25,
+    "function_name": "burn",
+    "profitability": 5,
+    "reason": "The `burn` function subtracts `_value` from `totalSupply` without checking that `totalSupply >= _value`. Because the public `EAI_TokenERC20` function can be called by anyone to mint tokens and later reset `totalSupply` to a smaller value while another address retains a large balance, an attacker can create a state where an address has a balance greater than the current `totalSupply`. That address can then call `burn` to underflow `totalSupply` to a very large value (e.g., `2^256 - x`). This breaks the fundamental invariant that `totalSupply` equals the sum of all balances. The manipulated `totalSupply` can be used to attack external protocols that rely on this value (e.g., staking rewards, pricing mechanisms, or collateral calculations), and it allows the attacker to set `totalSupply` to virtually any desired value without restriction.",
+    "severity": 6,
+    "vulnerability": "Integer underflow in burn allows arbitrary totalSupply manipulation"
+  }
+]

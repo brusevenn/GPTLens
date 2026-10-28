@@ -1,0 +1,5 @@
+{"input_file": "proj-d2b659b60ad6925d__DxBurnToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d2b659b60ad6925d__DxBurnToken.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-d2b659b60ad6925d__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d2b659b60ad6925d__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-d2b659b60ad6925d", "case_ids": ["acb-4b207274fefab4f1"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

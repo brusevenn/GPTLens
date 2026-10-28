@@ -1,0 +1,3 @@
+{"input_file": "proj-222c4e810d816896__Dao.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-222c4e810d816896__Dao.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-222c4e810d816896", "case_ids": ["acb-c0b5572a7c1a1059"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

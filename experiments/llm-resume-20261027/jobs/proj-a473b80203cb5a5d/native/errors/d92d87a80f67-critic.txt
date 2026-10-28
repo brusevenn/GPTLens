@@ -1,0 +1,9 @@
+stage=critic
+input_id=data/ACToolBench154/proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.sol
+error_type=RuntimeError
+Traceback (most recent call last):
+  File "$REPO/scripts/benchmark.py", line 418, in run_project
+    run_critic.run(critic_args)
+  File "$REPO/src/run_critic.py", line 135, in run
+    raise RuntimeError(f"Critic failed for {errors} input(s); per-input statuses were saved")
+RuntimeError: Critic failed for 1 input(s); per-input statuses were saved

@@ -1,0 +1,87 @@
+{
+  "case_ids": [
+    "acb-ed91d999871cd8ae"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 131,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-71980e138b0c2109/source_code/config.json",
+      "sha256": "06accf40b2524cd688b1143363528302fe12fe0279c898e3f206f815aac3cd20"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T11:37:57.856160+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-71980e138b0c2109__IsolateLogic.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-71980e138b0c2109__IsolateLogic.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-71980e138b0c2109__IsolateLogic.sol",
+      "normalized_sha256": "774e14f960aa722b6055f06dbbd388500b9867ec1b53d6aea419b6a32d16ba3f",
+      "ranker_output": "ranker/proj-71980e138b0c2109__IsolateLogic.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 222701,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-71980e138b0c2109/source_code/IsolateLogic.sol",
+      "source_sha256": "db0fbd0da8feb5aa901e7257ba19a03f0ec537be9e79c4ced5c9c40422e592b6",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-71980e138b0c2109",
+  "project_source_file_count": 1,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T11:34:09.261793+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T11:37:57.856171+00:00",
+  "usage": {
+    "completion_tokens": 43324,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 38896,
+    "prompt_tokens": 39920,
+    "request_attempt_count": 2,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

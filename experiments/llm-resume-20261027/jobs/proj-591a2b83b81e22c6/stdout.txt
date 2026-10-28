@@ -1,0 +1,67 @@
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__interfaces__IERC1967Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__interfaces__IERC1967Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__interfaces__draft-IERC1822Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__interfaces__draft-IERC1822Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__ERC1967__ERC1967UpgradeUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__ERC1967__ERC1967UpgradeUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__beacon__IBeaconUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__beacon__IBeaconUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__utils__UUPSUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__utils__UUPSUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__security__PausableUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__security__PausableUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__StorageSlotUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__StorageSlotUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__security__ReentrancyGuard.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__security__ReentrancyGuard.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__extensions__IERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__utils__math__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts__utils__math__SafeMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__AstridProtocol.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-591a2b83b81e22c6__AstridProtocol.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-591a2b83b81e22c6__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-591a2b83b81e22c6__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IDelegationManager.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IDelegationManager.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IDelegationTerms.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IDelegationTerms.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__ISlasher.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__ISlasher.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IStrategy.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IStrategy.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IStrategyManager.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__eigenlayer__interfaces__IStrategyManager.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__helpers__Utils.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__helpers__Utils.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__interfaces__IDelegator.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__interfaces__IDelegator.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-591a2b83b81e22c6__interfaces__IRestakedETH.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-591a2b83b81e22c6__interfaces__IRestakedETH.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-591a2b83b81e22c6", "case_ids": ["acb-3544f61d9c3158ca"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 33, "failed_files": 0, "request_log": "requests.jsonl"}

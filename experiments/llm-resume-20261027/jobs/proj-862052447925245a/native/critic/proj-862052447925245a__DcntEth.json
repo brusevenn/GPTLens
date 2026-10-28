@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "setRouter",
+    "vulnerability": "Unprotected setRouter allows arbitrary router takeover",
+    "criticism": "The reasoning is correct: setRouter is public and has no access-control modifier, so any external account can overwrite the router variable. If onlyRouter on mint/burn checks msg.sender against this mutable router, the attacker can set the router to their own address and then invoke privileged supply-changing functions. This is a critical root-cause access-control vulnerability. Severity is 9 because it enables complete compromise of token supply and balances. Profitability is 9 because an attacker can mint tokens to themselves and sell or use them in liquidity pools/protocols that trust the token, assuming the token has any market value or integration. Correctness is 9 because the exploitation chain is accurately described, with only the usual reasonable assumption that onlyRouter uses the stored router variable and no hidden guard exists.",
+    "correctness": 9,
+    "severity": 9,
+    "profitability": 9,
+    "reason": "The setRouter function lacks any access control (e.g., onlyOwner). Any external account can call setRouter and set the router variable to an arbitrary address, including their own address. The router address is then used by the onlyRouter modifier on the mint and burn functions. An attacker can call setRouter(attackerAddress) to become the router, and subsequently call mint to create unlimited tokens or burn to destroy any holder's tokens. Even if the owner initially sets a legitimate router, an attacker can overwrite it at any time, completely compromising the token's supply and balances.",
+    "code": "function setRouter(address _router) public {\n    router = _router;\n}",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  },
+  {
+    "function_name": "mint",
+    "vulnerability": "Infinite token minting via hijacked router",
+    "criticism": "The reasoning is correct in context: mint itself uses onlyRouter, so it is not independently vulnerable if the router is secure. However, because setRouter is unprotected, the attack chain setRouter(attackerAddress) followed by mint(attackerAddress, arbitraryAmount) is valid and allows unlimited token creation. This can inflate supply, dilute holders, and drain liquidity pools or protocols that accept the token. The finding is somewhat derivative of the setRouter root cause and would normally be grouped with it rather than counted as a separate independent bug. Correctness is 8 because the exploit depends on the setRouter flaw and is not a flaw in mint alone. Severity is 9 because unlimited minting can be catastrophic. Profitability is 9 because the attacker can mint to themselves and monetize through sales or DeFi integrations when liquidity exists.",
+    "correctness": 8,
+    "severity": 9,
+    "profitability": 9,
+    "reason": "The mint function is intended to be callable only by the router contract. However, because setRouter is public and unrestricted, any attacker can first call setRouter(attackerAddress) to become the router, then call mint(attackerAddress, arbitraryAmount). This allows the attacker to mint an unlimited number of DcntEth tokens to themselves, diluting all existing holders and enabling them to drain any liquidity pools or protocols that trust this token. The onlyRouter modifier provides no security because the router can be arbitrarily changed by anyone.",
+    "code": "function mint(address _to, uint256 _amount) public onlyRouter {\n    _mint(_to, _amount);\n}",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  },
+  {
+    "function_name": "burn",
+    "vulnerability": "Arbitrary token burning via hijacked router",
+    "criticism": "The reasoning is technically correct: if an attacker can call setRouter(attackerAddress), they can become the router and call burn(victimAddress, amount) for any holder, because _burn typically does not require allowance from _from. This allows arbitrary destruction of victim balances and supply manipulation. However, this is again a manifestation of the same setRouter root cause, not an independent burn flaw, so counting it separately risks double-counting. Severity is high because any holder's tokens can be destroyed, but it is somewhat less directly devastating than arbitrary minting because the attacker does not receive the burned tokens. Profitability is lower than minting: direct gain is not automatic and would require griefing, market manipulation, shorting, or exploiting price effects from reduced supply. Correctness is 8 because the reasoning is accurate but dependent on the setRouter flaw. Severity is 9 because arbitrary burning of any holder is a severe integrity violation. Profitability is 4 because direct attacker profit is possible but conditional and less straightforward.",
+    "correctness": 8,
+    "severity": 9,
+    "profitability": 4,
+    "reason": "The burn function is intended to be callable only by the router contract. Because setRouter has no access control, an attacker can call setRouter(attackerAddress) and then call burn(victimAddress, amount) for any victim and any amount up to the victim's balance. This lets the attacker destroy any holder's tokens at will, causing direct financial loss to victims and potentially manipulating the token supply. The onlyRouter modifier is ineffective because the router can be reassigned by any external account.",
+    "code": "function burn(address _from, uint256 _amount) public onlyRouter {\n    _burn(_from, _amount);\n}",
+    "file_name": "proj-862052447925245a__DcntEth.sol"
+  }
+]

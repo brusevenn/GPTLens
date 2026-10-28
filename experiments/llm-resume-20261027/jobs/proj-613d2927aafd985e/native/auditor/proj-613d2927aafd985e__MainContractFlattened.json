@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "addMeByRC",
+    "code": "function addMeByRC() public {\n    require(tx.origin == owner);\n    rc[ msg.sender ] = true;\n    emit NewRC(msg.sender);\n}",
+    "vulnerability": "tx.origin authentication allows unauthorized RC registration",
+    "reason": "The function uses tx.origin to authenticate the owner. If the owner interacts with a malicious contract, that contract can call addMeByRC() while tx.origin still equals the owner, causing the malicious contract's address (msg.sender) to be added to the rc mapping. Once registered as an RC, the attacker can call claim() to drain all tokens from the TokenSale contract. This is a classic tx.origin phishing vulnerability and is exploitable in the real world.",
+    "file_name": "proj-613d2927aafd985e__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "claim",
+    "code": "function claim(address _buyer, uint256 _amount) onlyRC public returns(bool) {\n    return tokenContract.transfer(_buyer, _amount);\n}",
+    "vulnerability": "Unrestricted arbitrary token transfer by any RC",
+    "reason": "The onlyRC modifier checks only that msg.sender is in the rc mapping, but there is no limit, accounting, or check that _amount is owed to _buyer. Any address registered as an RC can transfer any amount of tokens from the TokenSale contract to any address. Combined with the tx.origin flaw in addMeByRC, an attacker can register a malicious contract as RC and then call claim(attacker, tokenContract.balanceOf(tokenSaleAddress)) to steal all tokens. Even if a legitimate RC is compromised, it can drain the entire token balance.",
+    "file_name": "proj-613d2927aafd985e__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "buyFromRC",
+    "code": "function buyFromRC(address _buyer, uint256 _rcTokenValue, uint256 _remainingTokens) onlyRC isBuyable public payable returns(uint256) {\n    uint256 oneToken = 10 ** uint256(decimals);\n    uint256 tokenValue = tokenValueInEther(_rcTokenValue);\n    uint256 tokenAmount = msg.value.mul(oneToken).div(tokenValue);\n    address _ambassador = msg.sender;\n    uint256 remainingTokens = tokenContract.balanceOf(this);\n    if ( _remainingTokens < remainingTokens ) {\n        remainingTokens = _remainingTokens;\n    }\n    if ( remainingTokens < tokenAmount ) {\n        uint256 refund = (tokenAmount - remainingTokens).mul(tokenValue).div(oneToken);\n        tokenAmount = remainingTokens;\n        forward(msg.value-refund);\n        remainingTokens = 0;\n        _buyer.transfer(refund);\n    } else {\n        remainingTokens = remainingTokens.sub(tokenAmount);\n        forward(msg.value);\n    }\n    tokenContract.transfer(_buyer, tokenAmount);\n    emit Buy(_buyer, tokenAmount, _ambassador);\n    return tokenAmount;\n}",
+    "vulnerability": "Arbitrary token price set by RC enables cheap token theft",
+    "reason": "The function trusts the caller-supplied _rcTokenValue and uses it to compute tokenValue and tokenAmount without validating it against a legitimate price or the RC's configured price. A malicious or compromised RC can set _rcTokenValue to a very small value (e.g., 1), making tokenValue tiny and tokenAmount enormous. The function then caps tokenAmount to remainingTokens and refunds the excess ETH to _buyer. As a result, the attacker can purchase all remaining tokens for almost no ETH. The function also ignores the return value of tokenContract.transfer, which can lead to silent failures, but the arbitrary pricing is the primary severe vulnerability.",
+    "file_name": "proj-613d2927aafd985e__MainContractFlattened.sol"
+  }
+]

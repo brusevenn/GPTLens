@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "setReward",
+    "vulnerability": "Missing access control allows arbitrary reward creation",
+    "criticism": "The core observation is correct: setReward is public and performs no authorization or validation on rewardSender, amount, remain, or price. Any caller can append arbitrary reward records and inflate _totalRemainCnt, which corrupts accounting and can be combined with generateReward and releaseCoin. However, the reasoning overstates direct token theft: the shown code does not mint or transfer tokens, and releaseCoin only returns a value, so actual draining depends on an external payout or redemption integration trusting that return value. The missing access control is real and serious, but profitability is conditional on how waitRelease is consumed.",
+    "correctness": 8,
+    "severity": 8,
+    "profitability": 5,
+    "reason": "setReward has no access control and no validation that rewardSender is authorized or that amount/remain correspond to real deposited rewards. An attacker can call setReward(attacker, hugeAmount, hugeRemain, chosenPrice) to create an arbitrary reward record for themselves and increase _totalRemainCnt by hugeRemain. generateReward will then compute a release for that record and credit waitRelease[attacker]; releaseCoin(attacker) returns that amount. In any real deployment where the returned release amount is used to mint or transfer tokens, the attacker can mint/claim arbitrary rewards; even otherwise it corrupts all accounting and can be used to drain reward pools.",
+    "code": "function setReward( address rewardSender, uint256 amount, uint256 remain, uint256 price ) public { if (reward[rewardSender].length == 0) { rewardKeys.push(rewardSender); } reward[rewardSender].push( RewardData(rewardSender, amount, remain, price, block.timestamp) ); _totalRemainCnt += remain; }",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  },
+  {
+    "function_name": "generateReward",
+    "vulnerability": "Repeated calls bypass daily release and drain rewards immediately",
+    "criticism": "The reasoning correctly identifies that generateReward is public and has no time-based or per-period guard. Because targetRelease is recalculated on every call and remain is reduced each time, anyone can repeatedly call it in the same block until remain is exhausted, bypassing the intended daily release schedule. The main overstatement is the phrase drain rewards immediately: the function only accrues waitRelease and reduces remain; actual token transfer still depends on releaseCoin and an external payout mechanism. Severity is still meaningful because it can prematurely unlock all rewards and, combined with missing access control elsewhere, enable abuse.",
+    "correctness": 8,
+    "severity": 6,
+    "profitability": 5,
+    "reason": "generateReward is public and has no time check or per-period release guard. It computes targetRelease = amount * _mineDaliyRatio / 100 on every call and reduces remain, so anyone can call it repeatedly in the same block or transaction. A reward recipient, or an attacker who first created a reward via setReward, can loop calls until remain is zero, unlocking the entire reward immediately instead of over daily periods. This bypasses the intended daily mining ratio and can drain rewards early.",
+    "code": "function generateReward(uint256 coinPrice) public { coinPrice = coinPrice == 0 ? 1 * 10**_decimals : coinPrice; for (uint256 i = 0; i < rewardKeys.length; i++) { for (uint256 j = 0; j < reward[rewardKeys[i]].length; j++) { if (reward[rewardKeys[i]][j].remain == 0) { continue; } uint256 pawnPrice = reward[rewardKeys[i]][j].price; uint256 targetRelease = reward[rewardKeys[i]][j].amount.mul( _mineDaliyRatio ) / 100; uint256 fixMineCoin = targetRelease.mul(_fixMineCoinRatio).div( 100 ); uint256 sameCoinValue = ( ((targetRelease - fixMineCoin) * pawnPrice).div(coinPrice) ); uint256 release = sameCoinValue + fixMineCoin; if (reward[rewardKeys[i]][j].remain < release) { release = reward[rewardKeys[i]][j].remain; } if (waitRelease[rewardKeys[i]] != 0) { waitRelease[rewardKeys[i]] += release; } else { waitRelease[rewardKeys[i]] = release; } if (historyTotal[rewardKeys[i]] != 0) { historyTotal[rewardKeys[i]] += release; } else { historyTotal[rewardKeys[i]] = release; } reward[rewardKeys[i]][j].remain = reward[rewardKeys[i]][j].remain - release; history[rewardKeys[i]].push( RewardHistory( release, sameCoinValue, fixMineCoin, coinPrice, block.timestamp ) ); _totalMineCnt += release; emit CoinReward( rewardKeys[i], release, coinPrice, sameCoinValue, fixMineCoin ); } } }",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  },
+  {
+    "function_name": "releaseCoin",
+    "vulnerability": "Arbitrary sender parameter allows unauthorized reward release",
+    "criticism": "The reasoning is correct that releaseCoin lacks authorization and accepts an arbitrary sender parameter. Anyone can call releaseCoin(victim), zero out waitRelease[victim], and subtract that amount from _totalRemainCnt, permanently destroying the victim's pending reward and corrupting accounting. The claim that an attacker can steal the payout is conditional: the function itself only returns the amount to the caller and does not transfer tokens, so theft requires an external integration that trusts the return value to pay msg.sender or the caller. Thus the missing authorization and griefing impact are real and significant, while profitability is conditional and not directly realized in the shown code.",
+    "correctness": 8,
+    "severity": 7,
+    "profitability": 4,
+    "reason": "releaseCoin accepts an arbitrary sender parameter and does not require sender == _msgSender(). Anyone can call releaseCoin(victim) to set waitRelease[victim] to zero and subtract the pending amount from _totalRemainCnt. The victim loses the pending release; if an integration uses the returned amount to pay the caller, the attacker can also redirect the victim's payout to themselves. This is a missing authorization vulnerability that allows arbitrary users to destroy or steal pending rewards.",
+    "code": "function releaseCoin(address sender) public returns (uint256) { uint256 release = waitRelease[sender]; waitRelease[sender] = 0; _totalRemainCnt -= release; return release; }",
+    "file_name": "proj-2c369ee1c0d61899__contracts__Reward.sol"
+  }
+]

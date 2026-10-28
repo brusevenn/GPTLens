@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "fallback",
+    "code": "function () public payable{\n    require( now > startTime );\n    if(now < endTime) {\n        takeEther(msg.sender);\n    } else {\n        claimTokenBonus(msg.sender);\n    }\n}",
+    "vulnerability": "KYC and maxAmount bypass via direct fallback purchase",
+    "reason": "The fallback function is payable and directly calls takeEther(msg.sender) when now < endTime without requiring a KYC signature or updating alreadyPayed. takeEther accumulates pendingTokenUser and etherUser for the sender, but does not forward ETH or claim tokens until giveToken is called. A KYC-authorized user can send unlimited ETH directly to the fallback, bypassing the maxAmount check in buyImplementation. Later, the user calls buyTokens with msg.value=0 and a valid KYC signature (even with a small maxAmount); buyImplementation passes because totalPayed = alreadyPayed[buyerId] + 0 <= maxAmount, then releaseTokensTo skips takeEther and calls giveToken, which claims all accumulated pending tokens and forwards the accumulated ETH. This allows the user to exceed their KYC maximum and buy unlimited tokens. Additionally, the ETH sent via fallback is held in the RC contract until giveToken, and the TokenSale owner can withdraw it via withdraw, causing loss of user funds.",
+    "file_name": "proj-613d2927aafd985e__RC.sol"
+  },
+  {
+    "function_name": "addMeByRC",
+    "code": "function addMeByRC() public {\n    require(tx.origin == owner);\n    rc[ msg.sender ] = true;\n    emit NewRC(msg.sender);\n}",
+    "vulnerability": "tx.origin authentication allows arbitrary RC registration",
+    "reason": "addMeByRC uses tx.origin for authentication instead of msg.sender. If the TokenSale owner (an EOA) interacts with any malicious contract, that contract can call addMeByRC. Since tx.origin remains the owner's EOA, the require passes and msg.sender (the malicious contract) is registered as an RC. Once registered, the attacker can call claim to transfer any amount of tokens from the TokenSale to any address without paying, or call buyFromRC with an arbitrarily low _rcTokenValue to drain tokens at negligible cost. This can lead to total loss of the tokens held by the TokenSale contract. This is a classic tx.origin phishing vulnerability and is exploitable in the real world.",
+    "file_name": "proj-613d2927aafd985e__RC.sol"
+  },
+  {
+    "function_name": "buyImplementation",
+    "code": "function buyImplementation(address buyerAddress, uint64 buyerId, uint maxAmount, uint8 v, bytes32 r, bytes32 s) private returns (bool) {\n    bytes32 hash = sha256(\"Eidoo icoengine authorization\", address(0), buyerAddress, buyerId, maxAmount);\n    address signer = ecrecover(hash, v, r, s);\n    if (!isKycSigner[signer]) {\n        revert();\n    } else {\n        uint256 totalPayed = alreadyPayed[buyerId].add(msg.value);\n        require(totalPayed <= maxAmount);\n        alreadyPayed[buyerId] = totalPayed;\n        emit KycVerified(signer, buyerAddress, buyerId, maxAmount);\n        return releaseTokensTo(buyerAddress);\n    }\n}",
+    "vulnerability": "Signature replay across contracts due to missing contract address in hash",
+    "reason": "The KYC authorization hash in buyImplementation is constructed using a constant address(0), buyerAddress, buyerId, and maxAmount, but it does not include the address of the current RC contract, the TokenSale contract, or a chain ID. Therefore, a signature issued for one ICO/RC contract is valid for any other ICO/RC contract that uses the same KYC signer in its isKycSigner mapping. An attacker who has a valid KYC signature for one sale can replay it on another sale to bypass KYC verification and any per-sale maximum limits. The alreadyPayed mapping is per-contract, so it does not prevent replay. This allows unauthorized purchases and can exceed caps, breaking the KYC mechanism.",
+    "file_name": "proj-613d2927aafd985e__RC.sol"
+  }
+]

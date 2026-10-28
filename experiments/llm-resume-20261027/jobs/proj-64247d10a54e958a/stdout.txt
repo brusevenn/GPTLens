@@ -1,0 +1,3 @@
+{"input_file": "proj-64247d10a54e958a__BasePoolV2.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-64247d10a54e958a__BasePoolV2.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-64247d10a54e958a", "case_ids": ["acb-1058972b82ce7635", "acb-823c1e39610cd0c8", "acb-dd29066f36f4b59e"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

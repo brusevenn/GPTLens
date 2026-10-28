@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "depositFor",
+    "code": "function depositFor(address token, uint _amount,address user ) public {\n        uint256 _pool = balance();\n        IERC20(token).safeTransferFrom(msg.sender, address(this), _amount);\n        earn();\n        uint256 _after = balance();\n        _amount = _after.sub(_pool);\n        uint256 shares = 0;\n        if (totalSupply() == 0) {\n            shares = _amount;\n        } else {\n            shares = (_amount.mul(totalSupply())).div(_pool);\n        }\n        _mint(user, shares);\n    }",
+    "vulnerability": "Reentrancy due to missing nonReentrant modifier",
+    "reason": "The depositFor function lacks the nonReentrant modifier (unlike deposit) and performs an external call to an arbitrary token contract via safeTransferFrom before updating shares. An attacker can pass a malicious token contract that, during transferFrom, reenters the vault (e.g., calls deposit with the real want token). Because _pool is captured before the reentrant deposit, the outer depositFor later calculates _amount as the entire balance increase caused by the reentrant deposit, and mints additional shares to the attacker based on the stale _pool. This double-counts the deposited funds, allowing the attacker to mint far more shares than deserved and subsequently withdraw more than their deposit, draining funds from the vault. This is the exact class of vulnerability exploited in the Grim Finance hack.",
+    "file_name": "proj-77b92bbe4ed51390__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "depositFor",
+    "code": "function depositFor(address token, uint _amount,address user ) public {\n        uint256 _pool = balance();\n        IERC20(token).safeTransferFrom(msg.sender, address(this), _amount);\n        earn();\n        uint256 _after = balance();\n        _amount = _after.sub(_pool);\n        uint256 shares = 0;\n        if (totalSupply() == 0) {\n            shares = _amount;\n        } else {\n            shares = (_amount.mul(totalSupply())).div(_pool);\n        }\n        _mint(user, shares);\n    }",
+    "vulnerability": "Arbitrary token parameter allows malicious contract execution",
+    "reason": "The depositFor function accepts an arbitrary `token` address and calls `IERC20(token).safeTransferFrom` without verifying that `token` equals `address(want())`. This allows an attacker to supply a malicious token contract that executes arbitrary code during the transferFrom call. Combined with the missing reentrancy guard, this enables reentrancy attacks. Even with a reentrancy guard, calling arbitrary external contracts can lead to unexpected behavior. The function should require `token == address(want())` to prevent this attack vector.",
+    "file_name": "proj-77b92bbe4ed51390__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint _amount) public nonReentrant {\n        require(_amount > 0, \"!deposit zero\");\n        uint256 _pool = balance();\n        want().safeTransferFrom(msg.sender, address(this), _amount);\n        earn();\n        uint256 _after = balance();\n        _amount = _after.sub(_pool);\n        uint256 shares = 0;\n        if (totalSupply() == 0) {\n            shares = _amount;\n        } else {\n            shares = (_amount.mul(totalSupply())).div(_pool);\n        }\n        _mint(msg.sender, shares);\n    }",
+    "vulnerability": "First depositor inflation attack (share price manipulation)",
+    "reason": "The vault's share calculation is vulnerable to a first-depositor inflation attack. The first depositor can deposit a minimal amount (e.g., 1 wei) to receive 1 share. They can then directly transfer a large amount of the want token to the vault, inflating the balance without minting new shares. When a subsequent victim deposits, the share calculation `( _amount * totalSupply() ) / _pool` uses the inflated `_pool`, which can round down to zero shares for the victim. The attacker can then withdraw their single share, receiving the entire vault balance including the victim's deposit. The attacker only needs temporary capital for the donation, which is recovered during withdrawal. This is a well-known ERC4626-style inflation attack and is possible because the vault does not use virtual shares, minimum initial deposit, or dead shares to mitigate it.",
+    "file_name": "proj-77b92bbe4ed51390__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "migrateStake",
+    "code": "    function migrateStake(address oldStaking, uint256 amount) external {\n        StaxLPStaking(oldStaking).migrateWithdraw(msg.sender, amount);\n        _applyStake(msg.sender, amount);\n    }",
+    "vulnerability": "Arbitrary oldStaking allows fake stake minting and theft of staked tokens and rewards",
+    "reason": "The migrateStake function is external and accepts an arbitrary oldStaking address. It calls migrateWithdraw on that address and then credits amount to msg.sender via _applyStake without verifying that the call actually transferred amount of staking tokens to this contract. An attacker can deploy a malicious contract implementing migrateWithdraw(address,uint256) that does nothing, then call migrateStake(maliciousContract, hugeAmount). This increases the attacker's staked balance and total supply without any real tokens being deposited. The attacker can then call withdraw or withdrawAll to drain the contract's actual staking token balance (other users' stakes) and claim rewards proportional to the fake stake, stealing both principal and reward tokens. This is a critical non-privileged vulnerability.",
+    "file_name": "proj-033997bd14a9a729__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "migrateWithdraw",
+    "code": "    function migrateWithdraw(address staker, uint256 amount) external onlyMigrator {\n        _withdrawFor(staker, msg.sender, amount, true, staker);\n    }",
+    "vulnerability": "Migrator can steal any staker's tokens via migrateWithdraw",
+    "reason": "The migrateWithdraw function is restricted to the migrator address and transfers the staked tokens to msg.sender (the migrator) rather than to the staker. It only claims rewards to the staker. The owner can set migrator to any address via setMigrator. A malicious or compromised owner can set the migrator to their own address and then call migrateWithdraw for every staker with their full balance. This will transfer all staked tokens to the attacker, draining the entire staking pool. Although this requires owner privilege, it is a severe centralization risk and a rug-pull vector that allows complete theft of user funds.",
+    "file_name": "proj-033997bd14a9a729__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "stakeFor",
+    "code": "    function stakeFor(address _for, uint256 _amount) public {\n        require(_amount > 0, \"Cannot stake 0\");\n        stakingToken.safeTransferFrom(msg.sender, address(this), _amount);\n        _applyStake(_for, _amount);\n    }",
+    "vulnerability": "stakeFor credits full amount without measuring actual received tokens, enabling fee-on-transfer token drain",
+    "reason": "The stakeFor function calls stakingToken.safeTransferFrom(msg.sender, address(this), _amount) and then credits _amount to the user's staked balance via _applyStake. It does not check the contract's staking token balance before and after the transfer to determine how many tokens were actually received. If the staking token is a fee-on-transfer token (or otherwise takes a fee on transfer), the contract may receive less than _amount but still credit the full _amount to the user. An attacker can exploit this by staking tokens with an incoming transfer fee and then withdrawing the full credited amount, especially if the token has no outgoing fee or a smaller outgoing fee. This drains the contract's staking token balance, causing other stakers to be unable to withdraw their funds. This is a known vulnerability for contracts that do not support fee-on-transfer tokens.",
+    "file_name": "proj-033997bd14a9a729__MainContractFlattened.sol"
+  }
+]

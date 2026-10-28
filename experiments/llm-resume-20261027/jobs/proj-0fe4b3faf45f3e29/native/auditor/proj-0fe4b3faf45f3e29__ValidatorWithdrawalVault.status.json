@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-0fe4b3faf45f3e29__ValidatorWithdrawalVault.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

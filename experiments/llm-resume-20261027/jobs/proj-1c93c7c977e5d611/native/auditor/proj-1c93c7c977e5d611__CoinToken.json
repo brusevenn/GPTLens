@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_burn",
+    "code": "function _burn(address _who, uint256 _value) internal {\n        require(_value <= _rOwned[_who]);\n        _rOwned[_who] = _rOwned[_who].sub(_value);\n        _tTotal = _tTotal.sub(_value);\n        emit Transfer(_who, address(0), _value);\n    }",
+    "vulnerability": "Public burn allows arbitrary total supply reduction and can brick or steal via excluded accounts",
+    "reason": "The public `burn(uint256 _value)` function calls `_burn(msg.sender, _value)`. `_burn` subtracts `_value` directly from `_rOwned[_who]` (reflection units) and from `_tTotal` (token units). This dimensional mismatch means any holder can call `burn(_tTotal)` to reduce total supply to zero, because `_rOwned` is typically much larger than `_tTotal`; this causes division by zero in `_getRate` and bricks the contract. More severely, for excluded accounts (which the owner can create via `excludeAccount`), `_tOwned` is never reduced, so an excluded account can burn a large `_value` to reduce total supply while keeping its displayed balance unchanged, diluting other holders and enabling a rug pull. The function has no proper token-to-reflection conversion and no access control.",
+    "file_name": "proj-1c93c7c977e5d611__CoinToken.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(address account, uint256 amount) onlyOwner() public {\n        _tTotal = _tTotal.add(amount);\n        _rOwned[account] = _rOwned[account].add(amount);\n        emit Transfer(address(0), account, amount);\n    }",
+    "vulnerability": "Owner can mint arbitrary unbacked tokens due to missing _rTotal update",
+    "reason": "`mint` increases `_tTotal` by `amount` and `_rOwned[account]` by `amount`, but does not increase `_rTotal`. This breaks the reflection invariant `_rTotal / _tTotal`. An owner can mint a huge `amount` (e.g., equal to `_rTotal`) to their own address, causing their computed token balance to become enormous—potentially exceeding the real total supply—and then sell these unbacked tokens to drain liquidity pools. Even a small mint distorts balances and can make the rate zero (if `_tTotal` exceeds `_rTotal`), bricking the contract. This is a critical centralization/rug-pull vector.",
+    "file_name": "proj-1c93c7c977e5d611__CoinToken.sol"
+  },
+  {
+    "function_name": "_sendToCharity",
+    "code": "function _sendToCharity(uint256 tCharity, address sender) private {\n        uint256 currentRate = _getRate();\n        uint256 rCharity = tCharity.mul(currentRate);\n        _rOwned[FeeAddress] = _rOwned[FeeAddress].add(rCharity);\n        _tOwned[FeeAddress] = _tOwned[FeeAddress].add(tCharity);\n        emit Transfer(sender, FeeAddress, tCharity/5);\n        emit Transfer(sender, FeeAddress1, tCharity/5);\n        emit Transfer(sender, FeeAddress2, tCharity/5);\n        emit Transfer(sender, FeeAddress3, tCharity/5);\n        emit Transfer(sender, FeeAddress4, tCharity/5);\n    }",
+    "vulnerability": "Charity fee double-counted, allowing FeeAddress to accumulate unbacked tokens",
+    "reason": "During fee-bearing transfers, `_sendToCharity` adds `rCharity` to `_rOwned[FeeAddress]` and `tCharity` to `_tOwned[FeeAddress]`. Immediately after, `_reflectFee` subtracts the same `rCharity` from `_rTotal`. This double-counts the charity fee: the FeeAddress receives reflections that are also removed from total reflections, so the sum of all `_rOwned` exceeds `_rTotal` by the accumulated charity amount. The FeeAddress can then transfer or sell these unbacked tokens, draining value from other holders. Additionally, the function emits `Transfer` events to `FeeAddress1` through `FeeAddress4` without updating their balances, misleading off-chain systems. Since `FeeAddress` is set by the owner (or in the constructor), a malicious owner or compromised fee address can exploit this to steal funds.",
+    "file_name": "proj-1c93c7c977e5d611__CoinToken.sol"
+  }
+]

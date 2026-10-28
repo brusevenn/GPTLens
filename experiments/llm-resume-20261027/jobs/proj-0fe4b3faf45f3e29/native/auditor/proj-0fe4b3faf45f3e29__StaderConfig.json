@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "initialize",
+    "code": "function initialize(address _admin, address _ethDepositContract) external initializer {\n        UtilLib.checkNonZeroAddress(_admin);\n        UtilLib.checkNonZeroAddress(_ethDepositContract);\n        __AccessControl_init();\n        setConstant(ETH_PER_NODE, 32 ether);\n        setConstant(PRE_DEPOSIT_SIZE, 1 ether);\n        setConstant(FULL_DEPOSIT_SIZE, 31 ether);\n        setConstant(TOTAL_FEE, 10000);\n        setConstant(DECIMALS, 10**18);\n        setConstant(OPERATOR_MAX_NAME_LENGTH, 255);\n        setVariable(MIN_DEPOSIT_AMOUNT, 10**14);\n        setVariable(MAX_DEPOSIT_AMOUNT, 10000 ether);\n        setVariable(MIN_WITHDRAW_AMOUNT, 10**14);\n        setVariable(MAX_WITHDRAW_AMOUNT, 10000 ether);\n        setVariable(WITHDRAWN_KEYS_BATCH_SIZE, 50);\n        setVariable(MIN_BLOCK_DELAY_TO_FINALIZE_WITHDRAW_REQUEST, 600);\n        setContract(ETH_DEPOSIT_CONTRACT, _ethDepositContract);\n        _grantRole(DEFAULT_ADMIN_ROLE, _admin);\n    }",
+    "vulnerability": "Front-running initialization on uninitialized proxy",
+    "reason": "The initialize function is external and only protected by the initializer modifier. For upgradeable contracts, the implementation constructor calls _disableInitializers, locking the implementation's storage, but the proxy's storage remains uninitialized. If the proxy is deployed and initialized in separate transactions, an attacker can front-run the initialize call and pass their own address as _admin, thereby becoming DEFAULT_ADMIN_ROLE. The attacker then has full control over all onlyRole protected functions, can set critical contract addresses such as pool utils, oracle, vault factory, treasury, and can drain or disrupt the protocol. This is a real-world critical vulnerability if initialization is not performed atomically in the proxy constructor or a factory.",
+    "file_name": "proj-0fe4b3faf45f3e29__StaderConfig.sol"
+  },
+  {
+    "function_name": "updateAdmin",
+    "code": "function updateAdmin(address _admin) external onlyRole(DEFAULT_ADMIN_ROLE) {\n        address oldAdmin = accountsMap[ADMIN];\n        _grantRole(DEFAULT_ADMIN_ROLE, _admin);\n        setAccount(ADMIN, _admin);\n        _revokeRole(DEFAULT_ADMIN_ROLE, oldAdmin);\n    }",
+    "vulnerability": "Initial admin privileges are never revoked",
+    "reason": "The initialize function grants DEFAULT_ADMIN_ROLE to _admin but never calls setAccount(ADMIN, _admin). Therefore accountsMap[ADMIN] remains address(0) until the first updateAdmin call. When the initial admin calls updateAdmin(newAdmin), oldAdmin is address(0), so _revokeRole(DEFAULT_ADMIN_ROLE, oldAdmin) has no effect. The initial admin retains DEFAULT_ADMIN_ROLE indefinitely, while the new admin is also granted the role. This creates a hidden backdoor: the supposedly removed initial admin can still call all admin-only functions, revoke the new admin, change critical configuration, and potentially take over the protocol. If the initial admin's key is compromised or malicious, the attacker can use these retained privileges to steal funds or disrupt the system.",
+    "file_name": "proj-0fe4b3faf45f3e29__StaderConfig.sol"
+  },
+  {
+    "function_name": "updateAdmin",
+    "code": "function updateAdmin(address _admin) external onlyRole(DEFAULT_ADMIN_ROLE) {\n        address oldAdmin = accountsMap[ADMIN];\n        _grantRole(DEFAULT_ADMIN_ROLE, _admin);\n        setAccount(ADMIN, _admin);\n        _revokeRole(DEFAULT_ADMIN_ROLE, oldAdmin);\n    }",
+    "vulnerability": "Admin role lockout via self-revocation",
+    "reason": "The updateAdmin function does not check whether _admin is equal to oldAdmin (the address stored in accountsMap[ADMIN]). If the current admin calls updateAdmin with the same address that is already stored as oldAdmin, the function first grants DEFAULT_ADMIN_ROLE to _admin (already held), then sets the ADMIN account to _admin, and finally calls _revokeRole(DEFAULT_ADMIN_ROLE, oldAdmin) where oldAdmin == _admin. This revokes the DEFAULT_ADMIN_ROLE from the only administrator, permanently locking all admin-only functions. There is no recovery mechanism in StaderConfig itself. This can be triggered accidentally by the admin or through social engineering, resulting in a denial-of-service that freezes all configuration updates and privileged protocol operations.",
+    "file_name": "proj-0fe4b3faf45f3e29__StaderConfig.sol"
+  }
+]

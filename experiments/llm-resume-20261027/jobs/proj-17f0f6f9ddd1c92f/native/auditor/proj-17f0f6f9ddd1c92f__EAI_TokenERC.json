@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "EAI_TokenERC20",
+    "code": "function EAI_TokenERC20( uint256 initialSupply, string tokenName, string tokenSymbol ) public {\n    totalSupply = initialSupply * 10 ** uint256(decimals);\n    balanceOf[msg.sender] = totalSupply;\n    name = tokenName;\n    symbol = tokenSymbol;\n}",
+    "vulnerability": "Misnamed constructor allows public initialization and arbitrary token minting",
+    "reason": "The contract is named `EAI_TokenERC`, but the function intended to be the constructor is named `EAI_TokenERC20`. In Solidity 0.4.16, a constructor must have the exact same name as the contract. Therefore, `EAI_TokenERC20` is a regular public function that can be called by anyone at any time. An attacker can call it to set `totalSupply`, `balanceOf[msg.sender]`, `name`, and `symbol` to arbitrary values, effectively minting unlimited tokens to themselves and overwriting the total supply and token metadata. This is a critical, directly exploitable vulnerability that allows theft of value from any contract or exchange that accepts this token.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol"
+  },
+  {
+    "function_name": "EAI_TokenERC20",
+    "code": "function EAI_TokenERC20( uint256 initialSupply, string tokenName, string tokenSymbol ) public {\n    totalSupply = initialSupply * 10 ** uint256(decimals);\n    balanceOf[msg.sender] = totalSupply;\n    name = tokenName;\n    symbol = tokenSymbol;\n}",
+    "vulnerability": "Integer overflow in token initialization due to unchecked multiplication",
+    "reason": "The calculation `totalSupply = initialSupply * 10 ** uint256(decimals);` does not use SafeMath. In Solidity 0.4.16, integer multiplication wraps modulo 2^256. Because `decimals` is 8, the multiplier is 10^8 = 2^8 * 5^8, so the product is always a multiple of 256. An attacker can pass a carefully chosen large `initialSupply` to cause an overflow, resulting in `totalSupply` and `balanceOf[msg.sender]` being set to an arbitrary multiple of 256, potentially close to 2^256 - 256. This allows the attacker to mint an enormous amount of tokens in a single transaction. Combined with the public callability of this function, it is a severe integer overflow vulnerability that can be directly exploited to mint near-infinite tokens.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol"
+  },
+  {
+    "function_name": "burn",
+    "code": "function burn(uint256 _value) public returns (bool success) {\n    require(balanceOf[msg.sender] >= _value);\n    balanceOf[msg.sender] -= _value;\n    totalSupply -= _value;\n    emit Burn(msg.sender, _value);\n    return true;\n}",
+    "vulnerability": "Integer underflow in burn allows arbitrary totalSupply manipulation",
+    "reason": "The `burn` function subtracts `_value` from `totalSupply` without checking that `totalSupply >= _value`. Because the public `EAI_TokenERC20` function can be called by anyone to mint tokens and later reset `totalSupply` to a smaller value while another address retains a large balance, an attacker can create a state where an address has a balance greater than the current `totalSupply`. That address can then call `burn` to underflow `totalSupply` to a very large value (e.g., `2^256 - x`). This breaks the fundamental invariant that `totalSupply` equals the sum of all balances. The manipulated `totalSupply` can be used to attack external protocols that rely on this value (e.g., staking rewards, pricing mechanisms, or collateral calculations), and it allows the attacker to set `totalSupply` to virtually any desired value without restriction.",
+    "file_name": "proj-17f0f6f9ddd1c92f__EAI_TokenERC.sol"
+  }
+]

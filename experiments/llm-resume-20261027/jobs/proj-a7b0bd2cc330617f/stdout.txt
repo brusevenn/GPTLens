@@ -1,0 +1,3 @@
+{"input_file": "proj-a7b0bd2cc330617f__Yieldy.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a7b0bd2cc330617f__Yieldy.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-a7b0bd2cc330617f", "case_ids": ["acb-285fa0640794830e"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 1, "failed_files": 1, "request_log": "requests.jsonl"}

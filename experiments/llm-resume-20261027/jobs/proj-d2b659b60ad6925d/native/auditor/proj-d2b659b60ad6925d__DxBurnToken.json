@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_burn",
+    "code": "function _burn(address _addr, uint256 _value) private {\n    require(_value <= _rOwned[_addr]);\n    _rOwned[_addr] = _rOwned[_addr].sub(_value);\n    _tTotal = _tTotal.sub(_value);\n    emit Transfer(_addr, dead, _value);\n}",
+    "vulnerability": "Incorrect balance check allows arbitrary token burn and contract bricking",
+    "reason": "The public burn(uint256) function calls this private _burn with msg.sender and an arbitrary _value. However, _burn checks _value against _rOwned[_addr] (a reflection amount) instead of the actual token balance. _rOwned is scaled by _rTotal / _tTotal, which is extremely large for typical token supplies. Consequently, any holder with a tiny token balance has an enormous _rOwned and can call burn(totalSupply) or any value up to _rOwned. If they burn the entire total supply, _tTotal becomes zero. This causes _getRate() and _getCurrentSupply() to perform division by zero, bricking all transfers and balance queries. Even if not zero, the attacker can arbitrarily reduce _tTotal without correspondingly reducing _rTotal, destroying other holders' tokens proportionally and severely manipulating the reflection rate.",
+    "file_name": "proj-d2b659b60ad6925d__DxBurnToken.sol"
+  },
+  {
+    "function_name": "_transferStandard",
+    "code": "function _transferStandard(address sender, address recipient, uint256 tAmount) private {\n    (uint256 rAmount, uint256 rTransferAmount, uint256 rFee, uint256 tTransferAmount, uint256 tFee, uint256 tDev, uint256 tBurn) = _getValues(tAmount);\n    _rOwned[sender] = _rOwned[sender].sub(rAmount);\n    _rOwned[recipient] = _rOwned[recipient].add(rTransferAmount);\n    _takeDev(tDev);\n    uint256 rBurn = tBurn.mul(_getRate());\n    _reflectFee(rFee, rBurn, tFee, tDev, tBurn);\n    _burn(sender, tBurn);\n    emit Transfer(sender, recipient, tTransferAmount);\n}",
+    "vulnerability": "Double burn and unit mismatch in _burn call during transfers",
+    "reason": "During a normal token transfer, _transferStandard first deducts rAmount from sender._rOwned. rAmount already includes the reflection equivalent of the burn fee (rBurn). It then calls _burn(sender, tBurn), which subtracts tBurn (a token amount, not a reflection amount) again from sender._rOwned and reduces _tTotal by tBurn. This double deducts the burn fee from the sender in mismatched units. More critically, if a user transfers their entire balance with a non-zero burn fee, sender._rOwned becomes zero after the rAmount subtraction. The subsequent _burn call requires tBurn <= _rOwned[sender], i.e., tBurn <= 0. Since tBurn > 0, the transfer reverts. This can prevent users from moving their full balance whenever the burn fee is active, and it breaks the accounting invariant between _rTotal, _tTotal, and the sum of _rOwned.",
+    "file_name": "proj-d2b659b60ad6925d__DxBurnToken.sol"
+  },
+  {
+    "function_name": "setDevFeePercent",
+    "code": "function setDevFeePercent(uint256 devFee) external onlyOwner() {\n    require(devFee >= 0 && devFee <=maxDevFee,\"teamFee out of range\");\n    _devFee = devFee;\n    _previousDevFee = _devFee;\n}",
+    "vulnerability": "Owner can set dev fee to 100% (or fees summing over 100%) to steal all transfers or brick the token",
+    "reason": "The constructor sets maxDevFee from the arbitrary maxFees[2] input without enforcing a hard upper bound (e.g., <=10 or <=100). setDevFeePercent only checks against this potentially huge maxDevFee. A malicious or compromised owner can set _devFee to 100 (if maxDevFee allows) and direct all transferred tokens to _devWalletAddress, effectively stealing every transfer. Alternatively, if the owner sets tax/dev/burn fees such that their sum exceeds 100, _getTValues performs tAmount.sub(tFee).sub(tDev).sub(tBurn), which underflows and reverts all transfers, causing a permanent denial-of-service. This is a severe centralization backdoor because the constructor does not validate maxFees or enforce a 100% total fee cap.",
+    "file_name": "proj-d2b659b60ad6925d__DxBurnToken.sol"
+  }
+]

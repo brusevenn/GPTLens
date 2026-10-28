@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "returnFunds",
+    "code": "function returnFunds(uint256 amount_) public override whenProtocolNotPaused returns (uint256 fundsReturned_) {\n    require(amount_ == uint256(0) || ERC20Helper.transferFrom(_fundsAsset, msg.sender, address(this), amount_), \"ML:RF:TRANSFER_FROM_FAILED\");\n    emit FundsReturned(fundsReturned_ = _returnFunds());\n}",
+    "vulnerability": "Missing access control allows anyone to increase borrower's drawable funds, which the borrower can steal.",
+    "reason": "The returnFunds function is public and lacks any access control. It transfers the specified amount_ from the caller to the contract and then calls _returnFunds(), which adds the entire unaccounted funds asset balance to _drawableFunds. The _drawableFunds balance is only withdrawable by the borrower via the drawdownFunds function. Therefore, any user who calls returnFunds will have their funds credited to the borrower's drawable balance, which the borrower can immediately withdraw to any address. This is a direct theft of funds from any user who interacts with returnFunds, as they might believe they are repaying the loan or returning funds, but the borrower receives the credit.",
+    "file_name": "proj-2e162a64a27e35d3__MapleLoan.sol"
+  },
+  {
+    "function_name": "fundLoan",
+    "code": "function fundLoan(address lender_, uint256 amount_) external override whenProtocolNotPaused returns (uint256 fundsLent_) {\n    require(amount_ == uint256(0) || ERC20Helper.transferFrom(_fundsAsset, msg.sender, address(this), amount_), \"ML:FL:TRANSFER_FROM_FAILED\");\n    if (_nextPaymentDueDate == uint256(0)) {\n        emit Funded(lender_, fundsLent_ = _fundLoan(lender_), _nextPaymentDueDate);\n    }\n    uint256 extra = _getUnaccountedAmount(_fundsAsset);\n    if (extra > uint256(0)) {\n        emit FundsRedirected(extra, _lender);\n        require(ERC20Helper.transfer(_fundsAsset, _lender, extra), \"ML:FL:TRANSFER_FAILED\");\n    }\n}",
+    "vulnerability": "After the loan is funded, any user calling fundLoan with a non-zero amount will have their funds immediately redirected to the lender.",
+    "reason": "The fundLoan function does not check if the loan is already funded before accepting funds. Once _nextPaymentDueDate is non-zero, the function skips the _fundLoan logic but still processes the transferFrom of amount_ from the caller. It then calculates extra = _getUnaccountedAmount(_fundsAsset), which includes the just-transferred amount, and transfers the entire extra balance to the lender (_lender). Consequently, any user who calls fundLoan after the loan is funded will have their transferred funds immediately sent to the lender. A malicious lender can simply wait for unsuspecting users to mistakenly call fundLoan (e.g., thinking they are funding an unfunded loan, or through a UI that does not disable the button) and profit from their funds.",
+    "file_name": "proj-2e162a64a27e35d3__MapleLoan.sol"
+  },
+  {
+    "function_name": "makePayment",
+    "code": "function makePayment(uint256 amount_) external override returns (uint256 principal_, uint256 interest_) {\n    require(amount_ == uint256(0) || ERC20Helper.transferFrom(_fundsAsset, msg.sender, address(this), amount_), \"ML:MP:TRANSFER_FROM_FAILED\");\n    ( principal_, interest_ ) = _makePayment();\n    emit PaymentMade(principal_, interest_);\n}",
+    "vulnerability": "Overpayment is not refunded; excess becomes drawable funds that the borrower can withdraw, stealing from the payer.",
+    "reason": "The makePayment function accepts an arbitrary amount_ from any caller and transfers it to the contract. It then calls _makePayment(), which computes the required totalPaid_ based on the loan schedule and sets _drawableFunds = (_drawableFunds + _getUnaccountedAmount(_fundsAsset)) - totalPaid_. If the caller transfers more than totalPaid_, the excess remains in the contract as part of _drawableFunds (or reduces the amount drawn from existing unaccounted funds). The borrower can then call drawdownFunds to withdraw the excess _drawableFunds to any destination, as drawdownFunds only requires msg.sender == _borrower and does not check loan status. Therefore, any overpayment by a third party is effectively stolen by the borrower. There is no refund mechanism, and the function does not enforce amount_ == totalPaid_.",
+    "file_name": "proj-2e162a64a27e35d3__MapleLoan.sol"
+  }
+]

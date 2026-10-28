@@ -1,0 +1,35 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-e5871e2886c8fc03",
+  "case_ids": [
+    "acb-90ff9cb9a3b3af83",
+    "acb-dbc4a13462fe3d29"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "863cd5e85210ef870845c37a95b807ad0981b812671a3712035f43fbc86fe111",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:44:26.594797+00:00",
+  "exit_code": 0,
+  "input_identity": "a4efb9fc9a6ddb390a81f4a6bfd7994a69454ab790ffdf42ebeda3b7d56edb8d",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-e5871e2886c8fc03",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "BurnFlashStakeDeposit.sol",
+      "47f9be5456eb8da9dc52b31229179bedc869a095d266d51e16a8b34ef783481b"
+    ],
+    [
+      "FlashGovernanceArbiter.sol",
+      "006520d047cd5872350e98cca88e492de2563bdec50800a2f020fb1bd76cff7b"
+    ]
+  ],
+  "source_hashes": [
+    "006520d047cd5872350e98cca88e492de2563bdec50800a2f020fb1bd76cff7b",
+    "47f9be5456eb8da9dc52b31229179bedc869a095d266d51e16a8b34ef783481b"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

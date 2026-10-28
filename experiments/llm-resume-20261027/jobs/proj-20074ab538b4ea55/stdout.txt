@@ -1,0 +1,5 @@
+{"input_file": "proj-20074ab538b4ea55__Cryptbond.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-20074ab538b4ea55__Cryptbond.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-20074ab538b4ea55__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-20074ab538b4ea55__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-20074ab538b4ea55", "case_ids": ["acb-b3068721a5d0f50e"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

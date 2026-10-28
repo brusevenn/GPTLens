@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-0c0ab89caa1146e5__src__governance__timelock.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

@@ -1,0 +1,18 @@
+{
+  "case_count": 154,
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "finished_utc": "2026-10-27T15:47:01.758827+00:00",
+  "project_group_count": 121,
+  "provider_stop": true,
+  "resumed_project_count": 115,
+  "scoring_performed": false,
+  "status_counts": {
+    "COMPLETE": 76,
+    "INTERRUPTED": 9,
+    "NOT_RUN_PROVIDER_STOP": 8,
+    "REUSE_CACHE_DIAGNOSTIC_NO_REPLAY": 9,
+    "STOPPED_AUTH_OR_PAYMENT_ERROR": 1,
+    "WITH_FAILURES": 51
+  },
+  "tool": "GPTLens"
+}

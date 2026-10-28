@@ -1,0 +1,9 @@
+[
+  {
+    "function_name": "initializer",
+    "code": "modifier initializer() { bool isTopLevelCall = !_initializing; require( (isTopLevelCall && _initialized < 1) || (!AddressUpgradeable.isContract(address(this)) && _initialized == 1), \"Initializable: contract is already initialized\" ); _initialized = 1; if (isTopLevelCall) { _initializing = true; } _; if (isTopLevelCall) { _initializing = false; emit Initialized(1); } }",
+    "vulnerability": "Reentrancy during construction allows reinitialization",
+    "reason": "The second condition in the require statement `(!AddressUpgradeable.isContract(address(this)) && _initialized == 1)` does not check `isTopLevelCall`. During a contract's constructor, `AddressUpgradeable.isContract(address(this))` returns false. If an initializer function makes an external call, an attacker can reenter the contract and call an initializer function again. Because `_initialized` is already 1 and `_initializing` is true, the first condition fails but the second condition passes, allowing the initializer to execute a second time while still under construction. This violates the one-time initialization guarantee and can lead to state manipulation, duplicate initialization logic, or other unexpected behavior. The fix is to add `isTopLevelCall` to the second condition.",
+    "file_name": "proj-71cf2e6aa17c4f2f__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol"
+  }
+]

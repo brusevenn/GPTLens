@@ -1,0 +1,9 @@
+[
+  {
+    "function_name": "mint",
+    "code": "    function mint() public returns (bool) {\n        _mint( msg.sender, 100000000000000000 );\n        return true;\n    }",
+    "vulnerability": "Unrestricted public mint allows arbitrary token inflation",
+    "reason": "The mint() function is declared public and has no access control, ownership check, role check, or supply cap. Any external account or contract can call mint() repeatedly and receive 100000000000000000 base units minted directly to itself. Because the token uses 6 decimals, each call mints 100,000,000,000 tokens. An attacker can call this function arbitrarily many times, inflate the total supply without limit, and then sell or use the minted tokens against liquidity pools or other users, draining value and breaking the token's economic integrity.",
+    "file_name": "proj-43d618cac604b1a8__MainContractFlattened.sol"
+  }
+]

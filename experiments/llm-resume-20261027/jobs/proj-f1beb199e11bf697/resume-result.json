@@ -1,0 +1,29 @@
+{
+  "case_ids": [
+    "acb-3b256af3da4fed89"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "a71bbadc86bd1f640f12904a3ba35b66f37bd08a4238951f571cb76437807bfa",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:45:36.236085+00:00",
+  "input_identity": "5885b12ae888bbd3316ddbe65a7ce627d5a668f598fb5f744acc2cbe5136fda6",
+  "prior_request_attempts": 0,
+  "project_id": "proj-f1beb199e11bf697",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "ce9bfe37f1bd9dd8e43c3bbe769e67769469bf4a7b79354e5d790835bd0adad8"
+    ],
+    [
+      "UselessEthereumToken.sol",
+      "53672dc5a21a8fbe68da643b90b944ea0dcbfc6c0684b25d83fe930a3a836d6b"
+    ]
+  ],
+  "source_hashes": [
+    "53672dc5a21a8fbe68da643b90b944ea0dcbfc6c0684b25d83fe930a3a836d6b",
+    "ce9bfe37f1bd9dd8e43c3bbe769e67769469bf4a7b79354e5d790835bd0adad8"
+  ],
+  "status": "NOT_RUN_PROVIDER_STOP",
+  "tool": "GPTLens"
+}

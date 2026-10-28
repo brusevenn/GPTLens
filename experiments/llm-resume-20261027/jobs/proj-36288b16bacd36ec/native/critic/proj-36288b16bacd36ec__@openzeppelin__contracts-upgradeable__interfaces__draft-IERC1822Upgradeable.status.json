@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__interfaces__draft-IERC1822Upgradeable.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

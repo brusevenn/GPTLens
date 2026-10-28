@@ -1,0 +1,29 @@
+{
+  "case_ids": [
+    "acb-3571ac97d5e7d766"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "f9138022b8df7bbb9294bda3fa8919e14ba77447a4f180aac998033b7f51d09b",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:45:36.241264+00:00",
+  "input_identity": "62fb9506dc1ff61870e177d6e006a28f4ba0fde07a9af61357d101cd17d64ce6",
+  "prior_request_attempts": 0,
+  "project_id": "proj-fba6e8b44a49ab3c",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "559b9b029c508fecd56c230f4fb0bdd00d7f428f448906f6f534891109d6156f"
+    ],
+    [
+      "XBORNID.sol",
+      "83950b482ae3924897210e9051d022c503b8bcea84e79b866c9931f52f37afee"
+    ]
+  ],
+  "source_hashes": [
+    "559b9b029c508fecd56c230f4fb0bdd00d7f428f448906f6f534891109d6156f",
+    "83950b482ae3924897210e9051d022c503b8bcea84e79b866c9931f52f37afee"
+  ],
+  "status": "NOT_RUN_PROVIDER_STOP",
+  "tool": "GPTLens"
+}

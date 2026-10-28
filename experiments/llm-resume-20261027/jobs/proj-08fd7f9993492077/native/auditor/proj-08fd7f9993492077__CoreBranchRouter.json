@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "addLocalToken",
+    "code": "function addLocalToken(address _underlyingAddress) external payable virtual {\n    string memory name = ERC20(_underlyingAddress).name();\n    string memory symbol = ERC20(_underlyingAddress).symbol();\n    ERC20hTokenBranch newToken = IERC20hTokenBranchFactory(hTokenFactoryAddress).createToken(name, symbol);\n    bytes memory data = abi.encode(_underlyingAddress, newToken, name, symbol);\n    bytes memory packedData = abi.encodePacked(bytes1(0x02), data);\n    IBranchBridgeAgent(localBridgeAgentAddress).performCallOut{value: msg.value}(msg.sender, packedData, 0, 0);\n}",
+    "vulnerability": "Reentrancy due to external call to untrusted _underlyingAddress",
+    "reason": "The function calls ERC20(_underlyingAddress).name() and .symbol() on an arbitrary address controlled by the caller. An attacker can deploy a malicious contract that implements these functions and reenters addLocalToken or other functions before the original call completes. Because there is no reentrancy guard (no lock modifier), the attacker can cause multiple executions, create multiple hTokens, send multiple cross-chain messages, and potentially bypass fees or cause a denial of service. This is directly exploitable by any external attacker and can lead to financial loss for the bridge or its users.",
+    "file_name": "proj-08fd7f9993492077__CoreBranchRouter.sol"
+  },
+  {
+    "function_name": "addLocalToken",
+    "code": "function addLocalToken(address _underlyingAddress) external payable virtual {\n    string memory name = ERC20(_underlyingAddress).name();\n    string memory symbol = ERC20(_underlyingAddress).symbol();\n    ERC20hTokenBranch newToken = IERC20hTokenBranchFactory(hTokenFactoryAddress).createToken(name, symbol);\n    bytes memory data = abi.encode(_underlyingAddress, newToken, name, symbol);\n    bytes memory packedData = abi.encodePacked(bytes1(0x02), data);\n    IBranchBridgeAgent(localBridgeAgentAddress).performCallOut{value: msg.value}(msg.sender, packedData, 0, 0);\n}",
+    "vulnerability": "Missing duplicate check allows multiple hTokens for the same underlying token",
+    "reason": "The function does not verify whether the underlying token already has an associated hToken. An attacker can call addLocalToken with an already supported underlying token, causing the creation of a duplicate hToken and a cross-chain message to the root. If the root does not reject duplicates, it may update its mapping to the new hToken, breaking the bridge for the original token and potentially causing loss of funds for holders of the old hToken. This is a denial-of-service and can lead to stuck funds.",
+    "file_name": "proj-08fd7f9993492077__CoreBranchRouter.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize(address _localBridgeAgentAddress) external onlyOwner {\n    require(_localBridgeAgentAddress != address(0), \"Bridge Agent address cannot be 0\");\n    localBridgeAgentAddress = _localBridgeAgentAddress;\n    bridgeAgentExecutorAddress = IBranchBridgeAgent(localBridgeAgentAddress).bridgeAgentExecutorAddress();\n    renounceOwnership();\n}",
+    "vulnerability": "Centralization risk: owner can set a malicious bridge agent and executor before renouncing ownership",
+    "reason": "The initialize function is onlyOwner. It sets localBridgeAgentAddress to an arbitrary address and then reads bridgeAgentExecutorAddress from it. The owner can set a malicious bridge agent that returns a malicious executor address. Then the owner calls renounceOwnership(). The malicious executor can then call anyExecuteNoSettlement with arbitrary data to execute privileged functions such as adding/removing bridge agents, toggling factories, and managing strategies. This allows the owner (or an attacker who compromises the owner's private key) to take full control of the router and steal funds. There is no timelock or multisig, making this a severe centralization risk.",
+    "file_name": "proj-08fd7f9993492077__CoreBranchRouter.sol"
+  }
+]

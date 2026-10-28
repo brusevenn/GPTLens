@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_splitOtherToken",
+    "code": "function _splitOtherToken() public {\n        uint256 thisAmount = RewardToken.balanceOf(address(this));\n        if(thisAmount >= 10**18){\n            _splitOtherTokenSecond(thisAmount);\n        }\n    }",
+    "vulnerability": "Flash loan reward sniping due to lack of time-weighted LP balance",
+    "reason": "The function is public and can be called by anyone. It distributes the entire RewardToken balance held by the contract to addresses in the buyUser array based on their current LP token balance. An attacker can flash-loan a large amount of LP tokens, ensure they are added to buyUser by performing a token transfer (setShare only requires a non-zero LP balance at the time of a token transfer), and then call _splitOtherToken. Because the distribution is proportional to the current LP balance with no time-weighting or snapshot, the attacker receives a share of the RewardToken balance proportional to their temporary LP holdings. After the distribution, they can remove liquidity and repay the flash loan, keeping the stolen RewardTokens. This drains rewards intended for legitimate long-term LP holders.",
+    "file_name": "proj-132ee7f4a06db971__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "swapTokensForOther",
+    "code": "function swapTokensForOther(uint256 tokenAmount) private {\n        address[] memory path = new address[](2);\n        path[0] = address(this);\n        path[1] = address(RewardToken);\n        uniswapV2Router.swapExactTokensForTokensSupportingFeeOnTransferTokens(\n            tokenAmount,\n            0,\n            path,\n            address(pool),\n            block.timestamp\n        );\n    }",
+    "vulnerability": "Sandwich attack due to zero slippage protection (amountOutMin = 0)",
+    "reason": "The function swaps accumulated tokens for RewardToken using the Uniswap V2 router with amountOutMin set to 0. This means the swap will accept any amount of RewardToken, regardless of how bad the price is. An attacker can monitor the mempool for a transaction that will trigger this swap (e.g., when LpMarketCount or liquidCount exceeds the threshold and the time interval has passed). The attacker can front-run by buying the token to manipulate the pool price unfavorably for the contract's swap, then back-run after the contract's swap to sell and profit from the price impact. The contract receives less RewardToken than fair market value, and the attacker captures the difference. This is a classic MEV sandwich attack and is profitable at the expense of the contract and its users.",
+    "file_name": "proj-132ee7f4a06db971__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transReward",
+    "code": "function transReward(bytes memory data) public {\n        pool.functionCall(data);\n    }",
+    "vulnerability": "Public arbitrary external call from the token contract",
+    "reason": "The function is public and allows any caller to make the token contract execute an arbitrary low-level call to the pool address with arbitrary calldata. Because the token contract is the caller, the pool will see msg.sender as the token contract. If the pool contract has any privileged functions that transfer assets, change state, or rely on msg.sender being the token contract, an attacker can invoke them by encoding the appropriate calldata. For example, if the pool holds RewardToken or LP tokens and has a withdrawal or transfer function restricted to the token contract, the attacker can drain those assets. Even if the pool is currently trusted, this function violates the principle of least privilege and can be used to trigger unintended reward harvesting, liquidity manipulation, or other state changes. It is a critical backdoor.",
+    "file_name": "proj-132ee7f4a06db971__MainContractFlattened.sol"
+  }
+]

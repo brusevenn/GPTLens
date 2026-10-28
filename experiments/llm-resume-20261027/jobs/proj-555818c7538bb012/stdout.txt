@@ -1,0 +1,5 @@
+{"input_file": "proj-555818c7538bb012__FeeSplitter.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-555818c7538bb012__FeeSplitter.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-555818c7538bb012__Security.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-555818c7538bb012__Security.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-555818c7538bb012", "case_ids": ["acb-2a0a92ea46ccdbb6", "acb-515a384ca14997db"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 2, "request_log": "requests.jsonl"}

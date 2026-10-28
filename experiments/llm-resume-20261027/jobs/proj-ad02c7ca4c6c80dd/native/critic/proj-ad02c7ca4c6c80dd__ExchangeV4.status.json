@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-ad02c7ca4c6c80dd__ExchangeV4.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

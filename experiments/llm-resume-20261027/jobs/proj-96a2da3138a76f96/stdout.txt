@@ -1,0 +1,3 @@
+{"input_file": "proj-96a2da3138a76f96__StakedUSDe.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-96a2da3138a76f96__StakedUSDe.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-96a2da3138a76f96", "case_ids": ["acb-e2793365ba6c9dbb", "acb-e943b0306c83f892"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

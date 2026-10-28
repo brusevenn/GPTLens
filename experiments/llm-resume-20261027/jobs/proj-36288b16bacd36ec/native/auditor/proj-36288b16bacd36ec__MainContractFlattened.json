@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "claimRewardsFromVaultToPortfolioVault",
+    "code": "    function claimRewardsFromVaultToPortfolioVault(\n        IFeeDistribution.RewardData[] memory claimableRewards\n    ) public virtual {\n        for (uint256 i = 0; i < claimableRewards.length; i++) {\n            SafeERC20.safeTransfer(\n                IERC20(claimableRewards[i].token),\n                msg.sender,\n                claimableRewards[i].amount\n            );\n        }\n    }",
+    "vulnerability": "Unauthenticated arbitrary token transfer from vault",
+    "reason": "The function is public and has no access control. Any external caller can invoke it on ApolloXBscVault (or any AbstractVaultV2) and supply an arbitrary array of token addresses and amounts. The function then calls SafeERC20.safeTransfer to send the specified tokens from the vault contract directly to msg.sender. An attacker can pass the address of any ERC20 token held by the vault, such as APX performance fees, ALP, or asset tokens, and set the amount to the vault's entire balance. This allows immediate theft of all tokens held by the vault. No shares, ownership, or role is required, so the exploit is directly executable by any attacker.",
+    "file_name": "proj-36288b16bacd36ec__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_swap",
+    "code": "    function _swap(\n        IERC20 tokenForSwap,\n        bytes memory aggregatorData\n    ) public returns (uint256) {\n        SafeERC20.forceApprove(\n            tokenForSwap,\n            oneInchAggregatorAddress,\n            tokenForSwap.balanceOf(address(this))\n        );\n        (bool succ, bytes memory data) = address(oneInchAggregatorAddress).call(\n            aggregatorData\n        );\n        require(\n            succ,\n            \"Aggregator failed to swap, please update your block_number when running hardhat test\"\n        );\n        return abi.decode(data, (uint256));\n    }",
+    "vulnerability": "Public arbitrary call with unlimited token approval",
+    "reason": "The function is public and accepts arbitrary caller-controlled aggregatorData. It first approves oneInchAggregatorAddress to spend the entire balance of tokenForSwap held by BasePortfolioV2, then executes an arbitrary call to that aggregator. An attacker can call _swap with tokenForSwap set to any ERC20 held by the portfolio, including vault shares and reward tokens, and craft aggregatorData for the 1inch router to transfer the approved tokens to an attacker-controlled address or executor. Because the approval covers the full contract balance and the call data is not validated, this drains user funds and reward tokens from the portfolio. No access control is present.",
+    "file_name": "proj-36288b16bacd36ec__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_beforeTokenTransfer",
+    "code": "    function _beforeTokenTransfer(\n        address from,\n        address to,\n        uint256 amount\n    ) internal virtual override {\n        super._beforeTokenTransfer(from, to, amount);\n        ClaimData memory claimData = ClaimData({\n            receiver: msg.sender,\n            apolloXClaimData: VaultClaimData({\n                tokenOut: address(0),\n                aggregatorData: new bytes(0)\n            })\n        });\n        if (to != msg.sender && from != address(0) && to != address(0)) {\n            claim(claimData, false);\n            _initReceiverRewardPointer(to);\n        }\n    }",
+    "vulnerability": "Reward checkpoint bypass via transferFrom to self",
+    "reason": "The reward checkpoint logic uses msg.sender instead of from, and skips both claim and _initReceiverRewardPointer when to == msg.sender. An attacker can exploit this by holding shares in address A, approving a fresh address B, and then calling transferFrom(A, B, amount) from B. Because to == msg.sender, the condition is false, so B's reward pointer is never initialized and A's pending rewards are not checkpointed. B then has a zero reward pointer and can call claim() to receive rewards calculated from the entire cumulative rewardPerShareZappedIn, including historical rewards already earned or claimed by A and other users. This double-claims rewards and can drain reward tokens from the portfolio or other users. The attack requires only two addresses controlled by the attacker and is directly exploitable by any share holder.",
+    "file_name": "proj-36288b16bacd36ec__MainContractFlattened.sol"
+  }
+]

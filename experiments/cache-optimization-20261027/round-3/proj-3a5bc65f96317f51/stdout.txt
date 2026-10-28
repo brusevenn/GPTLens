@@ -1,0 +1,3 @@
+{"input_file": "proj-3a5bc65f96317f51__Controller.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-3a5bc65f96317f51__Controller.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-3a5bc65f96317f51", "case_ids": ["acb-6f4ec6eacf5a4436", "acb-acbe2bf899120839"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

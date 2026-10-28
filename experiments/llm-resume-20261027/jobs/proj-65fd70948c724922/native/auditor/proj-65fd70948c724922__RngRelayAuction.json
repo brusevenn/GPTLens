@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "mint",
+    "code": "function mint(address _to, uint96 _amount) external {\n    _transferBalance(msg.sender, address(0), _to, _amount);\n}",
+    "vulnerability": "Missing access control allows arbitrary TWAB manipulation",
+    "reason": "The mint function is external and has no access control. Any address can call it with msg.sender as the vault, creating a fake vault and minting arbitrary TWAB balances for any user. This allows an attacker to forge winning conditions in PrizePool.claimPrize, as they can set user and vault total supply TWABs to arbitrary values. Combined with contributing a small amount to the fake vault to gain vaultPortion, the attacker can claim prizes for which they are not eligible, potentially draining the prize pool. The same issue affects burn, transfer, delegate, and sponsor functions.",
+    "file_name": "proj-65fd70948c724922__RngRelayAuction.sol"
+  },
+  {
+    "function_name": "rngComplete",
+    "code": "function rngComplete(\n    uint256 _randomNumber,\n    uint256 _rngCompletedAt,\n    address _rewardRecipient,\n    uint32 _sequenceId,\n    AuctionResult calldata _rngAuctionResult\n) external returns (bytes32) {\n    if (_sequenceHasCompleted(_sequenceId)) revert SequenceAlreadyCompleted();\n    uint64 _auctionElapsedSeconds = uint64(block.timestamp < _rngCompletedAt ? 0 : block.timestamp - _rngCompletedAt);\n    if (_auctionElapsedSeconds > (_auctionDurationSeconds-1)) revert AuctionExpired();\n    UD2x18 rewardFraction = _fractionalReward(_auctionElapsedSeconds);\n    _auctionResults.rewardFraction = rewardFraction;\n    _auctionResults.recipient = _rewardRecipient;\n    _lastSequenceId = _sequenceId;\n    AuctionResult[] memory auctionResults = new AuctionResult[](2);\n    auctionResults[0] = _rngAuctionResult;\n    auctionResults[1] = AuctionResult({\n        rewardFraction: rewardFraction,\n        recipient: _rewardRecipient\n    });\n    uint32 drawId = prizePool.closeDraw(_randomNumber);\n    uint256 futureReserve = prizePool.reserve() + prizePool.reserveForOpenDraw();\n    uint256[] memory _rewards = RewardLib.rewards(auctionResults, futureReserve);\n    emit RngSequenceCompleted(\n        _sequenceId,\n        drawId,\n        _rewardRecipient,\n        _auctionElapsedSeconds,\n        rewardFraction\n    );\n    for (uint8 i = 0; i < _rewards.length; i++) {\n        uint104 _reward = uint104(_rewards[i]);\n        if (_reward > 0) {\n            prizePool.withdrawReserve(auctionResults[i].recipient, _reward);\n            emit AuctionRewardDistributed(_sequenceId, auctionResults[i].recipient, i, _reward);\n        }\n    }\n    return bytes32(uint(drawId));\n}",
+    "vulnerability": "Unauthenticated draw closure and arbitrary reward theft",
+    "reason": "rngComplete is external and does not verify msg.sender against rngAuctionRelayer. Anyone can call it with arbitrary _randomNumber, _rngCompletedAt, _rewardRecipient, _sequenceId, and _rngAuctionResult. The attacker can close the current draw with a chosen random number, enabling them to predict winners. They can also set _rngAuctionResult.rewardFraction to 1e18 and _rngAuctionResult.recipient to themselves, causing RewardLib.rewards to allocate the entire future reserve to them. Further, passing a large _sequenceId permanently sets _lastSequenceId to a high value, causing all future sequences to be considered completed and bricking the RNG relay (DoS).",
+    "file_name": "proj-65fd70948c724922__RngRelayAuction.sol"
+  },
+  {
+    "function_name": "setDrawManager",
+    "code": "function setDrawManager(address _drawManager) external {\n    if (drawManager != address(0)) {\n        revert DrawManagerAlreadySet();\n    }\n    drawManager = _drawManager;\n    emit DrawManagerSet(_drawManager);\n}",
+    "vulnerability": "Unauthenticated draw manager takeover when initially zero",
+    "reason": "If the contract is deployed with drawManager == address(0) (which is allowed by the constructor), any external caller can invoke setDrawManager to become the draw manager. As drawManager, the attacker can call closeDraw with an arbitrary winning random number and withdrawReserve to transfer all prize tokens to themselves. This is a critical privilege escalation if the deployer sets the initial drawManager to zero, even temporarily.",
+    "file_name": "proj-65fd70948c724922__RngRelayAuction.sol"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {\n    if(msg.data.length < (3 * 32) + 4) { throw; }\n    if (_value == 0) { return false; }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "correctness": 9,
+    "criticism": "The reasoning is correct. The `sufficientFunds` and `sufficientAllowance` checks are inverted (`fromBalance <= _value` and `allowance <= _value`), so they pass for a huge `_value` even when the sender has no balance or allowance. Combined with the inverted overflow check and lack of SafeMath, an attacker can set `_value = 2^256 - d` to make the destination balance overflow/decrease by d while the attacker's balance underflows/increases by d. This allows theft of any amount up to the victim's balance without allowance. The only caveat is that the exploit also relies on the inverted overflow check; the claim mentions the underflows but could explicitly note the overflow addition to the victim. Nevertheless, the described exploit is valid and critical. Severity and profitability are maximal because it enables direct theft.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol",
+    "final_score": 9.0,
+    "function_name": "transferFrom",
+    "profitability": 9,
+    "reason": "The checks `sufficientFunds = fromBalance <= _value` and `sufficientAllowance = allowance <= _value` are inverted. For a huge `_value` (e.g., `2^256 - d`), these conditions pass even when the sender has zero balance and zero allowance. The function then executes `balances[_from] -= _value` and `allowed[_from][msg.sender] -= _value` without SafeMath, causing underflows. An attacker can set `_from` to their own address and `_to` to a victim with balance `d`, using `_value = 2^256 - d`. The victim's balance is reduced by `d` while the attacker's balance underflows by the same amount, effectively increasing the attacker's balance by `d`. This allows theft of any amount up to the victim's full token balance without any allowance.",
+    "severity": 9,
+    "vulnerability": "Reversed balance/allowance checks enable unauthorized transfers and underflow"
+  },
+  {
+    "code": "function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {\n    if(msg.data.length < (3 * 32) + 4) { throw; }\n    if (_value == 0) { return false; }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "correctness": 8,
+    "criticism": "The reasoning is correct that the `overflowed` variable is misnamed and the condition requires `!overflowed`, meaning the addition to `balances[_to]` must actually overflow for the transfer to proceed. Using `_value = 2^256 - d`, the destination balance wraps down by d and the sender balance underflows up by d, enabling theft from any destination without allowance. However, this exploit also requires the reversed `sufficientFunds` and `sufficientAllowance` checks to pass; with correct checks, the huge `_value` would fail. The claim is therefore a valid exploit for the given code but attributes the vulnerability solely to the overflow check, which is slightly incomplete. Severity and profitability remain critical because the end result is unauthorized token theft.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol",
+    "final_score": 8.5,
+    "function_name": "transferFrom",
+    "profitability": 9,
+    "reason": "The variable `overflowed` is set to `balances[_to] + _value > balances[_to]`, which is true when the addition does NOT overflow. However, the condition requires `!overflowed`, meaning the addition must actually overflow for the transfer to succeed. An attacker can exploit this by setting `_from` to themselves and `_to` to a victim with a positive balance. By choosing `_value = 2^256 - d` where `d` is at most the victim's balance, the addition `balances[_to] + _value` overflows and wraps to `victimBalance - d`. The subsequent `balances[_from] -= _value` underflows, increasing the attacker's balance by `d`. This allows the attacker to steal tokens from any address by using it as the destination, with no allowance required.",
+    "severity": 9,
+    "vulnerability": "Inverted overflow check forces overflowing additions, enabling theft from destination"
+  },
+  {
+    "code": "function() payable {\n    if (!purchasingAllowed) { throw; }\n    if (msg.value < 1 finney * MINfinney) { return; }\n    owner.transfer(msg.value);\n    totalContribution += msg.value;\n    uint256 tokensIssued = (msg.value / 1e10) * ICORatio + AIRDROPBounce * 1e8;\n    totalSupply += tokensIssued;\n    balances[msg.sender] += tokensIssued;\n    Transfer(address(this), msg.sender, tokensIssued);\n}",
+    "correctness": 8,
+    "criticism": "The reasoning is largely correct assuming MINfinney is indeed initialized to zero and purchasingAllowed is true. With MINfinney = 0, the check `msg.value < 1 finney * MINfinney` becomes `msg.value < 0`, which is always false, so a zero-value call proceeds. The function then awards `AIRDROPBounce * 1e8` tokens regardless of payment, and this can be repeated, minting unlimited free tokens and diluting supply. However, the claim depends on the unverified initialization of MINfinney; if MINfinney is nonzero or later set, the issue may not exist. Also, profitability depends on the token having market liquidity. Severity is high because it can destroy token economics and governance. Correctness is good but not absolute due to the initialization assumption. Severity high, profitability high but contingent on liquidity.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol",
+    "final_score": 7.75,
+    "function_name": "function() payable",
+    "profitability": 7,
+    "reason": "MINfinney is initialized to 0, so the minimum purchase check `msg.value < 1 finney * MINfinney` becomes `msg.value < 0`, which is always false. An attacker can call the payable fallback with 0 ETH (or any tiny amount) and still receive the full AIRDROPBounce bonus of 50,000,000 * 1e8 base tokens. The function then increments totalSupply and credits the attacker's balance without any actual payment. This can be repeated indefinitely to mint an unlimited number of tokens for free, diluting the token supply and allowing the attacker to acquire massive voting/governance power or dump the tokens on exchanges.",
+    "severity": 8,
+    "vulnerability": "Free token minting via zero-value fallback calls"
+  }
+]

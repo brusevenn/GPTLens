@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "safeTransferFrom",
+    "code": "function safeTransferFrom(IERC20Token _token, address _from, address _to, uint256 _value) public {\n    execute(_token, abi.encodeWithSelector(TRANSFER_FROM_FUNC_SELECTOR, _from, _to, _value));\n}",
+    "vulnerability": "Unrestricted public safeTransferFrom allows draining tokens approved to BancorNetwork",
+    "reason": "safeTransferFrom is public and inherited by BancorNetwork, with no ownerOnly, protected, or other access-control check. The function executes an external call to token.transferFrom(_from, _to, _value) from the BancorNetwork contract context. Any attacker can call BancorNetwork.safeTransferFrom(token, victim, attacker, amount). Since users must approve BancorNetwork to perform normal conversions, the token contract sees BancorNetwork as the spender and transfers the victim's approved tokens to the attacker. This is directly exploitable in a single transaction and can drain all tokens of any user who has an active allowance to BancorNetwork.",
+    "file_name": "proj-213cae2425161adc__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "safeTransfer",
+    "code": "function safeTransfer(IERC20Token _token, address _to, uint256 _value) public {\n    execute(_token, abi.encodeWithSelector(TRANSFER_FUNC_SELECTOR, _to, _value));\n}",
+    "vulnerability": "Unrestricted public safeTransfer allows theft of any ERC20 tokens held by BancorNetwork",
+    "reason": "safeTransfer is public and has no access control, so any attacker can instruct the BancorNetwork contract to transfer any ERC20 token balance it holds to an arbitrary address. Because execute performs the token call with BancorNetwork as msg.sender, the token transfer succeeds for any balance held by the contract. BancorNetwork may hold tokens transiently during conversions, such as BNT retained in xConvert2 before xTransfer, and it can also hold stuck or donated token balances. Since safeTransfer is not protected by the reentrancy guard, a malicious converter or token involved in a conversion can also reenter safeTransfer and steal tokens in flight. This allows direct theft of contract-held tokens.",
+    "file_name": "proj-213cae2425161adc__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "safeApprove",
+    "code": "function safeApprove(IERC20Token _token, address _spender, uint256 _value) public {\n    execute(_token, abi.encodeWithSelector(APPROVE_FUNC_SELECTOR, _spender, _value));\n}",
+    "vulnerability": "Unrestricted public safeApprove allows arbitrary approval of BancorNetwork token balances",
+    "reason": "safeApprove is public and has no access control. An attacker can call BancorNetwork.safeApprove(token, attacker, amount), causing BancorNetwork to approve the attacker to spend its own token balance. The attacker can then call token.transferFrom(BancorNetwork, attacker, amount) and drain any tokens held by BancorNetwork. If the contract has no balance at the moment of approval, the attacker can pre-approve itself and later sweep tokens that arrive, or use reentrancy during a conversion to exploit transient balances. This creates a direct path to drain all ERC20 tokens held by the vulnerable contract.",
+    "file_name": "proj-213cae2425161adc__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_withdraw",
+    "code": "    function _withdraw(address caller, address receiver, address _owner, uint256 assets, uint256 shares) internal override nonReentrant notZero(assets) notZero(shares) {\n        if (hasRole(FULL_RESTRICTED_STAKER_ROLE, caller) || hasRole(FULL_RESTRICTED_STAKER_ROLE, receiver)) {\n            revert OperationNotAllowed();\n        }\n        super._withdraw(caller, receiver, _owner, assets, shares);\n        _checkMinShares();\n    }",
+    "vulnerability": "Full restricted staker can withdraw via a non-restricted caller because _owner is not checked.",
+    "reason": "The _withdraw function only checks whether the caller or receiver has FULL_RESTRICTED_STAKER_ROLE, but it does not check the _owner whose shares are being burned. A user with FULL_RESTRICTED_STAKER_ROLE can call approve (or sign a permit) to allow a clean address to spend their shares. The clean address then calls withdraw or redeem with _owner set to the restricted user. Since _owner is not checked, the burn is allowed because _beforeTokenTransfer permits burns to address(0). The restricted user can therefore bypass the blacklist and withdraw their staked assets to a clean address, defeating the purpose of the full restriction.",
+    "file_name": "proj-96a2da3138a76f96__StakedUSDe.sol"
+  },
+  {
+    "function_name": "_deposit",
+    "code": "    function _deposit(address caller, address receiver, uint256 assets, uint256 shares) internal override nonReentrant notZero(assets) notZero(shares) {\n        if (hasRole(SOFT_RESTRICTED_STAKER_ROLE, caller) || hasRole(SOFT_RESTRICTED_STAKER_ROLE, receiver)) {\n            revert OperationNotAllowed();\n        }\n        super._deposit(caller, receiver, assets, shares);\n        _checkMinShares();\n    }",
+    "vulnerability": "Full restricted staker can deposit USDe and mint stUSDe to a clean address because _deposit only checks SOFT_RESTRICTED roles, not FULL_RESTRICTED for the caller.",
+    "reason": "A user with FULL_RESTRICTED_STAKER_ROLE can call deposit or mint with receiver set to a non-restricted address. The _deposit function checks only SOFT_RESTRICTED_STAKER_ROLE for caller and receiver, so the call proceeds. It transfers USDe from the restricted caller to the vault and mints stUSDe to the clean receiver. The clean receiver can then withdraw the underlying USDe. This effectively transfers USDe from the blacklisted address to a clean address, bypassing the full restriction and allowing the restricted user to continue using the protocol.",
+    "file_name": "proj-96a2da3138a76f96__StakedUSDe.sol"
+  },
+  {
+    "function_name": "totalAssets",
+    "code": "    function totalAssets() public view override returns (uint256) {\n        return IERC20(asset()).balanceOf(address(this)) - getUnvestedAmount();\n    }",
+    "vulnerability": "Reward dilution: unvested rewards are excluded from totalAssets, allowing new depositors to capture unvested rewards.",
+    "reason": "When transferInRewards is called, vestingAmount and lastDistributionTimestamp are set, but totalAssets subtracts getUnvestedAmount(), so the share price does not immediately reflect the new rewards. An attacker can monitor transferInRewards and deposit a large amount immediately after. They receive shares at the pre-reward price. As the rewards vest over the 8-hour period, totalAssets increases and the attacker's shares appreciate. The attacker can then withdraw after vesting, capturing a proportional share of the rewards without having been staked at the time of distribution. This dilutes the rewards of existing stakers and can be repeated for profit, making the vesting period ineffective against yield theft.",
+    "file_name": "proj-96a2da3138a76f96__StakedUSDe.sol"
+  }
+]

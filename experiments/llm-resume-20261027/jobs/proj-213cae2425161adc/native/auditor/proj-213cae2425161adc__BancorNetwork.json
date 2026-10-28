@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "handleSourceToken",
+    "code": "function handleSourceToken(IERC20Token _sourceToken, IConverterAnchor _anchor, uint256 _amount) private {\n        IConverter firstConverter = IConverter(_anchor.owner());\n        bool isNewerConverter = isV28OrHigherConverter(firstConverter);\n\n        if (msg.value > 0) {\n            require(msg.value == _amount, \"ERR_ETH_AMOUNT_MISMATCH\");\n            if (!isNewerConverter)\n                IEtherToken(getConverterEtherTokenAddress(firstConverter)).deposit.value(msg.value)();\n        }\n        else if (etherTokens[_sourceToken]) {\n            safeTransferFrom(_sourceToken, msg.sender, this, _amount);\n            if (isNewerConverter)\n                IEtherToken(_sourceToken).withdraw(_amount);\n        }\n        else {\n            if (isNewerConverter)\n                safeTransferFrom(_sourceToken, msg.sender, firstConverter, _amount);\n            else\n                safeTransferFrom(_sourceToken, msg.sender, this, _amount);\n        }\n    }",
+    "vulnerability": "Missing validation that msg.value > 0 only applies to ETH/ether-token source",
+    "reason": "When msg.value > 0, handleSourceToken only checks msg.value == _amount and skips the source-token transfer for ERC20 tokens. An attacker can call convertByPath with an ERC20 source token, send ETH equal to _amount, and have isNewerConverter be true. No EtherToken deposit occurs, and doConversion calls converter.convert without forwarding ETH because stepData.sourceToken is the ERC20. The V28+ converter assumes the network already transferred the ERC20 and processes the conversion using its existing reserve balance, sending target tokens to the attacker. The attacker pays only the ETH amount, which can be tiny if the ERC20 has low decimals, while draining valuable converter reserves.",
+    "file_name": "proj-213cae2425161adc__BancorNetwork.sol"
+  },
+  {
+    "function_name": "safeTransferFrom",
+    "code": "function safeTransferFrom(IERC20Token _token, address _from, address _to, uint256 _value) public {\n        execute(_token, abi.encodeWithSelector(TRANSFER_FROM_FUNC_SELECTOR, _from, _to, _value));\n    }",
+    "vulnerability": "Missing access control on public token transferFrom",
+    "reason": "TokenHandler.safeTransferFrom is public and unrestricted. BancorNetwork inherits it, so any external account can call safeTransferFrom with arbitrary _token, _from, _to, and _value. The function executes token.transferFrom from BancorNetwork's context. If any user has approved BancorNetwork to spend an ERC20 (as required for normal conversions), an attacker can transfer that user's tokens directly to themselves. This allows theft of user funds without any privilege.",
+    "file_name": "proj-213cae2425161adc__BancorNetwork.sol"
+  },
+  {
+    "function_name": "safeTransfer",
+    "code": "function safeTransfer(IERC20Token _token, address _to, uint256 _value) public {\n        execute(_token, abi.encodeWithSelector(TRANSFER_FUNC_SELECTOR, _to, _value));\n    }",
+    "vulnerability": "Missing access control on public token transfer",
+    "reason": "TokenHandler.safeTransfer is public and unrestricted. Any account can call safeTransfer on any ERC20 token held by BancorNetwork and send it to an arbitrary address. BancorNetwork may hold tokens during multi-step conversions, from trapped transfers, or from accidental deposits. This bypasses the owner-only withdrawTokens function and lets an attacker drain any ERC20 balance held by the contract.",
+    "file_name": "proj-213cae2425161adc__BancorNetwork.sol"
+  }
+]

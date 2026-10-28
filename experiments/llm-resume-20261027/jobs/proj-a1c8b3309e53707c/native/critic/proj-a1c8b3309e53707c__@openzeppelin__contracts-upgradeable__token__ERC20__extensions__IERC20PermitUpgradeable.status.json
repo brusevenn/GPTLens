@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20PermitUpgradeable.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

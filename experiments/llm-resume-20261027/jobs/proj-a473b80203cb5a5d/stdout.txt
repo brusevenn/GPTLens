@@ -1,0 +1,25 @@
+{"input_file": "proj-a473b80203cb5a5d__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargatePool.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargatePool.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStrategy.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IStrategy.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__libraries__SafeApprove.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a473b80203cb5a5d__src__libraries__SafeApprove.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-a473b80203cb5a5d", "case_ids": ["acb-e2ac75ac36f53db5"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 12, "failed_files": 2, "request_log": "requests.jsonl"}

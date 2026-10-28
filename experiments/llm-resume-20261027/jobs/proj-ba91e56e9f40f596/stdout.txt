@@ -1,0 +1,3 @@
+{"input_file": "proj-ba91e56e9f40f596__PublicLock.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-ba91e56e9f40f596__PublicLock.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-ba91e56e9f40f596", "case_ids": ["acb-84ecdf17ef03534a"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

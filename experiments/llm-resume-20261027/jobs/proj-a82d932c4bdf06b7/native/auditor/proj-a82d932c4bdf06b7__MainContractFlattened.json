@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "init",
+    "code": "    function init(\n        address newOwner,\n        string calldata tokenName,\n        string calldata tokenSymbol\n    ) external {\n        _transferOwnership(newOwner);\n        _tokenName = tokenName;\n        _tokenSymbol = tokenSymbol;\n        _registerInterface(_INTERFACE_ID_ERC721_METADATA);\n        _registerInterface(_INTERFACE_ID_ERC165);\n        _registerInterface(_INTERFACE_ID_ERC721);\n    }",
+    "vulnerability": "Unprotected initializer allows arbitrary ownership takeover",
+    "reason": "The init function is external and lacks any access control or initialization guard. Any attacker can call init(attacker, ...) at any time, even after the legitimate owner has already initialized the contract. The function calls _transferOwnership(newOwner) without checking msg.sender or whether the contract is already initialized. This sets _owner to the attacker, giving them full control over all onlyOwner functions. Since init can be called repeatedly, transferring ownership to a secure address does not prevent takeover. This is directly exploitable and results in complete contract takeover.",
+    "file_name": "proj-a82d932c4bdf06b7__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "    function mint(address to, uint256 tokenId) external onlyOwner {\n        _safeMint(to, tokenId);\n    }",
+    "vulnerability": "Unrestricted arbitrary minting via ownership takeover / centralization",
+    "reason": "The mint function is protected by onlyOwner, but the unprotected init function allows any attacker to become the owner. Once the attacker calls init to set themselves as owner, they can call mint to create arbitrary token IDs to any address. This enables unlimited supply inflation, dilution of existing holders, and minting of rare IDs to the attacker. Even without the init flaw, the owner has centralized power to mint unlimited tokens, which is a severe centralization risk if ownership is compromised or malicious. With the init flaw, it is directly exploitable by anyone.",
+    "file_name": "proj-a82d932c4bdf06b7__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "burn",
+    "code": "    function burn(uint256 tokenId) external onlyOwner {\n        _burn(tokenId);\n    }",
+    "vulnerability": "Arbitrary burning of user tokens via ownership takeover / centralization",
+    "reason": "The burn function is protected by onlyOwner, but the unprotected init function allows any attacker to become the owner. Once the attacker becomes owner, they can call burn for any token ID, destroying user-owned NFTs and causing permanent loss of assets. The function does not require the caller to own the token; it only checks contract ownership. Even without the init flaw, the owner can burn any user's NFT, which is a severe centralization risk. With the init flaw, any attacker can perform this destruction.",
+    "file_name": "proj-a82d932c4bdf06b7__MainContractFlattened.sol"
+  }
+]

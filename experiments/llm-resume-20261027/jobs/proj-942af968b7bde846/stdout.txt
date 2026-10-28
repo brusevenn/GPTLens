@@ -1,0 +1,23 @@
+{"input_file": "proj-942af968b7bde846__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-942af968b7bde846__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__Admin.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__Admin.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__MetaTransactionReceiver.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__MetaTransactionReceiver.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__SuperOperators.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__BaseWithStorage__SuperOperators.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721Events.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721Events.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721MandatoryTokenReceiver.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721MandatoryTokenReceiver.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721TokenReceiver.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Interfaces__ERC721TokenReceiver.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Libraries__AddressUtils.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__contracts_common__src__Libraries__AddressUtils.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__src__Land.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-942af968b7bde846__src__Land.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-942af968b7bde846__src__Land__erc721__ERC721BaseToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-942af968b7bde846__src__Land__erc721__ERC721BaseToken.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-942af968b7bde846__src__Land__erc721__LandBaseToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-942af968b7bde846__src__Land__erc721__LandBaseToken.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-942af968b7bde846", "case_ids": ["acb-3728bbb084117986"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 11, "failed_files": 1, "request_log": "requests.jsonl"}

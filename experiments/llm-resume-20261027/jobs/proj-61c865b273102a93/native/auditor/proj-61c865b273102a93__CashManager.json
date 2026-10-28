@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setPendingMintBalance",
+    "code": "    function setPendingMintBalance(\n        address user,\n        uint256 epoch,\n        uint256 oldBalance,\n        uint256 newBalance\n    ) external updateEpoch onlyRole(MANAGER_ADMIN) {\n        if (oldBalance != mintRequestsPerEpoch[epoch][user]) {\n            revert UnexpectedMintBalance();\n        }\n        if (epoch > currentEpoch) {\n            revert CannotServiceFutureEpoch();\n        }\n        mintRequestsPerEpoch[epoch][user] = newBalance;\n        emit PendingMintBalanceSet(user, epoch, oldBalance, newBalance);\n    }",
+    "vulnerability": "Manager can re-set already claimed mint balances to mint arbitrary Cash",
+    "reason": "The function only checks that oldBalance matches the current stored balance. After a user claims their mint via claimMint, their balance is set to 0. The manager can call this function with oldBalance=0 and a large newBalance for the same past epoch. The user can then call claimMint again, receiving additional Cash. This can be repeated to mint unlimited Cash. Since the manager can also control KYC and exchange rates, they can drain the system.",
+    "file_name": "proj-61c865b273102a93__CashManager.sol"
+  },
+  {
+    "function_name": "setPendingRedemptionBalance",
+    "code": "    function setPendingRedemptionBalance(\n        address user,\n        uint256 epoch,\n        uint256 balance\n    ) external updateEpoch onlyRole(MANAGER_ADMIN) {\n        if (epoch > currentEpoch) {\n            revert CannotServiceFutureEpoch();\n        }\n        uint256 previousBalance = redemptionInfoPerEpoch[epoch].addressToBurnAmt[\n            user\n        ];\n        if (balance < previousBalance) {\n            redemptionInfoPerEpoch[epoch].totalBurned -= previousBalance - balance;\n        } else if (balance > previousBalance) {\n            redemptionInfoPerEpoch[epoch].totalBurned += balance - previousBalance;\n        }\n        redemptionInfoPerEpoch[epoch].addressToBurnAmt[user] = balance;\n        emit PendingRedemptionBalanceSet(\n            user,\n            epoch,\n            balance,\n            redemptionInfoPerEpoch[epoch].totalBurned\n        );\n    }",
+    "vulnerability": "Manager can re-set already processed redemption balances to drain collateral or mint unlimited Cash",
+    "reason": "The function allows the manager to set an arbitrary balance for a user in any past epoch without checking if redemptions for that epoch have already been processed. After a redemption is processed, the user's addressToBurnAmt is set to 0. The manager can set it to a large value again and call completeRedemptions to receive collateral again, or use refundees to mint Cash again. This allows unlimited double-spending and draining of assetSender.",
+    "file_name": "proj-61c865b273102a93__CashManager.sol"
+  },
+  {
+    "function_name": "completeRedemptions",
+    "code": "    function completeRedemptions(\n        address[] calldata redeemers,\n        address[] calldata refundees,\n        uint256 collateralAmountToDist,\n        uint256 epochToService,\n        uint256 fees\n    ) external override updateEpoch onlyRole(MANAGER_ADMIN) {\n        _checkAddressesKYC(redeemers);\n        _checkAddressesKYC(refundees);\n        if (epochToService >= currentEpoch) {\n            revert MustServicePastEpoch();\n        }\n        uint256 refundedAmt = _processRefund(refundees, epochToService);\n        uint256 quantityBurned = redemptionInfoPerEpoch[epochToService]\n            .totalBurned - refundedAmt;\n        uint256 amountToDist = collateralAmountToDist - fees;\n        _processRedemption(\n            redeemers,\n            amountToDist,\n            quantityBurned,\n            epochToService\n        );\n        collateral.safeTransferFrom(assetSender, feeRecipient, fees);\n        emit RedemptionFeesCollected(feeRecipient, fees, epochToService);\n    }",
+    "vulnerability": "Manager can drain assetSender by setting arbitrary fees with empty redemption arrays",
+    "reason": "The function transfers fees from assetSender to feeRecipient unconditionally. There is no check that fees are related to actual redemptions or that redeemers/refundees are non-empty. The manager can set feeRecipient to their own address and call completeRedemptions with empty arrays, collateralAmountToDist equal to fees, and an arbitrary past epoch. This transfers the entire fee amount from assetSender to the manager without any legitimate redemption.",
+    "file_name": "proj-61c865b273102a93__CashManager.sol"
+  }
+]

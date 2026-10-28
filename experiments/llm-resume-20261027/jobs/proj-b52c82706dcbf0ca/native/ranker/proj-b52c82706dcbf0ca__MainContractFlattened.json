@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function init(\n        IERC20 initToken,\n        uint256 initPeriods,\n        uint256 initInterval\n    ) public {\n        token = initToken;\n        periods = initPeriods;\n        interval = initInterval;\n        owner = _msgSender();\n    }",
+    "correctness": 9,
+    "criticism": "The reasoning is essentially correct. The init function is public, has no onlyOwner/initializer/alreadyInitialized guard, and unconditionally sets owner to _msgSender(). Any external account can call it, and because there is no one-time initialization check, it can be called again after legitimate initialization. If the contract holds ERC20 tokens and withdraw is onlyOwner, an attacker can become owner and drain tokens, so severity and attacker profitability are high. Minor caveat: if deployment is atomic and no funds or privileged functions are present impact is lower, but the code as shown permits takeover and reinitialization. Score: correctness 9, severity 9, profitability 9.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol",
+    "final_score": 9.0,
+    "function_name": "init",
+    "profitability": 9,
+    "reason": "The init function has no access control and no already-initialized check. It unconditionally sets owner = _msgSender(). After the contract is deployed and funded, any attacker can call init() with arbitrary values, become the owner, and then call withdraw() to transfer any ERC20 token held by the contract to themselves. Because init() can be called repeatedly, even a contract that has already been legitimately initialized can be taken over by an attacker. This directly allows theft of all tokens in the contract.",
+    "severity": 9,
+    "vulnerability": "Unprotected public initializer / reinitialization"
+  },
+  {
+    "code": "function withdraw(\n        IERC20 otherToken,\n        uint256 amount,\n        address receiver\n    ) public virtual onlyOwner {\n        uint256 currentBalance = otherToken.balanceOf(address(this));\n        require(receiver != address(0), \"receiver must not empty\");\n        require(currentBalance >= amount, \"current balance insufficient\");\n        otherToken.safeTransfer(receiver, amount);\n    }",
+    "correctness": 8,
+    "criticism": "The reasoning is mostly correct: withdraw is onlyOwner but places no restriction on which IERC20 token can be withdrawn and no check that the amount is not needed for vested or vesting schedules. Therefore the owner can drain the vesting token or any other token held by the contract. However, this is largely a privileged centralization risk unless the owner is compromised or the init takeover is chained. The reason correctly notes the init chain, but standalone an arbitrary external attacker cannot call withdraw. The severity is high if the contract custodies vesting funds; profitability is high for a malicious owner or for an attacker after init takeover, but lower as an independent unprivileged exploit. The code also does not update schedule.released or other accounting, so later release logic may fail or overpay from shared balances. Score: correctness 8, severity 8, profitability 7.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol",
+    "final_score": 7.75,
+    "function_name": "withdraw",
+    "profitability": 7,
+    "reason": "The withdraw function is restricted to onlyOwner, but it allows the owner to transfer any IERC20 token held by the contract to an arbitrary receiver. There is no restriction preventing the owner from withdrawing the vesting token itself, nor is there any check that the withdrawn amount is not needed for vested or vesting schedules. A malicious or compromised owner can drain the entire token balance, stealing funds that should be locked for beneficiaries. In combination with the publicly callable init(), any attacker can first become owner via init() and then use withdraw() to steal the entire balance.",
+    "severity": 8,
+    "vulnerability": "Owner can withdraw vesting tokens (rug pull)"
+  },
+  {
+    "code": "function getReleasableAmount(uint256 index) public view returns (uint256) {\n        require(index < vestingSchedules.length, \"Invalid schedule index\");\n        bool inBlocklist = blocklist[index];\n        if (inBlocklist || defaultStart == 0) {\n            return 0;\n        }\n        VestingSchedule storage schedule = vestingSchedules[index];\n        ExchangeMode exchangeMode = modes[index];\n        Info storage info = modeInfos[exchangeMode];\n        if ( block.timestamp >= (info.periods - 1).mul(info.interval).add(defaultStart) ) {\n            return schedule.amount.sub(schedule.released);\n        } else {\n            uint256 amountPerPeriod = schedule.amount.div(info.periods);\n            uint256 distributedPeriods = block.timestamp.sub(defaultStart).div( info.interval );\n            uint256 payableAmount = amountPerPeriod.mul(distributedPeriods + 1);\n            return payableAmount.sub(schedule.released);\n        }\n    }",
+    "correctness": 8,
+    "criticism": "The core issue is correctly identified: getReleasableAmount ignores the per-schedule start timestamp and computes elapsed time from the global defaultStart. If defaultStart predates a newly added schedule, that schedule is treated as having vested since defaultStart, allowing the beneficiary to claim immediately vested portions that should not yet be available. This can overpay and potentially drain shared vesting reserves. The reasoning has minor inaccuracies: the immediate percentage depends on periods/interval, and for four annual periods one year after defaultStart would be about 50%, not 25%. The code also appears to contain an off-by-one issue, since it adds one period immediately and treats vesting as complete at (periods - 1) * interval rather than periods * interval. Severity is high because overpayment can exhaust funds; profitability is high for a beneficiary of a post-defaultStart schedule, but it depends on schedule eligibility and defaultStart being set in the past. Score: correctness 8, severity 8, profitability 7.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol",
+    "final_score": 7.75,
+    "function_name": "getReleasableAmount",
+    "profitability": 7,
+    "reason": "Each vesting schedule stores its own start timestamp in VestingSchedule.start, and addLinearVesting() sets it to block.timestamp. However, getReleasableAmount() completely ignores schedule.start and calculates all elapsed time from the global defaultStart. If defaultStart is set to a past date (for example, the token launch), any schedule added later is treated as if it had started at defaultStart. A beneficiary of such a newly added schedule can immediately call release() and receive the amount that would have vested since defaultStart, potentially draining a large portion of the vesting pool. For instance, if defaultStart is one year ago and a new four-year vesting schedule is added, the beneficiary can claim roughly 25% immediately instead of starting from zero. This logic bug overpays beneficiaries and can be exploited by any beneficiary of a post-defaultStart schedule.",
+    "severity": 8,
+    "vulnerability": "Global defaultStart causes retroactive vesting for new schedules"
+  }
+]

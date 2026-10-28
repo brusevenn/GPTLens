@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "ToOwner",
+    "code": "function ToOwner( ) public { balances[msg.sender] = totalSupply; owner = msg.sender; }",
+    "vulnerability": "Public ownership takeover and arbitrary token balance assignment",
+    "reason": "ToOwner has no access control and is callable by any external account. It directly sets owner = msg.sender, allowing any attacker to become the contract owner, and assigns balances[msg.sender] = totalSupply, giving the attacker the entire 3,000,000,000 token supply in their balance without increasing or tracking supply correctly. After calling this in one transaction, the attacker can call withdraw() to drain all Ether held by the contract, withdrawForeignTokens() to steal arbitrary ERC20 tokens held by the contract, burn tokens, change parameters, blacklist users, and transfer the newly assigned tokens to exchanges or other addresses. This is directly exploitable and highly profitable.",
+    "file_name": "proj-20074ab538b4ea55__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "Mining24",
+    "code": "function Mining24 (uint256 _value, uint256 _minReq) public { owner = msg.sender; value = _value; minReq = _minReq; balances[msg.sender] = totalDistributed; }",
+    "vulnerability": "Public ownership takeover and unauthorized parameter manipulation",
+    "reason": "Mining24 has no access control and can be called by anyone. It sets owner = msg.sender, so any attacker can seize ownership of the contract. It also lets the attacker set the global value and minReq parameters used by token distribution logic. Even though balances[msg.sender] is set to totalDistributed rather than totalSupply, the ownership takeover alone is critical: the attacker can immediately call withdraw() to drain Ether, call withdrawForeignTokens() to steal tokens held by the contract, disable or enable whitelist entries, and disrupt distribution. This is a real-world exploitable privilege escalation.",
+    "file_name": "proj-20074ab538b4ea55__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "function() public payable",
+    "code": "function() public payable { uint toMint = msg.value/price; balances[msg.sender]+=toMint; Transfer(0,msg.sender,toMint); }",
+    "vulnerability": "Unrestricted token minting without supply accounting",
+    "reason": "The payable fallback function lets any address mint CBN tokens by sending Ether, with no whitelist check, no canDistr modifier, no distributionFinished check, and no cap. It directly increases balances[msg.sender] by msg.value/price but never updates totalSupply, totalDistributed, or totalRemaining, so token balances can be created beyond the declared 3,000,000,000 supply limit and become inconsistent with totalSupply. An attacker can mint large amounts of tokens and, if the token is tradable, dump them on holders. More critically, because ToOwner allows anyone to become owner, an attacker can first take ownership, send Ether to the fallback to mint tokens, then call withdraw() to recover the Ether, effectively obtaining unlimited tokens for free.",
+    "file_name": "proj-20074ab538b4ea55__MainContractFlattened.sol"
+  }
+]

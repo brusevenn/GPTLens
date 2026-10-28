@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setOracleData",
+    "code": "function setOracleData(address rToken, oracleChainlink _oracle) external {\n        oracleData[rToken] = _oracle;\n    }",
+    "vulnerability": "Missing access control allows anyone to replace any rToken's price oracle",
+    "reason": "setOracleData is external and has no owner/admin check. Any attacker can set oracleData[address(rToken)] to a malicious contract that implements decimals() and latestRoundData(). Since getUnderlyingPrice trusts this mapping, the attacker can return an arbitrarily high or low answer and manipulate collateral valuations. In a lending protocol using this oracle, the attacker can inflate collateral to borrow excess assets or crash the price to trigger liquidations. This is directly exploitable and highly severe.",
+    "file_name": "proj-d79ac252134863ee__contracts__SimplePriceOracle.sol"
+  },
+  {
+    "function_name": "getUnderlyingPrice",
+    "code": "function getUnderlyingPrice(RToken rToken) public view returns (uint) {\n        uint decimals = oracleData[address(rToken)].decimals();\n        (uint80 roundId,int256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound) = oracleData[address(rToken)].latestRoundData();\n        return 10 ** (18 - decimals) * uint(answer);\n    }",
+    "vulnerability": "Unvalidated negative or zero Chainlink answer can be cast to uint, producing a huge price",
+    "reason": "latestRoundData returns int256 answer, but the function does not check answer > 0 before casting to uint. A malicious oracle, which can be installed because setOracleData is unprotected, or a feed that returns a negative answer can cause uint(answer) to wrap into an enormous value for negative answers. The resulting huge price can be used to inflate collateral, allowing the attacker to borrow far more than intended. The function must reject non-positive answers and bound the result.",
+    "file_name": "proj-d79ac252134863ee__contracts__SimplePriceOracle.sol"
+  },
+  {
+    "function_name": "getUnderlyingPrice",
+    "code": "function getUnderlyingPrice(RToken rToken) public view returns (uint) {\n        uint decimals = oracleData[address(rToken)].decimals();\n        (uint80 roundId,int256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound) = oracleData[address(rToken)].latestRoundData();\n        return 10 ** (18 - decimals) * uint(answer);\n    }",
+    "vulnerability": "No staleness or round validation allows stale or incomplete oracle data to be used",
+    "reason": "The function reads latestRoundData but ignores roundId, startedAt, updatedAt, and answeredInRound. It never checks that updatedAt is recent or that answeredInRound >= roundId. If the feed is stale or an incomplete round is returned, the protocol will use an outdated or invalid price. An attacker can exploit this by setting an oracle, or using an existing stale feed, whose price no longer reflects the market, then borrowing against overvalued collateral or forcing liquidations. This is a severe oracle-risk vulnerability. The function should require a valid, complete, recent round and enforce a heartbeat.",
+    "file_name": "proj-d79ac252134863ee__contracts__SimplePriceOracle.sol"
+  }
+]
