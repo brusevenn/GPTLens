@@ -1,0 +1,45 @@
+{"input_file": "proj-c25baacfd4f5ff31__AccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__AccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__AccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__AccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__DefaultAccess.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__DefaultAccess.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__ERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__ERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__EnumerableSet.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__EnumerableSet.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IAccessControl.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IAccessControl.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IAccessControlEnumerable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IAccessControlEnumerable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IDiscountPolicy.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IDiscountPolicy.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20Permit.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IERC20Permit.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__IOracleConnector.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__IOracleConnector.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c25baacfd4f5ff31__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c25baacfd4f5ff31__ReentrancyGuard.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__ReentrancyGuard.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__SpotVault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c25baacfd4f5ff31__SpotVault.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c25baacfd4f5ff31__Utils.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__Utils.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-c25baacfd4f5ff31__draft-IERC6093.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-c25baacfd4f5ff31__draft-IERC6093.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-c25baacfd4f5ff31", "case_ids": ["acb-5cb60e3e1c7deb69"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 22, "failed_files": 0, "request_log": "requests.jsonl"}

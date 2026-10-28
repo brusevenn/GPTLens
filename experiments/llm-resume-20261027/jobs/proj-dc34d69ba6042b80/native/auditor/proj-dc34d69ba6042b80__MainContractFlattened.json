@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "burn",
+    "code": "function burn(address from, uint256 amount) public {\n    _tokenTransfer(from, bridgeBurnAddress, amount, 0, false);\n}",
+    "vulnerability": "Arbitrary token burn/forced transfer from any address",
+    "reason": "The burn function is public and has no access control or allowance check. It directly calls _tokenTransfer, bypassing _transfer's zero-address, blacklist, and maxTxAmount checks. An attacker can specify any victim address, including the Uniswap V2 pair, and move their tokens to bridgeBurnAddress (which defaults to address(0) and is excluded). This allows arbitrary token destruction or forced transfers. For example, an attacker can call burn(uniswapV2Pair, pairBalance) to destroy the pair's SFM tokens and then call pair.sync() to manipulate the SFM price, or simply burn a victim's entire balance. This is a critical loss-of-funds vulnerability.",
+    "file_name": "proj-dc34d69ba6042b80__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize() public initializer {\n    __Context_init_unchained();\n    __Ownable_init_unchained();\n    __Safemoon_v2_init_unchained();\n}",
+    "vulnerability": "Unprotected initializer allows ownership takeover",
+    "reason": "initialize() is public and guarded only by the initializer modifier. There is no constructor or atomic initialization in the contract. If the contract is deployed (especially behind a proxy) and initialize() is not called in the same transaction, an attacker can front-run the initialization transaction and call initialize() first. The attacker becomes the owner and _initializerAccount, and __Safemoon_v2_init_unchained() assigns the entire initial supply to _initializerAccount (_rOwned[_initializerAccount] = _rTotal). The attacker can then control the contract, mint/whitelist, withdraw funds, and steal all tokens. This is a well-known unprotected initializer vulnerability.",
+    "file_name": "proj-dc34d69ba6042b80__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_transfer",
+    "code": "function _transfer(\n    address from,\n    address to,\n    uint256 amount\n) private preventBlacklisted(_msgSender(), \"Safemoon: Address is blacklisted\") preventBlacklisted(from, \"Safemoon: From address is blacklisted\") preventBlacklisted(to, \"Safemoon: To address is blacklisted\") isRouter(_msgSender()) {\n    require(from != address(0), \"BEP20: transfer from the zero address\");\n    require(to != address(0), \"BEP20: transfer to the zero address\");\n    require(amount > 0, \"Transfer amount must be greater than zero\");\n    if (from != owner() && to != owner()) require(amount <= _maxTxAmount, \"Transfer amount exceeds the maxTxAmount.\");\n    uint256 contractTokenBalance = balanceOf(address(this));\n    if (contractTokenBalance >= _maxTxAmount) {\n        contractTokenBalance = _maxTxAmount;\n    }\n    bool overMinTokenBalance = contractTokenBalance >= numTokensToCollectBNB;\n    if ( overMinTokenBalance && !inSwapAndLiquify && swapAndEvolveEnabled && !_isInCollectBNBWhitelist(from) && !_isInCollectBNBWhitelist(to) ) {\n        contractTokenBalance = numTokensToCollectBNB;\n        collectBNB(contractTokenBalance);\n    }\n    bool takeFee = true;\n    if (_isExcludedFromFee[from] || _isExcludedFromFee[to]) {\n        takeFee = false;\n    }\n    uint256 tierIndex = 0;\n    if (takeFee) {\n        tierIndex = _accountsTier[from];\n        if (_msgSender() != from) {\n            tierIndex = _accountsTier[_msgSender()];\n        }\n    }\n    _tokenTransfer(from, to, amount, tierIndex, takeFee);\n}",
+    "vulnerability": "Any contract can self-whitelist to tier 1 and bypass fees",
+    "reason": "The _transfer function applies the isRouter(_msgSender()) modifier, which detects whether msg.sender is a contract and attempts to call factory() on it. If the call succeeds, it sets _accountsTier[_sender] = 1. Any attacker can deploy a contract that implements a factory() function and use it to call transferFrom on behalf of users. Inside _transfer, when _msgSender() != from, the fee tier is taken from _accountsTier[_msgSender()], so the attacker's contract is treated as a tier 1 whitelisted router. Tier 1 fees are 2% (50+50+100 basis points) versus the default 15% (500+500+500 basis points). This allows any user to bypass most transfer fees by routing transfers through a malicious contract, causing significant economic loss to the token ecosystem/protocol.",
+    "file_name": "proj-dc34d69ba6042b80__MainContractFlattened.sol"
+  }
+]

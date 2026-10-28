@@ -1,0 +1,6 @@
+{"input_file": "proj-08fd7f9993492077__BranchPort.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-08fd7f9993492077__BranchPort.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-08fd7f9993492077__CoreBranchRouter.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-08fd7f9993492077__CoreBranchRouter.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-08fd7f9993492077__RootBridgeAgent.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-08fd7f9993492077__RootBridgeAgent.json", "status": "error", "error_type": "ValueError"}

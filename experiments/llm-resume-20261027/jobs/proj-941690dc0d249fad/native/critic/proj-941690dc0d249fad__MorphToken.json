@@ -1,0 +1,35 @@
+[
+  {
+    "function_name": "owned",
+    "vulnerability": "Public ownership takeover due to misnamed constructor",
+    "criticism": "The reasoning is correct. Solidity identifiers are case-sensitive, so `owned()` is not a constructor for a contract named `Owned`; it is an ordinary public function and can be called by anyone when inherited. It unconditionally sets `owner = msg.sender`, allowing any attacker to become owner. If privileged functions such as `mintTokens`, `blacklistAccount`, or `transferOwnership` rely on `onlyOwner`, this grants full contract control, arbitrary minting, freezing, and potential theft. The severity is critical, and the profitability is high because an attacker can mint and dump tokens or otherwise abuse ownership. Score: correctness 9, severity 9, profitability 9.",
+    "correctness": 9,
+    "severity": 9,
+    "profitability": 9,
+    "reason": "In Solidity 0.4.18, a constructor must have the exact same name as its contract. The function `owned()` in contract `Owned` is therefore not a constructor; it is an ordinary public function inherited by `MorphToken` and callable by anyone at any time. When any attacker calls `owned()`, the statement `owner = msg.sender` overwrites the legitimate owner with the attacker's address. After takeover, the attacker can call `mintTokens` to mint unlimited tokens to itself, call `blacklistAccount` to freeze other users, and call `transferOwnership` to transfer control. This is directly exploitable for token dilution, theft, and full contract control.",
+    "code": "function owned() public {\n        owner = msg.sender;\n    }",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "vulnerability": "Blacklist bypass via transferFrom",
+    "criticism": "The reasoning is correct. The shown `transferFrom` performs only balance and allowance checks and directly updates balances; it does not enforce the blacklist checks that `transfer` apparently enforces. Since `approve` is unrestricted, a blacklisted account can approve itself or a colluding address and then move tokens through `transferFrom`, bypassing the freeze mechanism. This is a real logic flaw and defeats the purpose of blacklisting. Severity is significant because it allows frozen or stolen funds to be moved, though it does not by itself allow theft from users who have not granted allowance. Profitability is plausible if the blacklisted account controls valuable tokens, since it can move them to a fresh address and potentially liquidate them. Score: correctness 9, severity 7, profitability 7.",
+    "correctness": 9,
+    "severity": 7,
+    "profitability": 7,
+    "reason": "The `transferFrom` function does not check `isblacklistedAccount[_from]`, `isblacklistedAccount[msg.sender]`, or `isblacklistedAccount[_to]`, while `transfer` does enforce the blacklist. A blacklisted account can call `approve` (which is also unrestricted) to approve itself or a colluding address, then call `transferFrom` from the blacklisted address. Because only `transfer` checks the blacklist, this succeeds and moves tokens despite the account being blacklisted. This completely defeats the blacklist/freeze mechanism and lets an attacker move stolen or frozen funds after being blacklisted, or send tokens to another blacklisted account.",
+    "code": "function transferFrom( address _from, address _to, uint256 _amount ) public returns (bool success) {\n        if (balanceOf[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balanceOf[_to].add(_amount) > balanceOf[_to]) {\n            balanceOf[_from] = balanceOf[_from].sub(_amount);\n            allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_amount);\n            balanceOf[_to] = balanceOf[_to].add(_amount);\n            return true;\n        } else {\n            return false;\n        }\n    }",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  },
+  {
+    "function_name": "approve",
+    "vulnerability": "ERC20 approve race condition / allowance double-spend",
+    "criticism": "The reasoning is correct. The function directly overwrites the existing allowance and does not require resetting to zero or use increase/decrease semantics. A malicious spender can monitor the mempool, spend the old allowance before an owner's `approve` transaction is mined, and then spend the new allowance afterward, receiving more than the owner intended. This is the classic ERC20 approve race condition. Severity is moderate because exploitation requires an existing allowance, a malicious spender, and owner allowance-change behavior. Profitability is plausible but bounded by the old allowance and token liquidity. Score: correctness 9, severity 5, profitability 6.",
+    "correctness": 9,
+    "severity": 5,
+    "profitability": 6,
+    "reason": "The `approve` function directly overwrites the existing allowance with `_amount` and does not require the previous allowance to be zero or use increase/decrease semantics. If an owner first approves a spender for N tokens and later submits a transaction to change the allowance to M, the spender can watch the mempool, spend the old N before the change is mined, and then spend the new M after the change. The spender receives N + M total instead of at most M, which is a real front-running allowance double-spend and is beneficial to the spender.",
+    "code": "function approve(address _spender, uint256 _amount) public returns (bool success) {\n        allowed[msg.sender][_spender] = _amount;\n        Approval(msg.sender, _spender, _amount);\n        return true;\n    }",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  }
+]

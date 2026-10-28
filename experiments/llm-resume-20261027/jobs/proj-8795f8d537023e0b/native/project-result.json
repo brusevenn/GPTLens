@@ -1,0 +1,385 @@
+{
+  "case_ids": [
+    "acb-9e2dd5b0aa10b416"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 66447,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/config.json",
+      "sha256": "718b85da1f61c241767d65784599b8118247a8c7db44769aeb4a15533f37161d"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T12:22:31.748818+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Address.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Address.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__Address.sol",
+      "normalized_sha256": "61e2321494aa1781957c6162e0dd6a9587834990225674e2052075b7eaccd0b9",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__Address.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 8305,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/Address.sol",
+      "source_sha256": "d4d2431a565a1134cab60f94e857dcb565653b8efd202b3218879e3f4ea10d48",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Context.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Context.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__Context.sol",
+      "normalized_sha256": "a9feb71dbc61c3cfd0888a0f64392b9f8f0cc457a6d4fc758f67ba27bfab4994",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__Context.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 423,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/Context.sol",
+      "source_sha256": "f39dc802bf07eb2492c2d1bdb8acf28aac127b28f3e23dfda9e7172db9375054",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IERC20.sol",
+      "normalized_sha256": "580fc7d8b85a7245f1e2d8127324cd212c9a995a73252dce45be7f6590471ae6",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 716,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IERC20.sol",
+      "source_sha256": "242538ebe1b297c090db53064f0eab34ba402e3fae9bc082129addf7fcc79735",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeLibrary.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeLibrary.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IPancakeLibrary.sol",
+      "normalized_sha256": "c3b3b25acb362a05dff21dcbfde14c32398cc168a8c7774ac4a364c004341244",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IPancakeLibrary.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1778,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IPancakeLibrary.sol",
+      "source_sha256": "c15fa157f80f62e953e510beb7bec1ca25254c0eb9521fca5bab9a6a3e2ec5c8",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakePair.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakePair.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IPancakePair.sol",
+      "normalized_sha256": "8ed0a19851f3730c90252d1f6c5a55b5fdfb29c445d5c3abf842549c09efd7c9",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IPancakePair.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2452,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IPancakePair.sol",
+      "source_sha256": "f3e0e41c865a8647a7c6e124eaff8f6d79bcd1b2f47cc9c3e6380ff419767c35",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeRouter01.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeRouter01.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IPancakeRouter01.sol",
+      "normalized_sha256": "fb8502adea8a5ea57f1a3e3ff52eaf3580249146fd369d5491aba5fc39435c95",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IPancakeRouter01.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 3514,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IPancakeRouter01.sol",
+      "source_sha256": "a97efcd91dba325ed542d43ac31d40b1967d72209c538e2db51eb921d1a486f5",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeRouter02.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IPancakeRouter02.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IPancakeRouter02.sol",
+      "normalized_sha256": "389ea3fecd8c7c5ba3b21bb9f3023a49dc8809ffcf0916314e9f9ff0feae8bc0",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IPancakeRouter02.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1310,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IPancakeRouter02.sol",
+      "source_sha256": "7c069a517381ba02456458d6420fb106c0da53fb85efa4523ee27ceb3f6ccbc3",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IUniswapV2Factory.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__IUniswapV2Factory.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__IUniswapV2Factory.sol",
+      "normalized_sha256": "a2f21ae46e561f4f32cfc74e56ed0970a035437ee84cb4fb93fa5de3b054e48e",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__IUniswapV2Factory.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 691,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/IUniswapV2Factory.sol",
+      "source_sha256": "17bc6cf66511624bdbef226e509411e8ece1911116352d65a9c6723f5ef0328b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-8795f8d537023e0b__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-8795f8d537023e0b__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__MainContractFlattened.sol",
+      "normalized_sha256": "138c1d9e20285f19fdc4d7c482fda8cf3f05ad2eac11745dc2a1b7deef25f1f2",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 43707,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/MainContractFlattened.sol",
+      "source_sha256": "5f28051c464d0d737cafa100cf6e37477aabf773d3f3d536a85f352e836ef017",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-8795f8d537023e0b__NGFSToken.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-8795f8d537023e0b__NGFSToken.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/78eda4cd01c1-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__NGFSToken.sol",
+      "normalized_sha256": "5c50635ff1938e03808662b1833b27210f5f356b416bee963b835f9a2f9e001d",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 21337,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/NGFSToken.sol",
+      "source_sha256": "d3cdae6ab425667a841512661e77b869fc337d96ebdc5df89dc1ef1285c12112",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Ownable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__Ownable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__Ownable.sol",
+      "normalized_sha256": "68c4ba8cd9da6e55cceb5ac782616f3c16500a8817321eaf6c4bbffbfc5b967f",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__Ownable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1716,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/Ownable.sol",
+      "source_sha256": "f1c0326cbae4044568838b3225781d03ba9efb0dc62398769ff4eba18d16185d",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__SafeMath.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-8795f8d537023e0b__SafeMath.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-8795f8d537023e0b__SafeMath.sol",
+      "normalized_sha256": "a8f8380fca44ca4256ff58be80ee73cd1abd1b40e136fd4183b62499662765a3",
+      "ranker_output": "ranker/proj-8795f8d537023e0b__SafeMath.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2272,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-8795f8d537023e0b/source_code/SafeMath.sol",
+      "source_sha256": "8c8c705ca0019dafe27ec1b2e60e0de61f94eb1f50b4a430651820b7b2943bf1",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-8795f8d537023e0b",
+  "project_source_file_count": 12,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T12:19:29.350906+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T12:22:31.748838+00:00",
+  "usage": {
+    "completion_tokens": 30015,
+    "prompt_cache_hit_tokens": 4480,
+    "prompt_cache_miss_tokens": 15509,
+    "prompt_tokens": 19989,
+    "request_attempt_count": 14,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

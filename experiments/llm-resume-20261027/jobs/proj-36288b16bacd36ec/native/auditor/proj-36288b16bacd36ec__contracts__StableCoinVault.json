@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "initialize",
+    "code": "function initialize(\n        string memory name_,\n        string memory symbol_,\n        address apolloXBscVaultAddr\n    ) public initializer {\n        BasePortfolioV2._initialize(name_, symbol_);\n        require(\n            apolloXBscVaultAddr != address(0),\n            \"apolloXBscVaultAddr cannot be zero\"\n        );\n        vaults = [AbstractVaultV2(ApolloXBscVault(apolloXBscVaultAddr))];\n    }",
+    "vulnerability": "Public initializer front-running",
+    "reason": "The initialize function is public and relies solely on the initializer modifier to prevent re-initialization. If the contract is deployed and not initialized atomically in the same transaction (e.g., via a proxy deployment script that sends a separate initialize transaction), an attacker can observe the deployment, call initialize first with a malicious apolloXBscVaultAddr, and set the vaults array to an attacker-controlled vault. Since the initializer modifier will then block the legitimate owner from initializing, the attacker can control the vault used by BasePortfolioV2's deposit/withdraw logic, enabling theft or locking of user funds. This is a well-known real-world front-running attack on unprotected initializers.",
+    "file_name": "proj-36288b16bacd36ec__contracts__StableCoinVault.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize(\n        string memory name_,\n        string memory symbol_,\n        address apolloXBscVaultAddr\n    ) public initializer {\n        BasePortfolioV2._initialize(name_, symbol_);\n        require(\n            apolloXBscVaultAddr != address(0),\n            \"apolloXBscVaultAddr cannot be zero\"\n        );\n        vaults = [AbstractVaultV2(ApolloXBscVault(apolloXBscVaultAddr))];\n    }",
+    "vulnerability": "Arbitrary vault address without contract validation",
+    "reason": "The function only checks that apolloXBscVaultAddr is non-zero but does not verify that it is a deployed contract implementing the expected ApolloXBscVault interface. If an attacker can call initialize (e.g., via front-running), they can set the address to an EOA or a malicious contract. BasePortfolioV2 functions that iterate over vaults or call vault methods will then either revert (causing denial of service for deposits/withdrawals) or execute attacker-controlled code that can drain approved tokens or manipulate portfolio accounting. Even if initialization is protected, a mistake by the deployer can permanently brick the vault or expose funds.",
+    "file_name": "proj-36288b16bacd36ec__contracts__StableCoinVault.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize(\n        string memory name_,\n        string memory symbol_,\n        address apolloXBscVaultAddr\n    ) public initializer {\n        BasePortfolioV2._initialize(name_, symbol_);\n        require(\n            apolloXBscVaultAddr != address(0),\n            \"apolloXBscVaultAddr cannot be zero\"\n        );\n        vaults = [AbstractVaultV2(ApolloXBscVault(apolloXBscVaultAddr))];\n    }",
+    "vulnerability": "Missing access control allows initializer to set critical vault configuration",
+    "reason": "The initialize function sets the critical vaults array without any owner/admin check. While the initializer modifier enforces one-time execution, it does not restrict who can be the first caller. An attacker can call initialize with a malicious apolloXBscVaultAddr and then exploit inherited BasePortfolioV2 functions that trust the vaults array. For example, if BasePortfolioV2 has a function that rebalances or withdraws from vaults, it will call the attacker's contract, which can return manipulated balances or steal tokens via reentrancy or approval abuse. This allows an attacker to take control of the portfolio's vault configuration and siphon funds.",
+    "file_name": "proj-36288b16bacd36ec__contracts__StableCoinVault.sol"
+  }
+]

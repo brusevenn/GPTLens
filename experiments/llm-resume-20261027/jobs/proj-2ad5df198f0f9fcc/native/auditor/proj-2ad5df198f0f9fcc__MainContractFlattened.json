@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "owned",
+    "code": "function owned() public { owner = msg.sender; }",
+    "vulnerability": "Public ownership takeover",
+    "reason": "The function is named `owned` instead of `Owned`, so it is not a constructor and is publicly callable by anyone at any time. This allows any attacker to overwrite the `owner` variable and become the contract owner, bypassing all `onlyOwner` restrictions. Once owner, the attacker can mint unlimited tokens, freeze accounts, set prices, and open the exchange.",
+    "file_name": "proj-2ad5df198f0f9fcc__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mintToken",
+    "code": "function mintToken(address target, uint256 mintedAmount) onlyOwner public {\n    balanceOf[target] += mintedAmount;\n    totalSupply += mintedAmount;\n    Transfer(0, this, mintedAmount);\n    Transfer(this, target, mintedAmount);\n}",
+    "vulnerability": "Arbitrary token minting due to broken access control",
+    "reason": "The `onlyOwner` modifier is ineffective because any attacker can become owner by calling the public `owned()` function. Once owner, the attacker can call `mintToken` to create an unlimited number of tokens and assign them to any address. This dilutes existing holders and can be used to drain the contract's Ether by selling the minted tokens. The function also lacks overflow checks, but the primary issue is unauthorized minting.",
+    "file_name": "proj-2ad5df198f0f9fcc__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "sell",
+    "code": "function sell(uint256 amount) public {\n    require(this.balance >= amount * sellPrice);\n    require(isOpened);\n    _transfer(msg.sender, this, amount);\n    msg.sender.transfer(amount * sellPrice);\n}",
+    "vulnerability": "Unchecked multiplication and Ether drain",
+    "reason": "The multiplication `amount * sellPrice` is not protected against integer overflow. An attacker who has become owner can set a crafted `sellPrice` (or use an existing one) and call `sell` with a large `amount` such that the product overflows to a value less than or equal to the contract's balance, allowing them to drain the contract's Ether. More directly, after taking ownership and minting unlimited tokens, the attacker can set `isOpened` to true and `sellPrice` to a high value, then sell the minted tokens to drain all Ether from the contract. The function sends Ether based on the unchecked calculation without validating the token source.",
+    "file_name": "proj-2ad5df198f0f9fcc__MainContractFlattened.sol"
+  }
+]

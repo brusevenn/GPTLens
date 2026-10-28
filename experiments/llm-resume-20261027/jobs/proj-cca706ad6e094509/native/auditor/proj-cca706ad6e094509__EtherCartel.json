@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "DrugDealer",
+    "code": "function DrugDealer() public{\n    ceoAddress=msg.sender;\n}",
+    "vulnerability": "Misnamed constructor allows anyone to become CEO and steal fees",
+    "reason": "The contract is named EtherCartel, but the function intended as the constructor is named DrugDealer. In Solidity 0.4.18, only a function with the exact same name as the contract is executed as the constructor. Therefore, DrugDealer() is a public function that can be called by anyone at any time. At deployment, ceoAddress is not initialized and remains address(0). Any attacker can call DrugDealer() to set ceoAddress to their own address. Since ceoAddress receives the 4% dev fee from buyDrugs and sellDrugs, the attacker can steal all protocol fees. This is a critical access control vulnerability and is exploitable by a simple transaction from any account.",
+    "file_name": "proj-cca706ad6e094509__EtherCartel.sol"
+  },
+  {
+    "function_name": "collectDrugs",
+    "code": "function collectDrugs(address ref) public{\n    require(initialized);\n    if(referrals[msg.sender]==0 && referrals[msg.sender]!=msg.sender){\n        referrals[msg.sender]=ref;\n    }\n    uint256 drugsUsed=getMyDrugs();\n    uint256 newKilo=SafeMath.div(drugsUsed,DRUGS_TO_PRODUCE_1KILO);\n    Kilos[msg.sender]=SafeMath.add(Kilos[msg.sender],newKilo);\n    claimedDrugs[msg.sender]=0;\n    lastCollect[msg.sender]=now;\n    claimedDrugs[referrals[msg.sender]]=SafeMath.add(claimedDrugs[referrals[msg.sender]],SafeMath.div(drugsUsed,5));\n    marketDrugs=SafeMath.add(marketDrugs,SafeMath.div(drugsUsed,10));\n}",
+    "vulnerability": "Self-referral bug allows user to receive 20% referral bonus on their own collections",
+    "reason": "The condition `referrals[msg.sender]==0 && referrals[msg.sender]!=msg.sender` is intended to prevent self-referral, but it checks the current stored referral (which is 0) instead of the `ref` parameter. For any non-zero caller, `0 != msg.sender` is true, so a user can call `collectDrugs(msg.sender)` and set their own referral to themselves. Later in the same function, after resetting `claimedDrugs[msg.sender]=0`, it adds `drugsUsed/5` to `claimedDrugs[referrals[msg.sender]]`, which is now the user's own address. Thus the user gets back 20% of the drugs they just collected as claimable drugs, in addition to converting the full `drugsUsed` into Kilos. This creates money out of thin air, allowing the attacker to repeatedly collect and compound, eventually selling the inflated drugs to drain the contract's ETH balance. The correct check should validate the `ref` parameter, e.g., `require(ref != msg.sender)`.",
+    "file_name": "proj-cca706ad6e094509__EtherCartel.sol"
+  },
+  {
+    "function_name": "seedMarket",
+    "code": "function seedMarket(uint256 drugs) public payable{\n    require(marketDrugs==0);\n    initialized=true;\n    marketDrugs=drugs;\n}",
+    "vulnerability": "Unprotected initializer allows anyone to set marketDrugs and manipulate prices or block legitimate initialization",
+    "reason": "The `seedMarket` function can be called by anyone when `marketDrugs==0`. It sets `initialized=true` and `marketDrugs=drugs` without requiring any payment (`msg.value` is not checked) and without restricting the caller. An attacker can front-run the legitimate deployment by calling `seedMarket(1)` (or another chosen small value) to set `marketDrugs` to a tiny value before the deployer's intended seed transaction. The deployer's transaction will then revert because `marketDrugs != 0`, leaving the attacker's value in place. With a tiny `marketDrugs`, the attacker can call `getFreeKilo()` to obtain 300 Kilos, wait a short time to generate drugs, and then call `sellDrugs()`. The `calculateTrade` formula yields a payout close to the entire contract balance when the amount of drugs sold is much larger than `marketDrugs`, so the attacker can drain almost all ETH from the contract once it has a balance. Even without front-running, if `marketDrugs` is ever zero, anyone can re-seed and manipulate the market. The function should be restricted to a trusted owner and should require `!initialized`.",
+    "file_name": "proj-cca706ad6e094509__EtherCartel.sol"
+  }
+]

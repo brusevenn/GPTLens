@@ -1,0 +1,86 @@
+{
+  "case_ids": [
+    "acb-e63cbf4d02c20746"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 145,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-4c63965ec8e8b5b5/source_code/config.json",
+      "sha256": "cb4556c2fd0408366278e6bd62b053d92c37cf0882b6171ad3c46e0e47d18562"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T10:59:51.427961+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_error_type": "RuntimeError",
+      "auditor_status": {
+        "case_id": null,
+        "error_type": "APIConnectionError",
+        "http_status": null,
+        "input_file": "proj-4c63965ec8e8b5b5__NFTXVaultFactoryUpgradeable.sol",
+        "provider_error_code": null,
+        "stage": "auditor",
+        "status": "error"
+      },
+      "critic_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "error_log": "errors/e8078cae0aa8-auditor.txt",
+      "error_type": "APIConnectionError",
+      "input_id": "data/ACToolBench154/proj-4c63965ec8e8b5b5__NFTXVaultFactoryUpgradeable.sol",
+      "normalized_sha256": "ed1b57339bd4093f612e17e26ee7c970f9ef37cb80ecf252ccc7d6dd756ff6f8",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 123382,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-4c63965ec8e8b5b5/source_code/NFTXVaultFactoryUpgradeable.sol",
+      "source_sha256": "14ab42693863290cc667032a0465176a6192bd676590bcc7ba9dd60820c90da5",
+      "status": "AUDITOR_ERROR"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-4c63965ec8e8b5b5",
+  "project_source_file_count": 1,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T10:57:51.139627+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T10:59:51.427973+00:00",
+  "usage": {
+    "completion_tokens": 0,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 0,
+    "prompt_tokens": 0,
+    "request_attempt_count": 1,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

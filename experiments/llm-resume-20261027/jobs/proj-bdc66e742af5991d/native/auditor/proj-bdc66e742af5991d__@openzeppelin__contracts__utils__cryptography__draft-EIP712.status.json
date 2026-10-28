@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-bdc66e742af5991d__@openzeppelin__contracts__utils__cryptography__draft-EIP712.sol",
+  "stage": "auditor",
+  "status": "no_findings",
+  "finding_count": 0
+}

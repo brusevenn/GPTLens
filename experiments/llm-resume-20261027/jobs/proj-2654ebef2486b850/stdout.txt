@@ -1,0 +1,5 @@
+{"input_file": "proj-2654ebef2486b850__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-2654ebef2486b850__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-2654ebef2486b850__Virgo_ZodiacToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-2654ebef2486b850__Virgo_ZodiacToken.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-2654ebef2486b850", "case_ids": ["acb-970582f592349726"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

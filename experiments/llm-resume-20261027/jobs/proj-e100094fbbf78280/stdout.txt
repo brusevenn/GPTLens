@@ -1,0 +1,5 @@
+{"input_file": "proj-e100094fbbf78280__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-e100094fbbf78280__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-e100094fbbf78280__WalletLibrary.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-e100094fbbf78280__WalletLibrary.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-e100094fbbf78280", "case_ids": ["acb-4bfe56113f30f2d8"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_sponsor",
+    "code": "function _sponsor(uint256 _assets, address _receiver) internal returns (uint256) {\n    uint256 _shares = deposit(_assets, _receiver);\n    if (\n        _twabController.delegateOf(address(this), _receiver) != _twabController.SPONSORSHIP_ADDRESS()\n    ) {\n        _twabController.sponsor(_receiver);\n    }\n    emit Sponsor(msg.sender, _receiver, _assets, _shares);\n    return _shares;\n}",
+    "vulnerability": "Arbitrary sponsorship of any receiver's TWAB balance",
+    "reason": "The public functions sponsor and sponsorWithPermit call _sponsor with an arbitrary _receiver. _sponsor first deposits to _receiver and then calls _twabController.sponsor(_receiver), which sets _receiver's delegate to the SPONSORSHIP_ADDRESS and removes their delegateBalance from the vault's total supply TWAB. An attacker can call sponsor(0, victim) (or with 1 wei if zero deposits are rejected) for every other vault shareholder, reducing the vault's total supply TWAB to only the attacker's balance. The attacker then has 100% of the vault's prize-winning TWAB and can claim all prizes that the vault wins, stealing the other users' prize yield at near-zero cost.",
+    "file_name": "proj-7782e27ce595662c__Vault.sol"
+  },
+  {
+    "function_name": "swapExactAmountIn",
+    "code": "function swapExactAmountIn(\n    address _account,\n    uint256 _amountIn,\n    uint256 _amountOutMin\n) external returns (uint256) {\n    uint256 availableBalance = _availableReserveOut();\n    (uint128 _virtualReserveIn, uint128 _virtualReserveOut, uint256 amountOut) = LiquidatorLib\n        .swapExactAmountIn(\n        virtualReserveIn,\n        virtualReserveOut,\n        availableBalance,\n        _amountIn,\n        swapMultiplier,\n        liquidityFraction,\n        minK\n    );\n    virtualReserveIn = _virtualReserveIn;\n    virtualReserveOut = _virtualReserveOut;\n    require(amountOut >= _amountOutMin, \"LiquidationPair/min-not-guaranteed\");\n    _swap(_account, amountOut, _amountIn);\n    emit Swapped(_account, _amountIn, amountOut, _virtualReserveIn, _virtualReserveOut);\n    return amountOut;\n}",
+    "vulnerability": "Missing token transfer from caller allows theft of unaccounted prize tokens",
+    "reason": "swapExactAmountIn does not pull _amountIn of tokenIn from msg.sender. Instead, it relies on the caller having already transferred prize tokens to the PrizePool. The internal _swap calls Vault.liquidate, which calls PrizePool.contributePrizeTokens(address(this), _amountIn); this only checks the PrizePool's global unaccounted balance. Since _account is arbitrary and the caller is not authenticated, an attacker can front-run any user who has transferred prize tokens to the PrizePool (or consume any unaccounted balance) by calling swapExactAmountIn(attacker, amountIn, 0). The attacker's call consumes those prize tokens, mints vault shares to attacker, and steals the user's funds. The same issue exists in swapExactAmountOut.",
+    "file_name": "proj-7782e27ce595662c__Vault.sol"
+  },
+  {
+    "function_name": "_deposit",
+    "code": "function _deposit(address _caller, address _receiver, uint256 _assets, uint256 _shares) internal virtual override {\n    IERC20 _asset = IERC20(asset());\n    uint256 _vaultAssets = _asset.balanceOf(address(this));\n    if (_assets > _vaultAssets) {\n        uint256 _assetsDeposit;\n        unchecked {\n            if (_vaultAssets != 0) {\n                _assetsDeposit = _assets - _vaultAssets;\n            }\n        }\n        SafeERC20.safeTransferFrom(\n            _asset,\n            _caller,\n            address(this),\n            _assetsDeposit != 0 ? _assetsDeposit : _assets\n        );\n    }\n    _yieldVault.deposit(_assets, address(this));\n    _mint(_receiver, _shares);\n    emit Deposit(_caller, _receiver, _assets, _shares);\n}",
+    "vulnerability": "Idle asset balance can be used to mint shares without payment",
+    "reason": "_deposit checks the Vault's current asset balance _vaultAssets. If the requested _assets is less than or equal to _vaultAssets, it skips safeTransferFrom entirely. It then calls _yieldVault.deposit(_assets, address(this)), using pre-existing idle assets in the Vault, and mints _shares to the receiver. An attacker can monitor for direct asset transfers to the Vault (or assets left idle by liquidate) and call deposit with _assets equal to the idle balance. Because _shares are computed before the deposit using an exchange rate that excludes idle assets, the attacker receives shares backed by those idle assets without paying anything, stealing the idle funds from the Vault.",
+    "file_name": "proj-7782e27ce595662c__Vault.sol"
+  }
+]

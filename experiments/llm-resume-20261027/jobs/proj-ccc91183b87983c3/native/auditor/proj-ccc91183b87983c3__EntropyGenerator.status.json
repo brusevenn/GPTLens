@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-ccc91183b87983c3__EntropyGenerator.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

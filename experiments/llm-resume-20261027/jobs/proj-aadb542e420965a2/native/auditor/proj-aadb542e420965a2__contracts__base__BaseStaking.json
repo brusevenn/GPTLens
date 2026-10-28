@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "_compound",
+    "code": "function _compound(address account) internal virtual {\n        require(endBlock == 0 || endBlock > block.number, \"Staking Ended\");\n        uint256 reward = rewards[account];\n        rewards[account] = 0;\n        if (_rewardSupply < reward) {\n            reward = _rewardSupply;\n        }\n        _rewardSupply -= reward;\n        _balances[account] += reward;\n        _totalSupply += reward;\n    }",
+    "vulnerability": "Unbacked staking balance created by compounding rewards",
+    "reason": "The function increases _balances[account] and _totalSupply by the reward amount without transferring any stakingToken into the contract. If configuration.rewardsToken is different from configuration.stakingToken, the compounded reward is not backed by stakingToken deposits. An attacker can stake tokens, accrue rewards, call compound(), and then withdraw the inflated balance via withdraw(). This withdraws stakingToken that belongs to other stakers, draining the staking pool. The attacker also earns future rewards on the unbacked balance, further draining the reward pool. The code does not enforce rewardsToken == stakingToken, so this is exploitable in the common configuration where users stake one token and earn another.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__BaseStaking.sol"
+  },
+  {
+    "function_name": "updateReward",
+    "code": "modifier updateReward(address account) virtual {\n        if (_totalSupply == 0) {\n            endBlock = block.number + _rewardSupply / configuration.rewardRate;\n        }\n        rewardPerTokenStored = rewardPerToken();\n        lastUpdateBlock = block.number >= endBlock ? endBlock : block.number;\n        rewards[account] = earned(account);\n        userRewardPerTokenPaid[account] = rewardPerTokenStored;\n        _;\n    }",
+    "vulnerability": "Reward period reset causes overcommit and allows theft of reward funds",
+    "reason": "When _totalSupply is zero, the modifier resets endBlock using the full remaining _rewardSupply. However, already accrued but unclaimed rewards are stored in the rewards mapping and have not been subtracted from _rewardSupply. This can extend the reward period beyond what the remaining reward tokens can cover. An attacker can be the sole staker, accrue rewards, withdraw all tokens so _totalSupply becomes zero, and then stake again to reset endBlock. New stakers later join and accrue rewards during the extended period. The attacker's old unclaimed rewards plus new rewards can exceed _rewardSupply. Because claim() and compound() pay first-come-first-served and cap at _rewardSupply, the attacker can claim first and take the entire reward supply, leaving later stakers with unpaid rewards. This is a direct theft of reward tokens from other users.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__BaseStaking.sol"
+  },
+  {
+    "function_name": "rescueTokens",
+    "code": "function rescueTokens(IERC20 _token, address _destination) external onlyRole(DEFAULT_ADMIN_ROLE) {\n        uint256 balance = _token.balanceOf(address(this));\n        _token.safeTransfer(_destination, balance);\n    }",
+    "vulnerability": "Admin can drain all tokens and hardcoded admin backdoor",
+    "reason": "Any address with DEFAULT_ADMIN_ROLE can call rescueTokens to transfer the contract's entire balance of any token to an arbitrary destination. This includes configuration.stakingToken and configuration.rewardsToken, meaning the admin can steal all user deposits and reward funds. The initializer additionally grants DEFAULT_ADMIN_ROLE to a hardcoded external address 0x6FF5A4e3c726499F4b7F39421396Fe2E1B401BAE in addition to the deployer, creating a backdoor. There is no restriction preventing staking or reward tokens from being rescued, and no timelock or multisig requirement. The hardcoded address or any compromised admin can immediately drain all funds, causing total loss to users.",
+    "file_name": "proj-aadb542e420965a2__contracts__base__BaseStaking.sol"
+  }
+]

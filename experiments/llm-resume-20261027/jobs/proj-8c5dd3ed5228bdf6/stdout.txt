@@ -1,0 +1,5 @@
+{"input_file": "proj-8c5dd3ed5228bdf6__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-8c5dd3ed5228bdf6__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-8c5dd3ed5228bdf6__contracts__MinterProxyV2.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-8c5dd3ed5228bdf6__contracts__MinterProxyV2.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-8c5dd3ed5228bdf6", "case_ids": ["acb-66da2bfec581cfff"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

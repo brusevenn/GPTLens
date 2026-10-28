@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-b98075e441e39427__contracts__interfaces__IVisor.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

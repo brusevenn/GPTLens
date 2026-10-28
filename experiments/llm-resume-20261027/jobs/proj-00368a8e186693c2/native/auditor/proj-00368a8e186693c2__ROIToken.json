@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "transferOwnership",
+    "code": "function transferOwnership(address newOwner) public virtual {\n    require(newOwner != address(0), \"Ownable: new owner is the zero address\");\n    emit OwnershipTransferred(_owner, newOwner);\n    _owner = newOwner;\n}",
+    "vulnerability": "Missing onlyOwner modifier allows anyone to become owner",
+    "reason": "The transferOwnership function is public and lacks the onlyOwner modifier. Any address can call it to set themselves as the new owner. Once an attacker becomes owner, they can call Sweep to drain ETH, transferForeignToken to drain any ERC20 tokens, change fees, set marketing address, or otherwise take full control of the contract.",
+    "file_name": "proj-00368a8e186693c2__ROIToken.sol"
+  },
+  {
+    "function_name": "swapTokensForEth",
+    "code": "function swapTokensForEth(uint256 tokenAmount) private {\n    address[] memory path = new address[](2);\n    path[0] = address(this);\n    path[1] = uniswapV2Router.WETH();\n    _approve(address(this), address(uniswapV2Router), tokenAmount);\n    uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(\n        tokenAmount,\n        0,\n        path,\n        address(this),\n        block.timestamp\n    );\n    emit SwapTokensForETH(tokenAmount, path);\n}",
+    "vulnerability": "No slippage protection (amountOutMin=0) allows sandwich attacks",
+    "reason": "The contract swaps tokens for ETH with amountOutMin set to 0 and deadline set to block.timestamp. An attacker can monitor the mempool for a transaction that triggers this swap, front-run by selling tokens to manipulate the Uniswap price downwards, causing the contract to receive less ETH, and then back-run by buying tokens at the lower price to profit. This results in a loss of ETH for the contract and its holders.",
+    "file_name": "proj-00368a8e186693c2__ROIToken.sol"
+  },
+  {
+    "function_name": "_getSellBnBAmount",
+    "code": "function _getSellBnBAmount(uint256 tokenAmount) private view returns(uint256) {\n    address[] memory path = new address[](2);\n    path[0] = address(this);\n    path[1] = uniswapV2Router.WETH();\n    uint[] memory amounts = uniswapV2Router.getAmountsOut(tokenAmount, path);\n    return amounts[1];\n}",
+    "vulnerability": "Uses manipulable Uniswap spot price to record sell BNB amount, enabling flash loan price manipulation to drain ETH via auto buyback",
+    "reason": "The function returns the spot price from Uniswap's getAmountsOut, which can be manipulated within a transaction using flash loans. In _transfer, this value is stored in sellHistory.bnbAmount for any transfer to the Uniswap pair. Later, the auto buyback logic computes _bBSLimitMax as the average of these recorded amounts divided by _buyBackDivisor. An attacker can take a flash loan, manipulate the Uniswap pool to inflate the spot price, call transfer(uniswapV2Pair, smallAmount) to record a huge bnbAmount, and trigger the auto buyback. The contract then spends a large amount of ETH to buy back and burn tokens at the manipulated price. The attacker can then sell their tokens back at a profit, draining ETH from the contract. The default buyBackSellLimit is bypassed because _bBSLimitMax is overwritten when _isAutoBuyBack is true.",
+    "file_name": "proj-00368a8e186693c2__ROIToken.sol"
+  }
+]

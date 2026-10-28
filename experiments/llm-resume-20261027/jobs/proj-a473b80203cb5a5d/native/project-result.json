@@ -1,0 +1,386 @@
+{
+  "case_ids": [
+    "acb-e2ac75ac36f53db5"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 32856,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/config.json",
+      "sha256": "de603958334d66485f77522ba41edc5aca6d8b2c37c0a3ba726060fe1e387629"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T13:23:27.384284+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__MainContractFlattened.sol",
+      "normalized_sha256": "a24f7fc6a0500317e9cfab71d156bc488172a70c0e130fcf678541a2e80dfe5b",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 24403,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/MainContractFlattened.sol",
+      "source_sha256": "c00e62824bfd59fa67cc09509494d63002cacf9ec0b48516a6f3f7202c97f75f",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.sol",
+      "normalized_sha256": "b799b1e342867911da3504c17f891bbd098c3a3c3d571785ba2e890bf185107f",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__interfaces__IERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2388,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+      "source_sha256": "deff3f42989a81b5aa34bbf7ecc17557c1cde909adceb497a85b554f0a72fe40",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol",
+      "normalized_sha256": "e0fb6d653c09e0f7ddc24051c4e418a1baaf0867a693c891c9da7522a94e67ff",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 5114,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/lib/BoringSolidity/contracts/libraries/BoringERC20.sol",
+      "source_sha256": "0d4afd9c15c05834118cfcacaf7257e8e2b088a1032f2c3e0cb1b4ba8580ecd1",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/a499d91682de-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol",
+      "normalized_sha256": "57ce2da32875e85d954d6776918f4e59638cb0242fcfbe5e6fe47676097e47bf",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 3334,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+      "source_sha256": "00f9b5fa8f023db2d825800a90bd95442a4dd464d48025e8f851c0526ca3a866",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.sol",
+      "normalized_sha256": "30878b0ae88fa59e1669282bd66072df4d145c0a848dddaebe5175eb67e0ff39",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__IBentoBoxV1.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 5176,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/IBentoBoxV1.sol",
+      "source_sha256": "97447ef627a0d5d41cf3f55b6d286e7734b08ba0b6971b16b54fa510f33945f8",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargatePool.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargatePool.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__IStargatePool.sol",
+      "normalized_sha256": "07bfc7809debd4f35427a23c9a84897de7a7e43fc17a788a2598ab3c07b559f6",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__IStargatePool.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 656,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/IStargatePool.sol",
+      "source_sha256": "281fb6239a81ded138af64a8bb86928dba51fd750a84856c5f69bbbb8f6da68d",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.sol",
+      "normalized_sha256": "3c0836b0dfd8f54c5c0c4d43faca45ec30996765dfef1c0cf5c275ae489edb0e",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__IStargateRouter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1821,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/IStargateRouter.sol",
+      "source_sha256": "ce8a222143d0a53f062e54930b24ed2f933069cbd0f99beb7c22c3efc932a158",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStrategy.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IStrategy.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__IStrategy.sol",
+      "normalized_sha256": "78ab9fedd588b257af38c8a26024e09e1bf283a46b39367cb892a5ba1ea919ad",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__IStrategy.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1557,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/IStrategy.sol",
+      "source_sha256": "b714eaab02727d925d20a9c503143471fff2a2cbfa453032ee82b3a37df1c883",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.sol",
+      "normalized_sha256": "1a45539284a97a4a9ef516ca10efbb6120dd5c0c1a2961566ee47e2c0c4220d4",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 741,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/ISwapperV2.sol",
+      "source_sha256": "44799ab8d20e3cfb526a7418eb41333b19d4838dc016f7da45a39705991acd98",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.sol",
+      "normalized_sha256": "1bfdb57beb70325a673a1ace6a6b4cb15b08c65edf1d7257ccad0890219102ac",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__interfaces__IUniswapV2Pair.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1438,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/interfaces/IUniswapV2Pair.sol",
+      "source_sha256": "ad5cc0aa7b54ad0386ec7a5076b23dbe1f0a549bafb68ac6bde54ae58cf313d7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__libraries__SafeApprove.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a473b80203cb5a5d__src__libraries__SafeApprove.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__libraries__SafeApprove.sol",
+      "normalized_sha256": "d3ecfcdda565ea9ef5b3c7932a168ba367a654c3b2898821bf6cdd9c1016f1df",
+      "ranker_output": "ranker/proj-a473b80203cb5a5d__src__libraries__SafeApprove.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 626,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/libraries/SafeApprove.sol",
+      "source_sha256": "9c1c3f621518a13e9e04fd378044606419b1787d18812853e9f834314ec420ba",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/d92d87a80f67-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-a473b80203cb5a5d__src__swappers__ZeroXStargateLPSwapper.sol",
+      "normalized_sha256": "88b5a615425051ba055fe7744f6c2a1276ee254ca744abf368377ac91cae01ab",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 2631,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a473b80203cb5a5d/source_code/src/swappers/ZeroXStargateLPSwapper.sol",
+      "source_sha256": "971531bdade08aa3b49b92e76a757a0f8ed036cf7423b0952a4c6e832ab0343e",
+      "status": "CRITIC_ERROR"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-a473b80203cb5a5d",
+  "project_source_file_count": 12,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T13:06:35.438153+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T13:23:27.384297+00:00",
+  "usage": {
+    "completion_tokens": 170238,
+    "prompt_cache_hit_tokens": 5632,
+    "prompt_cache_miss_tokens": 12980,
+    "prompt_tokens": 18612,
+    "request_attempt_count": 16,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

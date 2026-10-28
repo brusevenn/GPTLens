@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-2ad5df198f0f9fcc",
+  "case_ids": [
+    "acb-e2ef9605daf74987"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "3ec550cf4cbc8c0917c91d8d2d1b6cbb694cdf4d5ebe02ddf39d9f187b7eabfc",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T10:25:42.209060+00:00",
+  "exit_code": 0,
+  "input_identity": "f9e1d9a65bd8bab7ac9c83ed8fdb998ec5139328f8f1a253d87e1e4c2d893a1a",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-2ad5df198f0f9fcc",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "1d6b8cafdc736a9d8013f577ddae05203d4e860f3816a1a3e182a51d0dd97a49"
+    ],
+    [
+      "RobotBTC.sol",
+      "45ec53a9f6066ba83dd1edcc55b5de4f5c2090f302998e28f2493699d11859c4"
+    ]
+  ],
+  "source_hashes": [
+    "1d6b8cafdc736a9d8013f577ddae05203d4e860f3816a1a3e182a51d0dd97a49",
+    "45ec53a9f6066ba83dd1edcc55b5de4f5c2090f302998e28f2493699d11859c4"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

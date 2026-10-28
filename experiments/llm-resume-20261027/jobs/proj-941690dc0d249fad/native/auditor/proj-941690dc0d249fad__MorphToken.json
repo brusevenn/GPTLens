@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "owned",
+    "code": "function owned() public {\n        owner = msg.sender;\n    }",
+    "vulnerability": "Public ownership takeover due to misnamed constructor",
+    "reason": "In Solidity 0.4.18, a constructor must have the exact same name as its contract. The function `owned()` in contract `Owned` is therefore not a constructor; it is an ordinary public function inherited by `MorphToken` and callable by anyone at any time. When any attacker calls `owned()`, the statement `owner = msg.sender` overwrites the legitimate owner with the attacker's address. After takeover, the attacker can call `mintTokens` to mint unlimited tokens to itself, call `blacklistAccount` to freeze other users, and call `transferOwnership` to transfer control. This is directly exploitable for token dilution, theft, and full contract control.",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom( address _from, address _to, uint256 _amount ) public returns (bool success) {\n        if (balanceOf[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balanceOf[_to].add(_amount) > balanceOf[_to]) {\n            balanceOf[_from] = balanceOf[_from].sub(_amount);\n            allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_amount);\n            balanceOf[_to] = balanceOf[_to].add(_amount);\n            return true;\n        } else {\n            return false;\n        }\n    }",
+    "vulnerability": "Blacklist bypass via transferFrom",
+    "reason": "The `transferFrom` function does not check `isblacklistedAccount[_from]`, `isblacklistedAccount[msg.sender]`, or `isblacklistedAccount[_to]`, while `transfer` does enforce the blacklist. A blacklisted account can call `approve` (which is also unrestricted) to approve itself or a colluding address, then call `transferFrom` from the blacklisted address. Because only `transfer` checks the blacklist, this succeeds and moves tokens despite the account being blacklisted. This completely defeats the blacklist/freeze mechanism and lets an attacker move stolen or frozen funds after being blacklisted, or send tokens to another blacklisted account.",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _amount) public returns (bool success) {\n        allowed[msg.sender][_spender] = _amount;\n        Approval(msg.sender, _spender, _amount);\n        return true;\n    }",
+    "vulnerability": "ERC20 approve race condition / allowance double-spend",
+    "reason": "The `approve` function directly overwrites the existing allowance with `_amount` and does not require the previous allowance to be zero or use increase/decrease semantics. If an owner first approves a spender for N tokens and later submits a transaction to change the allowance to M, the spender can watch the mempool, spend the old N before the change is mined, and then spend the new M after the change. The spender receives N + M total instead of at most M, which is a real front-running allowance double-spend and is beneficial to the spender.",
+    "file_name": "proj-941690dc0d249fad__MorphToken.sol"
+  }
+]

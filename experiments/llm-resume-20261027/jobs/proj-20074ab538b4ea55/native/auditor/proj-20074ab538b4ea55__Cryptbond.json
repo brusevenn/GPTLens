@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "ToOwner",
+    "code": "function ToOwner( ) public { balances[msg.sender] = totalSupply; owner = msg.sender; }",
+    "vulnerability": "Public ownership and total-supply token takeover",
+    "reason": "ToOwner has no access control, no require, and no modifier. Any external attacker can call ToOwner() directly. The function then executes balances[msg.sender] = totalSupply, giving the attacker the entire 3,000,000,000 token supply, and owner = msg.sender, making the attacker the contract owner. With owner privileges, the attacker can call withdraw() to drain the contract's ETH, call withdrawForeignTokens() to drain foreign tokens held by the contract, change sale parameters, blacklist addresses, or transfer ownership. This is immediately exploitable and highly beneficial to an attacker.",
+    "file_name": "proj-20074ab538b4ea55__Cryptbond.sol"
+  },
+  {
+    "function_name": "Mining24",
+    "code": "function Mining24 (uint256 _value, uint256 _minReq) public { owner = msg.sender; value = _value; minReq = _minReq; balances[msg.sender] = totalDistributed; }",
+    "vulnerability": "Unauthorized owner takeover and parameter manipulation",
+    "reason": "Mining24 is public and has no onlyOwner modifier or any authorization check. Any attacker can call Mining24(anyValue, anyMinReq) and set owner = msg.sender. Even if the attacker's balance is set to totalDistributed rather than totalSupply, the ownership takeover is enough to abuse all onlyOwner functions, including withdraw() to steal ETH, withdrawForeignTokens() to steal external tokens, setParameters() to manipulate sale parameters, disableWhitelist() to block users, and transferOwnership() to lock control. The attacker also controls value and minReq, which affect token distribution logic. This is a severe and directly exploitable privilege escalation.",
+    "file_name": "proj-20074ab538b4ea55__Cryptbond.sol"
+  },
+  {
+    "function_name": "function()",
+    "code": "function() public payable { uint toMint = msg.value/price; balances[msg.sender]+=toMint; Transfer(0,msg.sender,toMint); }",
+    "vulnerability": "Unbounded token minting and totalSupply cap bypass",
+    "reason": "The fallback function is payable and any external actor can trigger it by sending ETH to the contract. It computes toMint = msg.value/price and adds toMint directly to balances[msg.sender] without checking distributionFinished, totalRemaining, totalDistributed, or the totalSupply cap. It also does not update totalSupply or totalDistributed. As a result, an attacker can mint arbitrary amounts of tokens by sending ETH, even beyond the declared 3,000,000,000 totalSupply and even after distribution is supposedly finished. If the token has market value above the fixed price, the attacker can mint tokens cheaply and sell them, diluting existing holders and extracting value. This breaks the token supply invariant and is economically exploitable.",
+    "file_name": "proj-20074ab538b4ea55__Cryptbond.sol"
+  }
+]

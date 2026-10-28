@@ -1,0 +1,19 @@
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__access__Ownable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__access__Ownable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__extensions__IERC20Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__token__ERC20__utils__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__utils__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-033997bd14a9a729__@openzeppelin__contracts__utils__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-033997bd14a9a729__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-033997bd14a9a729__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-033997bd14a9a729__contracts__StaxLPStaking.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-033997bd14a9a729__contracts__StaxLPStaking.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-033997bd14a9a729", "case_ids": ["acb-da967e924bee328a"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 9, "failed_files": 1, "request_log": "requests.jsonl"}

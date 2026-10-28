@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-424da07d41309706__MainContractFlattened.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

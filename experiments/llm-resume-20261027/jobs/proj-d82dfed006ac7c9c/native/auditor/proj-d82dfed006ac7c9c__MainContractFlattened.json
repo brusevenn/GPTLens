@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "distributeToken",
+    "code": "function distributeToken(address[] addresses, uint256 _value) { for (uint i = 0; i < addresses.length; i++) { balances[msg.sender] -= _value; balances[addresses[i]] += _value; Transfer(msg.sender, addresses[i], _value); } }",
+    "vulnerability": "Integer underflow allows arbitrary token minting",
+    "reason": "The function subtracts `_value` from `balances[msg.sender]` without checking whether the sender's balance is sufficient. Because the contract uses Solidity 0.4.17, which does not have built-in overflow protection, subtracting a value greater than the current balance causes an unsigned integer underflow, wrapping the balance to `2^256 - 1`. An attacker with zero balance can call `distributeToken` with `_value = 1` and an array containing any recipient address. The first iteration underflows the attacker's balance to the maximum uint256 value, then adds `1` to the recipient. The attacker can repeat or adapt this to mint an effectively unlimited number of tokens to themselves or others. These tokens can then be transferred, sold on exchanges, or used to dilute the token's value, resulting in severe financial loss. This is a critical vulnerability because it breaks the fundamental invariant of the token supply and allows anyone to become a massive token holder without any initial capital.",
+    "file_name": "proj-d82dfed006ac7c9c__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transfer",
+    "code": "function transfer(address _to, uint256 _value) returns (bool success) { if (balances[msg.sender] >= _value && _value > 0) { balances[msg.sender] -= _value; balances[_to] += _value; Transfer(msg.sender, _to, _value); return true; } else { return false; } }",
+    "vulnerability": "Integer overflow on recipient balance",
+    "reason": "The function checks that the sender has enough balance to subtract `_value`, but it does not check whether adding `_value` to `balances[_to]` will overflow. In Solidity 0.4.17, if `balances[_to] + _value` exceeds `2^256 - 1`, the result wraps around to a small number, effectively destroying the recipient's tokens. While the initial total supply is far below the maximum, an attacker can first exploit the `distributeToken` underflow to create a huge balance for themselves and then manipulate other accounts' balances. For example, the attacker can set a victim's balance close to the maximum via `distributeToken`, then send a small amount to the victim to overflow their balance down to a tiny value. This allows the attacker to arbitrarily corrupt or destroy token balances, which can be used for griefing, market manipulation, or to attack exchanges and other contracts that rely on accurate balance reporting.",
+    "file_name": "proj-d82dfed006ac7c9c__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _value) returns (bool success) { allowed[msg.sender][_spender] = _value; Approval(msg.sender, _spender, _value); return true; }",
+    "vulnerability": "ERC20 approve race condition (double spending of allowance)",
+    "reason": "The `approve` function directly sets the allowance to `_value` without preventing a change from a non-zero allowance to another non-zero allowance. This is the classic ERC20 approve race condition. Suppose an owner has previously approved a spender for N tokens and now calls `approve` to change the allowance to M tokens. A malicious spender can monitor the mempool, see the new `approve` transaction, and front-run it by calling `transferFrom` to spend the entire old allowance N. After the owner's transaction is mined and the allowance becomes M, the spender can call `transferFrom` again to spend the new allowance M. As a result, the spender receives N + M tokens instead of the intended N (or M), directly stealing the extra allowance from the owner. This vulnerability is exploitable in real-world scenarios whenever an owner changes a non-zero allowance, and it can lead to significant token theft.",
+    "file_name": "proj-d82dfed006ac7c9c__MainContractFlattened.sol"
+  }
+]

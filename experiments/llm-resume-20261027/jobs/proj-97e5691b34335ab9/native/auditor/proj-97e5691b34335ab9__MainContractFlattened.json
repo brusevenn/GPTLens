@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "addTransaction",
+    "code": "function addTransaction(address destination, uint value, bytes memory data) public notNull(destination) returns (uint transactionId) {\n    transactionId = transactionCount;\n    transactions[transactionId] = Transaction({ destination: destination, value: value, data: data, executed: false });\n    transactionCount += 1;\n    emit Submission(transactionId);\n}",
+    "vulnerability": "Missing access control allows anyone to create transactions",
+    "reason": "The `addTransaction` function is public and lacks any owner check. In the original Gnosis MultiSigWallet, `addTransaction` is internal and only callable via `submitTransaction` which is restricted to owners. Here, any external attacker can call `addTransaction` directly to create arbitrary transactions. This enables transaction spam (increasing `transactionCount` and storage costs), transaction ID front-running, and can potentially trick signers into confirming a malicious transaction if they rely on transaction IDs without verifying details. An attacker can pre-create a transaction with a malicious destination and data, and if a signer later confirms by ID (e.g., from a queued list), the malicious transaction could be executed. This severely weakens the multisig's security model.",
+    "file_name": "proj-97e5691b34335ab9__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "replaceOwner",
+    "code": "function replaceOwner(address owner, address newOwner) public onlyWallet ownerExists(owner) ownerDoesNotExist(newOwner) {\n    for (uint i=0; i<owners.length; i++)\n        if (owners[i] == owner) {\n            owners[i] = newOwner;\n            break;\n        }\n    isOwner[owner] = false;\n    isOwner[newOwner] = true;\n    emit OwnerRemoval(owner);\n    emit OwnerAddition(newOwner);\n}",
+    "vulnerability": "Missing zero-address validation for newOwner",
+    "reason": "The `replaceOwner` function does not include the `notNull(newOwner)` modifier, unlike `addOwner`. This allows the multisig to replace an existing owner with `address(0)`. Once `address(0)` becomes an owner, it is recorded in `isOwner` and the `owners` array, but it can never confirm any transaction because it cannot send messages. This reduces the number of active owners while `required` remains unchanged. If `required` equals the original number of owners, the multisig becomes permanently bricked because the zero address cannot provide the missing confirmation. Even if not fully bricked, it permanently degrades the multisig's functionality and can be used by a malicious insider to grief other owners. The function should reject `address(0)` to prevent accidental or malicious lockout.",
+    "file_name": "proj-97e5691b34335ab9__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "function () payable external",
+    "code": "function () payable external {\n    address impl = implementation;\n    require(impl != address(0));\n    assembly {\n        let ptr := mload(0x40)\n        calldatacopy(ptr, 0, calldatasize)\n        let result := delegatecall(gas, impl, ptr, calldatasize, 0, 0)\n        let size := returndatasize\n        returndatacopy(ptr, 0, size)\n        switch result\n        case 0 { revert(ptr, size) }\n        default { return(ptr, size) }\n    }\n}",
+    "vulnerability": "Arbitrary delegatecall to externally set implementation",
+    "reason": "The fallback function delegates all unknown calls to the `implementation` address stored in storage. While `_setImplementation` is protected by `onlyWallet`, the proxy pattern introduces a critical attack surface: if the implementation contract contains any public function that performs a `call` or `delegatecall` to an attacker-controlled address, the attacker can invoke it through this fallback. Because the implementation code executes in the context of `EthVault`, such a function could be used to make `EthVault` call itself with data that invokes privileged functions like `_setImplementation`, `addOwner`, or `replaceOwner`. Since the call would come from `address(this)`, the `onlyWallet` modifier would pass, allowing the attacker to set a malicious implementation, add themselves as an owner, or directly modify the multisig. This can lead to complete takeover and draining of all funds. Even without an explicit arbitrary call primitive, storage collisions between the implementation and `EthVault` can corrupt critical variables (e.g., `owners`, `required`, `transactions`) because the implementation's storage layout must be perfectly aligned with the proxy's. The lack of isolation for the upgradeable implementation makes this a severe vulnerability.",
+    "file_name": "proj-97e5691b34335ab9__MainContractFlattened.sol"
+  }
+]

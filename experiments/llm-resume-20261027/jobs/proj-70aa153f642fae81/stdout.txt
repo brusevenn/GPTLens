@@ -1,0 +1,5 @@
+{"input_file": "proj-70aa153f642fae81__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-70aa153f642fae81__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-70aa153f642fae81__ShadowFi.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-70aa153f642fae81__ShadowFi.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-70aa153f642fae81", "case_ids": ["acb-bc128ac601d99ea7"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 2, "request_log": "requests.jsonl"}

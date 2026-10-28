@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "approve",
+    "code": "function approve(address _spender, uint256 _amount) returns (bool success) {\n    allowed[msg.sender][_spender] = _amount;\n    Approval(msg.sender, _spender, _amount);\n    return true;\n}",
+    "vulnerability": "ERC20 approve race condition",
+    "reason": "The approve function directly overwrites the allowance mapping without any mechanism to prevent front-running. A malicious spender can monitor the mempool for a transaction that changes their allowance (e.g., from a non-zero value to another value) and front-run it by spending the old allowance. After the new approval transaction is mined, the spender can spend the new allowance as well, effectively double-spending the allowance. For example, if Alice approves Bob for 100 tokens, then later decides to change the allowance to 50 tokens, Bob can front-run Alice's second transaction by spending the initial 100 tokens, and after the new approval is mined, he can spend 50 more, totaling 150 tokens. This is a real-world exploit that benefits a malicious spender and can cause financial loss to the token owner. The lack of increaseApproval/decreaseApproval functions exacerbates this known ERC20 vulnerability.",
+    "file_name": "proj-b49f8ec70ad0ee40__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transfer",
+    "code": "function transfer(address _to, uint256 _amount) returns (bool success) {\n    if (balances[msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {\n        balances[msg.sender] -= _amount;\n        balances[_to] += _amount;\n        Transfer(msg.sender, _to, _amount);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Short address attack due to missing calldata length validation",
+    "reason": "The transfer function accepts an address and a uint256 without validating the length of msg.data. In Solidity 0.4.13, if a caller (such as an exchange or wallet) passes a short address (e.g., 19 bytes instead of 20), the ABI encoding pads the missing byte with zeros, which shifts the uint256 amount. An attacker can create a wallet with a short address and initiate a withdrawal from a vulnerable exchange. The exchange calls transfer with the short address and a small amount, but due to the shift, the contract interprets the amount as significantly larger (e.g., multiplied by 256). The attacker receives the inflated amount, stealing funds from the exchange. The contract does not check msg.data.length or use a safe transfer pattern, making it exploitable in real-world integration scenarios. This affects any function taking an address and uint256, including transfer and transferFrom.",
+    "file_name": "proj-b49f8ec70ad0ee40__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom( address _from, address _to, uint256 _amount ) returns (bool success) {\n    if (balances[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {\n        balances[_from] -= _amount;\n        allowed[_from][msg.sender] -= _amount;\n        balances[_to] += _amount;\n        Transfer(_from, _to, _amount);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Short address attack due to missing calldata length validation",
+    "reason": "Similar to transfer, the transferFrom function lacks validation of msg.data.length. It takes three parameters: two addresses and a uint256. A short address supplied by an attacker (when a third-party exchange or wallet constructs the call) causes the subsequent arguments to be shifted. This can lead to an unintended larger allowance spending or token transfer. For instance, an attacker with a short address could trick an exchange into calling transferFrom, resulting in the exchange approving or transferring more tokens than intended. The attacker gains the excess tokens while the exchange loses funds. The absence of a check like require(msg.data.length == 100) (4 + 32 + 32 + 32) or the use of a safe transfer pattern makes this function vulnerable to the well-known short address attack in Solidity 0.4.13.",
+    "file_name": "proj-b49f8ec70ad0ee40__MainContractFlattened.sol"
+  }
+]

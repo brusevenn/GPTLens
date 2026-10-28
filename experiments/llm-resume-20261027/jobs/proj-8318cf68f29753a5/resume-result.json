@@ -1,0 +1,29 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-8318cf68f29753a5",
+  "case_ids": [
+    "acb-9a0d67a95cd272e6"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "9e56690a2909cdea35625c2f7c8840be87a5aaca55a8370e95f2e82d3edc5a8d",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T12:18:16.633445+00:00",
+  "exit_code": 2,
+  "input_identity": "d65e559bd34f295d90fca7d7a3e07b40a37c5850138c1ec54165ee3f08c7491c",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-8318cf68f29753a5",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "PrizePool.sol",
+      "42a52a6186d02c63361c5e8e66c436006c4eeec6ea01985b99d7f7087bf3d624"
+    ]
+  ],
+  "source_hashes": [
+    "42a52a6186d02c63361c5e8e66c436006c4eeec6ea01985b99d7f7087bf3d624"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

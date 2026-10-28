@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-2654ebef2486b850",
+  "case_ids": [
+    "acb-970582f592349726"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "d8fcb0d1f89aa2110ebc2cf36d01a413d28c139c3a35544a4772b8954df2f97c",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T10:24:39.352194+00:00",
+  "exit_code": 0,
+  "input_identity": "fbae1d713c429b2531834499bd3b89af00337bba3d68620089a71599376ff059",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-2654ebef2486b850",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "af674351f90aeb8a8dd2d70ebf5c8cde1de33b84b957fd84e2178a5a3349bbac"
+    ],
+    [
+      "Virgo_ZodiacToken.sol",
+      "5f8a401c349bf1d1d4b42499f9d24569222f923295b4c886f250fb72c1735a6e"
+    ]
+  ],
+  "source_hashes": [
+    "5f8a401c349bf1d1d4b42499f9d24569222f923295b4c886f250fb72c1735a6e",
+    "af674351f90aeb8a8dd2d70ebf5c8cde1de33b84b957fd84e2178a5a3349bbac"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

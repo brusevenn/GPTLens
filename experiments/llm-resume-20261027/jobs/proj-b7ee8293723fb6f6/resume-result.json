@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-b7ee8293723fb6f6",
+  "case_ids": [
+    "acb-67cc607ff5d869bf"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "7763d3f62ceaecd6a395047e70f180c28e289c1b07ba5d00fe80ca72404022d1",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T14:10:26.587922+00:00",
+  "exit_code": 0,
+  "input_identity": "b71e060d52290dc61e4242ba73d75fe85983d5f204e1b9c611f26bc211ed7aad",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-b7ee8293723fb6f6",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "DimonCoin.sol",
+      "c1b0c49f259fc6f468e6a9e3c44c13c4291d530da49c553bfbdab815c57b5eb7"
+    ],
+    [
+      "MainContractFlattened.sol",
+      "d01a276250ec6928369aeb76f18698d08f9edf52dcd9ffe2c35133e03c3a30c1"
+    ]
+  ],
+  "source_hashes": [
+    "c1b0c49f259fc6f468e6a9e3c44c13c4291d530da49c553bfbdab815c57b5eb7",
+    "d01a276250ec6928369aeb76f18698d08f9edf52dcd9ffe2c35133e03c3a30c1"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

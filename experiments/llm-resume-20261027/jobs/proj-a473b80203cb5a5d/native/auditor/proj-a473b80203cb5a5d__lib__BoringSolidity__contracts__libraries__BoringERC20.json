@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "safeTransfer",
+    "code": "function safeTransfer(\n    IERC20 token,\n    address to,\n    uint256 amount\n) internal {\n    (bool success, bytes memory data) = address(token).call(abi.encodeWithSelector(SIG_TRANSFER, to, amount));\n    require(success && (data.length == 0 || abi.decode(data, (bool))), \"BoringERC20: Transfer failed\");\n}",
+    "vulnerability": "Missing contract existence check allows false transfer success",
+    "reason": "The function uses address(token).call without verifying that token is a deployed contract. In the EVM, calling an externally owned account (EOA) or the zero address returns success = true and data.length == 0. The require condition accepts empty return data, so safeTransfer does not revert even though no token transfer occurred. If a protocol uses this library and accepts arbitrary token addresses, an attacker can supply an EOA or zero address as the token. The protocol will believe the transfer succeeded and may update internal accounting, credit balances, or release other assets. This can be exploited to steal funds from the protocol without transferring any real tokens. The missing isContract check is a severe vulnerability because it breaks the safety guarantee of the transfer wrapper.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol"
+  },
+  {
+    "function_name": "safeTransferFrom",
+    "code": "function safeTransferFrom(\n    IERC20 token,\n    address from,\n    address to,\n    uint256 amount\n) internal {\n    (bool success, bytes memory data) = address(token).call(abi.encodeWithSelector(SIG_TRANSFER_FROM, from, to, amount));\n    require(success && (data.length == 0 || abi.decode(data, (bool))), \"BoringERC20: TransferFrom failed\");\n}",
+    "vulnerability": "Missing contract existence check allows false transferFrom success",
+    "reason": "Similar to safeTransfer, safeTransferFrom calls address(token).call without checking that token has code. If token is an EOA or zero address, the call does nothing, returns success = true and empty returndata. The require passes because data.length == 0 is accepted. An attacker can exploit this by passing a non-contract token address to a function that uses safeTransferFrom to pull tokens from the caller. The calling contract will incorrectly believe the transferFrom succeeded and may credit the attacker with tokens, allow withdrawals, or increase collateral. Because no actual transfer or allowance check occurs, the attacker can drain funds from the protocol. This is a severe vulnerability in any contract that accepts untrusted token addresses.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol"
+  },
+  {
+    "function_name": "safeDecimals",
+    "code": "function safeDecimals(IERC20 token) internal view returns (uint8) {\n    (bool success, bytes memory data) = address(token).staticcall(abi.encodeWithSelector(SIG_DECIMALS));\n    return success && data.length == 32 ? abi.decode(data, (uint8)) : 18;\n}",
+    "vulnerability": "Unsafe decimals fallback and unvalidated decoding enable mispricing and DoS",
+    "reason": "safeDecimals returns 18 whenever the staticcall fails or the returned data length is not exactly 32. This fallback is dangerous because many tokens have decimals other than 18, such as 0, 6, or 8. An attacker can deploy a token that does not implement decimals() (or returns malformed data) so that safeDecimals incorrectly reports 18 decimals. If a protocol uses this value to normalize token amounts, it can dramatically overvalue or undervalue the attacker's token. For example, a token with 0 actual decimals but reported as 18 can be used to inflate collateral by a factor of 1e18, allowing the attacker to borrow or withdraw far more than they deposited. Additionally, if a malicious token returns exactly 32 bytes with a value greater than type(uint8).max, abi.decode(data, (uint8)) will revert, causing a denial-of-service in any function that processes multiple tokens. The function is named safeDecimals but does not safely validate the returned value, making it exploitable for fund theft and griefing.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.sol"
+  }
+]

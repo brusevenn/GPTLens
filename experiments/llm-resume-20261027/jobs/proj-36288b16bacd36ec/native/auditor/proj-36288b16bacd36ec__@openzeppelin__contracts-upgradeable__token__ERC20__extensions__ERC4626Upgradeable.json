@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 assets, address receiver) public virtual override returns (uint256) {\n    require(assets <= maxDeposit(receiver), \"ERC4626: deposit more than max\");\n    uint256 shares = previewDeposit(assets);\n    _deposit(_msgSender(), receiver, assets, shares);\n    return shares;\n}",
+    "vulnerability": "Inflation attack / donation attack",
+    "reason": "The vault uses the raw balance of the underlying asset (totalAssets = balanceOf(address(this))) and does not implement virtual shares or a decimals offset. An attacker can be the first depositor by depositing 1 wei to receive 1 share, then directly transfer (donate) a large amount of the underlying asset to the vault contract, inflating totalAssets while totalSupply remains 1. When a victim calls deposit(assets, receiver), previewDeposit calculates shares = assets * totalSupply / totalAssets rounded down. If the victim's deposit amount is less than the inflated totalAssets, the calculation yields 0 shares. The victim's assets are still transferred into the vault. The attacker can then redeem their 1 share for the entire vault balance, including the victim's deposit. This is a well-known severe vulnerability in early ERC4626 implementations.",
+    "file_name": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__ERC4626Upgradeable.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(uint256 shares, address receiver) public virtual override returns (uint256) {\n    require(shares <= maxMint(receiver), \"ERC4626: mint more than max\");\n    uint256 assets = previewMint(shares);\n    _deposit(_msgSender(), receiver, assets, shares);\n    return assets;\n}",
+    "vulnerability": "Inflation attack / donation attack",
+    "reason": "Similar to the deposit function, the mint function uses the manipulable exchange rate based on totalAssets. An attacker can first deposit 1 wei to get 1 share, then donate a large amount of the underlying asset to the vault, massively inflating totalAssets per share. When a victim calls mint(shares, receiver), previewMint computes the required assets as shares * totalAssets / totalSupply rounded up. Due to the inflated totalAssets, the victim must pay an excessive amount of assets for a small number of shares. After the victim's transaction, the attacker redeems their 1 share for the entire vault balance, which includes the victim's overpayment. This allows the attacker to steal the victim's deposited assets.",
+    "file_name": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__ERC4626Upgradeable.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(uint256 shares, address receiver) public virtual override returns (uint256) {\n    require(shares <= maxMint(receiver), \"ERC4626: mint more than max\");\n    uint256 assets = previewMint(shares);\n    _deposit(_msgSender(), receiver, assets, shares);\n    return assets;\n}",
+    "vulnerability": "Free minting when the vault is undercollateralized",
+    "reason": "The maxMint function always returns type(uint256).max and does not check _isVaultCollateralized(), unlike maxDeposit. If the vault ever becomes undercollateralized such that totalAssets() == 0 while totalSupply() > 0, previewMint(shares) will compute assets = shares * totalAssets / totalSupply = 0 for any number of shares. An attacker can then call mint with an arbitrarily large number of shares, paying 0 assets, and receive those shares. This dilutes existing shareholders to zero and allows the attacker to later redeem any future deposits or donations. This state can be reached if the underlying asset is a rebasing token with negative rebase, a token that can be burned from the vault, or if an inheriting contract overrides totalAssets to include a strategy that loses all funds. The missing collateralization check is a known severe vulnerability in this version of OpenZeppelin's ERC4626 implementation.",
+    "file_name": "proj-36288b16bacd36ec__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__ERC4626Upgradeable.sol"
+  }
+]

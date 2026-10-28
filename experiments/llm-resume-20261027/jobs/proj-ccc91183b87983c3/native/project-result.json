@@ -1,0 +1,89 @@
+{
+  "case_ids": [
+    "acb-8a040b35b3b0bcbb",
+    "acb-d8c1f12db7814708",
+    "acb-fe2fba2d028aadb2"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 146,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-ccc91183b87983c3/source_code/config.json",
+      "sha256": "7425d86bd2a63fb035e95b2e0acd9fd277ac43ecb8955d7a7cd3d8336ca3bd71"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T14:48:52.748207+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-ccc91183b87983c3__EntropyGenerator.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-ccc91183b87983c3__EntropyGenerator.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-ccc91183b87983c3__EntropyGenerator.sol",
+      "normalized_sha256": "554f1eec1b81200144c176e0de9b9bf3a76e5f774fd31c8b7bc097639ee725e8",
+      "ranker_output": "ranker/proj-ccc91183b87983c3__EntropyGenerator.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 159055,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-ccc91183b87983c3/source_code/EntropyGenerator.sol",
+      "source_sha256": "2d5756dfe5a76c6f68c2995ea68225ca6c8b99e7caece1a03c89f13a2ccaa2ad",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-ccc91183b87983c3",
+  "project_source_file_count": 1,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T14:45:07.724762+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T14:48:52.748219+00:00",
+  "usage": {
+    "completion_tokens": 37948,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 21442,
+    "prompt_tokens": 22466,
+    "request_attempt_count": 2,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

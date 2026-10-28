@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "mint",
+    "code": "function mint( address account, uint256 amount, string memory txId ) public returns (bool) { _mint(account, amount); emit Minted(account, amount, txId); return true; }",
+    "vulnerability": "Public mint function allows anyone to mint arbitrary tokens without any access control or underlying asset deposit.",
+    "reason": "The mint function is declared public and has no modifiers or checks to restrict who can call it. Any external actor can call mint to create an arbitrary amount of tokens for any address, including themselves. This leads to unlimited inflation, devaluing existing tokens and enabling attackers to steal value from any contract or liquidity pool that holds or accepts this token. For example, an attacker can mint a huge amount of tokens and dump them on a decentralized exchange, draining the pool's other assets. This is a critical vulnerability that completely breaks the token's economics and security.",
+    "file_name": "proj-1363b49f81543e3c__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "approve",
+    "code": "function approve(address spender, uint256 amount) public returns (bool) { _approve(msg.sender, spender, amount); return true; }",
+    "vulnerability": "Race condition in approve allows double-spending of allowances.",
+    "reason": "The approve function directly sets the allowance without using a mechanism to prevent the known ERC20 approve race condition. If an owner changes a non-zero allowance to another non-zero value, a malicious spender can front-run the transaction by spending the original allowance, and then after the transaction is mined, spend the new allowance as well. For example, Alice approves Bob for 100 tokens. Later, Alice decides to change the allowance to 50 by calling approve(Bob, 50). Bob sees this transaction and quickly spends 100 tokens before it is mined. After the approve transaction is mined, Bob can spend another 50 tokens, totaling 150 tokens, even though Alice intended to allow only 50 more. This allows a malicious spender to transfer more tokens than the owner intended. Although increaseAllowance and decreaseAllowance are provided as a mitigation, the approve function remains vulnerable and may be used by users unaware of the risk.",
+    "file_name": "proj-1363b49f81543e3c__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "constructor",
+    "code": "constructor( string memory name, string memory symbol, uint8 decimals, address account, uint256 amount ) public { _name = name; _symbol = symbol; _decimals = decimals; _mint(account, amount * 10 ** uint256(decimals)); }",
+    "vulnerability": "Integer overflow in initial supply calculation can lead to an incorrect and potentially much smaller total supply.",
+    "reason": "The constructor calculates the initial token supply using `amount * 10 ** uint256(decimals)` without using SafeMath. In Solidity 0.5.11, arithmetic operations do not check for overflow by default. If the deployer chooses a sufficiently large `amount` or `decimals`, the multiplication can overflow modulo 2^256, resulting in a much smaller (or even zero) initial supply than intended. This can severely distort the token's distribution and economics. For instance, if the deployer intends to mint 10^30 tokens with 18 decimals, the multiplication might wrap around to a tiny number. While this requires specific deployment parameters, it is a real vulnerability that can be triggered accidentally or through malicious deployment scripts. An attacker could potentially exploit a small initial supply if the token is used in governance or liquidity provision, although the primary risk is to the deployer and token holders due to incorrect minting.",
+    "file_name": "proj-1363b49f81543e3c__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-d79ac252134863ee__MainContractFlattened.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

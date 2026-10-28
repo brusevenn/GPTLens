@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "UBSexToken",
+    "code": "function UBSexToken() { owner = msg.sender; totalSupply = 1.9 * 10 ** 26; balances[owner] = totalSupply; }",
+    "vulnerability": "Misnamed constructor allows arbitrary ownership takeover",
+    "reason": "The function `UBSexToken` is intended to be the constructor but is named differently from the contract `BAFCToken`. In Solidity, a constructor must have the same name as the contract. Therefore, `UBSexToken` is a regular public function, and no constructor exists. During deployment, `owner` is never initialized. Any external caller can invoke `UBSexToken()` to set `owner` to their own address, gaining full control over owner-only functions such as `freezeAccount`, `transferOwnership`, and `switchLiquidity`. An attacker can call this function immediately after deployment to become the owner and take over the contract.",
+    "file_name": "proj-c308ab5d03a974c9__BAFCToken.sol"
+  },
+  {
+    "function_name": "UBSexToken",
+    "code": "function UBSexToken() { owner = msg.sender; totalSupply = 1.9 * 10 ** 26; balances[owner] = totalSupply; }",
+    "vulnerability": "Arbitrary token minting to caller",
+    "reason": "The public function `UBSexToken` sets `totalSupply` to a fixed value and assigns the entire supply to `balances[owner]`, where `owner` is `msg.sender`. Because the function is publicly callable and lacks any access control, any attacker can call it to mint the entire total supply to their own address. This gives the attacker a massive token balance and can be used to steal value from legitimate holders or drain contracts/exchanges that accept the token.",
+    "file_name": "proj-c308ab5d03a974c9__BAFCToken.sol"
+  },
+  {
+    "function_name": "UBSexToken",
+    "code": "function UBSexToken() { owner = msg.sender; totalSupply = 1.9 * 10 ** 26; balances[owner] = totalSupply; }",
+    "vulnerability": "Re-initialization allows unlimited token minting",
+    "reason": "The function `UBSexToken` can be called multiple times by any address because it lacks a one-time initialization guard. Each call sets `balances[msg.sender] = totalSupply` without reducing the balances of previous callers or increasing `totalSupply`. An attacker can call it, transfer the minted tokens to another address, and then call it again to mint another `totalSupply` to themselves. This process can be repeated indefinitely, allowing the attacker to mint an unlimited number of tokens and completely destroy the token's economics.",
+    "file_name": "proj-c308ab5d03a974c9__BAFCToken.sol"
+  }
+]

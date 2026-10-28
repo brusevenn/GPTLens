@@ -1,0 +1,3 @@
+{"input_file": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-dba82638ecd8f4f8__VotiumStrategyCore.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-dba82638ecd8f4f8", "case_ids": ["acb-93ad8a9c143d1cda"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

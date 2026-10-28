@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function withdraw(uint256 _withdrawId) external override {\n    if (withdrawIdToWithdrawRequestInfo[_withdrawId].owner != msg.sender) revert NotOwner();\n    if (!this.canWithdraw(_withdrawId)) revert WithdrawNotReady();\n    if (withdrawIdToWithdrawRequestInfo[_withdrawId].withdrawn) revert AlreadyWithdrawn();\n    relock();\n    uint256 cvxWithdrawAmount = withdrawIdToWithdrawRequestInfo[_withdrawId]\n        .cvxOwed;\n    uint256 ethReceived = sellCvx(cvxWithdrawAmount);\n    cvxUnlockObligations -= cvxWithdrawAmount;\n    withdrawIdToWithdrawRequestInfo[_withdrawId].withdrawn = true;\n    (bool sent, ) = msg.sender.call{value: ethReceived}(\"\");\n    if (!sent) revert FailedToSend();\n}",
+    "correctness": 7,
+    "criticism": "The snippet calls sellCvx but does not show its implementation, so the zero-min_dy claim is not directly verifiable from the provided code. If sellCvx uses Curve exchange_underlying with min_dy=0, then a withdrawal-sized CVX-to-ETH sale can be sandwiched: the attacker manipulates the pool before the withdrawal, the user receives less ETH, and the attacker back-runs for profit. The lack of a minimum ETH output parameter means the user cannot bound slippage. This is a real and user-impacting MEV issue when the assumption holds, but exploitability and profit depend on withdrawal size, liquidity, gas, and whether transactions are exposed in the public mempool. It is serious for the affected withdrawer but not necessarily protocol-wide insolvency.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol",
+    "final_score": 6.75,
+    "function_name": "withdraw",
+    "profitability": 6,
+    "reason": "The function calls sellCvx(cvxWithdrawAmount), which invokes ICrvEthPool.exchange_underlying with min_dy set to 0. An attacker can front-run the withdrawal to manipulate the Curve pool price, causing the user to receive less ETH for their CVX. The attacker then back-runs to profit. The function lacks any minimum ETH output parameter, making every withdrawal susceptible to sandwich attacks.",
+    "severity": 7,
+    "vulnerability": "MEV sandwich due to zero slippage protection in sellCvx"
+  },
+  {
+    "code": "function ethPerCvx(bool _validate) public view returns (uint256) {\n    ChainlinkResponse memory cl;\n    try chainlinkCvxEthFeed.latestRoundData() returns (\n        uint80 roundId,\n        int256 answer,\n        uint256 ,\n        uint256 updatedAt,\n        uint80\n    ) {\n        cl.success = true;\n        cl.roundId = roundId;\n        cl.answer = answer;\n        cl.updatedAt = updatedAt;\n    } catch {\n        cl.success = false;\n    }\n    if (\n        (!_validate ||\n            (cl.success == true &&\n                cl.roundId != 0 &&\n                cl.answer >= 0 &&\n                cl.updatedAt != 0 &&\n                cl.updatedAt <= block.timestamp &&\n                block.timestamp - cl.updatedAt <= 25 hours))\n    ) {\n        return uint256(cl.answer);\n    } else {\n        revert ChainlinkFailed();\n    }\n}",
+    "correctness": 6,
+    "criticism": "The code-level behavior is correctly identified: when _validate is false, ethPerCvx returns cl.answer without checking call success, roundId, freshness, or non-negativity. If latestRoundData reverts, cl.answer defaults to 0; if the feed returns a negative answer, casting to uint256 would produce a huge value. Thus stale, failed, or invalid feed data can be used silently. However, the impact reasoning depends on unshown production callers: it assumes VotiumStrategy.price()/AfEth.deposit() use this unchecked mode, and it incorrectly says the attacker can profit by depositing into SafEth, which is not obviously connected to this oracle. The real route would likely be AfEth deposit using an underpriced vAfEth value, and profitability requires stale/low feed data plus later price recovery. The vulnerability is potentially severe if the integration assumption is true, but the provided reasoning contains unsupported integration claims and a deposit-route error.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol",
+    "final_score": 6.25,
+    "function_name": "ethPerCvx",
+    "profitability": 6,
+    "reason": "When _validate is false, the function returns cl.answer without checking whether the Chainlink call succeeded, the roundId is valid, the answer is non-negative, or the price is fresh. If the feed fails or is stale, it returns 0 or an outdated price. This misprices vAfEth in VotiumStrategy.price(), which is used by AfEth.price() and AfEth.deposit(). An attacker can exploit a stale low price to mint excessive AfEth by depositing into SafEth, then profit when the price updates, stealing from existing holders.",
+    "severity": 7,
+    "vulnerability": "Unvalidated Chainlink price when _validate is false"
+  },
+  {
+    "code": "function depositRewards(uint256 _amount) public payable {\n    uint256 cvxAmount = buyCvx(_amount);\n    IERC20(CVX_ADDRESS).approve(VLCVX_ADDRESS, cvxAmount);\n    ILockedCvx(VLCVX_ADDRESS).lock(address(this), cvxAmount, 0);\n    emit DepositReward(cvxPerVotium(), _amount, cvxAmount);\n}",
+    "correctness": 7,
+    "criticism": "The issue is plausible but not fully proven by the supplied snippet: depositRewards does not show the buyCvx implementation, so the claim that Curve exchange_underlying is called with min_dy=0 is an external assumption. If buyCvx indeed has zero slippage protection, a front-run/back-run sandwich can worsen the ETH-to-CVX execution and reduce cvxAmount locked, especially for large public deposits. However, the economic harm may fall mainly on the caller/protocol rewards rather than existing holders, and attacker profitability depends heavily on pool depth, victim transaction size, gas costs, and mempool visibility. The reasoning is directionally correct but relies on unshown code and overstates certainty.",
+    "file_name": "proj-dba82638ecd8f4f8__VotiumStrategyCore.sol",
+    "final_score": 6.0,
+    "function_name": "depositRewards",
+    "profitability": 5,
+    "reason": "The function calls buyCvx(_amount), which invokes ICrvEthPool.exchange_underlying with min_dy set to 0. An attacker can front-run the transaction to manipulate the Curve pool price, causing the contract to receive less CVX for the ETH. The attacker then back-runs to profit, while the protocol loses value. This is exploitable because depositRewards is public and is used to process potentially large reward amounts.",
+    "severity": 5,
+    "vulnerability": "MEV sandwich due to zero slippage protection in buyCvx"
+  }
+]

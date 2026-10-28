@@ -1,0 +1,115 @@
+{
+  "case_ids": [
+    "acb-4b207274fefab4f1"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 54582,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-d2b659b60ad6925d/source_code/config.json",
+      "sha256": "058bc5adf69e723b563537a54bc652a8450cb8a0374d7bd7c411bd7b3ae272af"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T15:00:46.966359+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-d2b659b60ad6925d__DxBurnToken.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-d2b659b60ad6925d__DxBurnToken.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/dc5ec8fe9bd6-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-d2b659b60ad6925d__DxBurnToken.sol",
+      "normalized_sha256": "8117b4e4aa47c754ef185360d1bbfe40f311774db15437a2733eda9777af9cf0",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 38329,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d2b659b60ad6925d/source_code/DxBurnToken.sol",
+      "source_sha256": "cbae471db064082bb4f33bbe50f67d51da393fc05201d75d418a390428cb6b6c",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-d2b659b60ad6925d__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-d2b659b60ad6925d__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-d2b659b60ad6925d__MainContractFlattened.sol",
+      "normalized_sha256": "ef983d9f62e6d7e74b226ed69f9dfb862e7e416f7d8ccd8919c9c0f6812fd148",
+      "ranker_output": "ranker/proj-d2b659b60ad6925d__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 38386,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-d2b659b60ad6925d/source_code/MainContractFlattened.sol",
+      "source_sha256": "046753b93654afc292dc162035e4ccaef444433e2284d1e79eb755784a6db462",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-d2b659b60ad6925d",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T14:48:53.207587+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T15:00:46.966370+00:00",
+  "usage": {
+    "completion_tokens": 126199,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 13492,
+    "prompt_tokens": 15540,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

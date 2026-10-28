@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "addTransaction",
+    "code": "function addTransaction(address destination, uint value, bytes memory data) public notNull(destination) returns (uint transactionId) {\n    transactionId = transactionCount;\n    transactions[transactionId] = Transaction({\n        destination: destination,\n        value: value,\n        data: data,\n        executed: false\n    });\n    transactionCount += 1;\n    emit Submission(transactionId);\n}",
+    "vulnerability": "Unrestricted transaction creation",
+    "reason": "The addTransaction function is declared public without an owner check or onlyWallet restriction. In the standard MultiSigWallet implementation, this function is internal and only called by submitTransaction. Here, any external account can create arbitrary transactions in the wallet. This enables attackers to manipulate the transaction ID sequence and inject malicious transactions into the pending list. Owners relying on off-chain coordination or precomputed transaction IDs may be tricked into confirming an attacker-injected transaction, potentially leading to unauthorized fund transfers. It also allows storage bloat and transaction-list pollution, which can degrade UI performance and increase the chance of user error.",
+    "file_name": "proj-97e5691b34335ab9__MultiSigWallet.sol"
+  },
+  {
+    "function_name": "executeTransaction",
+    "code": "function executeTransaction(uint transactionId) public notExecuted(transactionId) {\n    if (isConfirmed(transactionId)) {\n        Transaction storage txn = transactions[transactionId];\n        txn.executed = true;\n        (bool result, ) = txn.destination.call.value(txn.value)(txn.data);\n        if (result) emit Execution(transactionId);\n        else {\n            emit ExecutionFailure(transactionId);\n            txn.executed = false;\n        }\n    }\n}",
+    "vulnerability": "Missing caller authorization",
+    "reason": "The function lacks the ownerExists(msg.sender) modifier present in the standard implementation. Consequently, any external address can execute a transaction that has reached the required number of confirmations. While confirmTransaction automatically calls executeTransaction when the final confirmation is added, a transaction whose external call fails remains confirmed and unexecuted (executed is reset to false). An attacker can later call executeTransaction to force execution of such a transaction at an arbitrary time, potentially front-running owner revocations or executing when conditions are unfavorable to the owners. Restricting execution to owners preserves control over the timing of confirmed transactions.",
+    "file_name": "proj-97e5691b34335ab9__MultiSigWallet.sol"
+  },
+  {
+    "function_name": "removeOwner",
+    "code": "function removeOwner(address owner) public onlyWallet ownerExists(owner) {\n    isOwner[owner] = false;\n    for (uint i=0; i<owners.length - 1; i++)\n        if (owners[i] == owner) {\n            owners[i] = owners[owners.length - 1];\n            break;\n        }\n    owners.length -= 1;\n    if (required > owners.length)\n        changeRequirement(owners.length);\n    emit OwnerRemoval(owner);\n}",
+    "vulnerability": "Stale confirmations not cleared on owner removal",
+    "reason": "When an owner is removed, the contract sets isOwner[owner] to false and shrinks the owners array, but it never deletes the owner's existing entries in the confirmations mapping. As a result, if the same address is later re-added as an owner (via addOwner or replaceOwner), any confirmations they made for pending transactions while previously an owner become valid again and count toward the required threshold without the owner re-confirming. An attacker who controls an owner can confirm a malicious transaction, get removed, and later be re-added (or exploit a compromised owner who is removed and later re-added after key recovery) to execute the old malicious transaction without fresh approvals from the current owner set. replaceOwner has the same underlying issue because it also does not clear the old owner's confirmations.",
+    "file_name": "proj-97e5691b34335ab9__MultiSigWallet.sol"
+  }
+]

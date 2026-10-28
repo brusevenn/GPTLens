@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "changeNodePrice",
+    "code": "function changeNodePrice(uint256 newNodePrice) external { nodePrice = newNodePrice; }",
+    "vulnerability": "Missing access control allows anyone to change node price",
+    "reason": "The function changeNodePrice has no onlyOwner modifier, so any external address can call it and set nodePrice to zero. An attacker can set nodePrice to 0 and then call createNode(count) to create up to maxNodes without paying any AURUM. These free nodes can later be used to claim rewards, draining the contract's AURUM reward pool. This is directly exploitable by any unauthenticated attacker and results in financial loss to the protocol.",
+    "file_name": "proj-1e8499a21723a585__AurumNodePool.sol"
+  },
+  {
+    "function_name": "changeRewardPerNode",
+    "code": "function changeRewardPerNode(uint256 _rewardPerDay) external { rewardPerDay = _rewardPerDay; }",
+    "vulnerability": "Missing access control allows anyone to set arbitrary reward rate",
+    "reason": "The function changeRewardPerNode lacks the onlyOwner modifier. Any attacker can set rewardPerDay to an arbitrarily large value. After obtaining a node (which can be done for free by first setting nodePrice to 0 via the similarly unprotected changeNodePrice), the attacker can call claimNodeReward or claimAllNodesReward to transfer an amount of AURUM calculated from the manipulated rewardPerDay. By choosing a value based on the contract's AURUM balance and elapsed time, the attacker can drain the entire reward pool in a single transaction.",
+    "file_name": "proj-1e8499a21723a585__AurumNodePool.sol"
+  },
+  {
+    "function_name": "setTeamFees",
+    "code": "function setTeamFees(uint256 _teamFee) external onlyOwner { teamFee = _teamFee; }",
+    "vulnerability": "No upper bound on teamFee enables contract balance drain",
+    "reason": "setTeamFees allows the owner to set teamFee without checking that it is less than or equal to feeDenomiator (1000). In createNode, operationsPrice is computed as price * teamFee / feeDenomiator and then transferred from the contract to teamWallet. If teamFee > feeDenomiator, operationsPrice exceeds the price paid by the user. A malicious or compromised owner can set teamWallet to their own address, set teamFee to a value that makes operationsPrice equal to the contract's entire AURUM balance, and then call createNode with a small nodePrice. The contract first receives the small payment, then transfers the inflated operationsPrice to the owner, draining all AURUM held by the contract at the cost of only the small nodePrice.",
+    "file_name": "proj-1e8499a21723a585__AurumNodePool.sol"
+  }
+]

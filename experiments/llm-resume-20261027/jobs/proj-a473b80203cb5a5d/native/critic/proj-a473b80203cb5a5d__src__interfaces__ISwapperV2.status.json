@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-a473b80203cb5a5d__src__interfaces__ISwapperV2.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

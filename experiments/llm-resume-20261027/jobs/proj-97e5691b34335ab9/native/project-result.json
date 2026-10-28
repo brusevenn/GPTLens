@@ -1,0 +1,196 @@
+{
+  "case_ids": [
+    "acb-73c8758464d9e257"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 32219,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/config.json",
+      "sha256": "3a25892286860b69b74dad3e1e2f4c6ca14ab41aa212349fbe0efda088d2b4a5"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T12:58:18.532953+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-97e5691b34335ab9__EthVault.impl.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-97e5691b34335ab9__EthVault.impl.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-97e5691b34335ab9__EthVault.impl.sol",
+      "normalized_sha256": "308612dab6300a0454ef0af2292752b114b36c6d31b7a1f30ff0409a0f165219",
+      "ranker_output": "ranker/proj-97e5691b34335ab9__EthVault.impl.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 5966,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/EthVault.impl.sol",
+      "source_sha256": "3519656231034229d6a8e7e660a74b21c8d8b04f1a64ad3885bd1a4562bc3e46",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-97e5691b34335ab9__EthVault.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-97e5691b34335ab9__EthVault.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-97e5691b34335ab9__EthVault.sol",
+      "normalized_sha256": "fe5aa0ad50bf27dceb2c28b355e749405a580ec079b55f940a118db548e18410",
+      "ranker_output": "ranker/proj-97e5691b34335ab9__EthVault.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1532,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/EthVault.sol",
+      "source_sha256": "4122f48ac8201df66e8ff1f32edeb61637b198ca7dfcd96848588c517bc3c433",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-97e5691b34335ab9__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-97e5691b34335ab9__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/f805cb93d389-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-97e5691b34335ab9__MainContractFlattened.sol",
+      "normalized_sha256": "14c3d38b3f91b88b016f03a96e8852a778121049825337063b42574a5f72c19f",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 13384,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/MainContractFlattened.sol",
+      "source_sha256": "2d15f1a2ca99abc325de2562663bacb0efd605d96f44725c6b6102e44c6de540",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-97e5691b34335ab9__MultiSigWallet.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-97e5691b34335ab9__MultiSigWallet.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-97e5691b34335ab9__MultiSigWallet.sol",
+      "normalized_sha256": "3ab0d4d65f455482582ddd15b762f1dbc42470111460c476b6f01da937242c54",
+      "ranker_output": "ranker/proj-97e5691b34335ab9__MultiSigWallet.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 11818,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/MultiSigWallet.sol",
+      "source_sha256": "7279b69f9cf3a2d6a50407924204466919715a89b3258d610ece90955da9dc36",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-97e5691b34335ab9__SafeMath.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-97e5691b34335ab9__SafeMath.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-97e5691b34335ab9__SafeMath.sol",
+      "normalized_sha256": "02665861dd936c249c8eca60887a4449f0a610f3758682fa4652703a55b3667d",
+      "ranker_output": "ranker/proj-97e5691b34335ab9__SafeMath.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 937,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-97e5691b34335ab9/source_code/SafeMath.sol",
+      "source_sha256": "04492c403aa906551a793ecd9f67e217b68850ea73e70e2b6237b8c9ab7478cf",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-97e5691b34335ab9",
+  "project_source_file_count": 5,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T12:43:32.196547+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T12:58:18.532966+00:00",
+  "usage": {
+    "completion_tokens": 149554,
+    "prompt_cache_hit_tokens": 3584,
+    "prompt_cache_miss_tokens": 8960,
+    "prompt_tokens": 12544,
+    "request_attempt_count": 8,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "initialize",
+    "code": "function initialize(\n    string memory _tokenName,\n    string memory _tokenSymbol,\n    uint8 _decimal\n) external initializer {\n    ERC20Upgradeable.__ERC20_init(_tokenName, _tokenSymbol);\n    ERC20PermitUpgradeable.__ERC20Permit_init(_tokenName);\n    AccessControlUpgradeable.__AccessControl_init();\n    _setupRole(ADMIN_ROLE, msg.sender);\n    _setRoleAdmin(ADMIN_ROLE, ADMIN_ROLE);\n    _setRoleAdmin(MINTER_BURNER_ROLE, ADMIN_ROLE);\n    _setRoleAdmin(REBASE_ROLE, ADMIN_ROLE);\n    decimal = _decimal;\n    WAD = 10**decimal;\n    rebasingCreditsPerToken = WAD;\n    _setIndex(WAD);\n}",
+    "vulnerability": "Unprotected initializer allows front-running and admin takeover",
+    "reason": "The initialize function is external and only protected by the initializer modifier. If the contract is deployed without calling initialize in the same transaction, an attacker can front-run the deployment by calling initialize with their own arguments. The attacker becomes the ADMIN_ROLE. With this role, they can grant themselves MINTER_BURNER_ROLE and REBASE_ROLE, enabling them to mint unlimited tokens, burn any user's tokens, and arbitrarily rebase the supply. This leads to total loss of funds and control of the token.",
+    "file_name": "proj-a7b0bd2cc330617f__Yieldy.sol"
+  },
+  {
+    "function_name": "rebase",
+    "code": "function rebase(uint256 _profit, uint256 _epoch) external onlyRole(REBASE_ROLE) {\n    uint256 currentTotalSupply = _totalSupply;\n    require(_totalSupply > 0, \"Can't rebase if not circulating\");\n    if (_profit == 0) {\n        emit LogSupply(_epoch, block.timestamp, currentTotalSupply);\n        emit LogRebase(_epoch, 0, getIndex());\n    } else {\n        uint256 updatedTotalSupply = currentTotalSupply + _profit;\n        if (updatedTotalSupply > MAX_SUPPLY) {\n            updatedTotalSupply = MAX_SUPPLY;\n        }\n        rebasingCreditsPerToken = rebasingCredits / updatedTotalSupply;\n        require(rebasingCreditsPerToken > 0, \"Invalid change in supply\");\n        _totalSupply = updatedTotalSupply;\n        _storeRebase(updatedTotalSupply, _profit, _epoch);\n    }\n}",
+    "vulnerability": "Integer division rounding in rebase creates unbacked token balances",
+    "reason": "The rebase function calculates the new rebasingCreditsPerToken as rebasingCredits / updatedTotalSupply using integer division, which rounds down. Because balanceOf is computed as creditBalances / rebasingCreditsPerToken, rounding down the rate causes the sum of all balances to exceed the reported _totalSupply. This creates unbacked tokens. An attacker can hold tokens, wait for a rebase that causes a rounding error, and then sell the inflated balance to an AMM or other contract. The AMM credits the attacker with more tokens than the actual total supply, allowing the attacker to drain liquidity from the pool or dilute other holders.",
+    "file_name": "proj-a7b0bd2cc330617f__Yieldy.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(\n    address _from,\n    address _to,\n    uint256 _value\n) public override returns (bool) {\n    require(_allowances[_from][msg.sender] >= _value, \"Allowance too low\");\n    uint256 newValue = _allowances[_from][msg.sender] - _value;\n    _allowances[_from][msg.sender] = newValue;\n    emit Approval(_from, msg.sender, newValue);\n    uint256 creditAmount = creditsForTokenBalance(_value);\n    creditBalances[_from] = creditBalances[_from] - creditAmount;\n    creditBalances[_to] = creditBalances[_to] + creditAmount;\n    emit Transfer(_from, _to, _value);\n    return true;\n}",
+    "vulnerability": "Missing zero address check in transferFrom allows token burning",
+    "reason": "The transferFrom function does not check that _to is not the zero address. This allows a spender with an allowance to transfer the owner's tokens to address(0), effectively burning them. The burned tokens are added to the zero address's balance and are permanently locked. This can be used to grief users, reduce circulating supply, or manipulate the relative share of token holders. It also violates the ERC20 standard, which requires transfers to the zero address to revert. An attacker who holds tokens can burn someone else's tokens (if they have allowance) to increase the value of their own holdings.",
+    "file_name": "proj-a7b0bd2cc330617f__Yieldy.sol"
+  }
+]

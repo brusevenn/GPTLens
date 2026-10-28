@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "payableCall",
+    "code": "function payableCall(PayableCall[] calldata calls) public payable returns (bytes[] memory returnData) {\n    uint256 valAccumulator;\n    uint256 length = calls.length;\n    returnData = new bytes[](length);\n    PayableCall calldata _call;\n    for (uint256 i = 0; i < length;) {\n        _call = calls[i];\n        uint256 val = _call.value;\n        unchecked {\n            valAccumulator += val;\n        }\n        bool success;\n        if (isContract(_call.target)) (success, returnData[i]) = _call.target.call{value: val}(_call.callData);\n        if (!success) revert CallFailed();\n        unchecked { ++i; }\n    }\n    if (msg.value != valAccumulator) revert CallFailed();\n}",
+    "vulnerability": "Missing access control on payableCall allows arbitrary asset theft from VirtualAccount",
+    "reason": "The payableCall function is public and lacks the requiresApprovedCaller modifier. Anyone can call this function on any VirtualAccount. The function executes arbitrary external calls from the VirtualAccount. An attacker can craft a call to an ERC20 token's transfer function to transfer the VirtualAccount's token balance to the attacker. Similarly, for ERC721 tokens, the attacker can call transferFrom(virtualAccount, attacker, tokenId) because the call originates from the VirtualAccount, satisfying the authorization check. This allows any external attacker to steal all ERC20, ERC721, and ERC1155 assets held by any VirtualAccount. This is directly exploitable without any privileged role.",
+    "file_name": "proj-cfdeedc6cb543e83__RootPort.sol"
+  },
+  {
+    "function_name": "toggleVirtualAccountApproved",
+    "code": "function toggleVirtualAccountApproved(VirtualAccount _userAccount, address _router) external override requiresBridgeAgent {\n    isRouterApproved[_userAccount][_router] = !isRouterApproved[_userAccount][_router];\n}",
+    "vulnerability": "Any bridge agent can approve arbitrary routers for any VirtualAccount, enabling theft of all assets",
+    "reason": "The toggleVirtualAccountApproved function can be called by any address with the bridge agent role. It toggles the isRouterApproved mapping for an arbitrary _userAccount and _router without verifying that the bridge agent is authorized for that specific VirtualAccount or that the VirtualAccount owner consented to the router. A malicious or compromised bridge agent can approve itself (or an attacker-controlled address) as a router for any VirtualAccount. The approved router can then call withdrawNative, withdrawERC20, withdrawERC721, or call on the VirtualAccount to drain all its assets. If bridge agents can be created permissionlessly via the factory, any attacker can become a bridge agent, approve themselves, and steal all funds from every VirtualAccount. Even if the role is permissioned, a single compromised bridge agent can steal all user assets, making this a critical centralization vulnerability.",
+    "file_name": "proj-cfdeedc6cb543e83__RootPort.sol"
+  },
+  {
+    "function_name": "bridgeToRoot",
+    "code": "function bridgeToRoot(address _recipient, address _hToken, uint256 _amount, uint256 _deposit, uint256 _srcChainId) external override requiresBridgeAgent {\n    if (!isGlobalAddress[_hToken]) revert UnrecognizedToken();\n    if (_amount - _deposit > 0) {\n        unchecked {\n            _hToken.safeTransfer(_recipient, _amount - _deposit);\n        }\n    }\n    if (_deposit > 0)\n        if (!ERC20hTokenRoot(_hToken).mint(_recipient, _deposit, _srcChainId)) revert UnableToMint();\n}",
+    "vulnerability": "Any bridge agent can mint arbitrary hTokens and drain the RootPort pool",
+    "reason": "The bridgeToRoot function is callable by any bridge agent. It allows the caller to specify an arbitrary _recipient, _deposit, and _amount. The function transfers _amount - _deposit from the RootPort's hToken balance to the recipient and mints _deposit new hTokens to the recipient. There is no validation that _deposit corresponds to a legitimate cross-chain deposit or that the bridge agent is authorized for the specific token and chain. A malicious bridge agent can set _deposit to an arbitrarily large value and _recipient to their own address, minting unlimited hTokens. They can also drain the pool by setting _amount - _deposit to the pool's entire balance. This allows a single malicious bridge agent to inflate the token supply and steal all pooled tokens, leading to catastrophic financial loss. If bridge agents are permissionless, any attacker can become a bridge agent and exploit this.",
+    "file_name": "proj-cfdeedc6cb543e83__RootPort.sol"
+  }
+]

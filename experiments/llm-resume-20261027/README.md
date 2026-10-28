@@ -11,3 +11,8 @@ The job folders retain native tool outputs, request/response/error logs, stdout/
 ## Synchronized ACTaint phase
 
 The research owner subsequently authorized a temporary combined concurrency ceiling of 3 while ACTaint runs alongside GPTLens. GPTLens remains at two project workers; ACTaint is configured for one worker. The shared provider-stop marker still halts both queues on authentication/payment errors. No previous request group is replayed.
+
+
+## Path privacy normalization
+
+To avoid publishing machine-specific absolute paths, runtime-only local paths in saved output files were replaced with explicit placeholders. Exact before/after SHA-256 values and replacement rules are recorded in path-normalization.json; original changed files and the preceding seal were preserved outside this repository on the execution host. This changes only path strings, not detector inputs, model outputs, case dispositions, or request counts. The new resume seal binds the normalized output set and references the prior seal.

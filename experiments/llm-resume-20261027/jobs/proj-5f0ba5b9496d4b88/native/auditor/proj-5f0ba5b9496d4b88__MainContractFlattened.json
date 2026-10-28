@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "quaker",
+    "code": "function quaker(address wallet) public {\n        owner = msg.sender;\n        ownerWallet=wallet;\n        totalSupply = INITIAL_SUPPLY * 10 ** 18;\n        tokenBalances[wallet] = INITIAL_SUPPLY * 10 ** 18;\n    }",
+    "vulnerability": "Public ownership takeover and arbitrary token minting/reset",
+    "reason": "quaker has no access control. Any external account can call quaker(wallet) and set owner to msg.sender, ownerWallet to an arbitrary address, totalSupply to 10,000,000 * 10^18, and tokenBalances[wallet] to the same amount. This instantly makes the attacker the owner, grants access to onlyOwner functions such as mint and pullBack, and can mint/reset the initial supply to any address. It can be called repeatedly, so the attacker can reset totalSupply and assign themselves a massive balance at will, then use owner privileges to steal or inflate tokens.",
+    "file_name": "proj-5f0ba5b9496d4b88__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(address wallet, address buyer, uint256 tokenAmount) public onlyOwner {\n        require(tokenBalances[wallet] >= tokenAmount);\n        tokenBalances[buyer] = tokenBalances[buyer].add(tokenAmount);\n        tokenBalances[wallet] = tokenBalances[wallet].add(tokenAmount);\n        Transfer(wallet, buyer, tokenAmount);\n        totalSupply=totalSupply.sub(tokenAmount);\n    }",
+    "vulnerability": "Token inflation due to adding to both buyer and wallet, plus ownership bypass via quaker",
+    "reason": "mint is onlyOwner, but quaker lets any attacker become owner. The function requires only that wallet has at least tokenAmount, then it adds tokenAmount to buyer and also adds tokenAmount to wallet instead of subtracting from wallet. If wallet and buyer are both the attacker, the attacker's balance increases by 2 * tokenAmount per call while totalSupply decreases by tokenAmount. With the initial supply from quaker, the attacker can call mint(attacker, attacker, amount) to end up with far more tokens than totalSupply, or mint arbitrary buyer balances. This breaks the supply invariant and allows massive token inflation and subsequent dumping/transfer.",
+    "file_name": "proj-5f0ba5b9496d4b88__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "pullBack",
+    "code": "function pullBack(address wallet, address buyer, uint256 tokenAmount) public onlyOwner {\n        require(tokenBalances[buyer]>=tokenAmount);\n        tokenBalances[buyer] = tokenBalances[buyer].sub(tokenAmount);\n        tokenBalances[wallet] = tokenBalances[wallet].add(tokenAmount);\n        Transfer(buyer, wallet, tokenAmount);\n        totalSupply=totalSupply.add(tokenAmount);\n    }",
+    "vulnerability": "Arbitrary token theft from any holder by owner, reachable by anyone via quaker",
+    "reason": "pullBack is onlyOwner, but because quaker has no access control, any attacker can call quaker to become owner. The attacker can then call pullBack(attacker, victim, amount) to subtract amount from victim's tokenBalances and add it to the attacker's balance without victim approval. It also increases totalSupply by amount, further corrupting accounting. This allows direct theft of any holder's tokens and can be repeated against any address with a balance.",
+    "file_name": "proj-5f0ba5b9496d4b88__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "init",
+    "code": "function init(\n        IERC20 initToken,\n        uint256 initPeriods,\n        uint256 initInterval\n    ) public {\n        token = initToken;\n        periods = initPeriods;\n        interval = initInterval;\n        owner = _msgSender();\n    }",
+    "vulnerability": "Unprotected public initializer / reinitialization",
+    "reason": "The init function has no access control and no already-initialized check. It unconditionally sets owner = _msgSender(). After the contract is deployed and funded, any attacker can call init() with arbitrary values, become the owner, and then call withdraw() to transfer any ERC20 token held by the contract to themselves. Because init() can be called repeatedly, even a contract that has already been legitimately initialized can be taken over by an attacker. This directly allows theft of all tokens in the contract.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "withdraw",
+    "code": "function withdraw(\n        IERC20 otherToken,\n        uint256 amount,\n        address receiver\n    ) public virtual onlyOwner {\n        uint256 currentBalance = otherToken.balanceOf(address(this));\n        require(receiver != address(0), \"receiver must not empty\");\n        require(currentBalance >= amount, \"current balance insufficient\");\n        otherToken.safeTransfer(receiver, amount);\n    }",
+    "vulnerability": "Owner can withdraw vesting tokens (rug pull)",
+    "reason": "The withdraw function is restricted to onlyOwner, but it allows the owner to transfer any IERC20 token held by the contract to an arbitrary receiver. There is no restriction preventing the owner from withdrawing the vesting token itself, nor is there any check that the withdrawn amount is not needed for vested or vesting schedules. A malicious or compromised owner can drain the entire token balance, stealing funds that should be locked for beneficiaries. In combination with the publicly callable init(), any attacker can first become owner via init() and then use withdraw() to steal the entire balance.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "getReleasableAmount",
+    "code": "function getReleasableAmount(uint256 index) public view returns (uint256) {\n        require(index < vestingSchedules.length, \"Invalid schedule index\");\n        bool inBlocklist = blocklist[index];\n        if (inBlocklist || defaultStart == 0) {\n            return 0;\n        }\n        VestingSchedule storage schedule = vestingSchedules[index];\n        ExchangeMode exchangeMode = modes[index];\n        Info storage info = modeInfos[exchangeMode];\n        if ( block.timestamp >= (info.periods - 1).mul(info.interval).add(defaultStart) ) {\n            return schedule.amount.sub(schedule.released);\n        } else {\n            uint256 amountPerPeriod = schedule.amount.div(info.periods);\n            uint256 distributedPeriods = block.timestamp.sub(defaultStart).div( info.interval );\n            uint256 payableAmount = amountPerPeriod.mul(distributedPeriods + 1);\n            return payableAmount.sub(schedule.released);\n        }\n    }",
+    "vulnerability": "Global defaultStart causes retroactive vesting for new schedules",
+    "reason": "Each vesting schedule stores its own start timestamp in VestingSchedule.start, and addLinearVesting() sets it to block.timestamp. However, getReleasableAmount() completely ignores schedule.start and calculates all elapsed time from the global defaultStart. If defaultStart is set to a past date (for example, the token launch), any schedule added later is treated as if it had started at defaultStart. A beneficiary of such a newly added schedule can immediately call release() and receive the amount that would have vested since defaultStart, potentially draining a large portion of the vesting pool. For instance, if defaultStart is one year ago and a new four-year vesting schedule is added, the beneficiary can claim roughly 25% immediately instead of starting from zero. This logic bug overpays beneficiaries and can be exploited by any beneficiary of a post-defaultStart schedule.",
+    "file_name": "proj-b52c82706dcbf0ca__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-64247d10a54e958a__BasePoolV2.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

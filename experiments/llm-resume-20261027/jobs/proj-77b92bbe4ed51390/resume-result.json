@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-77b92bbe4ed51390",
+  "case_ids": [
+    "acb-e654b6a24b2b608b"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "be2eeb9b01bf27928667196bfed748bfa94bef37377ac7cc3338e4f8f08ec218",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T12:01:21.800593+00:00",
+  "exit_code": 2,
+  "input_identity": "6c32bf07bc27d2dd5540fa5623f78408ee89c90f5b28bdf3187d9c567ce5db5d",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-77b92bbe4ed51390",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "GrimBoostVault.sol",
+      "87949226d695b62bbfcf5357e8fc14798f5ffd112f5374af06f4324b790bf6a9"
+    ],
+    [
+      "MainContractFlattened.sol",
+      "494a4c43d9adc3004d57ac5b031a3bb18fe3074aadcb179fa04d6e885e767139"
+    ]
+  ],
+  "source_hashes": [
+    "494a4c43d9adc3004d57ac5b031a3bb18fe3074aadcb179fa04d6e885e767139",
+    "87949226d695b62bbfcf5357e8fc14798f5ffd112f5374af06f4324b790bf6a9"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

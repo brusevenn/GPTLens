@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-c0cd3cd11af4edb7__contracts__LiquidXv2Zap.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

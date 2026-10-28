@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-a6c36a55c19a84c2__AnyswapV4Router.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

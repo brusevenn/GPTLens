@@ -1,0 +1,5 @@
+{"input_file": "proj-c308ab5d03a974c9__BAFCToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c308ab5d03a974c9__BAFCToken.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c308ab5d03a974c9__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-c308ab5d03a974c9__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-c308ab5d03a974c9", "case_ids": ["acb-bf972ed885c29d51"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

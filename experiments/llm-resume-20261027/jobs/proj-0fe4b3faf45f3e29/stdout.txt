@@ -1,0 +1,7 @@
+{"input_file": "proj-0fe4b3faf45f3e29__StaderConfig.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-0fe4b3faf45f3e29__StaderConfig.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-0fe4b3faf45f3e29__ValidatorWithdrawalVault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-0fe4b3faf45f3e29__ValidatorWithdrawalVault.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-0fe4b3faf45f3e29__VaultProxy.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-0fe4b3faf45f3e29__VaultProxy.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-0fe4b3faf45f3e29", "case_ids": ["acb-22a75d69f1c00c11", "acb-ed61f3b5f23eb606", "acb-f16d2287950d3a28"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 3, "failed_files": 0, "request_log": "requests.jsonl"}

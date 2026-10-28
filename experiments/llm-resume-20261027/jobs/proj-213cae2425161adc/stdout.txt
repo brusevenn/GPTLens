@@ -1,0 +1,5 @@
+{"input_file": "proj-213cae2425161adc__BancorNetwork.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-213cae2425161adc__BancorNetwork.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-213cae2425161adc__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-213cae2425161adc__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-213cae2425161adc", "case_ids": ["acb-275ea6ddaa8fb3ec"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

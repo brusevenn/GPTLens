@@ -1,0 +1,38 @@
+{
+  "automatic_retries": 0,
+  "case_ids": [
+    "acb-682cf046c4180b69"
+  ],
+  "case_timeout_seconds": 1200,
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "96de7e95d97b0c7a5da0026cc5f5cbe5c09b3eae104016380e287f650d8dca6c",
+  "dataset": "ACToolBench154",
+  "input_identity": "9e70eddb444b05e7ce9869353be3a7e9439a0c45e75cdd004c61c7067042706e",
+  "max_tokens": 65536,
+  "prior_request_attempts": 0,
+  "project_id": "proj-d79ac252134863ee",
+  "prompt_layout": "prefix_stable_v2",
+  "reasoning_effort": "high",
+  "request_timeout_seconds": 300,
+  "source_hashes": [
+    "0de3a9a91987a4a9116add1c1200539332cba0825306faf97d5c89bf6430e1f2",
+    "12d43b93c9130c624b2e3e17758c4a5449811bbc6b267c94e1ee126b2cc48b6f",
+    "1f43b26e2d2cdf93b4b2e2d6bf5fd05a52cd846bcbba40a209e1fde4508348d6",
+    "3a4b912416d93d11f6f618218cf0d8aec59974aadcae46b9e247bc5415488b40",
+    "3bab7b6efab36f25764e0b11580a0849f0e737899eb4c2c200d36b2c49a4135e",
+    "4b2ebb41fa4c90266118f4f4f4f7d58eb3149cf5d3836702c8c2bbe4a9358f65",
+    "763ca318af5d13135272869ff5354d2a9444b636b42d0be0cc33a0268f2a3e57",
+    "79980e5adae9980c257766bdcb28cf446f41279e82bc409e5769d74bc6b05f95",
+    "9ce447afd55675f932a48581c5898b6f5e08840d9ff4a095de0c97196dce540f",
+    "9dadde414e8244cae5088ce7f6883a47868ba79c61c3f780f8abeabf019ad3fe",
+    "b1cfb4decf218af9a48463aea2d86f992c91432a49f7916516ffafe1f6a1fa67",
+    "bc2ecd2927c202aab91222af287c07503cb348d8a96da3d368f195648356c4b7",
+    "edf556b1690768caa0bab72e53be1cb105b0e8aeaa96d0745f3935ac94b5f38a",
+    "f03754353a53b2be2d81e1994e07c54d1f008cb1ea26109b4c5d32633da31b81"
+  ],
+  "started_utc": "2026-10-27T15:00:47.067114+00:00",
+  "thinking": {
+    "type": "enabled"
+  },
+  "tool": "GPTLens"
+}

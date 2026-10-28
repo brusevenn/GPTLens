@@ -1,0 +1,5 @@
+{"input_file": "proj-e7864677dc9f4dcb__AISPACE.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-e7864677dc9f4dcb__AISPACE.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-e7864677dc9f4dcb__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-e7864677dc9f4dcb__MainContractFlattened.json", "status": "error", "error_type": "APIStatusError"}
+{"project_id": "proj-e7864677dc9f4dcb", "case_ids": ["acb-94c7c6096a94649f"], "status": "STOPPED_AUTH_OR_PAYMENT_ERROR", "execution_status": "STOPPED_AUTH_OR_PAYMENT_ERROR", "file_count": 2, "failed_files": 2, "request_log": "requests.jsonl"}

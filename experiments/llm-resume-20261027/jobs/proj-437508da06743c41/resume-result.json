@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-437508da06743c41",
+  "case_ids": [
+    "acb-d47bb55bf0aa38f3"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "b3173eadeee4ba0e848af7588f0ccc67030ed2bd848c8a5626cb76b39c33e2b3",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T10:55:39.564139+00:00",
+  "exit_code": 2,
+  "input_identity": "ad6b9a55458e7feafc4b10f8c74d7bbfc0f5112f062c31a84b4074169bedfa9e",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-437508da06743c41",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "e54b1c6631da492619d89e56cde01adb99b1cd8882344d1b16461244da2bb6cb"
+    ],
+    [
+      "NOVO.sol",
+      "f6a2b59a521369888bce95f4fd66b99204eca84f18a5adf65e762e18b0ac52a2"
+    ]
+  ],
+  "source_hashes": [
+    "e54b1c6631da492619d89e56cde01adb99b1cd8882344d1b16461244da2bb6cb",
+    "f6a2b59a521369888bce95f4fd66b99204eca84f18a5adf65e762e18b0ac52a2"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

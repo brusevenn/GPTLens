@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setCurves",
+    "code": "function setCurves(Curves curves_) public {\n    curves = curves_;\n}",
+    "vulnerability": "Missing access control allows arbitrary Curves contract",
+    "reason": "The FeeSplitter.setCurves function has no access control. Any attacker can replace the trusted Curves contract with a malicious contract implementing curvesTokenBalance and curvesTokenSupply. Because FeeSplitter.balanceOf and totalSupply trust these values, the attacker can report arbitrary balances and supply. The attacker can then call addFees (also publicly callable due the broken onlyManager modifier) with a tiny amount to initialize cumulativeFeePerToken, and call claimFees for the malicious token. getClaimableFees will compute a claim using the forged balance and transfer the entire ETH balance held by FeeSplitter to the attacker. This drains all holder fees.",
+    "file_name": "proj-555818c7538bb012__FeeSplitter.sol"
+  },
+  {
+    "function_name": "setManager",
+    "code": "function setManager(address manager_, bool value) public onlyOwner {\n    managers[manager_] = value;\n}",
+    "vulnerability": "Broken onlyOwner modifier permits privilege escalation",
+    "reason": "The Security.onlyOwner modifier is implemented as `msg.sender == owner;` without a require statement, so it never restricts callers. Therefore setManager is callable by anyone. An attacker can call setManager(attacker, true) to become a manager and/or call transferOwnership to become owner because it uses the same broken modifier. This exposes all onlyOwner and onlyManager functions in Curves and FeeSplitter. The attacker can raise maxFeePercent, set external/protocol fees to arbitrary values, set protocolFeeDestination to themselves, set feeRedistributor to a malicious contract, or call addFees/onBalanceChange in FeeSplitter, enabling theft of trade fees and manipulation of fee accounting.",
+    "file_name": "proj-555818c7538bb012__FeeSplitter.sol"
+  },
+  {
+    "function_name": "transferCurvesToken",
+    "code": "function transferCurvesToken(address curvesTokenSubject, address to, uint256 amount) external {\n    if (to == address(this)) revert ContractCannotReceiveTransfer();\n    _transfer(curvesTokenSubject, msg.sender, to, amount);\n}",
+    "vulnerability": "Fee accounting not updated on direct token transfers",
+    "reason": "Direct internal Curves token transfers use _transfer, which only updates curvesTokenBalance and emits Transfer. It does not call feeRedistributor.onBalanceChange for the sender or recipient, so FeeSplitter's userFeeOffset values are not synchronized with balances. An attacker can transfer tokens to a fresh address whose userFeeOffset is zero or stale. That address can then call claimFees and claim cumulative fees for the entire cumulativeFeePerToken on the received balance, including fees that were already claimed or that accrued before it held the tokens. By cycling the same tokens through fresh accounts, the attacker can repeatedly claim the same historical fees and drain ETH from FeeSplitter.",
+    "file_name": "proj-555818c7538bb012__FeeSplitter.sol"
+  }
+]

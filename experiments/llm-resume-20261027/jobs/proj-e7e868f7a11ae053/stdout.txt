@@ -1,0 +1,2 @@
+{"input_file": "proj-e7e868f7a11ae053__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"project_id": "proj-e7e868f7a11ae053", "case_ids": ["acb-9d41ca219bc63bb9"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 8, "failed_files": 8, "request_log": "requests.jsonl"}

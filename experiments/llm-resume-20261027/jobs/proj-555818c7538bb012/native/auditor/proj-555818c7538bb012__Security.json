@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setProtocolFeePercent",
+    "code": "function setProtocolFeePercent(uint256 protocolFeePercent_, address protocolFeeDestination_) external onlyOwner {\n    if (\n        protocolFeePercent_ + feesEconomics.subjectFeePercent + feesEconomics.referralFeePercent + feesEconomics.holdersFeePercent > feesEconomics.maxFeePercent ||\n        protocolFeeDestination_ == address(0)\n    ) revert InvalidFeeDefinition();\n    feesEconomics.protocolFeePercent = protocolFeePercent_;\n    feesEconomics.protocolFeeDestination = protocolFeeDestination_;\n}",
+    "vulnerability": "Broken onlyOwner/onlyManager modifiers allow anyone to execute privileged fee-setting functions",
+    "reason": "Security.onlyOwner and Security.onlyManager are written as `msg.sender == owner;` and `managers[msg.sender] == true;` without require/revert, so the expression is evaluated and discarded. Any address can call every onlyOwner/onlyManager function. For example, an attacker can first call setMaxFeePercent with a large value because onlyManager is broken, then call this setProtocolFeePercent with 1e18 and the attacker as protocolFeeDestination. getFees will then calculate protocolFee = price on every buy, and _transferFees sends that fee to the attacker. The same broken modifiers also allow changing feeRedistributor, external fee percentages, managers, and ownership, causing theft of all trading/holder fees and full protocol takeover.",
+    "file_name": "proj-555818c7538bb012__Security.sol"
+  },
+  {
+    "function_name": "setCurves",
+    "code": "function setCurves(Curves curves_) public {\n    curves = curves_;\n}",
+    "vulnerability": "Missing access control on setCurves allows replacing Curves with a malicious contract and draining FeeSplitter ETH",
+    "reason": "setCurves has no access control. FeeSplitter trusts curves for balanceOf, totalSupply, and claim accounting. An attacker can set curves to a malicious contract that returns arbitrary curvesTokenBalance/curvesTokenSupply values. Since FeeSplitter holds ETH from holder fees and addFees is callable because onlyManager is broken, the attacker can seed a token's cumulativeFeePerToken with 1 wei, or use any existing cumulative fees, then call claimFees with a fabricated huge balance. getClaimableFees computes owed from that fabricated balance and claimFees transfers the resulting ETH to msg.sender, draining the FeeSplitter's balance.",
+    "file_name": "proj-555818c7538bb012__Security.sol"
+  },
+  {
+    "function_name": "_transfer",
+    "code": "function _transfer(address curvesTokenSubject, address from, address to, uint256 amount) internal {\n    if (amount > curvesTokenBalance[curvesTokenSubject][from]) revert InsufficientBalance();\n    if (from != to) {\n        _addOwnedCurvesTokenSubject(to, curvesTokenSubject);\n    }\n    curvesTokenBalance[curvesTokenSubject][from] = curvesTokenBalance[curvesTokenSubject][from] - amount;\n    curvesTokenBalance[curvesTokenSubject][to] = curvesTokenBalance[curvesTokenSubject][to] + amount;\n    emit Transfer(curvesTokenSubject, from, to, amount);\n}",
+    "vulnerability": "Missing FeeSplitter offset update on token transfers enables historical fee double-claiming",
+    "reason": "_transfer updates curvesTokenBalance without notifying FeeSplitter via onBalanceChange for the sender or recipient. FeeSplitter records a userFeeOffset to determine which cumulative fees a holder has already been accounted for. A fresh address receiving tokens through transferCurvesToken or transferAllCurvesTokens keeps offset 0, or an old lower offset. When it calls claimFees, updateFeeCredit/getClaimableFees calculates owed using the full cumulativeFeePerToken times its new balance, so it is credited for historical fees accrued before it owned the tokens. This lets an attacker claim fees already earned by prior holders and drains ETH from FeeSplitter.",
+    "file_name": "proj-555818c7538bb012__Security.sol"
+  }
+]

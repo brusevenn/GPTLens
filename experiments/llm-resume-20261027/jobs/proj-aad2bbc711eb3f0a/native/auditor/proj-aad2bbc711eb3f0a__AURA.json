@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setOwner",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "vulnerability": "Missing access control on setOwner allows anyone to become the owner.",
+    "reason": "The setOwner function in the Owned contract lacks the onlyOwner modifier. Any external account can call this function and set the owner variable to an arbitrary address, including themselves. Once the attacker becomes the owner, they gain full administrative privileges: they can call unlockToken to prematurely unlock the token, call lockBalances to set balancesUploaded to true and permanently prevent the legitimate owner from distributing tokens via uploadBalances, or set the owner to address(0) to permanently brick all owner-only functions. If the token is still locked, setting the owner to zero makes it impossible to unlock, effectively locking all tokens forever. This is a critical access control vulnerability that is directly exploitable by any attacker.",
+    "file_name": "proj-aad2bbc711eb3f0a__AURA.sol"
+  },
+  {
+    "function_name": "unlockToken",
+    "code": "function unlockToken() onlyOwner {\n    locked = false;\n}",
+    "vulnerability": "Owner takeover via setOwner allows an attacker to unlock the token prematurely.",
+    "reason": "Although unlockToken is protected by the onlyOwner modifier, the owner state can be changed by anyone through the public setOwner function. An attacker can first call setOwner to set themselves as the owner, then immediately call unlockToken to set locked = false. This breaks the intended lock mechanism that is supposed to prevent transfers and approvals before a specific time or condition. Premature unlocking can be exploited to trade tokens before the official sale, manipulate token price, or disrupt an ICO. The intermediate reasoning is: the onlyOwner check only verifies msg.sender == owner; since setOwner is unprotected, the attacker can trivially satisfy this condition and execute unlockToken.",
+    "file_name": "proj-aad2bbc711eb3f0a__AURA.sol"
+  },
+  {
+    "function_name": "lockBalances",
+    "code": "function lockBalances() onlyOwner {\n    balancesUploaded = true;\n}",
+    "vulnerability": "Owner takeover via setOwner allows an attacker to permanently block balance uploads.",
+    "reason": "The lockBalances function is protected by onlyOwner, but the owner can be changed by anyone via the unprotected setOwner function. An attacker can call setOwner to become the owner, then call lockBalances to set balancesUploaded = true. This permanently prevents the legitimate owner from calling uploadBalances to distribute tokens to recipients. If the token distribution has not yet been completed, this causes a denial of service, forcing the owner to distribute tokens individually or potentially locking the intended distribution. This griefing attack is directly exploitable and can cause significant disruption to the project's token distribution plans.",
+    "file_name": "proj-aad2bbc711eb3f0a__AURA.sol"
+  }
+]

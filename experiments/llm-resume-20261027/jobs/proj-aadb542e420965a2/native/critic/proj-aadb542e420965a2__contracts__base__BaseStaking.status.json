@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-aadb542e420965a2__contracts__base__BaseStaking.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "ValueError"
+}

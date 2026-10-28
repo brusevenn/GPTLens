@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "lockUnits",
+    "code": "function lockUnits(uint units, address token, address member) external {\n    mapTokenMember_Units[token][member] -= units;\n    mapTokenMember_Units[token][msg.sender] += units;\n}",
+    "vulnerability": "Missing access control allows any attacker to steal LP units from any member",
+    "reason": "The lockUnits function has no access control (e.g., onlyRouter) and moves LP units from an arbitrary member address to msg.sender. An attacker can call lockUnits(victimUnits, token, victim) to subtract the victim's LP units and add them to the attacker's balance. The attacker can then call removeLiquidityDirectly or use the stolen units to withdraw the underlying pool assets. This directly drains liquidity from the pool and is immediately profitable for the attacker.",
+    "file_name": "proj-9cc8fc9183d71d44__Pools.sol"
+  },
+  {
+    "function_name": "transferTo",
+    "code": "function transferTo(address recipient, uint amount) external virtual override returns (bool) {\n    _transfer(tx.origin, recipient, amount);\n    return true;\n}",
+    "vulnerability": "tx.origin phishing allows theft of user tokens without allowance",
+    "reason": "The transferTo function uses tx.origin as the sender instead of msg.sender. Any malicious contract can call VADER.transferTo(attacker, amount) and, if a victim calls the malicious contract, tx.origin will be the victim. The function will then transfer the victim's VADER tokens to the attacker without requiring any approval or consent from the victim. The provided Attack contract demonstrates this exact exploit by calling transferTo to steal the caller's VADER before converting and redeeming it. This is a severe real-world phishing vulnerability.",
+    "file_name": "proj-9cc8fc9183d71d44__Pools.sol"
+  },
+  {
+    "function_name": "harvest",
+    "code": "function harvest(address synth) external returns(uint reward) {\n    address _member = msg.sender;\n    uint _weight;\n    address _token = iSYNTH(synth).TOKEN();\n    reward = calcCurrentReward(synth, _member);\n    mapMemberSynth_lastTime[_member][synth] = block.timestamp;\n    if(iPOOLS(POOLS).isAsset(_token)){\n        iERC20(USDV).transfer(POOLS, reward);\n        reward = iPOOLS(POOLS).mintSynth(USDV, _token, address(this));\n        _weight = iUTILS(UTILS()).calcValueInBase(_token, reward);\n    } else {\n        iERC20(VADER).transfer(POOLS, reward);\n        reward = iPOOLS(POOLS).mintSynth(VADER, _token, address(this));\n        _weight = iROUTER(ROUTER).getUSDVAmount(iUTILS(UTILS()).calcValueInBase(_token, reward));\n    }\n    mapMemberSynth_deposit[_member][synth] += reward;\n    mapMember_weight[_member] += _weight;\n    totalWeight += _weight;\n    emit MemberHarvests(synth, _member, reward, _weight, totalWeight);\n}",
+    "vulnerability": "Reward calculation uses current total weight for past elapsed time, enabling reward inflation and reserve drain",
+    "reason": "The harvest function calls calcCurrentReward, which computes rewards using the member's current total weight (mapMember_weight) multiplied by the time elapsed since the last claim for a specific synth. An attacker can deposit a tiny amount of synth A, wait for a long period (e.g., 100 seconds, since secondsPerEra is 1 and erasToEarn is 100), then deposit a large amount of synth B to dramatically inflate their total weight. When they call harvest(synth A), the reward is calculated using the inflated total weight for the entire waiting period, allowing them to claim a disproportionate amount of the Vault's reserves. After harvesting, the attacker can withdraw synth B after the minimumDepositTime (1 second) and also withdraw the inflated synth A rewards, draining the Vault's USDV/VADER reserves.",
+    "file_name": "proj-9cc8fc9183d71d44__Pools.sol"
+  }
+]

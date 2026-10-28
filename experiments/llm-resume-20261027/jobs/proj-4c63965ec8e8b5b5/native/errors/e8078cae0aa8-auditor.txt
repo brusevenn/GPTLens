@@ -1,0 +1,9 @@
+stage=auditor
+input_id=data/ACToolBench154/proj-4c63965ec8e8b5b5__NFTXVaultFactoryUpgradeable.sol
+error_type=RuntimeError
+Traceback (most recent call last):
+  File "$REPO/scripts/benchmark.py", line 380, in run_project
+    run_auditor.run(auditor_args)
+  File "$REPO/src/run_auditor.py", line 113, in run
+    raise RuntimeError(f"Auditor failed for {errors} input(s); per-input statuses were saved")
+RuntimeError: Auditor failed for 1 input(s); per-input statuses were saved

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-83d6a41518987deb__LendingLedger.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

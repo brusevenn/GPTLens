@@ -1,0 +1,118 @@
+{
+  "case_ids": [
+    "acb-94c7c6096a94649f"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 44891,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-e7864677dc9f4dcb/source_code/config.json",
+      "sha256": "128b100db138e79bd3edde4e5ae4ffb27e351977b7d9c943c61a8ca83dae03e6"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T15:45:36.147819+00:00",
+  "execution_status": "STOPPED_AUTH_OR_PAYMENT_ERROR",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e7864677dc9f4dcb__AISPACE.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-e7864677dc9f4dcb__AISPACE.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/4f5b94c809ea-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-e7864677dc9f4dcb__AISPACE.sol",
+      "normalized_sha256": "1f85115e64c3bf0e32e75e6a0c05d18aed6044d53512f04d0c4b810228c1d50d",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 33243,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-e7864677dc9f4dcb/source_code/AISPACE.sol",
+      "source_sha256": "2c1c0b19fa1f03f3194f76e89cad500fd102b6ee8d03a6ed05af47f52051de7f",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-e7864677dc9f4dcb__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "APIStatusError",
+        "http_status": 402,
+        "input_file": "proj-e7864677dc9f4dcb__MainContractFlattened.json",
+        "provider_error_code": "invalid_request_error",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/a33f152afab7-critic.txt",
+      "error_type": "APIStatusError",
+      "input_id": "data/ACToolBench154/proj-e7864677dc9f4dcb__MainContractFlattened.sol",
+      "normalized_sha256": "5f27721172388416675b6c61e8f4e3291e25650c1c38272cd5c33defb0e80c63",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 33075,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-e7864677dc9f4dcb/source_code/MainContractFlattened.sol",
+      "source_sha256": "cdb2e75ca2e5a1f460ea99685b008ca6d57d7c787e604eb58235176993d9a09f",
+      "status": "CRITIC_ERROR"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-e7864677dc9f4dcb",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T15:40:06.775638+00:00",
+  "status": "STOPPED_AUTH_OR_PAYMENT_ERROR",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T15:45:36.147839+00:00",
+  "usage": {
+    "completion_tokens": 58859,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 6274,
+    "prompt_tokens": 7682,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

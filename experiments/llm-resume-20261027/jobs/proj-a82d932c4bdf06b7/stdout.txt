@@ -1,0 +1,47 @@
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__GSN__Context.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__GSN__Context.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__access__Roles.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__access__Roles.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__access__roles__SignerRole.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__access__roles__SignerRole.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__drafts__Counters.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__drafts__Counters.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__introspection__ERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__introspection__ERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__introspection__IERC165.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__introspection__IERC165.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__math__Math.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__math__Math.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__math__SafeMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__math__SafeMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__ownership__Ownable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__ownership__Ownable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20Burnable.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20Burnable.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20Detailed.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__ERC20Detailed.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__SafeERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC20__SafeERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__ERC721.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__ERC721.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__ERC721Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__ERC721Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721Receiver.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__token__ERC721__IERC721Receiver.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__utils__Address.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__utils__Address.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__utils__ReentrancyGuard.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-a82d932c4bdf06b7__@openzeppelin__contracts__utils__ReentrancyGuard.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-a82d932c4bdf06b7__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a82d932c4bdf06b7__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-a82d932c4bdf06b7__contracts__DInterest.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a82d932c4bdf06b7__contracts__DInterest.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-a82d932c4bdf06b7__contracts__DInterestWithDepositFee.sol", "status": "error", "error_type": "RuntimeError"}

@@ -1,0 +1,5 @@
+{"input_file": "proj-ae554f59459d23ae__ERCDDAToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-ae554f59459d23ae__ERCDDAToken.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-ae554f59459d23ae__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-ae554f59459d23ae__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-ae554f59459d23ae", "case_ids": ["acb-c7bc780df013c737"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

@@ -1,0 +1,1279 @@
+{
+  "case_ids": [
+    "acb-3bd4414e9220f782"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 384449,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/config.json",
+      "sha256": "a666847a1911f1c682edcebbf3cb68f8949ca9c48e5779384fcaba9f4ae380ec"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T09:42:13.177453+00:00",
+  "execution_status": "INTERRUPTED",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__MainContractFlattened.sol",
+      "normalized_sha256": "2750da67804ad0af83ecaf01def1be4874aac95914dfdf1feeec7f9afce200e8",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 43646,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/MainContractFlattened.sol",
+      "source_sha256": "692e786a40f91849584d3dcb1180c5e33d824902a0596ab1963f8f0e1dd0e19b",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__src__ControllerV4.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__src__ControllerV4.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__ControllerV4.sol",
+      "normalized_sha256": "fd6ca5168461f5e922292e2bde02a8557c720b65d6aaad88c74abac1f0f9bddd",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__ControllerV4.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 12376,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/ControllerV4.sol",
+      "source_sha256": "a8137d55dc3939266db3810d9ffa32cb225b9f3649e048bde4bdc160227322cd",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__governance__timelock.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__governance__timelock.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__governance__timelock.sol",
+      "normalized_sha256": "798ce837e1cd76290ccf7c31b66044c2646d062d9c92028810b891703994ba21",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__governance__timelock.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 5114,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/governance/timelock.sol",
+      "source_sha256": "9bebf02e0154ac7cba327eb0397eb87e8251b3776deeb12f7ca2d0430b7ed5f0",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__compound.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__compound.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__compound.sol",
+      "normalized_sha256": "6f91be45afb6e8116a951bce4ddb9673c0ed815c5204af80381cebef8eb3e8a7",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__compound.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 8402,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/compound.sol",
+      "source_sha256": "d53e3ca63f50eab1f25053a7a3d694da429821ef18255f84c5af0487d7fc0cf4",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__controller.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__controller.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__controller.sol",
+      "normalized_sha256": "3a54dba7b62a59e35454c11912210baafb55942babda4a5defb6851a3ae30196",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__controller.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 480,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/controller.sol",
+      "source_sha256": "2613cc5aee9b06d8dc3c6cef8985e0c096e8cd1be07b4f340b692fefc16d783b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__converter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__converter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__converter.sol",
+      "normalized_sha256": "f3d1901e5954e7dcece7deefb5fd96809b2120893278a5551d8b046634da4316",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__converter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 139,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/converter.sol",
+      "source_sha256": "1dd236c883bad55967728455fe5292b651162acc513f0833744b70a5cd4dbcf6",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__curve.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__curve.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__curve.sol",
+      "normalized_sha256": "751baa83a31738a211229878161f0a5755c24c0e0126633a02ce1fced193096c",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__curve.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 4564,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/curve.sol",
+      "source_sha256": "dfffa4fc8f4becdd31003791275230a269ae626bdbf9e5e4d7718199cc84725b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__jar-converter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__jar-converter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__jar-converter.sol",
+      "normalized_sha256": "34fdc7ea4da99b39ff511ea17e2ccdfe6380dfab156443abc247ac88de6f174e",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__jar-converter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 302,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/jar-converter.sol",
+      "source_sha256": "8b7e0815c5da2ab79fbf6db3188604e6035b5a01151a286da447202c613bd3c1",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__jar.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__jar.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__jar.sol",
+      "normalized_sha256": "4f40fbe555405fb645a700405082796079d74e32047e63326b16a228778b0e7a",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__jar.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 483,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/jar.sol",
+      "source_sha256": "f23c57f25839f1213550719106b8a3418bf1df0847bee9cec156f7aae9da6c98",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__masterchef.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__masterchef.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__masterchef.sol",
+      "normalized_sha256": "c1556814d87ade7b6109f43a1f46f907adb1b8ea37338d1365bee4d9015e09fb",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__masterchef.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2120,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/masterchef.sol",
+      "source_sha256": "016999e139d9c82fc7c661858dc84c8ed3159f23a2a9287c0ddb5ef642c9f874",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__onesplit.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__onesplit.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__onesplit.sol",
+      "normalized_sha256": "fd4cbb5662b082a8b4b283840c068cb6288dce9b427c70057a5f7d48c704425a",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__onesplit.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 569,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/onesplit.sol",
+      "source_sha256": "5c3068cb08eabbffc2ae621d0946a6bff4bea7e08c3991a09f67eca9cf85ba43",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__proxy.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__proxy.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__proxy.sol",
+      "normalized_sha256": "f36a9923f5f2d47606c9532899fb80469fdd51fa79cf67406e5540e8d9b7f9d3",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__proxy.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 264,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/proxy.sol",
+      "source_sha256": "d1728470086c29a9eaaefe689db2dc621c420dc71cd704704f03dd74917e8855",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__staking-rewards.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__staking-rewards.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__staking-rewards.sol",
+      "normalized_sha256": "488a1a4c8eb2ce7acabd2585a0cbf2477c3d4cc7d07b46d9f31685793961f87a",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__staking-rewards.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2318,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/staking-rewards.sol",
+      "source_sha256": "13349f0d4137c0679109858ee6741349105c1f8fae2ecb4e41ad4993f1749347",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__strategy.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__strategy.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__strategy.sol",
+      "normalized_sha256": "1d8c33980efc7607a5b4eb659e70be5aa5335dae58661ba3a6464d9fc415a812",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__strategy.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1026,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/strategy.sol",
+      "source_sha256": "4711729e24e20c3e85312a6c39cf32dbf13add629cc0029d47faf11505d24169",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__uniswapv2.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__uniswapv2.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__uniswapv2.sol",
+      "normalized_sha256": "77f10ea00e0e7eefe46ccef27e04fe6e38bbd35a092eac00af61dec4b24d6b86",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__uniswapv2.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 5440,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/uniswapv2.sol",
+      "source_sha256": "75a6c499c218eb45602324709edffd75f2fe6060b47223662cc48804654972af",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__usdt.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__usdt.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__usdt.sol",
+      "normalized_sha256": "9039d77b25a5085f9d6f289555953a160c7d32e9d60b308c95148e9245c3c258",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__usdt.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 331,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/usdt.sol",
+      "source_sha256": "8a63377702464b62917e4a75af0d41f725203505bd5832b64598f9e6fea23b84",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__weth.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__interfaces__weth.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__interfaces__weth.sol",
+      "normalized_sha256": "8da356774057a9ddd1a099b6d80605eb641320b7ebcb743bf45dd935559646d6",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__interfaces__weth.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 812,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/interfaces/weth.sol",
+      "source_sha256": "939ea0b34acd35d472f272b7fa6c56ab12827c7c0b3486255b74b204cc6674c6",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__careful-math.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__careful-math.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__careful-math.sol",
+      "normalized_sha256": "62a93c551b95fb39421085c94ad57ed90f331950b19fc967eb6a7cb7725b719a",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__careful-math.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2191,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/careful-math.sol",
+      "source_sha256": "10b97f60408df52b8d6d85cee8fad8b4895e9052cef80204409e4958dad15abf",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__context.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__context.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__context.sol",
+      "normalized_sha256": "d21bc38027452167cdf12eb7b1ae853aad31ae8dd14ac69c809c29bbe354a3a8",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__context.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 933,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/context.sol",
+      "source_sha256": "d20a5ae07bc58a546d5cc13db982d76bec82900ce99c2fbe8f01d4a710509f0a",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__enumerableSet.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__enumerableSet.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__enumerableSet.sol",
+      "normalized_sha256": "b055fa0764769e0d7bdfca052c781b73f2d042aa930dca28b24986e0d89062a0",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__enumerableSet.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 7787,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/enumerableSet.sol",
+      "source_sha256": "3ede197777e1458890b0d350cb3bb73904b4c3169a58517eaffac8374c1b5d55",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__erc20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__erc20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__erc20.sol",
+      "normalized_sha256": "b1cd84d99dd83813ffb30bb5901802706a03ccb835c3b2d66736cab240fc9fd9",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__erc20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 22905,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/erc20.sol",
+      "source_sha256": "6ba09166aa7d8c81c1165d5646225c78d2ed1e553270b538426ea4a0346ec5b9",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__exponential.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__exponential.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__exponential.sol",
+      "normalized_sha256": "b8c8ca49ed27182e6690cbea70a950665694aaf86f5fb671ac44e97042d947ec",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__exponential.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 12391,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/exponential.sol",
+      "source_sha256": "d1a7e5b20f8f701dd44dfe873e427c608bacd649c3d648b8d80ff6314a896a7e",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__ownable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__ownable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__ownable.sol",
+      "normalized_sha256": "6a8ad9eaed8c101d38fc4f7de32c5e5ff61b8b6a0f6cb856e23f63a30301b411",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__ownable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2221,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/ownable.sol",
+      "source_sha256": "74a1374c54d1231887e70b6d8c04b1dcb968608d3e940e3ac55b033c8abe358c",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__owned.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__owned.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__owned.sol",
+      "normalized_sha256": "fd96f54b6a3fbb5259fcd052c92c8843d801daaf6acd27f9c21a5db36358b0b5",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__owned.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1128,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/owned.sol",
+      "source_sha256": "06548bb7c5567df8338335213242ea29803266a3cb7d59d9da0a1fd6fe4aa62d",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__pausable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__pausable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__pausable.sol",
+      "normalized_sha256": "7b6f9b4054bf174bc63434d5dbe18fc9728e63175781c1b4cf52723bd1967b7d",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__pausable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1271,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/pausable.sol",
+      "source_sha256": "020f080b948cd389d46780caaeef95e39d85e6d583fe3e94238481d8053bb274",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__reentrancy-guard.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__reentrancy-guard.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__reentrancy-guard.sol",
+      "normalized_sha256": "8f7ac60345ada1da01a59f6bc65fb75960b2dbe8af337b83439735c738b5b4ae",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__reentrancy-guard.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2594,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/reentrancy-guard.sol",
+      "source_sha256": "c246dcb1b7c0d24ab58226aab14dbc7987b489e98c4b2ad379e89e4faf3858a0",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__safe-math.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-0c0ab89caa1146e5__src__lib__safe-math.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__lib__safe-math.sol",
+      "normalized_sha256": "9f06d4906335bed38b0d8fe74a099c481338353de136b3b948e7796426440e51",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__lib__safe-math.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 5200,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/lib/safe-math.sol",
+      "source_sha256": "0a249139188b101375379d8f0dfbdf20f1be71126bfe29310d4c537b22292ff0",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__src__pickle-jar.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-0c0ab89caa1146e5__src__pickle-jar.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__pickle-jar.sol",
+      "normalized_sha256": "2ac8ceb343be00fad34dbd3c9e9fd97135fde14cc7dce4924b9a0256a2f985d9",
+      "ranker_output": "ranker/proj-0c0ab89caa1146e5__src__pickle-jar.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 4095,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/pickle-jar.sol",
+      "source_sha256": "ad410d7886df5eba3e4736c71df9bf7fb617f0b310775633c51947169040c28b",
+      "status": "COMPLETED"
+    },
+    {
+      "active_stage": "auditor",
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "error_type": "Interrupted",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__pickle-swap.sol",
+      "normalized_sha256": "2e4341ca61530ea4de8549f498a8dade2d0c7df2f395ab4b3242d564bcc67b88",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2799,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/pickle-swap.sol",
+      "source_sha256": "2dde4232af2b28ff212baaf5228b7cddd03ceef4368b2a123e9d3dafe3b16747",
+      "status": "INTERRUPTED_UNKNOWN"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__proxy-logic__curve.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1651,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/proxy-logic/curve.sol",
+      "source_sha256": "31a2908f7ddd9196d042e8fbc35a8190d5efdbb4d002bed3830861b8825bd6ba",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__proxy-logic__uniswapv2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 6735,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/proxy-logic/uniswapv2.sol",
+      "source_sha256": "47b466cb5a82d253b2df776662c881b823f1e0febca026d4d30a8571f4afaa06",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__staking-rewards.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 6497,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/staking-rewards.sol",
+      "source_sha256": "eef5bf2c1180e2cf4ff05c52d60c0044bf28592c137b61dc68cfdcdb11bac42b",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__compound__strategy-cmpd-dai-v2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 12594,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/compound/strategy-cmpd-dai-v2.sol",
+      "source_sha256": "3d2647326bab932444f3fe20da680ce5d29003deecad96214e8d9b9b19d3babd",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__crv-locker.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2963,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/crv-locker.sol",
+      "source_sha256": "29b0d339a1eee31c13f2415ac1ec414bbbd42eb0143ebeef47f58270d7aa312c",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__scrv-voter.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 5352,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/scrv-voter.sol",
+      "source_sha256": "8ea5c8187343845782f61903cd1735b92d0faccfb90cd624f0ba37da1bdbad75",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__strategy-curve-3crv-v2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 3668,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/strategy-curve-3crv-v2.sol",
+      "source_sha256": "79ea4ece24f34dfba5cd29e344d8637290d8fa6ed8f7ff77a0c3cc3befda7767",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__strategy-curve-rencrv-v2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 3345,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/strategy-curve-rencrv-v2.sol",
+      "source_sha256": "b6834ae372da21dc9b37ad52939d15b0f85bf273e56bd5e307133613fe64fe1e",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__strategy-curve-scrv-v3_2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 4461,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/strategy-curve-scrv-v3_2.sol",
+      "source_sha256": "897531d6c95aa60a8e27c3f778818b01c7a536b1f8a2dfd43cb94a20fa123aba",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__curve__strategy-curve-scrv-v4_1.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 6081,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/curve/strategy-curve-scrv-v4_1.sol",
+      "source_sha256": "5fd6886db97121a952c731bcd2a2af3c7c2491cbbefacc8d1e18f43e452c508c",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__strategy-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 9102,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/strategy-base.sol",
+      "source_sha256": "4e9dde0661e9199123f459bc30e1b028d99b2e5964d27d55a123a56748712af5",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__strategy-curve-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2462,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/strategy-curve-base.sol",
+      "source_sha256": "106270292fe22111dd60c75db4bdc991db167195b3acbc06923ab530a478d4ba",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__strategy-staking-rewards-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1352,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/strategy-staking-rewards-base.sol",
+      "source_sha256": "844b8ca57f1d0a5c26f3999752f5b624f8292ada806debd50769a7831f687f40",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__strategy-uni-farm-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 3246,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/strategy-uni-farm-base.sol",
+      "source_sha256": "9f752e40b326d9ff4ae6a7ece3553f53d5295980f626346f24310d3b55d2b876",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__uniswapv2__strategy-uni-eth-dai-lp-v4.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 913,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/uniswapv2/strategy-uni-eth-dai-lp-v4.sol",
+      "source_sha256": "975351a47cee3f210c89a63f466ff9d015455067a6cb86ec134b0ff8d26c20ea",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__uniswapv2__strategy-uni-eth-usdc-lp-v4.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 919,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/uniswapv2/strategy-uni-eth-usdc-lp-v4.sol",
+      "source_sha256": "20bc9985d385d9fe0202ff606f3a77c2b2d37711368b04e303a3b687e183ba9e",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__uniswapv2__strategy-uni-eth-usdt-lp-v4.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 919,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/uniswapv2/strategy-uni-eth-usdt-lp-v4.sol",
+      "source_sha256": "dcff91cec6b6c9b59d006307708334ebd1f2af751fcc34bdd3007072a48342e0",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__strategies__uniswapv2__strategy-uni-eth-wbtc-lp-v2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 919,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/strategies/uniswapv2/strategy-uni-eth-wbtc-lp-v2.sol",
+      "source_sha256": "92c476003c4ac34a36eef0af95912382c5ca5cb878a0602812d462e59b714d1b",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__jar-converters__curve-curve.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 17247,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/jar-converters/curve-curve.test.sol",
+      "source_sha256": "a770ef166f80e4a50ca16c43e42e22a244d38e591cecb6b2b6c56e52e6466fb4",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__jar-converters__curve-uni.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 21885,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/jar-converters/curve-uni.sol",
+      "source_sha256": "6a708a80fccffd2f3b8b5137c94606b66ebb9e1cb5eb2e067f7ce3d6a769a08e",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__jar-converters__uni-curve.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 27985,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/jar-converters/uni-curve.sol",
+      "source_sha256": "06efdc5dc567080a4c79191cbd5169fcdcc65e427ee8195aa0d324cfcb386cf7",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__jar-converters__uni-uni.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 11703,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/jar-converters/uni-uni.test.sol",
+      "source_sha256": "58070291a2c3cb460a0796d8e4a52e4e49fb2992b7edeae282be5bf86d392057",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__hevm.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 182,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/hevm.sol",
+      "source_sha256": "485acd12b325fd9038ba308100c494fb497682af7757f43c77916e3e5a5f1679",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__mock-erc20.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 332,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/mock-erc20.sol",
+      "source_sha256": "3cf7d72acc541b875da0a1a6cc4222c87512898fdfadc88731c0f5cf65928c54",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__test-approx.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 744,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/test-approx.sol",
+      "source_sha256": "44f35b7c13dcd667acb9e2143aab1c69d56c15c49acb7380d35c647abc175963",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__test-defi-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 7031,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/test-defi-base.sol",
+      "source_sha256": "c174c742ea95e0d0464ab0fe3c16ac5a11a7cb5cbd009b5e016ebacde02f0d7a",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__test-strategy-curve-farm-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 3118,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/test-strategy-curve-farm-base.sol",
+      "source_sha256": "f6ee7ad40d2d27e16d324902bf482ff26cb70080dced5fde8838e80b18a6588a",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__test-strategy-uni-farm-base.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 4015,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/test-strategy-uni-farm-base.sol",
+      "source_sha256": "a45c3ee885c6897d82a3f770969198aad54cc565b384538eed0c1f7757d9e179",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 4685,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/test.sol",
+      "source_sha256": "e4c65750701ef86eea8adde7aaf528bce875c4de1db05b7411019453b70014a7",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__lib__user.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 744,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/lib/user.sol",
+      "source_sha256": "b31a6a9588ddec6c69078944188a0aa4006b8c6ccdc3377d8f13171b5eac1ce4",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__pickle-swap.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1368,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/pickle-swap.test.sol",
+      "source_sha256": "2e6041c724f8cc8ba6468c7133a6b87be824311c016cb02d9f6864bb3a71caa6",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__staking-rewards.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2696,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/staking-rewards.test.sol",
+      "source_sha256": "f2e06a38989962b1579c6e7e2c1445462d6784e21c22b0f5147cb0281d21a621",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__compound__strategy-cmpnd-dai-v2.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 12966,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/compound/strategy-cmpnd-dai-v2.sol",
+      "source_sha256": "5f66ad57d0b191d4441ded01b4916a434aee94b64ffd69acb76c35fbbcd86f92",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__curve__strategy-curve-3crv-v2.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2203,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/curve/strategy-curve-3crv-v2.test.sol",
+      "source_sha256": "85a8afd126ac85ca44991388c9bdcf471c021e5ff2244dd886bb108c788f41e3",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__curve__strategy-curve-rencrv-v2.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2211,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/curve/strategy-curve-rencrv-v2.test.sol",
+      "source_sha256": "bf27d272176d4581934e046183f7e08c84d91df7369c685306159779c06fe0e9",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__curve__strategy-curve-scrv-v3_2.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2210,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/curve/strategy-curve-scrv-v3_2.test.sol",
+      "source_sha256": "e7fa58e2868fc82d5e61eb8d95c65465cb9220c4dd0fb8cff001ffe6578d7ac5",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__curve__strategy-curve-scrv-v4_1.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 7040,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/curve/strategy-curve-scrv-v4_1.test.sol",
+      "source_sha256": "5dab6a0bfec553cd71b16b38ddf30d655dd45753f083ac4a3509e3732de5cadf",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__uniswapv2__strategy-uni-eth-dai-lp-v4.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1883,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/uniswapv2/strategy-uni-eth-dai-lp-v4.test.sol",
+      "source_sha256": "857ec15052d8b37664e5457d479dd02363103b7c4f450c884f7c457430755620",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__uniswapv2__strategy-uni-eth-usdc-lp-v4.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1890,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/uniswapv2/strategy-uni-eth-usdc-lp-v4.test.sol",
+      "source_sha256": "f10786e28e341f57925496f7254dcf6bc57c648636937e2b360ac898fd7110a1",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__uniswapv2__strategy-uni-eth-usdt-lp-v4.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1890,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/uniswapv2/strategy-uni-eth-usdt-lp-v4.test.sol",
+      "source_sha256": "75e718868a16874ab815fc81e5ca4778983edc241a14da9dce25cea921110202",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__strategies__uniswapv2__strategy-uni-eth-wbtc-lp-v2.test.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1884,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/strategies/uniswapv2/strategy-uni-eth-wbtc-lp-v2.test.sol",
+      "source_sha256": "0da7a1c223f60c238d39611a0b78fcb2810a7554f6400fb29cfc713592c75395",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__tests__uni-curve-converter.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 1910,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/tests/uni-curve-converter.sol",
+      "source_sha256": "97159619a61d7c6d749ad7be0bc61381474d8c35f1dff17eee57f467f8c97fcd",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__uni-curve-converter.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 5468,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/uni-curve-converter.sol",
+      "source_sha256": "b3bd7d68b4a4de628d721c9571ee4feb886a8388ef638fe7d243f8a70baaca51",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__voting__PicklesInTheCitadel.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 2173,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/voting/PicklesInTheCitadel.sol",
+      "source_sha256": "4d268d6ecc7d00013eb399da4b471ca8697795e3cc24930e8e150547c0ffabac",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__yield-farming__masterchef.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 10561,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/yield-farming/masterchef.sol",
+      "source_sha256": "fdf4e8eb539aa1c3fd5a690bea96b8afd4ff675c239e32c406f85c9f38288734",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-0c0ab89caa1146e5__src__yield-farming__pickle-token.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 380,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-0c0ab89caa1146e5/source_code/src/yield-farming/pickle-token.sol",
+      "source_sha256": "ec3d08d6fd1daab2db773b77a18b84a29b2824c74449a77a9321b7be1f3222d9",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-0c0ab89caa1146e5",
+  "project_source_file_count": 75,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T09:22:13.557358+00:00",
+  "status": "INTERRUPTED",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T09:42:13.177479+00:00"
+}

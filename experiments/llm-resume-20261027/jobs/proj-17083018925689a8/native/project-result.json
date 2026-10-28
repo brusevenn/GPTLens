@@ -1,0 +1,84 @@
+{
+  "case_ids": [
+    "acb-7a46c5a963d98ebc"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 130,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-17083018925689a8/source_code/config.json",
+      "sha256": "6741e4b8c583c3f3ee71dd9916457dbe99dd575cba1fc3bf17d1dd702d89b4ad"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T10:01:53.170600+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_error_type": "RuntimeError",
+      "auditor_status": {
+        "case_id": null,
+        "error_type": "RuntimeError",
+        "input_file": "proj-17083018925689a8__AlgebraPool.sol",
+        "stage": "auditor",
+        "status": "error"
+      },
+      "critic_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "error_log": "errors/0ed203203667-auditor.txt",
+      "error_type": "RuntimeError",
+      "input_id": "data/ACToolBench154/proj-17083018925689a8__AlgebraPool.sol",
+      "normalized_sha256": "e36b6c0a2dd8a024c227676a9cf64d042fca25df236eec3d441c3b60eae11830",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 239612,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-17083018925689a8/source_code/AlgebraPool.sol",
+      "source_sha256": "c25fda342859e1a4a44db72de829c076183c80854098610c05f2812372cc5e85",
+      "status": "AUDITOR_ERROR"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-17083018925689a8",
+  "project_source_file_count": 1,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T09:56:13.165528+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T10:01:53.170615+00:00",
+  "usage": {
+    "completion_tokens": 65536,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 37837,
+    "prompt_tokens": 37837,
+    "request_attempt_count": 1,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

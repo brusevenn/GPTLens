@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "depositFor",
+    "code": "function depositFor(address token, uint _amount,address user ) public {\n    uint256 _pool = balance();\n    IERC20(token).safeTransferFrom(msg.sender, address(this), _amount);\n    earn();\n    uint256 _after = balance();\n    _amount = _after.sub(_pool);\n    uint256 shares = 0;\n    if (totalSupply() == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount.mul(totalSupply())).div(_pool);\n    }\n    _mint(user, shares);\n}",
+    "vulnerability": "Reentrancy due to missing nonReentrant and arbitrary token callback, allowing double minting of shares",
+    "reason": "The depositFor function is public and not protected by the ReentrancyGuard. It accepts an arbitrary token address and calls safeTransferFrom on that token before updating state. An attacker can deploy a malicious token whose transferFrom reenters depositFor with the real want token, or repeatedly invokes depositFor/deposit, causing the same want balance increase to be counted in both the inner and outer calls. Because _pool is captured before the external call and _after is read after the callback, the attacker can mint shares multiple times for a single deposit. They can then withdraw these excess shares and drain other users' funds.",
+    "file_name": "proj-77b92bbe4ed51390__GrimBoostVault.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint _amount) public nonReentrant {\n    require(_amount > 0, \"!deposit zero\");\n    uint256 _pool = balance();\n    want().safeTransferFrom(msg.sender, address(this), _amount);\n    earn();\n    uint256 _after = balance();\n    _amount = _after.sub(_pool);\n    uint256 shares = 0;\n    if (totalSupply() == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount.mul(totalSupply())).div(_pool);\n    }\n    _mint(msg.sender, shares);\n}",
+    "vulnerability": "First-depositor inflation/donation attack due to share price manipulation",
+    "reason": "The share calculation uses the vault balance before the deposit (_pool) and the deposited amount after fees (_after - _pool). An attacker can make the first deposit of 1 wei, receiving 1 share, then directly transfer (donate) a large amount of want tokens to the vault. Because balance() includes both the vault balance and the strategy balance, the donation inflates _pool without increasing totalSupply. When a victim deposits, their shares are calculated as depositAmount * totalSupply / _pool. If the donation is large enough, the victim receives zero or very few shares due to rounding. The attacker can then withdraw their 1 share and redeem the entire inflated balance, stealing the victim's deposit. This attack is known as the ERC4626 inflation attack and is profitable for the attacker while causing loss to later depositors.",
+    "file_name": "proj-77b92bbe4ed51390__GrimBoostVault.sol"
+  },
+  {
+    "function_name": "withdraw",
+    "code": "function withdraw(uint256 _shares) public {\n    uint256 r = (balance().mul(_shares)).div(totalSupply());\n    _burn(msg.sender, _shares);\n    uint b = want().balanceOf(address(this));\n    if (b < r) {\n        uint _withdraw = r.sub(b);\n        strategy.withdraw(_withdraw);\n        uint _after = want().balanceOf(address(this));\n        uint _diff = _after.sub(b);\n        if (_diff < _withdraw) {\n            r = b.add(_diff);\n        }\n    }\n    want().safeTransfer(msg.sender, r);\n}",
+    "vulnerability": "Reentrancy via ERC777/hook token because withdraw lacks nonReentrant, enabling inflated second withdrawal",
+    "reason": "The withdraw function has no nonReentrant modifier. It calculates r using the current balance, then burns shares, but the actual token transfer happens after share burning. During want().safeTransfer, a token with a hook (such as ERC777) can reenter withdraw before the vault's token balance is reduced. In the reentrant call, totalSupply has already been reduced by the first burn, but balance() still includes the tokens being withdrawn. This inflated price per share allows the attacker to receive more than their fair share for the remaining shares. By carefully choosing a small first withdrawal so that the vault still has enough balance for both transfers, the attacker can extract more value than entitled, stealing funds from other shareholders.",
+    "file_name": "proj-77b92bbe4ed51390__GrimBoostVault.sol"
+  }
+]

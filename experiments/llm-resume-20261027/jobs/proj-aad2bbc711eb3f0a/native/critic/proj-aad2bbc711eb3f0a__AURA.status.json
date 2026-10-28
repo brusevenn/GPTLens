@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-aad2bbc711eb3f0a__AURA.json",
+  "stage": "critic",
+  "status": "error",
+  "error_type": "ValueError"
+}

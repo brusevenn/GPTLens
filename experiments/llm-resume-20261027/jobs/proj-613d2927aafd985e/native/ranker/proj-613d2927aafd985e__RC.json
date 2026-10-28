@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function addMeByRC() public {\n    require(tx.origin == owner);\n    rc[ msg.sender ] = true;\n    emit NewRC(msg.sender);\n}",
+    "correctness": 8,
+    "criticism": "The tx.origin issue is real: if the owner initiates a transaction to a malicious contract, that contract can call addMeByRC because tx.origin remains the owner while msg.sender is the malicious contract. This can register attacker-controlled code as an RC, so the reasoning is directionally correct. However, 'arbitrary RC registration' is overstated because it is not directly exploitable by an arbitrary external attacker; it requires owner phishing or the owner deliberately interacting with malicious code. The claimed total drain through claim or buyFromRC with an arbitrarily low _rcTokenValue depends on unshown functions and privileges; the snippet alone does not prove that registration grants arbitrary token transfer or negligible-cost draining. If those RC privileges are as described, the impact is severe, but the exploit remains conditional. Scores reflect high correctness for the tx.origin flaw, high potential severity/profitability if RC privileges are real, but not maximum due to conditional exploitation and missing evidence for the drain path.",
+    "file_name": "proj-613d2927aafd985e__RC.sol",
+    "final_score": 7.5,
+    "function_name": "addMeByRC",
+    "profitability": 7,
+    "reason": "addMeByRC uses tx.origin for authentication instead of msg.sender. If the TokenSale owner (an EOA) interacts with any malicious contract, that contract can call addMeByRC. Since tx.origin remains the owner's EOA, the require passes and msg.sender (the malicious contract) is registered as an RC. Once registered, the attacker can call claim to transfer any amount of tokens from the TokenSale to any address without paying, or call buyFromRC with an arbitrarily low _rcTokenValue to drain tokens at negligible cost. This can lead to total loss of the tokens held by the TokenSale contract. This is a classic tx.origin phishing vulnerability and is exploitable in the real world.",
+    "severity": 7,
+    "vulnerability": "tx.origin authentication allows arbitrary RC registration"
+  },
+  {
+    "code": "function () public payable{\n    require( now > startTime );\n    if(now < endTime) {\n        takeEther(msg.sender);\n    } else {\n        claimTokenBonus(msg.sender);\n    }\n}",
+    "correctness": 6,
+    "criticism": "The core concern is plausible: the payable fallback calls takeEther(msg.sender) without a visible KYC signature or maxAmount check. If takeEther credits the sender with pending token allocation, a user can send ETH directly and bypass the buyImplementation KYC/maxAmount path. However, the detailed exploit chain is not fully supported by the provided snippet: the behavior of releaseTokensTo is unknown, and it is not clear that calling buyTokens with msg.value=0 will 'skip takeEther' or invoke giveToken as claimed. Also, if the fallback later calls claimTokenBonus after endTime without KYC, the bypass may be even simpler and not require a valid KYC signature, which weakens the stated reasoning. The claim about the owner withdrawing user ETH is a separate centralization/design concern and is not proven by this snippet. Severity is high because uncapped ETH intake could exceed KYC limits and capture sale allocation; profitability is medium-high because the attacker still needs the resulting tokens to be valuable or discounted and must be able to claim/sell them.",
+    "file_name": "proj-613d2927aafd985e__RC.sol",
+    "final_score": 6.5,
+    "function_name": "fallback",
+    "profitability": 6,
+    "reason": "The fallback function is payable and directly calls takeEther(msg.sender) when now < endTime without requiring a KYC signature or updating alreadyPayed. takeEther accumulates pendingTokenUser and etherUser for the sender, but does not forward ETH or claim tokens until giveToken is called. A KYC-authorized user can send unlimited ETH directly to the fallback, bypassing the maxAmount check in buyImplementation. Later, the user calls buyTokens with msg.value=0 and a valid KYC signature (even with a small maxAmount); buyImplementation passes because totalPayed = alreadyPayed[buyerId] + 0 <= maxAmount, then releaseTokensTo skips takeEther and calls giveToken, which claims all accumulated pending tokens and forwards the accumulated ETH. This allows the user to exceed their KYC maximum and buy unlimited tokens. Additionally, the ETH sent via fallback is held in the RC contract until giveToken, and the TokenSale owner can withdraw it via withdraw, causing loss of user funds.",
+    "severity": 8,
+    "vulnerability": "KYC and maxAmount bypass via direct fallback purchase"
+  },
+  {
+    "code": "function buyImplementation(address buyerAddress, uint64 buyerId, uint maxAmount, uint8 v, bytes32 r, bytes32 s) private returns (bool) {\n    bytes32 hash = sha256(\"Eidoo icoengine authorization\", address(0), buyerAddress, buyerId, maxAmount);\n    address signer = ecrecover(hash, v, r, s);\n    if (!isKycSigner[signer]) {\n        revert();\n    } else {\n        uint256 totalPayed = alreadyPayed[buyerId].add(msg.value);\n        require(totalPayed <= maxAmount);\n        alreadyPayed[buyerId] = totalPayed;\n        emit KycVerified(signer, buyerAddress, buyerId, maxAmount);\n        return releaseTokensTo(buyerAddress);\n    }\n}",
+    "correctness": 7,
+    "criticism": "The missing domain separation is correctly identified: the hash uses a constant address(0) and does not include this contract's address or a chain ID. If multiple deployments share the same isKycSigner and accept the same buyerAddress, buyerId, and maxAmount, a valid KYC signature can be replayed across those deployments. However, the reasoning overstates the impact. buyImplementation is private and only reachable through the sale flow, and replay still requires a valid signature for that buyer. It also still enforces totalPayed <= maxAmount per contract, so it does not exceed the signed maxAmount on a single contract. It enables cross-sale or cross-chain reuse of an existing KYC approval, but not arbitrary unauthorized purchase without a signature. Profitability is limited and depends on multiple contracts using the same signer and on valuable capped allocations. Correctness is fairly high for the domain-separation flaw, but severity and profitability are moderate to low.",
+    "file_name": "proj-613d2927aafd985e__RC.sol",
+    "final_score": 5.25,
+    "function_name": "buyImplementation",
+    "profitability": 3,
+    "reason": "The KYC authorization hash in buyImplementation is constructed using a constant address(0), buyerAddress, buyerId, and maxAmount, but it does not include the address of the current RC contract, the TokenSale contract, or a chain ID. Therefore, a signature issued for one ICO/RC contract is valid for any other ICO/RC contract that uses the same KYC signer in its isKycSigner mapping. An attacker who has a valid KYC signature for one sale can replay it on another sale to bypass KYC verification and any per-sale maximum limits. The alreadyPayed mapping is per-contract, so it does not prevent replay. This allows unauthorized purchases and can exceed caps, breaking the KYC mechanism.",
+    "severity": 4,
+    "vulnerability": "Signature replay across contracts due to missing contract address in hash"
+  }
+]

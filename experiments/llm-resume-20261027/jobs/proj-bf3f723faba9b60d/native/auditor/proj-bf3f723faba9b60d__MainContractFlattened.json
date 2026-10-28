@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "swapTokensForOther",
+    "code": "    function swapTokensForOther(uint256 tokenAmount) public {\n        address[] memory path = new address[](2);\n        path[0] = address(this);\n        path[1] = address(_baseToken);\n        uniswapV2Router.swapExactTokensForTokensSupportingFeeOnTransferTokens(\n            tokenAmount,\n            0,\n            path,\n            address(warp),\n            block.timestamp\n        );\n        warp.withdraw();\n    }",
+    "vulnerability": "Public unrestricted token swap with zero minimum output and unprotected warp withdrawal",
+    "reason": "The function is public and lacks access control. Any user can call it with an arbitrary tokenAmount, causing the contract to swap its own token balance for USDT via Uniswap with amountOutMin set to 0. This allows an attacker to sandwich the swap: manipulate the pool before the call to worsen the price, let the contract sell at a disadvantage, then reverse the trade for profit. Additionally, the function calls warp.withdraw() without restrictions, potentially allowing anyone to trigger withdrawal of accumulated funds from the warp contract. The zero slippage protection makes the swap highly vulnerable to MEV attacks, and the unrestricted withdrawal could lead to loss of funds depending on the warp implementation.",
+    "file_name": "proj-bf3f723faba9b60d__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_isAddLiquidityV1",
+    "code": "    function _isAddLiquidityV1()internal view returns(bool ldxAdd){\n        address token0 = IUniswapV2Pair(address(uniswapV2Pair)).token0();\n        address token1 = IUniswapV2Pair(address(uniswapV2Pair)).token1();\n        (uint r0,uint r1,) = IUniswapV2Pair(address(uniswapV2Pair)).getReserves();\n        uint bal1 = IERC20(token1).balanceOf(address(uniswapV2Pair));\n        uint bal0 = IERC20(token0).balanceOf(address(uniswapV2Pair));\n        if( token0 == address(this) ){\n            if( bal1 > r1){\n                uint change1 = bal1 - r1;\n                ldxAdd = change1 > 1000;\n            }\n        }else{\n            if( bal0 > r0){\n                uint change0 = bal0 - r0;\n                ldxAdd = change0 > 1000;\n            }\n        }\n    }",
+    "vulnerability": "Logic flaw allows fee bypass by donating base token to pair",
+    "reason": "The function attempts to detect liquidity additions by checking if the pair's balance of the other token exceeds its reserve. However, it does not verify that the token being transferred is part of a legitimate addLiquidity operation. An attacker can send a tiny amount (more than 1000 wei) of the base token (USDT) directly to the Uniswap pair, causing bal1 > r1 to be true. Then, when the attacker transfers the project token to the pair (e.g., to sell), _transfer calls _isAddLiquidityV1 and receives true, setting isAddLdx = true. This causes takeFee to be false, bypassing the 3% sell fee and the warp.addTokenldx call. The attacker can repeat this for every sell, saving significant fees at negligible cost (1001 wei of USDT). This undermines the token's fee mechanism and can be exploited for profit.",
+    "file_name": "proj-bf3f723faba9b60d__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "rescueToken",
+    "code": "    function rescueToken(address tokenAddress, uint256 tokens) public returns (bool success) {\n        require(_tokenOwner == msg.sender);\n        return IERC20(tokenAddress).transfer(msg.sender, tokens);\n    }",
+    "vulnerability": "TokenOwner can drain any ERC20 tokens from the contract",
+    "reason": "The function allows the address stored in _tokenOwner to transfer any ERC20 token held by the contract to themselves. There is no restriction on which token or how much can be rescued. Since the contract accumulates USDT from swaps and project tokens from fees, the _tokenOwner can call rescueToken with the token's address or the USDT address to drain all accumulated funds. This is a backdoor that enables a rug pull. Although it requires the caller to be _tokenOwner, in the real world this address may be controlled by the deployer or a compromised party, making the contract's funds insecure. The function lacks any timelock or multisig protection.",
+    "file_name": "proj-bf3f723faba9b60d__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringERC20.json",
+  "stage": "critic",
+  "status": "complete",
+  "finding_count": 3
+}

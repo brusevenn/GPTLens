@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "setOwner",
+    "code": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n}",
+    "vulnerability": "Missing onlyOwner access control on setOwner",
+    "reason": "The setOwner function is public and lacks the onlyOwner modifier. Any external account can call setOwner(attacker) and become the contract owner. This completely compromises all onlyOwner functions: the attacker can permanently lock balance uploads by calling lockBalances, unlock trading early by calling unlockToken, manipulate fees/holding periods, or set owner to zero to permanently brick administrative functionality. This is a real-world exploitable ownership takeover with severe DoS and control impact.",
+    "file_name": "proj-d92a4472b11f4077__IDXM.sol"
+  },
+  {
+    "function_name": "pow10",
+    "code": "function pow10(uint256 a, uint8 b) internal returns (uint256 result) {\n    for (uint8 i = 0; i < b; i++) {\n        a *= 10;\n    }\n    return result;\n}",
+    "vulnerability": "pow10 returns uninitialized result instead of modified a",
+    "reason": "The function updates the local parameter a by multiplying by 10, but returns the never-assigned result variable, which is always 0. This is called in precalculate() to set baseFeeDivisor, feeDivisor, and singleIDXMQty. All three critical fee parameters become 0. Consequently, singleIDXMQty is 0, so feeFor returns 0 for any recipient with a nonzero balance, allowing complete bypass of export fees. For zero-balance recipients, feeFor divides by baseFeeDivisor = 0 and reverts, causing a DoS in fee calculation. This is a critical logic flaw with direct economic and availability impact.",
+    "file_name": "proj-d92a4472b11f4077__IDXM.sol"
+  },
+  {
+    "function_name": "feeFor",
+    "code": "function feeFor(address from, address to, uint256 amount) constant external returns (uint256 value) {\n    uint256 fee = exportFee[from];\n    if (fee == 0) return 0;\n    uint256 amountHeld;\n    if (balanceOf[to] != 0) {\n        if (validAfter[to].ts + mustHoldFor < now) amountHeld = balanceOf[to];\n        else amountHeld = validAfter[to].last;\n        if (amountHeld >= singleIDXMQty) return 0;\n        return amount*fee*(singleIDXMQty - amountHeld) / feeDivisor;\n    } else return amount*fee / baseFeeDivisor;\n}",
+    "vulnerability": "Division by zero and fee bypass due zero divisors",
+    "reason": "Because pow10 always returns 0, baseFeeDivisor and feeDivisor are 0. In the else branch (when balanceOf[to] == 0), feeFor performs amount*fee / baseFeeDivisor, which always reverts due division by zero. This can be triggered by any caller querying fees for a zero-balance recipient, causing a DoS for systems relying on feeFor. In the nonzero-balance branch, singleIDXMQty is also 0, so the check amountHeld >= singleIDXMQty is always true (since amountHeld is uint), causing feeFor to return 0 regardless of fee or amount. This allows users to completely bypass export fees by ensuring the recipient address has a nonzero IDXM balance. Both impacts are directly exploitable and economically beneficial to fee evaders.",
+    "file_name": "proj-d92a4472b11f4077__IDXM.sol"
+  }
+]

@@ -1,0 +1,19 @@
+{"input_file": "proj-98b2c0e1dc60d5ec__IERC20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__IERC20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__IERC20Metadata.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__IERC20Metadata.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Callee.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Callee.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Factory.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Factory.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Pair.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__ILeetSwapV2Pair.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__LeetSwapV2Fees.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__LeetSwapV2Fees.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-98b2c0e1dc60d5ec__LeetSwapV2Pair.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-98b2c0e1dc60d5ec__LeetSwapV2Pair.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-98b2c0e1dc60d5ec__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-98b2c0e1dc60d5ec__MainContractFlattened.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-98b2c0e1dc60d5ec__Math.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-98b2c0e1dc60d5ec__Math.json", "status": "skipped_empty_findings"}
+{"project_id": "proj-98b2c0e1dc60d5ec", "case_ids": ["acb-b07c561da5bda09c"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 9, "failed_files": 1, "request_log": "requests.jsonl"}

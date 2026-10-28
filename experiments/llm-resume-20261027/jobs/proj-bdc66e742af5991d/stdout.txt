@@ -1,0 +1,9 @@
+{"input_file": "proj-bdc66e742af5991d__@openzeppelin__contracts__utils__cryptography__ECDSA.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-bdc66e742af5991d__@openzeppelin__contracts__utils__cryptography__ECDSA.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-bdc66e742af5991d__@openzeppelin__contracts__utils__cryptography__draft-EIP712.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-bdc66e742af5991d__@openzeppelin__contracts__utils__cryptography__draft-EIP712.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-bdc66e742af5991d__MainContractFlattened.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-bdc66e742af5991d__MainContractFlattened.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-bdc66e742af5991d__contracts__Forwarder.sol", "status": "complete", "finding_count": 1}
+{"input_file": "proj-bdc66e742af5991d__contracts__Forwarder.json", "status": "complete", "finding_count": 1}
+{"project_id": "proj-bdc66e742af5991d", "case_ids": ["acb-69f0bc0ebcd2e6f6"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 4, "failed_files": 0, "request_log": "requests.jsonl"}

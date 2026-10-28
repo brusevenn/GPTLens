@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-36288b16bacd36ec__contracts__vaults__apolloX__ApolloXBscVault.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

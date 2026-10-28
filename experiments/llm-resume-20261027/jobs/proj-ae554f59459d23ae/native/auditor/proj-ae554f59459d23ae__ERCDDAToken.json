@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "owned",
+    "code": "function owned() public { owner = msg.sender; }",
+    "vulnerability": "Unprotected ownership transfer",
+    "reason": "The owned() function is declared public and lacks any access control such as an onlyOwner modifier or a require statement. Any external account can call owned() and set the owner variable to their own address. Once an attacker becomes the owner, they gain access to all onlyOwner functions, including mintToken, freezeAccount, and burn. This allows the attacker to arbitrarily mint new tokens, freeze any account, or burn tokens, leading to complete compromise of the token contract.",
+    "file_name": "proj-ae554f59459d23ae__ERCDDAToken.sol"
+  },
+  {
+    "function_name": "mintToken",
+    "code": "function mintToken(address target, uint256 mintedAmount) onlyOwner public{\n    balanceOf[target] += mintedAmount;\n    totalSupply += mintedAmount;\n}",
+    "vulnerability": "Integer overflow in unchecked arithmetic",
+    "reason": "The mintToken function performs unchecked addition on balanceOf[target] and totalSupply. Since Solidity 0.4.24 does not include built-in overflow checks, an attacker who becomes the owner (for example, by calling the unprotected owned() function) can supply a carefully chosen mintedAmount that causes an overflow. This allows the attacker to arbitrarily set any account's balance to any desired value by wrapping the addition, and to corrupt totalSupply. For instance, the attacker can zero out a victim's balance or mint themselves an arbitrary amount without increasing totalSupply in a consistent manner. This is a severe arithmetic vulnerability that enables direct theft or destruction of token balances.",
+    "file_name": "proj-ae554f59459d23ae__ERCDDAToken.sol"
+  },
+  {
+    "function_name": "freezeAccount",
+    "code": "function freezeAccount(address target, bool freeze) onlyOwner public {\n    frozenAccount[target] = freeze;\n    emit FrozenFunds(target, freeze);\n}",
+    "vulnerability": "Arbitrary account freezing causing denial of service",
+    "reason": "The freezeAccount function allows the owner to set frozenAccount[target] to true for any address without any restrictions or user consent. Once an account is frozen, the _transfer function requires both the sender and receiver to be unfrozen, meaning the frozen account can neither send nor receive tokens. An attacker who gains ownership through the unprotected owned() function can freeze all token holders, preventing them from transferring or selling their tokens. This can be used to lock user funds, cause a denial of service, or manipulate the market by freezing competitors. The function is a severe centralization risk that becomes directly exploitable after ownership takeover.",
+    "file_name": "proj-ae554f59459d23ae__ERCDDAToken.sol"
+  }
+]

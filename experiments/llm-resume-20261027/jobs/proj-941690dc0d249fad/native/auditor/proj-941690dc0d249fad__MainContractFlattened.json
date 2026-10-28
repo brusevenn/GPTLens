@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "owned",
+    "code": "function owned() public {\n        owner = msg.sender;\n    }",
+    "vulnerability": "Public ownership takeover due to misnamed constructor",
+    "reason": "In Solidity 0.4.18, a constructor must have the exact same name and capitalization as its contract. The contract is named `Owned`, but the function is named `owned` with a lowercase `o`. Therefore `owned()` is not a constructor; it is a public function that remains callable after deployment. Any external account can call `owned()` and set `owner = msg.sender`. After that, the attacker satisfies the `onlyOwner` modifier and can call every privileged function in `Owned` and `MorphToken`, including `mintTokens`, `blacklistAccount`, `transferOwnership`, and `burn`. This is a direct, real-world exploitable ownership takeover.",
+    "file_name": "proj-941690dc0d249fad__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mintTokens",
+    "code": "function mintTokens(uint256 _mintedAmount) public onlyOwner {\n        balanceOf[owner] = balanceOf[owner].add(_mintedAmount);\n        totalSupply = totalSupply.add(_mintedAmount);\n        Transfer(0, owner, _mintedAmount);\n    }",
+    "vulnerability": "Arbitrary unlimited token minting via stolen ownership",
+    "reason": "`mintTokens` allows the owner to increase `balanceOf[owner]` and `totalSupply` by an arbitrary `_mintedAmount`, with no maximum supply cap, no timelock, and no validation beyond `onlyOwner`. Because `owned()` can be called by anyone to become owner, an attacker can first call `owned()` and then call `mintTokens` with any `uint256` value. The attacker can mint an unlimited number of tokens directly to their own address, then sell or transfer them into markets, dilute all existing holders, and drain liquidity. This is highly beneficial to an attacker and is directly enabled by the ownership takeover vulnerability.",
+    "file_name": "proj-941690dc0d249fad__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom( address _from, address _to, uint256 _amount ) public returns (bool success) {\n        if (balanceOf[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balanceOf[_to].add(_amount) > balanceOf[_to]) {\n            balanceOf[_from] = balanceOf[_from].sub(_amount);\n            allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_amount);\n            balanceOf[_to] = balanceOf[_to].add(_amount);\n            return true;\n        } else {\n            return false;\n        }\n    }",
+    "vulnerability": "Blacklist bypass in transferFrom",
+    "reason": "The `transfer` function enforces `isblacklistedAccount` checks on both sender and recipient, but `transferFrom` does not check either `isblacklistedAccount[_from]` or `isblacklistedAccount[_to]`. Therefore, a blacklisted account can still move tokens by approving a non-blacklisted accomplice and having that accomplice call `transferFrom` on its behalf. Since `approve` also has no blacklist check, the blacklisted account can grant allowance and then have its tokens transferred out despite being blacklisted. This completely defeats the blacklist freeze mechanism and allows a malicious or compromised blacklisted address to move frozen funds to another address, which is directly beneficial to an attacker.",
+    "file_name": "proj-941690dc0d249fad__MainContractFlattened.sol"
+  }
+]

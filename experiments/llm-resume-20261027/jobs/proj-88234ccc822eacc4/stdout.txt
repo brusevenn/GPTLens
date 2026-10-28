@@ -1,0 +1,3 @@
+{"input_file": "proj-88234ccc822eacc4__PublicVault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-88234ccc822eacc4__PublicVault.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-88234ccc822eacc4", "case_ids": ["acb-b5d78316bf6fe1b6"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

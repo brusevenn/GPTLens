@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "WhiteListMint",
+    "code": "function WhiteListMint(bytes32[] calldata _merkleProof, uint256 chosenAmount) public {\n        require(_numberMinted(msg.sender)<1, \"Already Claimed\");\n        require(isPaused == false, \"turn on minting\");\n        require( chosenAmount > 0, \"Number Of Tokens Can Not Be Less Than Or Equal To 0\" );\n        require( totalSupply() + chosenAmount <= maxsupply - reserve, \"all tokens have been minted\" );\n        bytes32 leaf = keccak256(abi.encodePacked(msg.sender));\n        require( MerkleProof.verify(_merkleProof, rootHash, leaf), \"Invalid Proof\" );\n        _safeMint(msg.sender, chosenAmount);\n    }",
+    "vulnerability": "Unrestricted mint amount for whitelisted addresses",
+    "reason": "The function only checks _numberMinted(msg.sender) < 1 to limit each address to one mint transaction, but the user-supplied chosenAmount is not restricted to 1. A whitelisted attacker can pass the maximum remaining public supply (e.g., maxsupply - reserve - totalSupply()) and mint all available public tokens in a single transaction. This deprives other whitelisted users and allows the attacker to acquire a large supply for free, which can be sold or used to manipulate the NFT market.",
+    "file_name": "proj-82c8ff156ec8a48d__Bad_Guys_by_RPF.sol"
+  },
+  {
+    "function_name": "mintReservedTokens",
+    "code": "function mintReservedTokens(uint256 quantity) public onlyOwner {\n        require(quantity <= reserve, \"All reserve tokens have bene minted\");\n        reserve -= quantity;\n        _safeMint(msg.sender, quantity);\n    }",
+    "vulnerability": "Missing total supply cap check allows owner to mint beyond maxsupply",
+    "reason": "The function only ensures quantity <= reserve and decrements reserve. It does not check totalSupply() + quantity <= maxsupply. Because setReserve can be called repeatedly to reset reserve to any value up to maxsupply, the owner can repeatedly call setReserve(maxsupply) and mintReservedTokens(maxsupply) to mint an unbounded number of tokens. Even without resetting, after public minting has occurred, increasing reserve via setReserve allows the owner to mint more than the original reserve, exceeding maxsupply. This breaks the supply cap and allows the owner to dilute the collection arbitrarily.",
+    "file_name": "proj-82c8ff156ec8a48d__Bad_Guys_by_RPF.sol"
+  },
+  {
+    "function_name": "setReserve",
+    "code": "function setReserve(uint256 _reserve) public onlyOwner {\n        require(_reserve <= maxsupply, \"the quantity exceeds\");\n        reserve = _reserve;\n    }",
+    "vulnerability": "Reserve can be arbitrarily reset, enabling supply cap bypass and public mint DoS",
+    "reason": "setReserve can be called at any time by the owner and only checks _reserve <= maxsupply. It does not consider the current total supply or the amount already minted. An owner can set reserve = maxsupply to make maxsupply - reserve = 0, completely disabling WhiteListMint. More critically, combined with mintReservedTokens, the ability to reset reserve after it has been consumed allows the owner to mint unlimited tokens in multiple iterations. This is a severe centralization risk and a direct violation of the advertised maximum supply.",
+    "file_name": "proj-82c8ff156ec8a48d__Bad_Guys_by_RPF.sol"
+  }
+]

@@ -1,0 +1,114 @@
+{
+  "case_ids": [
+    "acb-74bd087687516332"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 12444,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-2c369ee1c0d61899/source_code/config.json",
+      "sha256": "a6b95f35e1b979fe363950b8673993cbc316b945d9e09a8074c26d68b6e8d1ca"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T10:27:28.047299+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-2c369ee1c0d61899__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-2c369ee1c0d61899__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-2c369ee1c0d61899__MainContractFlattened.sol",
+      "normalized_sha256": "6dd69baa5d2ae35df98e2a9ec573cc46215afed5bfc17f9bbb496d64ac1a48b5",
+      "ranker_output": "ranker/proj-2c369ee1c0d61899__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 7069,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-2c369ee1c0d61899/source_code/MainContractFlattened.sol",
+      "source_sha256": "7372e96e5029bd32ebd8a7b45247f81e0fac2197712b925011cfd7b96019a2d2",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-2c369ee1c0d61899__contracts__Reward.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-2c369ee1c0d61899__contracts__Reward.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-2c369ee1c0d61899__contracts__Reward.sol",
+      "normalized_sha256": "a63ae8d24ad7edc2dee6209c6dd7ab3ac4f88a4084033682b4f6055a84c124ea",
+      "ranker_output": "ranker/proj-2c369ee1c0d61899__contracts__Reward.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 7012,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-2c369ee1c0d61899/source_code/contracts/Reward.sol",
+      "source_sha256": "8107a09e76b7e9fb64ec973c0be688c97aee6eef1f4215cb0d37f738f1c9ae16",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-2c369ee1c0d61899",
+  "project_source_file_count": 2,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T10:24:39.736199+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T10:27:28.047313+00:00",
+  "usage": {
+    "completion_tokens": 31109,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 5105,
+    "prompt_tokens": 7025,
+    "request_attempt_count": 4,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

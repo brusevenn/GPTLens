@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "function() payable",
+    "code": "function() payable {\n    if (!purchasingAllowed) { throw; }\n    if (msg.value < 1 finney * MINfinney) { return; }\n    owner.transfer(msg.value);\n    totalContribution += msg.value;\n    uint256 tokensIssued = (msg.value / 1e10) * ICORatio + AIRDROPBounce * 1e8;\n    totalSupply += tokensIssued;\n    balances[msg.sender] += tokensIssued;\n    Transfer(address(this), msg.sender, tokensIssued);\n}",
+    "vulnerability": "Free token minting via zero-value fallback calls",
+    "reason": "MINfinney is initialized to 0, so the minimum purchase check `msg.value < 1 finney * MINfinney` becomes `msg.value < 0`, which is always false. An attacker can call the payable fallback with 0 ETH (or any tiny amount) and still receive the full AIRDROPBounce bonus of 50,000,000 * 1e8 base tokens. The function then increments totalSupply and credits the attacker's balance without any actual payment. This can be repeated indefinitely to mint an unlimited number of tokens for free, diluting the token supply and allowing the attacker to acquire massive voting/governance power or dump the tokens on exchanges.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {\n    if(msg.data.length < (3 * 32) + 4) { throw; }\n    if (_value == 0) { return false; }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Reversed balance/allowance checks enable unauthorized transfers and underflow",
+    "reason": "The checks `sufficientFunds = fromBalance <= _value` and `sufficientAllowance = allowance <= _value` are inverted. For a huge `_value` (e.g., `2^256 - d`), these conditions pass even when the sender has zero balance and zero allowance. The function then executes `balances[_from] -= _value` and `allowed[_from][msg.sender] -= _value` without SafeMath, causing underflows. An attacker can set `_from` to their own address and `_to` to a victim with balance `d`, using `_value = 2^256 - d`. The victim's balance is reduced by `d` while the attacker's balance underflows by the same amount, effectively increasing the attacker's balance by `d`. This allows theft of any amount up to the victim's full token balance without any allowance.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "transferFrom",
+    "code": "function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {\n    if(msg.data.length < (3 * 32) + 4) { throw; }\n    if (_value == 0) { return false; }\n    uint256 fromBalance = balances[_from];\n    uint256 allowance = allowed[_from][msg.sender];\n    bool sufficientFunds = fromBalance <= _value;\n    bool sufficientAllowance = allowance <= _value;\n    bool overflowed = balances[_to] + _value > balances[_to];\n    if (sufficientFunds && sufficientAllowance && !overflowed) {\n        balances[_to] += _value;\n        balances[_from] -= _value;\n        allowed[_from][msg.sender] -= _value;\n        Transfer(_from, _to, _value);\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "vulnerability": "Inverted overflow check forces overflowing additions, enabling theft from destination",
+    "reason": "The variable `overflowed` is set to `balances[_to] + _value > balances[_to]`, which is true when the addition does NOT overflow. However, the condition requires `!overflowed`, meaning the addition must actually overflow for the transfer to succeed. An attacker can exploit this by setting `_from` to themselves and `_to` to a victim with a positive balance. By choosing `_value = 2^256 - d` where `d` is at most the victim's balance, the addition `balances[_to] + _value` overflows and wraps to `victimBalance - d`. The subsequent `balances[_from] -= _value` underflows, increasing the attacker's balance by `d`. This allows the attacker to steal tokens from any address by using it as the destination, with no allowance required.",
+    "file_name": "proj-2654ebef2486b850__MainContractFlattened.sol"
+  }
+]

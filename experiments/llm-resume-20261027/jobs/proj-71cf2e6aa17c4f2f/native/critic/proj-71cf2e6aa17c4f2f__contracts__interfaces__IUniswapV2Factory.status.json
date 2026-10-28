@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-71cf2e6aa17c4f2f__contracts__interfaces__IUniswapV2Factory.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

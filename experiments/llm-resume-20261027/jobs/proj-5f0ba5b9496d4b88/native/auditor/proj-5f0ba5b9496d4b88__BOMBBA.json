@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "quaker",
+    "code": "function quaker(address wallet) public { owner = msg.sender; ownerWallet=wallet; totalSupply = INITIAL_SUPPLY * 10 ** 18; tokenBalances[wallet] = INITIAL_SUPPLY * 10 ** 18; }",
+    "vulnerability": "Unauthenticated ownership takeover and arbitrary token balance/supply assignment",
+    "reason": "The quaker function has no access control. Any attacker can call quaker(attacker) to set owner to their own address, set ownerWallet to an arbitrary address, reset totalSupply to INITIAL_SUPPLY * 10^18, and assign INITIAL_SUPPLY * 10^18 tokens to any wallet. This immediately grants the attacker ownership privileges, allowing them to call all onlyOwner functions such as mint and pullBack. Moreover, because quaker does not clear existing balances, an attacker can call it repeatedly with different wallets, assigning the full initial supply to each wallet while totalSupply is simply reset to the initial value. This completely corrupts token accounting and allows arbitrary token creation/assignment.",
+    "file_name": "proj-5f0ba5b9496d4b88__BOMBBA.sol"
+  },
+  {
+    "function_name": "mint",
+    "code": "function mint(address wallet, address buyer, uint256 tokenAmount) public onlyOwner { require(tokenBalances[wallet] >= tokenAmount); tokenBalances[buyer] = tokenBalances[buyer].add(tokenAmount); tokenBalances[wallet] = tokenBalances[wallet].add(tokenAmount); Transfer(wallet, buyer, tokenAmount); totalSupply=totalSupply.sub(tokenAmount); }",
+    "vulnerability": "Incorrect mint accounting allows unlimited token inflation and corrupts totalSupply",
+    "reason": "The mint function checks only that wallet already has at least tokenAmount, but it does not subtract tokenAmount from wallet. Instead, it adds tokenAmount to buyer, then adds tokenAmount to wallet again, and subtracts tokenAmount from totalSupply. If buyer == wallet, the first add updates the balance, and the second add reads that updated balance, so the attacker's balance is increased by 2 * tokenAmount while totalSupply is reduced by tokenAmount. An attacker can first call the unprotected quaker function to become owner and set a huge wallet balance, then call mint(attacker, attacker, INITIAL_SUPPLY * 10**18). This can leave the attacker with 3 * INITIAL_SUPPLY * 10**18 tokens while totalSupply becomes zero, breaking ERC20 accounting and allowing the attacker to transfer large amounts of unbacked tokens. Because quaker grants ownership to anyone, this becomes publicly exploitable.",
+    "file_name": "proj-5f0ba5b9496d4b88__BOMBBA.sol"
+  },
+  {
+    "function_name": "pullBack",
+    "code": "function pullBack(address wallet, address buyer, uint256 tokenAmount) public onlyOwner { require(tokenBalances[buyer]>=tokenAmount); tokenBalances[buyer] = tokenBalances[buyer].sub(tokenAmount); tokenBalances[wallet] = tokenBalances[wallet].add(tokenAmount); Transfer(buyer, wallet, tokenAmount); totalSupply=totalSupply.add(tokenAmount); }",
+    "vulnerability": "Owner can arbitrarily seize tokens from any holder and inflate totalSupply",
+    "reason": "The pullBack function lets the owner deduct tokenAmount from any buyer without allowance or consent and credit the same amount to an arbitrary wallet. It also increases totalSupply by tokenAmount. Since quaker allows any attacker to become owner, an attacker can call quaker(attacker) and then call pullBack(attacker, victim, victimBalance) to steal all tokens from any victim. The attacker can also use quaker to assign a large balance to the victim and then pull those tokens back to themselves. This function therefore allows arbitrary token theft and supply corruption.",
+    "file_name": "proj-5f0ba5b9496d4b88__BOMBBA.sol"
+  }
+]

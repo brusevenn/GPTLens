@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "owned",
+    "code": "function owned() public { owner = msg.sender; }",
+    "vulnerability": "Unauthenticated ownership takeover",
+    "reason": "The function `owned()` is public and has no `onlyOwner` modifier. Any external account can call it at any time, and the body `owner = msg.sender;` immediately replaces the stored owner with the caller. Because `onlyOwner` protects sensitive functions such as `mintToken`, `freezeAccount`, and `burn`, an attacker can first call `owned()` to become owner and then execute privileged operations. This is directly exploitable in the real world: an attacker can take ownership of any deployed instance and then mint arbitrary tokens, freeze holders, or burn tokens. The attacker benefits by gaining full administrative control without any authorization.",
+    "file_name": "proj-ae554f59459d23ae__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "mintToken",
+    "code": "function mintToken(address target, uint256 mintedAmount) onlyOwner public{ balanceOf[target] += mintedAmount; totalSupply += mintedAmount; }",
+    "vulnerability": "Arbitrary unlimited minting and unchecked integer overflow",
+    "reason": "Once an attacker becomes owner, which is trivial through the public `owned()` function, `mintToken` lets them create an arbitrary `mintedAmount` of tokens for any `target` without a supply cap. The balance and totalSupply additions are performed with unchecked Solidity 0.4.24 arithmetic, so the owner can also intentionally overflow `balanceOf[target]` or `totalSupply` to manipulate accounting. In a real deployment, the attacker can mint a huge amount to their own address, sell into any liquidity pool or exchange, and drain the token's economic value. The absence of a cap or event further hides the inflation, and the overflow path can corrupt balances and supply beyond merely adding new tokens.",
+    "file_name": "proj-ae554f59459d23ae__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "freezeAccount",
+    "code": "function freezeAccount(address target, bool freeze) onlyOwner public { frozenAccount[target] = freeze; emit FrozenFunds(target, freeze); }",
+    "vulnerability": "Arbitrary account freezing by owner",
+    "reason": "After taking ownership through `owned()`, an attacker can call `freezeAccount` for any address. `_transfer` requires both sender and recipient to be unfrozen, so a frozen account cannot send or receive tokens. The attacker can freeze large holders or competing exchange-related addresses to prevent them from selling or moving tokens, then use `mintToken` to create tokens and sell them before victims can react. This is directly beneficial in a market manipulation or extortion scenario and can lock user funds indefinitely. Although the function is `onlyOwner`, the ownership check is not a real barrier because `owned()` is publicly callable.",
+    "file_name": "proj-ae554f59459d23ae__MainContractFlattened.sol"
+  }
+]

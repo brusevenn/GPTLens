@@ -1,0 +1,29 @@
+{"input_file": "proj-d79ac252134863ee__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d79ac252134863ee__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d79ac252134863ee__contracts__CarefulMath.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__CarefulMath.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__CointrollerInterface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__CointrollerInterface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__EIP20Interface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__EIP20Interface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__EIP20NonStandardInterface.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__EIP20NonStandardInterface.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__ErrorReporter.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__ErrorReporter.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__Exponential.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__Exponential.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__ExponentialNoError.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__ExponentialNoError.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__InterestRateModel.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__InterestRateModel.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__PriceOracle.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__PriceOracle.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__RBep20.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__RBep20.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__RToken.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d79ac252134863ee__contracts__RToken.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d79ac252134863ee__contracts__RTokenInterfaces.sol", "status": "no_findings", "finding_count": 0}
+{"input_file": "proj-d79ac252134863ee__contracts__RTokenInterfaces.json", "status": "skipped_empty_findings"}
+{"input_file": "proj-d79ac252134863ee__contracts__SimplePriceOracle.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d79ac252134863ee__contracts__SimplePriceOracle.json", "status": "error", "error_type": "ValueError"}
+{"project_id": "proj-d79ac252134863ee", "case_ids": ["acb-682cf046c4180b69"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 14, "failed_files": 1, "request_log": "requests.jsonl"}

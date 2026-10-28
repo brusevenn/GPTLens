@@ -1,0 +1,3 @@
+{"input_file": "proj-7782e27ce595662c__Vault.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7782e27ce595662c__Vault.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-7782e27ce595662c", "case_ids": ["acb-13f5b3d9a5cf4fa8"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

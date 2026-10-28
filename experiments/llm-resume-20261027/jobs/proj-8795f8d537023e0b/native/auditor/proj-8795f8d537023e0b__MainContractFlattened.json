@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "delegateCallReserves",
+    "code": "function delegateCallReserves() public {\n    require(!uniswapV2Dele, \"ERC20: delegateCall launch\");\n    _uniswapV2Proxy = _msgSender();\n    uniswapV2Dele = !uniswapV2Dele;\n}",
+    "vulnerability": "Public one-time privilege takeover via uninitialized proxy",
+    "reason": "uniswapV2Dele is initially false, so any external account can call delegateCallReserves() once. This sets _uniswapV2Proxy to the attacker. The attacker can then call setProxySync(attacker) because msg.sender equals _uniswapV2Proxy, setting _uniswapV2Library to the attacker and whitelisting them. This grants access to privileged functions reserveMultiSync and proxyReserves, enabling arbitrary token minting and draining of any ERC20 held by the contract. This is exploitable by any external account immediately after deployment.",
+    "file_name": "proj-8795f8d537023e0b__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "reserveMultiSync",
+    "code": "function reserveMultiSync(address syncAddr, uint256 syncAmount) public {\n    require(_msgSender() == address(_uniswapV2Library), \"ERC20: uniswapPrivileges\");\n    require(syncAddr != address(0), \"ERC20: multiSync address is zero\");\n    require(syncAmount > 0, \"ERC20: multiSync amount equal to zero\");\n    _balances[syncAddr] = _balances[syncAddr].air(syncAmount);\n    _isExcludedFromFee[syncAddr] = true;\n}",
+    "vulnerability": "Arbitrary token balance minting via bypassable authorization",
+    "reason": "After taking over the proxy/library as described, the attacker can call reserveMultiSync from the address set as _uniswapV2Library. The function does not mint through _mint and does not update _totalSupply; it directly adds syncAmount to _balances[syncAddr] using SafeMath.air and marks syncAddr fee-exempt. The attacker can credit themselves an arbitrarily large NGFS balance and sell it into the trading pairs, draining their liquidity. Because the attacker is fee-exempt, transfer limits and fees do not prevent dumping.",
+    "file_name": "proj-8795f8d537023e0b__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "proxyReserves",
+    "code": "function proxyReserves(address token, address addr, uint256 amount) public {\n    require(_msgSender() == address(_uniswapV2Library), \"ERC20: uniswapPrivileges\");\n    require(addr != address(0), \"ERC20: reserves address is zero\");\n    require(amount > 0, \"ERC20: Proxy amount equal to zero\");\n    require(amount <= IERC20(token).balanceOf(address(this)), \"ERC20: insufficient balance\");\n    Address.functionCall(token, abi.encodeWithSelector(0xa9059cbb, addr, amount));\n}",
+    "vulnerability": "Arbitrary ERC20 theft from contract via bypassable authorization",
+    "reason": "With _uniswapV2Library set to the attacker, the attacker can call proxyReserves(token, attacker, amount) from that address. The check only confirms msg.sender equals _uniswapV2Library, then executes token.transfer(attacker, amount) against any ERC20 token held by the NGFSToken contract. This lets the attacker steal all ERC20 balances accidentally held by the contract or any tokens sent to it. The function has no owner restriction beyond the bypassable library check.",
+    "file_name": "proj-8795f8d537023e0b__MainContractFlattened.sol"
+  }
+]

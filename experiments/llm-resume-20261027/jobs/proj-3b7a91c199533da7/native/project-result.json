@@ -1,0 +1,143 @@
+{
+  "case_ids": [
+    "acb-6d2d1ac9798c0060",
+    "acb-d2934f4b7d14df65",
+    "acb-f0ed5c6d4149e180"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 164,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-3b7a91c199533da7/source_code/config.json",
+      "sha256": "d79d20e318c8e20f3d006735bac0c7669703903779f0d007840e347997b398cb"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T10:44:09.837344+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOAutoAction.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOAutoAction.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-3b7a91c199533da7__MIMOAutoAction.sol",
+      "normalized_sha256": "7206a46a46481d96ac2a0301610d3b74f9d5fe37958f88789daabac77d63dc60",
+      "ranker_output": "ranker/proj-3b7a91c199533da7__MIMOAutoAction.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 46357,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-3b7a91c199533da7/source_code/MIMOAutoAction.sol",
+      "source_sha256": "97e43abacdd7e8546d97aa2cf173f45165cad738a8863959ea66e7c66a20876b",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOProxy.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOProxy.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-3b7a91c199533da7__MIMOProxy.sol",
+      "normalized_sha256": "81c2fd289f7cd13bbf009cda74d64269bda7cb0440b2e87b12336aefe7e55eba",
+      "ranker_output": "ranker/proj-3b7a91c199533da7__MIMOProxy.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 25566,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-3b7a91c199533da7/source_code/MIMOProxy.sol",
+      "source_sha256": "bf6239cb7bfc7630c00bc57238045bde869430b4f1cdcc5600915ffea542b1e0",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOProxyFactory.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-3b7a91c199533da7__MIMOProxyFactory.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-3b7a91c199533da7__MIMOProxyFactory.sol",
+      "normalized_sha256": "9d059d4bf8832112c440bf603e304a890478c0180366787366614cf259d08973",
+      "ranker_output": "ranker/proj-3b7a91c199533da7__MIMOProxyFactory.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 31810,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-3b7a91c199533da7/source_code/MIMOProxyFactory.sol",
+      "source_sha256": "114ed4ee8f801a68c4bf0abc5e56f084bba294dfba79b491814075f8c62ede94",
+      "status": "COMPLETED"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-3b7a91c199533da7",
+  "project_source_file_count": 3,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T10:32:39.893811+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T10:44:09.837358+00:00",
+  "usage": {
+    "completion_tokens": 125286,
+    "prompt_cache_hit_tokens": 3072,
+    "prompt_cache_miss_tokens": 16751,
+    "prompt_tokens": 19823,
+    "request_attempt_count": 6,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

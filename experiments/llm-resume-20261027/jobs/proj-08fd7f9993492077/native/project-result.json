@@ -1,0 +1,161 @@
+{
+  "case_ids": [
+    "acb-04489a8c0224171c",
+    "acb-3c45fab9049415d1",
+    "acb-5729a29c2ac944cf",
+    "acb-72a366fd0d1c5275",
+    "acb-ff9707e257136b42"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 199,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/config.json",
+      "sha256": "b452fd44ee13d7420f7ba990b27fe4f4f76e35c9fd07c8fd7c9ef81894c01e95"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T09:36:59.386408+00:00",
+  "execution_status": "INTERRUPTED",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-08fd7f9993492077__BranchPort.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-08fd7f9993492077__BranchPort.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/91022f0c988a-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-08fd7f9993492077__BranchPort.sol",
+      "normalized_sha256": "fa3e9611a41b599933c20983aa1b8214cdae7e14474814cdce4ca012e8a0c7b8",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 62651,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/BranchPort.sol",
+      "source_sha256": "19b8152470505b1ad7e971d8f55b13233b4826f8a17b67f6ec2a3690c9a5ed9c",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-08fd7f9993492077__CoreBranchRouter.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-08fd7f9993492077__CoreBranchRouter.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/c75ba4b263a3-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-08fd7f9993492077__CoreBranchRouter.sol",
+      "normalized_sha256": "9206176dbdf8de80222d7bf603d9ee059a745fc0e183fa2f15505d53319e8458",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 73000,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/CoreBranchRouter.sol",
+      "source_sha256": "c7e11ca4bfd0c2abb4584ea60b127181fcf9308a20f01eafad4f621c6e01ff8f",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-08fd7f9993492077__RootBridgeAgent.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-08fd7f9993492077__RootBridgeAgent.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/ebca63fc22ca-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-08fd7f9993492077__RootBridgeAgent.sol",
+      "normalized_sha256": "e7aed63d515437d9edbf3d3135e9c692f520776079c1608fef70180f98ef7b32",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 216514,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/RootBridgeAgent.sol",
+      "source_sha256": "fe52027e65951067ac5b768c628f2ac3279366acf0e53a429310216bd7d2f1d3",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "active_stage": "auditor",
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "error_type": "Interrupted",
+      "input_id": "data/ACToolBench154/proj-08fd7f9993492077__UlyssesRouter.sol",
+      "normalized_sha256": "8982f66efeaf6781eac4381edd13ed77d826a425c8bb98b7536d241e78ac8cc0",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 200760,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/UlyssesRouter.sol",
+      "source_sha256": "1839ff55167f7628f89b039f4a4f5bf1796d82bbfd4373049f57f782efe5d8bb",
+      "status": "INTERRUPTED_UNKNOWN"
+    },
+    {
+      "auditor_status": "NOT_RUN",
+      "critic_status": "NOT_RUN",
+      "input_id": "data/ACToolBench154/proj-08fd7f9993492077__UniswapV3Staker.sol",
+      "ranker_status": "NOT_RUN",
+      "source_bytes": 451688,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-08fd7f9993492077/source_code/UniswapV3Staker.sol",
+      "source_sha256": "3147b05e79defb1c2d0ee5c37e4f7e6c84ffdfeabad0ebe49922b5a719988c8b",
+      "status": "NOT_RUN_AFTER_INTERRUPT"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-08fd7f9993492077",
+  "project_source_file_count": 5,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T09:16:59.762684+00:00",
+  "status": "INTERRUPTED",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T09:36:59.386445+00:00"
+}

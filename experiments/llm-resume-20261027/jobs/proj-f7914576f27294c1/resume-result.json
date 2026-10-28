@@ -1,0 +1,24 @@
+{
+  "case_ids": [
+    "acb-06ed4c3400700f77"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "31b9804b865376409925c9ccf2538db571e42af154d6e83f872f849ba27ee28d",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T15:45:36.240323+00:00",
+  "input_identity": "ecec9be220ce46aed42c0d9aed494db50f79a552562066dcdfa0707c354106ae",
+  "prior_request_attempts": 0,
+  "project_id": "proj-f7914576f27294c1",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "Minter.sol",
+      "cfc4a08d8aa6636b23aa0695a666c46fb658b71858343b486293d80fce4d925b"
+    ]
+  ],
+  "source_hashes": [
+    "cfc4a08d8aa6636b23aa0695a666c46fb658b71858343b486293d80fce4d925b"
+  ],
+  "status": "NOT_RUN_PROVIDER_STOP",
+  "tool": "GPTLens"
+}

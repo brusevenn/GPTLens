@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "registerDcntEth",
+    "code": "function registerDcntEth(address _addr) public onlyOwner {\n    dcntEth = IDcntEth(_addr);\n}",
+    "vulnerability": "Owner can set dcntEth to a malicious contract and drain all WETH",
+    "reason": "The registerDcntEth function allows the owner to change the dcntEth address at any time. The owner can set dcntEth to a malicious contract that calls onOFTReceived with _amount equal to the router's WETH balance and _to set to the owner. Since onOFTReceived only checks that msg.sender equals address(dcntEth), the malicious contract passes the onlyLzApp modifier. The function then transfers the entire WETH balance to the owner because weth.balanceOf(address(this)) < _amount is false when _amount equals the balance. This is a direct rug pull and total loss of funds for liquidity providers.",
+    "file_name": "proj-862052447925245a__DecentEthRouter.sol"
+  },
+  {
+    "function_name": "redeemWeth",
+    "code": "function redeemWeth( uint256 amount ) public onlyIfWeHaveEnoughReserves(amount) {\n    dcntEth.transferFrom(msg.sender, address(this), amount);\n    weth.transfer(msg.sender, amount);\n}",
+    "vulnerability": "1:1 redemption without burning dcntEth drains WETH liquidity",
+    "reason": "The redeemWeth function allows anyone to transfer dcntEth to the router and receive WETH at a 1:1 rate. The dcntEth is not burned; it remains in the router. This means an attacker can acquire dcntEth cheaply (e.g., by bridging when WETH was insufficient or on the open market) and repeatedly redeem it for WETH, draining the WETH reserves. Liquidity providers who deposited WETH and had dcntEth minted to the router as collateral are left with unbacked claims, resulting in a bank run and loss of their WETH.",
+    "file_name": "proj-862052447925245a__DecentEthRouter.sol"
+  },
+  {
+    "function_name": "onOFTReceived",
+    "code": "function onOFTReceived( uint16 _srcChainId, bytes calldata, uint64, bytes32, uint _amount, bytes memory _payload ) external override onlyLzApp {\n    (uint8 msgType, address _from, address _to, bool deliverEth) = abi\n        .decode(_payload, (uint8, address, address, bool));\n    bytes memory callPayload = \"\";\n    if (msgType == MT_ETH_TRANSFER_WITH_PAYLOAD) {\n        (, , , , callPayload) = abi.decode(\n            _payload,\n            (uint8, address, address, bool, bytes)\n        );\n    }\n    emit ReceivedDecentEth(\n        msgType,\n        _srcChainId,\n        _from,\n        _to,\n        _amount,\n        callPayload\n    );\n    if (weth.balanceOf(address(this)) < _amount) {\n        dcntEth.transfer(_to, _amount);\n        return;\n    }\n    if (msgType == MT_ETH_TRANSFER) {\n        if (!gasCurrencyIsEth || !deliverEth) {\n            weth.transfer(_to, _amount);\n        } else {\n            weth.withdraw(_amount);\n            payable(_to).transfer(_amount);\n        }\n    } else {\n        weth.approve(address(executor), _amount);\n        executor.execute(_from, _to, deliverEth, _amount, callPayload);\n    }\n}",
+    "vulnerability": "Arbitrary external call with WETH approval to user-controlled executor",
+    "reason": "In onOFTReceived, for any msgType other than MT_ETH_TRANSFER, the router approves the executor to spend _amount WETH and then calls executor.execute with user-controlled _to and callPayload. An attacker can craft a cross-chain payload with msgType = MT_ETH_TRANSFER_WITH_PAYLOAD and a malicious callPayload (e.g., calling WETH.transfer to send the approved WETH to the attacker). The executor, if it does not strictly validate the target and calldata, will execute the arbitrary call using the router's WETH approval, allowing the attacker to steal the WETH. This is a critical arbitrary call vulnerability that can drain the router's WETH reserves.",
+    "file_name": "proj-862052447925245a__DecentEthRouter.sol"
+  }
+]

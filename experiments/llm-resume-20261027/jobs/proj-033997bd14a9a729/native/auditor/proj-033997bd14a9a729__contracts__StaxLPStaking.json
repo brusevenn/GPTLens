@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "migrateStake",
+    "code": "function migrateStake(address oldStaking, uint256 amount) external {\n    StaxLPStaking(oldStaking).migrateWithdraw(msg.sender, amount);\n    _applyStake(msg.sender, amount);\n}",
+    "vulnerability": "Unauthenticated arbitrary oldStaking allows minting unbacked stake",
+    "reason": "The function accepts an arbitrary `oldStaking` address from the caller and performs a high-level call to `migrateWithdraw` on it. If `oldStaking` is an EOA, a malicious contract with a permissive fallback, or a contract implementing a dummy `migrateWithdraw`, the call can succeed without transferring any `stakingToken` to this contract. Afterwards, `_applyStake(msg.sender, amount)` credits the caller with `amount` in `_balances` and increases `_totalSupply` without verifying that the corresponding staking tokens were actually received. An attacker can set `amount` to the contract's entire staking token balance (or a large value) and then call `withdraw` to transfer real staking tokens to themselves, or use the fake stake to claim a disproportionate share of reward tokens. This is a critical fund-draining vulnerability.",
+    "file_name": "proj-033997bd14a9a729__contracts__StaxLPStaking.sol"
+  },
+  {
+    "function_name": "migrateWithdraw",
+    "code": "function migrateWithdraw(address staker, uint256 amount) external onlyMigrator {\n    _withdrawFor(staker, msg.sender, amount, true, staker);\n}",
+    "vulnerability": "Migrator can withdraw any user's staked tokens to itself",
+    "reason": "The `onlyMigrator` function allows the address set as `migrator` (via the owner-only `setMigrator`) to specify an arbitrary `staker` and `amount`. It calls `_withdrawFor(staker, msg.sender, amount, true, staker)`, which transfers the staking tokens to `msg.sender` (the migrator) while sending rewards to `staker`. A malicious or compromised migrator (or an owner who sets themselves as migrator) can drain all staked tokens from any user by calling `migrateWithdraw(victim, balanceOf(victim))`. This is a severe centralization/privilege escalation risk that can lead to total loss of user funds.",
+    "file_name": "proj-033997bd14a9a729__contracts__StaxLPStaking.sol"
+  },
+  {
+    "function_name": "stakeFor",
+    "code": "function stakeFor(address _for, uint256 _amount) public {\n    require(_amount > 0, \"Cannot stake 0\");\n    stakingToken.safeTransferFrom(msg.sender, address(this), _amount);\n    _applyStake(_for, _amount);\n}",
+    "vulnerability": "Fee-on-transfer staking token inflates staked balance",
+    "reason": "The function transfers `_amount` of `stakingToken` from the caller and then credits `_for` with the same `_amount` without checking the actual amount received by the contract. If `stakingToken` is a fee-on-transfer token, the contract receives less than `_amount` (e.g., due to a transfer tax), but `_applyStake` still increases `_balances[_for]` and `_totalSupply` by `_amount`. An attacker can repeatedly stake and immediately withdraw, receiving the full `_amount` back while the contract only received a reduced amount. This drains the staking token balance from other users. The vulnerability is exploitable whenever the staking token has a transfer fee.",
+    "file_name": "proj-033997bd14a9a729__contracts__StaxLPStaking.sol"
+  }
+]

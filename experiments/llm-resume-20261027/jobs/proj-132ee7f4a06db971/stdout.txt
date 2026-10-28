@@ -1,0 +1,5 @@
+{"input_file": "proj-132ee7f4a06db971__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-132ee7f4a06db971__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-132ee7f4a06db971__token.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-132ee7f4a06db971__token.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-132ee7f4a06db971", "case_ids": ["acb-cb2bb912dfdc7aa1"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

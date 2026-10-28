@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "DrugDealer",
+    "code": "function DrugDealer() public{ ceoAddress=msg.sender; }",
+    "vulnerability": "Misnamed constructor allows anyone to set ceoAddress",
+    "reason": "The contract is named EtherCartel, but the function is named DrugDealer, so it is not a constructor. It is a public function that can be called by anyone at any time. An attacker can call DrugDealer() to set ceoAddress to their own address, then receive all 4% dev fees from buyDrugs and sellDrugs. They can also set ceoAddress to a contract that reverts on transfer, causing denial of service for all trades with nonzero fees. This is a critical ownership takeover.",
+    "file_name": "proj-cca706ad6e094509__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "collectDrugs",
+    "code": "function collectDrugs(address ref) public{\n        require(initialized);\n        if(referrals[msg.sender]==0 && referrals[msg.sender]!=msg.sender){\n            referrals[msg.sender]=ref;\n        }\n        uint256 drugsUsed=getMyDrugs();\n        uint256 newKilo=SafeMath.div(drugsUsed,DRUGS_TO_PRODUCE_1KILO);\n        Kilos[msg.sender]=SafeMath.add(Kilos[msg.sender],newKilo);\n        claimedDrugs[msg.sender]=0;\n        lastCollect[msg.sender]=now;\n        claimedDrugs[referrals[msg.sender]]=SafeMath.add(claimedDrugs[referrals[msg.sender]],SafeMath.div(drugsUsed,5));\n        marketDrugs=SafeMath.add(marketDrugs,SafeMath.div(drugsUsed,10));\n    }",
+    "vulnerability": "Self-referral allows minting 20% extra claimed drugs",
+    "reason": "The referral check only ensures referrals[msg.sender] != msg.sender before assignment, but when referrals[msg.sender] is 0 (the default), the condition is true even if ref == msg.sender. An attacker can call collectDrugs(address(this)) or collectDrugs(attackerAddress) to set themselves as their own referrer. The function then adds drugsUsed/5 to claimedDrugs[msg.sender] after resetting it to zero, effectively minting an extra 20% of all accrued drugs. Because drugsUsed includes both accrued and previously claimed drugs, and Kilos continuously generate drugs, an attacker can repeatedly collect and sell these minted drugs against the contract's ETH balance, draining funds from other users. This is especially powerful when combined with getFreeKilo and multiple addresses.",
+    "file_name": "proj-cca706ad6e094509__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "seedMarket",
+    "code": "function seedMarket(uint256 drugs) public payable{ require(marketDrugs==0); initialized=true; marketDrugs=drugs; }",
+    "vulnerability": "Unrestricted initialization with arbitrary marketDrugs",
+    "reason": "There is no access control on seedMarket, so anyone can call it before the legitimate deployment is initialized. The function sets initialized=true and marketDrugs to any caller-supplied value without requiring a corresponding ETH deposit or a nonzero value. An attacker can front-run initialization with drugs=0 and msg.value=0 to become the initializer, then use getFreeKilo and collectDrugs (with the self-referral bug) to set marketDrugs and mint free drugs, which can later be sold against ETH deposited by victims. Alternatively, an attacker can set an extreme marketDrugs value to manipulate the buy/sell pricing curve, grief the launch, or create favorable conditions to extract value from subsequent users. This vulnerability is exploitable and can lead to theft of user funds.",
+    "file_name": "proj-cca706ad6e094509__MainContractFlattened.sol"
+  }
+]

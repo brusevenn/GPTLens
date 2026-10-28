@@ -1,0 +1,735 @@
+{
+  "case_ids": [
+    "acb-3213d973a5810875"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 128857,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/config.json",
+      "sha256": "e9c4713b46e0e7c17bce362f3f42c8e91592ea09b4c1da5e5bb5676d86d0d32b"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T13:19:41.815760+00:00",
+  "execution_status": "PROJECT_COMPLETE",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.sol",
+      "normalized_sha256": "76354df9b0d59d201c64d7095aca95e2a2d4a5c0edc0afe6d60399f304064b96",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__AccessControlUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 8849,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol",
+      "source_sha256": "36ae01d269ee0cf6622f33e3af4fe1d0ccaccfd372a21c4435cba78fe8f6aa03",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.sol",
+      "normalized_sha256": "388a4af638969afad4b6f4f96f5bdd724f9c9255ffda70ce0e982d7386d21161",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__IAccessControlUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2931,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/access/IAccessControlUpgradeable.sol",
+      "source_sha256": "6d3fbd4566bc123db1ee6ba2a1b79544b572df9b9cc9be360ddb3244dd07c86b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.sol",
+      "normalized_sha256": "1388923e261f3a151c154ad5cb3902e34380d41d2c28fe219fa8e401d327c220",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__access__OwnableUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 3147,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+      "source_sha256": "1fbf2a131b895514f0027866cc0deff151ea16424b4aed2b8c573d2275cfa9e8",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol",
+      "normalized_sha256": "5e1ff87f3f0876473d103cc25f8a439bc91908d1db1e096ef3d1f1f131215e7e",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 6641,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+      "source_sha256": "a2c4e5c274a586f145d278293ae33198cd8f412ab7e6d26f2394c8949b32b24b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.sol",
+      "normalized_sha256": "168ae0eac60e0b2488bd548273cdb2aeb129a1e0ab10cdc1598df55238f23f5c",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__IERC20Upgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2748,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol",
+      "source_sha256": "78a6bc84bbb417f0d8a6b12e181e0f783151774f4f0c054c5d3f920e70d69f8c",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20PermitUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20PermitUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20PermitUpgradeable.sol",
+      "normalized_sha256": "4d5b10085898cf8e53590dd491c92ec3633a7c98ad4f588b05beed779cbb4aa5",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__extensions__IERC20PermitUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2272,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20PermitUpgradeable.sol",
+      "source_sha256": "cf0f8a5ee1c560ad1c5b0847a1531c5904cee45d0ec811cd83d0d95cbd5a333b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.sol",
+      "normalized_sha256": "7ac112f0c855189e9568c3150fe84a115f2c4d0b69818099757af537d041eb6c",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__token__ERC20__utils__SafeERC20Upgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 7101,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol",
+      "source_sha256": "53e882762222514d0f4ffe2c0c28fd59709987197ba11f0f3a8f35b72fd33bb6",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.sol",
+      "normalized_sha256": "566c3c9e1ea5b6a52ce0638b57b3c50ff480564a5612f78cd71762833ca2e333",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__AddressUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 9375,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
+      "source_sha256": "db92fc1b515decad3a783b1422190877d2d70b907c6e36fb0998d9465aee42db",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.sol",
+      "normalized_sha256": "4236fde37829a75940c8e98e3c6ee23a6b1c046e0ebc1bb697bb86714849082c",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__ContextUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1345,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+      "source_sha256": "5fb301961e45cb482fe4e05646d2f529aa449fe0e90c6671475d6a32356fa2d4",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.sol",
+      "normalized_sha256": "dadbb3578bd8b97f28a2cb2604e72dbcd3e0fba3b6d2f760b1e8a6e69fe3cd91",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__StringsUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2846,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol",
+      "source_sha256": "357c8d1a0fb673fa10a884d6e27b383171ecc3eaf8dee8211de75f88ff77843d",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.sol",
+      "normalized_sha256": "6bd91c9c6cb4e31966fba0ff2d457d90db292707afa7eb7b3d970b265248b4f8",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__ERC165Upgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1520,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
+      "source_sha256": "fd84e5284eccc479268f0ef36b830019d4f7999ceb7959430d8d8d9e602dd4ef",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.sol",
+      "normalized_sha256": "d5aacc8ed711a0e3c3c2e2fc3ad86691c59ec2b88147ef21ef586c88e9ed7ac9",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__introspection__IERC165Upgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 864,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol",
+      "source_sha256": "a39bc026ad6214e9ecd526bd4a1ddf9862d80bd4a9d0d031d9bafa4c3c147c0b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.sol",
+      "normalized_sha256": "cedcea909711be0302630cdf2399bde40dc9acce8ac2670f08d53ff1b489b4ac",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__MathUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 12796,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol",
+      "source_sha256": "fbf7ebc0f3c2cf5aef908ecce85e69af53db4e2c6652f61c8ac1e3f416c2fa99",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.sol",
+      "normalized_sha256": "c39ac27f6d88264511c68a84a82475f343f2e01eb7c154cba1c692b124ab9e25",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts-upgradeable__utils__math__SignedMathUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1274,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts-upgradeable/utils/math/SignedMathUpgradeable.sol",
+      "source_sha256": "4f06981f993ea4a96e078c2036b5a42e1edade38996e5180171d5fe4be2f18fe",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__access__Ownable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__access__Ownable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts__access__Ownable.sol",
+      "normalized_sha256": "24d54388cab589e1245827e2c6fc504ee7215949280deabf5ae7cd3dfae903d1",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts__access__Ownable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2616,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts/access/Ownable.sol",
+      "source_sha256": "a8e4e1ae19d9bd3e8b0a6d46577eec098c01fbaffd3ec1252fd20d799e73393b",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__token__ERC20__IERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__token__ERC20__IERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts__token__ERC20__IERC20.sol",
+      "normalized_sha256": "da08d00af5c698ef5a33d7dcabe507faef7bdc8183578a04f7cbd903b3ed72e6",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts__token__ERC20__IERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2737,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "source_sha256": "7ebde70853ccafcf1876900dad458f46eb9444d591d39bfc58e952e2582f5587",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__utils__Context.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__@openzeppelin__contracts__utils__Context.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__@openzeppelin__contracts__utils__Context.sol",
+      "normalized_sha256": "c6f2311e2044c338d629913b139e11d3fe400b4efb09c9d32c64be60e4a04986",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__@openzeppelin__contracts__utils__Context.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 844,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/@openzeppelin/contracts/utils/Context.sol",
+      "source_sha256": "1458c260d010a08e4c20a4a517882259a23a4baa0b5bd9add9fb6d6a1549814a",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a1c8b3309e53707c__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a1c8b3309e53707c__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__MainContractFlattened.sol",
+      "normalized_sha256": "4be3dfedf5fe22761f4c91deab291d2aea3f8b76c61bdbeb4ea7e9835a0fe698",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 95228,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/MainContractFlattened.sol",
+      "source_sha256": "9c1ae0c411a512d7828b82b43969b74b115c2e786624333b0963478258f119d0",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 1,
+        "input_file": "proj-a1c8b3309e53707c__contracts__AdminableUpgradeable.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 1,
+        "input_file": "proj-a1c8b3309e53707c__contracts__AdminableUpgradeable.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__AdminableUpgradeable.sol",
+      "normalized_sha256": "0e2181f02addcbb038446234fcdb054eb12f7008f7c01acb8a1edd15b3127cd1",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__AdminableUpgradeable.json",
+      "ranker_status": {
+        "finding_count": 1,
+        "status": "complete"
+      },
+      "source_bytes": 868,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/AdminableUpgradeable.sol",
+      "source_sha256": "a1e73bb1c007b489c9723e62709fbc562a9f86b6cea80abab12207c4ec10952e",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__interfaces__ILevelManager.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__interfaces__ILevelManager.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__interfaces__ILevelManager.sol",
+      "normalized_sha256": "f5aa0ce42a56e93e352220eca321c2d359e5aef6b6b445fe3c7888f6e0ce8019",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__interfaces__ILevelManager.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2289,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/interfaces/ILevelManager.sol",
+      "source_sha256": "466f4cfd669a44585d57f22a8ffb255e49b104f7f33c33b679ad7c40adf63b8e",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__interfaces__IMigrationPool.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__interfaces__IMigrationPool.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__interfaces__IMigrationPool.sol",
+      "normalized_sha256": "fab4907f7d41b33a4940c7d2dbaca34d8d9f73ea31e8cd448f8505d42155af65",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__interfaces__IMigrationPool.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 301,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/interfaces/IMigrationPool.sol",
+      "source_sha256": "37db4d3e4db9db7b454603cf8f413c04a92db8dd7e961d572350e19b0956bf15",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__IStaking.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__IStaking.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__staking__IStaking.sol",
+      "normalized_sha256": "4533f52a4890ac0dae18fd3371fb7b3a4826e13dec9cac53747f0fcf15e25ec9",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__staking__IStaking.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 707,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/staking/IStaking.sol",
+      "source_sha256": "f7d2cf9edfcc6d6e5c0431a458881cc6e27b858d31ce730c6dee23cced14fb89",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__IStakingLockable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__IStakingLockable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__staking__IStakingLockable.sol",
+      "normalized_sha256": "d0c234e967fc02e116c77ce46545007debe7e47d3a41bc6656d8d99e701fbd82",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__staking__IStakingLockable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 598,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/staking/IStakingLockable.sol",
+      "source_sha256": "17865182d4dd220cc99309415f92cfe80de9ccd179177fc2573ff911eae86fd9",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.sol",
+      "normalized_sha256": "b57d5bd0482c6bebf8a6c0ed1a617ae6a9ffe92e73f100d3991fb9bb268d8e48",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__staking__LaunchpadLockableStaking.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 22605,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/staking/LaunchpadLockableStaking.sol",
+      "source_sha256": "9ae28435eb57353ca7521fa5559449f26f0d456f1eb4b9b30aba86c72b40f3a2",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__StandaloneTreasury.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-a1c8b3309e53707c__contracts__staking__StandaloneTreasury.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-a1c8b3309e53707c__contracts__staking__StandaloneTreasury.sol",
+      "normalized_sha256": "4d682e0bcc7df3b9ce78993f0639ecbb4ca5ca4c33575308bd3343ce45ced6ad",
+      "ranker_output": "ranker/proj-a1c8b3309e53707c__contracts__staking__StandaloneTreasury.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 640,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-a1c8b3309e53707c/source_code/contracts/staking/StandaloneTreasury.sol",
+      "source_sha256": "8e91a9b6721022bb1ea3a9fefdbfc08f7668174f2f0e40c87f78511ef6ce178f",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-a1c8b3309e53707c",
+  "project_source_file_count": 25,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T13:05:12.407440+00:00",
+  "status": "COMPLETE",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T13:19:41.815773+00:00",
+  "usage": {
+    "completion_tokens": 145320,
+    "prompt_cache_hit_tokens": 10622,
+    "prompt_cache_miss_tokens": 22202,
+    "prompt_tokens": 32824,
+    "request_attempt_count": 28,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

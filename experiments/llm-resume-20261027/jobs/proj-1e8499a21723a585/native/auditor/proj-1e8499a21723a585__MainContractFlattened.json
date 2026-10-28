@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "changeRewardPerNode",
+    "code": "    function changeRewardPerNode(uint256 _rewardPerDay) external {\n        rewardPerDay = _rewardPerDay;\n    }",
+    "vulnerability": "Missing access control on rewardPerDay setter",
+    "reason": "The function lacks the onlyOwner modifier. Any attacker can set rewardPerDay to an arbitrarily large value. They can then create or use an existing node and call claimAllNodesReward or claimNodeReward to drain AURUM from the contract. This is directly exploitable and can result in the loss of all AURUM held by the pool.",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "changeNodePrice",
+    "code": "    function changeNodePrice(uint256 newNodePrice) external {\n        nodePrice = newNodePrice;\n    }",
+    "vulnerability": "Missing access control on nodePrice setter",
+    "reason": "The function lacks the onlyOwner modifier. Any attacker can set nodePrice to 0. They can then call createNode with the maximum allowed count to obtain nodes for free. These nodes accrue rewards based on rewardPerDay, allowing the attacker to claim AURUM from the contract without any initial payment, draining the reward pool.",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "createNode",
+    "code": "    function createNode(uint256 count) external {\n        require(count > 0, \"Count should be not 0\");\n        address account = msg.sender;\n        require(nodeOwners[account] + count <= maxNodes, \"Count Limited\");\n        uint256 price = nodePrice * count;\n        uint256 operationsPrice = price*teamFee/feeDenomiator;\n        AURUM.transferFrom(account, address(this), price);\n        AURUM.transfer(teamWallet, operationsPrice);\n        for (uint256 i = 0; i < count; i ++) {\n            _nodesOfUser[account].push(\n                NodeEntity({\n                    nodeId: (totalNodesCreated + 1),\n                    creationTime: block.timestamp + i,\n                    lastClaimTime: block.timestamp + i\n                })\n            );\n            nodeOwners[account]++;\n            totalNodesCreated++;\n        }\n    }",
+    "vulnerability": "No upper bound on teamFee allows contract AURUM balance drain",
+    "reason": "In createNode, operationsPrice is calculated as price*teamFee/feeDenomiator and transferred to teamWallet. The owner can set teamFee greater than feeDenomiator via setTeamFees (which lacks an upper bound) and set teamWallet to their own address. Then when createNode is called, the contract transfers more AURUM to teamWallet than it received from the user, using the contract's existing AURUM balance. This allows the owner to drain the reward pool.",
+    "file_name": "proj-1e8499a21723a585__MainContractFlattened.sol"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "add",
+    "code": "function add(\n    Rebase memory total,\n    uint256 elastic,\n    bool roundUp\n) internal pure returns (Rebase memory, uint256 base) {\n    base = toBase(total, elastic, roundUp);\n    total.elastic += uint128(elastic);\n    total.base += uint128(base);\n    return (total, base);\n}",
+    "vulnerability": "Unsafe uint128 downcast in add allows share/asset accounting corruption and unbacked share minting.",
+    "reason": "Solidity explicit conversion from uint256 to uint128 truncates modulo 2^128 without reverting. The function computes `base` using the full uint256 `elastic`, but updates the Rebase totals using `uint128(elastic)` and `uint128(base)`. If an integrating contract allows a user-controlled `elastic` value greater than type(uint128).max, the state may increase by only the truncated amounts while the function returns the full computed `base`. For example, with total.elastic=1, total.base=1, and elastic=2^128, `toBase` returns base=2^128, but uint128(elastic)=0 and uint128(base)=0, so total remains (1,1) while the function returns base=2^128. If the caller credits this returned base to the attacker, the attacker receives 2^128 shares that are not reflected in total.base, diluting and allowing theft from the pool. This is exploitable whenever user input can reach this function without a strict uint128 bound.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol"
+  },
+  {
+    "function_name": "sub",
+    "code": "function sub(\n    Rebase memory total,\n    uint256 base,\n    bool roundUp\n) internal pure returns (Rebase memory, uint256 elastic) {\n    elastic = toElastic(total, base, roundUp);\n    total.elastic -= uint128(elastic);\n    total.base -= uint128(base);\n    return (total, elastic);\n}",
+    "vulnerability": "Unsafe uint128 downcast in sub can under-decrement rebase totals while returning the full withdrawal amount.",
+    "reason": "The `sub` function calculates `elastic` using the full uint256 `base` and returns that full `elastic`, but subtracts only `uint128(elastic)` and `uint128(base)` from the stored Rebase. If an integrating contract passes a `base` greater than type(uint128).max (e.g., from user input or due to a malformed rebase state), the explicit downcast truncates the value modulo 2^128. The caller may then transfer the full computed `elastic` to the attacker while total.elastic is reduced by only a truncated amount, or total.base is reduced by a small amount. This breaks the invariant between total shares and total assets, allowing repeated withdrawals or leaving assets unaccounted for. In some cases, the truncated subtraction can also bypass intended balance checks or cause an underflow revert, leading to denial of service. This is severe because it can directly enable draining of pool assets if the returned `elastic` is used for a transfer.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol"
+  },
+  {
+    "function_name": "subElastic",
+    "code": "function subElastic(Rebase storage total, uint256 elastic) internal returns (uint256 newElastic) {\n    newElastic = total.elastic -= uint128(elastic);\n}",
+    "vulnerability": "Unsafe uint128 downcast in subElastic allows elastic to be reduced by a truncated amount, enabling token drain if the caller transfers the original elastic.",
+    "reason": "`subElastic` directly casts the uint256 `elastic` parameter to uint128 without checking whether it exceeds type(uint128).max. Solidity truncates the value modulo 2^128. In an integrating contract that uses `subElastic` to account for tokens being removed (for example, a fee withdrawal function that then transfers `elastic` tokens to the caller), an attacker can pass `elastic = 2^128` so that `uint128(elastic) = 0`. The function will subtract zero from `total.elastic`, leaving the rebase total unchanged, while the caller may transfer the full 2^128 tokens to the attacker. Even if no transfer occurs, the invariant between `total.elastic` and the contract's token balance is broken, enabling future share-price manipulation. This is a direct asset-drain vulnerability whenever a user-controlled or unchecked uint256 amount reaches `subElastic`.",
+    "file_name": "proj-a473b80203cb5a5d__lib__BoringSolidity__contracts__libraries__BoringRebase.sol"
+  }
+]

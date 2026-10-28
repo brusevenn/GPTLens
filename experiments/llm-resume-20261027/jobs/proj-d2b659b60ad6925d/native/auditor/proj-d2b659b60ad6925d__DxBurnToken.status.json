@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-d2b659b60ad6925d__DxBurnToken.sol",
+  "stage": "auditor",
+  "status": "complete",
+  "finding_count": 3
+}

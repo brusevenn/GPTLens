@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "validateSender",
+    "code": "function validateSender(string calldata sourceChain, string calldata sourceAddress) external view returns (bool) {\n    string memory sourceAddressLC = _lowerCase(sourceAddress);\n    bytes32 sourceAddressHash = keccak256(bytes(sourceAddressLC));\n    if (sourceAddressHash == interchainTokenServiceAddressHash) {\n        return true;\n    }\n    return sourceAddressHash == remoteAddressHashes[sourceChain];\n}",
+    "vulnerability": "Cross-chain address impersonation due to unconditional trust of local InterchainTokenService address",
+    "reason": "The validateSender function returns true for any sourceChain if the sourceAddress matches the local interchainTokenServiceAddressHash. This special case is intended to trust the InterchainTokenService (ITS) contract, which is deployed at the same address across EVM chains. However, it does not verify the sourceChain or whether the source address format is valid for that chain. An attacker could exploit this by sending a cross-chain message from a chain where they can control the sender address string to exactly match the local ITS address (e.g., on non-EVM chains that allow arbitrary address strings). The validator would then accept the message as if it came from the legitimate ITS on any chain, allowing the attacker to execute privileged ITS functions such as minting or transferring tokens. This bypasses the trusted remote address mapping and can lead to severe financial loss.",
+    "file_name": "proj-d74473f5d860a396__RemoteAddressValidator.sol"
+  },
+  {
+    "function_name": "getRemoteAddress",
+    "code": "function getRemoteAddress(string calldata chainName) external view returns (string memory remoteAddress) {\n    remoteAddress = remoteAddresses[chainName];\n    if (bytes(remoteAddress).length == 0) {\n        remoteAddress = interchainTokenServiceAddress.toString();\n    }\n}",
+    "vulnerability": "Dangerous fallback to local ITS address may cause tokens to be sent to an incorrect or attacker-controlled address",
+    "reason": "When no remote address is configured for a given chainName, getRemoteAddress returns the local InterchainTokenService address as a string. This fallback assumes that the ITS is deployed at the exact same address on every chain, which may not hold for non-EVM chains or chains where the ITS has not been deployed yet. If a user initiates a cross-chain transfer to an unconfigured destination chain, the tokens could be sent to the local ITS address string on that remote chain. An attacker could potentially create an account or contract at that exact address string on the destination chain (especially on chains that allow arbitrary address strings) and steal the tokens, or the tokens could be permanently lost if the address is invalid. The function should revert or return an empty value when the remote address is not explicitly configured, rather than silently using a potentially incorrect fallback.",
+    "file_name": "proj-d74473f5d860a396__RemoteAddressValidator.sol"
+  },
+  {
+    "function_name": "transferOwnership",
+    "code": "function transferOwnership(address newOwner) external virtual onlyOwner {\n    emit OwnershipTransferred(newOwner);\n    assembly {\n        sstore(_OWNER_SLOT, newOwner)\n        sstore(_OWNERSHIP_TRANSFER_SLOT, 0)\n    }\n}",
+    "vulnerability": "Missing zero-address check allows permanent loss of ownership",
+    "reason": "The transferOwnership function does not validate that newOwner is not the zero address. If the current owner accidentally or maliciously calls transferOwnership(address(0)), the owner slot is set to address(0). Since all administrative functions (including upgrade, addTrustedAddress, removeTrustedAddress, addGatewaySupportedChains, removeGatewaySupportedChains, and further ownership transfers) are protected by the onlyOwner modifier, which requires msg.sender to equal owner(), the contract becomes permanently locked. No one can ever call these functions again, effectively bricking the upgradeable contract. While this requires the owner to make a mistake, it is a critical centralization risk and can lead to a complete loss of control. A zero-address check should be added to prevent this.",
+    "file_name": "proj-d74473f5d860a396__RemoteAddressValidator.sol"
+  }
+]

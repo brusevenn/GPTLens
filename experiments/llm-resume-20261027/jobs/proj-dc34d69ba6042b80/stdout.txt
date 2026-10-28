@@ -1,0 +1,5 @@
+{"input_file": "proj-dc34d69ba6042b80__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-dc34d69ba6042b80__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-dc34d69ba6042b80__Safemoon.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-dc34d69ba6042b80__Safemoon.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-dc34d69ba6042b80", "case_ids": ["acb-9bc960b8f4324b8d"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

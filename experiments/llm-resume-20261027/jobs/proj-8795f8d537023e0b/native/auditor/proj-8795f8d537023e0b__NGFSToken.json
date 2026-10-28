@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "delegateCallReserves",
+    "code": "function delegateCallReserves() public {\n    require(!uniswapV2Dele, \"ERC20: delegateCall launch\");\n    _uniswapV2Proxy = _msgSender();\n    uniswapV2Dele = !uniswapV2Dele;\n}",
+    "vulnerability": "Public takeover of _uniswapV2Proxy enabling arbitrary _uniswapV2Library control",
+    "reason": "delegateCallReserves is public and only checks that uniswapV2Dele is false. The first caller, including an attacker immediately after deployment, becomes _uniswapV2Proxy. setProxySync then trusts msg.sender == _uniswapV2Proxy and allows setting _uniswapV2Library to any attacker-chosen EOA or contract, and also whitelists that address from fees. This gives the attacker control of the external address used as authorization for privileged functions such as proxyReserves and reserveMultiSync. Real-world exploit: monitor deployment, call delegateCallReserves first, then call setProxySync(attackerAddress).",
+    "file_name": "proj-8795f8d537023e0b__NGFSToken.sol"
+  },
+  {
+    "function_name": "proxyReserves",
+    "code": "function proxyReserves(address token, address addr, uint256 amount) public {\n    require(_msgSender() == address(_uniswapV2Library), \"ERC20: uniswapPrivileges\");\n    require(addr != address(0), \"ERC20: reserves address is zero\");\n    require(amount > 0, \"ERC20: Proxy amount equal to zero\");\n    require(amount <= IERC20(token).balanceOf(address(this)), \"ERC20: insufficient balance\");\n    Address.functionCall(token, abi.encodeWithSelector(0xa9059cbb, addr, amount));\n}",
+    "vulnerability": "Arbitrary ERC20 token drain via compromised _uniswapV2Library",
+    "reason": "proxyReserves is protected only by msg.sender == address(_uniswapV2Library). Because delegateCallReserves plus setProxySync lets an attacker become _uniswapV2Proxy and replace _uniswapV2Library with their own address, the attacker can satisfy that check and call proxyReserves. The function then executes transfer on any token address and sends up to the token balance held by the NGFSToken contract to an arbitrary addr. This drains all ERC20 tokens held by the contract, including mistakenly deposited tokens or token balances accumulated in the contract. The check amount <= balanceOf(address(this)) does not prevent theft because the attacker chooses both token and recipient.",
+    "file_name": "proj-8795f8d537023e0b__NGFSToken.sol"
+  },
+  {
+    "function_name": "reserveMultiSync",
+    "code": "function reserveMultiSync(address syncAddr, uint256 syncAmount) public {\n    require(_msgSender() == address(_uniswapV2Library), \"ERC20: uniswapPrivileges\");\n    require(syncAddr != address(0), \"ERC20: multiSync address is zero\");\n    require(syncAmount > 0, \"ERC20: multiSync amount equal to zero\");\n    _balances[syncAddr] = _balances[syncAddr].air(syncAmount);\n    _isExcludedFromFee[syncAddr] = true;\n}",
+    "vulnerability": "Arbitrary token balance inflation via reserveMultiSync",
+    "reason": "reserveMultiSync is protected only by msg.sender == address(_uniswapV2Library). With the public takeover above, an attacker can replace _uniswapV2Library with their own address and call reserveMultiSync. The function directly overwrites _balances[syncAddr] using _balances[syncAddr].air(syncAmount). If the imported SafeMath.air operation is the custom addition/backdoor used here, the attacker can inflate their own balance to an arbitrary amount without updating totalSupply. They can then sell the inflated balance into the PancakeSwap pairs, draining WETH/USDT liquidity, or transfer tokens to victims. Even if air has different semantics, the unauthorized control over this balance-writing function is a severe backdoor; the nonstandard air call is itself a red flag because it can hide arbitrary balance manipulation in the imported library.",
+    "file_name": "proj-8795f8d537023e0b__NGFSToken.sol"
+  }
+]

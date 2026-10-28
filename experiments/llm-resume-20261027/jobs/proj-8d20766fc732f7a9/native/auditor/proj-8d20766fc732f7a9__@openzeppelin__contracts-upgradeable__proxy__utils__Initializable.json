@@ -1,0 +1,9 @@
+[
+  {
+    "function_name": "_setInitializedVersion",
+    "code": "function _setInitializedVersion(uint8 version) private returns (bool) {\n        if (_initializing) {\n            require(\n                version == 1 && !AddressUpgradeable.isContract(address(this)),\n                \"Initializable: contract is already initialized\"\n            );\n            return false;\n        } else {\n            require(_initialized < version, \"Initializable: contract is already initialized\");\n            _initialized = version;\n            return true;\n        }\n    }",
+    "vulnerability": "Reentrancy during initialization (CVE-2023-30541)",
+    "reason": "The condition `!AddressUpgradeable.isContract(address(this))` allows nested initializer calls when the contract is under construction. If a constructor calls an initializer that makes an external call, an attacker can reenter the initializer and call it again. This can lead to multiple initializations, allowing the attacker to overwrite critical state such as ownership. The correct condition should be `AddressUpgradeable.isContract(address(this))` to disallow nested initializer calls during construction.",
+    "file_name": "proj-8d20766fc732f7a9__@openzeppelin__contracts-upgradeable__proxy__utils__Initializable.sol"
+  }
+]

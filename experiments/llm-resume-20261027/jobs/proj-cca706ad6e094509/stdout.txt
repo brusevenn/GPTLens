@@ -1,0 +1,5 @@
+{"input_file": "proj-cca706ad6e094509__EtherCartel.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-cca706ad6e094509__EtherCartel.json", "status": "error", "error_type": "ValueError"}
+{"input_file": "proj-cca706ad6e094509__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-cca706ad6e094509__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-cca706ad6e094509", "case_ids": ["acb-91be67dc212021ee"], "status": "WITH_FAILURES", "execution_status": "PROJECT_WITH_FAILURES", "file_count": 2, "failed_files": 1, "request_log": "requests.jsonl"}

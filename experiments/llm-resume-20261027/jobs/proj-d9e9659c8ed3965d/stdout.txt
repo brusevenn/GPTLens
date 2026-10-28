@@ -1,0 +1,3 @@
+{"input_file": "proj-d9e9659c8ed3965d__WellUpgradeable.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-d9e9659c8ed3965d__WellUpgradeable.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-d9e9659c8ed3965d", "case_ids": ["acb-33156783587a82b7"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

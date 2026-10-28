@@ -1,0 +1,43 @@
+{
+  "automatic_retries": 0,
+  "case_ids": [
+    "acb-40eb39be71cf0eb1"
+  ],
+  "case_timeout_seconds": 1200,
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "46830207b80930ca84e1ebf74956cb65eb3bf32d583dccf2c932d30ed51c5e93",
+  "dataset": "ACToolBench154",
+  "input_identity": "1501515c1fac1ad537641e04a9f73db8350019072fceb27f5461c8a0d5ac8feb",
+  "max_tokens": 65536,
+  "prior_request_attempts": 0,
+  "project_id": "proj-b98075e441e39427",
+  "prompt_layout": "prefix_stable_v2",
+  "reasoning_effort": "high",
+  "request_timeout_seconds": 300,
+  "source_hashes": [
+    "0573c2961569aa4906845d0cd428b5b7394956170054ceeaa8f8af96cd44875c",
+    "0c3c8f0e880bfb11298ab86b2863e7a6ce8c85e443fbf4998b8ed3b32739c853",
+    "11ad5e3e21434e00c4ceba1f5a977b7a68bdd7d16b849276ce4ff4495129eec7",
+    "1232c456965d3ede071d5a057052ee32b38331c16b6f03374c61b5265920b5a8",
+    "128b338ed9d2fd87a05f1ac21700a15cd1c8fb99054be9640076dc15bf392517",
+    "343342a7186149937b7e8d5556c420226859daafbf76bb398720f636b8cc7c02",
+    "4a04d0a20a19e3ef1dcabae9cad9ba006430a4e7eec4d9b519db87999722c98a",
+    "5f2dc35987fa6e9645cf7d54e54bafd29c6b1d64ed53e9efbd50bc3448378b31",
+    "865672d0a33ae88b57b28ede4f4df99e01901a0c007586f3ed76a18b99d603da",
+    "8d78ab699ba115f01c6e1a213e6a696d49c7ed26c4f49f23c2b80cb2895e8853",
+    "9a3d1e5be0f0ace13e2d9aa1d0a1c3a6574983983ad5de94fc412f878bf7fe89",
+    "a21c2cb94041b5e444aaaa750cef7264e2c7adc8b348d02a5a9ef0a166588ef2",
+    "ab27a7b50b7a9e236d622bd30ecd435e8814f9fe4847c42b59b5e289cef73250",
+    "b9f957b42bdcf3d3499be4c94558152e91658e34a1fe5a5e8f0972ce20e15ed7",
+    "ec032179af802dd3efbf4377ab603bf5bdbfe11dbc963a319dbf3c1654f428d7",
+    "eea796f96939e7dd6119de00941717ce5772d8a942b184f5e48d2b962d0ab655",
+    "eff65ebfa1cad6260b4916ce5293ed6c7231a34d2899c04227578c172990a1f8",
+    "f5a1eb501cf574127ad2cea3038ad050d3010989917c60dc9e45da0d5f8caa24",
+    "f88d22fb3034f86d1a428ba6c98b69d95627a355c5204116a3dc6121a9f08ade"
+  ],
+  "started_utc": "2026-10-27T14:05:04.775225+00:00",
+  "thinking": {
+    "type": "enabled"
+  },
+  "tool": "GPTLens"
+}

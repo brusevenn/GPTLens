@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 _amount) public {\n    uint256 _pool = balance();\n    uint256 _before = token.balanceOf(address(this));\n    token.safeTransferFrom(msg.sender, address(this), _amount);\n    uint256 _after = token.balanceOf(address(this));\n    _amount = _after.sub(_before);\n    uint256 shares = 0;\n    if (totalSupply() == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount.mul(totalSupply())).div(_pool);\n    }\n    _mint(msg.sender, shares);\n}",
+    "vulnerability": "Reentrancy in deposit before state update",
+    "reason": "The deposit function calls token.safeTransferFrom before minting shares. If the underlying token implements a transfer callback (e.g., ERC777's tokensToSend hook), an attacker can reenter deposit during the transfer. On reentry, the contract's state (totalSupply and balance) is still based on the pre-transfer value, but the token balance may have been partially updated. This allows the attacker to manipulate the share calculation and mint more shares than they are entitled to, diluting other users and stealing their funds. This is exploitable in real world with tokens that have transfer hooks, leading to direct financial loss for other depositors.",
+    "file_name": "proj-0c0ab89caa1146e5__src__pickle-jar.sol"
+  },
+  {
+    "function_name": "deposit",
+    "code": "function deposit(uint256 _amount) public {\n    uint256 _pool = balance();\n    uint256 _before = token.balanceOf(address(this));\n    token.safeTransferFrom(msg.sender, address(this), _amount);\n    uint256 _after = token.balanceOf(address(this));\n    _amount = _after.sub(_before);\n    uint256 shares = 0;\n    if (totalSupply() == 0) {\n        shares = _amount;\n    } else {\n        shares = (_amount.mul(totalSupply())).div(_pool);\n    }\n    _mint(msg.sender, shares);\n}",
+    "vulnerability": "Share inflation / first depositor attack",
+    "reason": "The share calculation uses the current total balance (including donations) and total supply without any virtual shares or minimum share requirement. An attacker can deposit 1 wei to get 1 share, then donate a large amount of tokens directly to the jar. When a victim deposits an amount smaller than the donation, the calculation `_amount * totalSupply / _pool` rounds down to zero, so the victim receives 0 shares. The victim's deposit remains in the jar. The attacker can then withdraw their 1 share, which now represents the entire jar balance, stealing the victim's deposit. Additionally, if the jar has a pre-existing token balance while totalSupply is 0, the first depositor gets shares equal to their deposit (ignoring the existing balance) and can immediately withdraw all tokens. This is the classic ERC4626 inflation attack and is exploitable on any ERC20 token.",
+    "file_name": "proj-0c0ab89caa1146e5__src__pickle-jar.sol"
+  },
+  {
+    "function_name": "setMin",
+    "code": "function setMin(uint256 _min) external {\n    require(msg.sender == governance, \"!governance\");\n    min = _min;\n}",
+    "vulnerability": "Missing upper bound on min allows governance to brick earn()",
+    "reason": "The setMin function does not enforce that _min is less than or equal to max (10000). If governance is malicious or compromised, it can set min to a value greater than max. The available() function then computes token.balanceOf(address(this)) * min / max, which can exceed the jar's actual token balance. Consequently, earn() attempts to transfer more tokens than the jar holds via token.safeTransfer(controller, _bal), causing every call to revert. This permanently disables the earn() function, locking idle funds in the jar and preventing yield generation. While governance is privileged, the lack of a safety check is a severe vulnerability that can be used to grief users and lock funds.",
+    "file_name": "proj-0c0ab89caa1146e5__src__pickle-jar.sol"
+  }
+]

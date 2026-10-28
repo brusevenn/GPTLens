@@ -1,0 +1,38 @@
+[
+  {
+    "code": "function setDAO(address dao) public {\n    require(DAO == address(0) || msg.sender == DAO || !configured, \"EK\");\n    DAO = dao;\n    flashGoverner = FlashGovernanceArbiterLike(LimboDAOLike(dao).getFlashGoverner());\n}",
+    "correctness": 7,
+    "criticism": "The core access-control observation is valid: `setDAO` has no dedicated authorization and the `!configured` branch allows any caller to set `DAO` while the contract is unconfigured. If `endConfiguration()` is also publicly callable, an attacker can race the legitimate setup, set an attacker-controlled DAO, and set `configured = true`; this is a serious initialization hijack. However, the 'permanent lock' claim depends on an unshown `endConfiguration()` implementation and on there being no other recovery or upgrade path. The attack also requires front-running the deployment/configuration window, and profitability depends on what rights `DAO` and `flashGoverner` actually grant. The vulnerability is real but the reasoning overstates certainty. Correctness is good but not complete because of the unshown dependency; severity is high because governance references can be hijacked; profitability is conditional on the privileges obtained.",
+    "file_name": "proj-e5871e2886c8fc03__BurnFlashStakeDeposit.sol",
+    "final_score": 7.0,
+    "function_name": "setDAO",
+    "profitability": 6,
+    "reason": "Before `configured` is true, any external account or contract can call `setDAO` with an attacker-controlled contract because the `!configured` branch makes the require pass. The attacker can also call the unrestricted `endConfiguration()` in the same transaction to set `configured = true`, permanently locking `DAO` to the malicious contract. Since future `setDAO` calls then require `msg.sender == DAO`, the legitimate owner can no longer restore the correct DAO. This gives the attacker control over the ProposalFactory's `DAO` and `flashGoverner` references, breaking all governance checks that depend on them. A malicious DAO only needs to implement `getFlashGoverner()` and can then return an attacker-controlled flash governor.",
+    "severity": 8,
+    "vulnerability": "Unauthenticated DAO replacement before configuration"
+  },
+  {
+    "code": "function toggleWhitelistProposal(address proposal) public onlySuccessfulProposal {\n    whitelistedProposalContracts[proposal] = !whitelistedProposalContracts[proposal];\n}",
+    "correctness": 8,
+    "criticism": "The reasoning correctly identifies that if `onlySuccessfulProposal` is implemented as `require(!configured || LimboDAOLike(DAO).successfulProposal(msg.sender))`, then while `configured` is false any caller can toggle an arbitrary whitelist entry. That is a genuine pre-configuration access-control bypass. The impact is overstated, however: flipping `whitelistedProposalContracts[proposal]` does not by itself execute or approve a proposal; the attacker must still call `lodgeProposal` and the malicious proposal must be processed by the real DAO, potentially requiring governance approval or favorable voting. The phrase 'if it reaches execution' concedes this condition. If whitelisted proposals bypass meaningful checks or are auto-executed, severity is high; otherwise it is a dangerous precursor rather than immediate asset loss. Profitability is therefore conditional and often indirect.",
+    "file_name": "proj-e5871e2886c8fc03__BurnFlashStakeDeposit.sol",
+    "final_score": 6.5,
+    "function_name": "toggleWhitelistProposal",
+    "profitability": 4,
+    "reason": "The `onlySuccessfulProposal` modifier relies on `assertSuccessfulProposal(msg.sender)`, which is `require(!configured || LimboDAOLike(DAO).successfulProposal(sender), \"EJ\")`. While `configured` is false, this check is bypassed for every caller. Therefore any attacker can call `toggleWhitelistProposal` and flip `whitelistedProposalContracts[proposal]` for an arbitrary malicious proposal. The attacker can then call `lodgeProposal` with that proposal, and ProposalFactory will treat it as whitelisted and forward it to the real DAO. This bypasses the intended proposal whitelist and lets an attacker submit arbitrary Proposal code; if it reaches execution, the attacker controls the proposal's `execute()` implementation and can perform governance-approved actions such as draining assets or changing critical protocol state.",
+    "severity": 6,
+    "vulnerability": "Whitelist bypass before configuration"
+  },
+  {
+    "code": "function parameterize(\n    address user,\n    address asset,\n    uint256 amount,\n    address flashGoverner,\n    address targetContract\n) public notCurrent {\n    params.user = user;\n    params.asset = asset;\n    params.amount = amount;\n    params.flashGoverner = flashGoverner;\n    params.targetContract = targetContract;\n}",
+    "correctness": 7,
+    "criticism": "The lack of caller restriction is real: anyone can overwrite `params` while the proposal is not current, and front-running is plausible if a legitimate proposer parameterizes and lodges in separate transactions or if the proposal address is predictable. The impact analysis is partially overstated. Setting `flashGoverner` to an attacker-controlled contract only makes the proposal call that contract; it does not by itself steal assets unless the proposal contract or the called contract has special privileges. The more concrete damage path is forcing the legitimate flash governor to burn a victim's asset, which is griefing and depends on the arbiter's authorization and the proposal passing. The reasoning also depends on the exact semantics of `notCurrent` and the proposal lifecycle. Thus the access-control bug is credible, but the exploitability and profitability are conditional.",
+    "file_name": "proj-e5871e2886c8fc03__BurnFlashStakeDeposit.sol",
+    "final_score": 5.75,
+    "function_name": "parameterize",
+    "profitability": 3,
+    "reason": "`parameterize` has no caller restriction; `notCurrent` only prevents writes while this proposal is already the DAO's current proposal. Before the proposal becomes current, any attacker can overwrite all stored parameters. A legitimate proposer who calls `parameterize` and then `lodgeProposal` in separate transactions can be front-run: the attacker sends `parameterize` with malicious values after the legitimate parameterization but before lodging, and the DAO later executes with the attacker's `user`, `asset`, `amount`, `flashGoverner`, and `targetContract`. The `execute` function then calls `FlashGovernanceArbiterLike(params.flashGoverner).burnFlashGovernanceAsset(params.targetContract, params.user, params.asset, params.amount)`, so the attacker can force a burn of a victim's governance asset or redirect the call to an attacker-controlled contract. This is a real parameter-tampering attack against a pending governance proposal.",
+    "severity": 6,
+    "vulnerability": "Unrestricted parameter tampering in BurnFlashStakeDeposit"
+  }
+]

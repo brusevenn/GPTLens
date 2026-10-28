@@ -1,0 +1,69 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-033997bd14a9a729",
+  "case_ids": [
+    "acb-da967e924bee328a"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "8de548ea2019327c73a7ff6061fe96f84cac4ac68a64280cea88fe88c9304649",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T09:16:59.370225+00:00",
+  "exit_code": 2,
+  "input_identity": "553610b9ccb4aaa9a8ce0791f9d948c0e25e9f14fdf1d3f470c0ef8a2b245dee",
+  "native_execution_status": "WITH_FAILURES",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-033997bd14a9a729",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "@openzeppelin/contracts/access/Ownable.sol",
+      "75e3c97011e75627ffb36f4a2799a4e887e1a3e27ed427490e82d7b6f51cc5c9"
+    ],
+    [
+      "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "3cd9bf87ad804088f574a5266771f038a2c44b53d85f355aadb35645e497d1c2"
+    ],
+    [
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "94f23e4af51a18c2269b355b8c7cf4db8003d075c9c541019eb8dcf4122864d5"
+    ],
+    [
+      "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+      "af5c8a77965cc82c33b7ff844deb9826166689e55dc037a7f2f790d057811990"
+    ],
+    [
+      "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+      "b5a1340c5232f387b15592574f27eef78f6017bdc66542a1cea512ad4f78a0d2"
+    ],
+    [
+      "@openzeppelin/contracts/utils/Address.sol",
+      "aafa8f3e41700a8353aabcdf020e06735753e6bc4b615279b43de53cfbb4f2cd"
+    ],
+    [
+      "@openzeppelin/contracts/utils/Context.sol",
+      "1458c260d010a08e4c20a4a517882259a23a4baa0b5bd9add9fb6d6a1549814a"
+    ],
+    [
+      "MainContractFlattened.sol",
+      "308ff3ced441b2c44dd51c25704be246dd2be7bb1c5ee375886e0535d31931c8"
+    ],
+    [
+      "contracts/StaxLPStaking.sol",
+      "d610cceae156861882459939958020b1b5afdf9c5a2e5e00dd27911fe38f3290"
+    ]
+  ],
+  "source_hashes": [
+    "1458c260d010a08e4c20a4a517882259a23a4baa0b5bd9add9fb6d6a1549814a",
+    "308ff3ced441b2c44dd51c25704be246dd2be7bb1c5ee375886e0535d31931c8",
+    "3cd9bf87ad804088f574a5266771f038a2c44b53d85f355aadb35645e497d1c2",
+    "75e3c97011e75627ffb36f4a2799a4e887e1a3e27ed427490e82d7b6f51cc5c9",
+    "94f23e4af51a18c2269b355b8c7cf4db8003d075c9c541019eb8dcf4122864d5",
+    "aafa8f3e41700a8353aabcdf020e06735753e6bc4b615279b43de53cfbb4f2cd",
+    "af5c8a77965cc82c33b7ff844deb9826166689e55dc037a7f2f790d057811990",
+    "b5a1340c5232f387b15592574f27eef78f6017bdc66542a1cea512ad4f78a0d2",
+    "d610cceae156861882459939958020b1b5afdf9c5a2e5e00dd27911fe38f3290"
+  ],
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens"
+}

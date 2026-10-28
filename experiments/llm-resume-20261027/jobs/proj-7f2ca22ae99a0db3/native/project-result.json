@@ -1,0 +1,493 @@
+{
+  "case_ids": [
+    "acb-3f8e2290a20abc91"
+  ],
+  "compile_configs_verified": [
+    {
+      "bytes": 123070,
+      "path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/config.json",
+      "sha256": "57a4d9de0601c8038a9cb64937e0b5293cb30cc24a2388bc3f5b28bd72f885ce"
+    }
+  ],
+  "dataset": "ACToolBench154",
+  "dataset_id": "actoolbench-cleaned-154",
+  "ended_utc": "2026-10-27T12:13:22.037364+00:00",
+  "execution_status": "PROJECT_WITH_FAILURES",
+  "file_results": [
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.sol",
+      "normalized_sha256": "b7b0dddc51fd6da2aff1c13e8ffd00dbaaf8b4f010d08342188324e097e57728",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__@openzeppelin__contracts__access__Ownable.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2254,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/@openzeppelin/contracts/access/Ownable.sol",
+      "source_sha256": "b9f957b42bdcf3d3499be4c94558152e91658e34a1fe5a5e8f0972ce20e15ed7",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.sol",
+      "normalized_sha256": "0af02bfa91a23181244e77efab4cdc1df6059736685aad5ba24045829337eec9",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__@openzeppelin__contracts__utils__Context.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 941,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/@openzeppelin/contracts/utils/Context.sol",
+      "source_sha256": "9a3d1e5be0f0ace13e2d9aa1d0a1c3a6574983983ad5de94fc412f878bf7fe89",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-7f2ca22ae99a0db3__MainContractFlattened.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-7f2ca22ae99a0db3__MainContractFlattened.json",
+        "stage": "critic",
+        "status": "complete"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__MainContractFlattened.sol",
+      "normalized_sha256": "c3b7ec31dc3be9b3267f7e9873275adbc76bb2af4ca4694adb8bebc12a9bd5fc",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__MainContractFlattened.json",
+      "ranker_status": {
+        "finding_count": 3,
+        "status": "complete"
+      },
+      "source_bytes": 99822,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/MainContractFlattened.sol",
+      "source_sha256": "652bb51f4bc9f27537e0a264929752fd58abf0fb78368a7655dfc6fd9bbc3e82",
+      "status": "COMPLETED"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.sol",
+      "normalized_sha256": "7a57a205bfb47c5b1b1ebe54d26cc28e29235a752ff925286ce6bece732cae28",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyBaseRouter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 323,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IBabyBaseRouter.sol",
+      "source_sha256": "264b5f3876badf6ca8b176546d7260d0b58c1a7c66a8d55866003e01c520d121",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.sol",
+      "normalized_sha256": "58176b6822b74b7966d9e96bd463ec3bd22d91171efce7a0279d84a4341b7d64",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyFactory.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 781,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IBabyFactory.sol",
+      "source_sha256": "c18bb5402b40daf0da978b23987a04d6b6632b59d2aed4195d1ffc844141171c",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.sol",
+      "normalized_sha256": "a378c270fe4bdbceb7e79fd2ba9075228b5cb0f30ad15d2502929459e258d00c",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabyPair.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2452,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IBabyPair.sol",
+      "source_sha256": "f5ee8d5bb59b724b7b1ab9e883c0fc8d8ce9aa03f08aa2be63d1899d67c7890e",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.sol",
+      "normalized_sha256": "b782793e3acf6fcb8331074407e39a03e39b0465d4c237ff0974801681adf5b9",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IBabySmartRouter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 2587,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IBabySmartRouter.sol",
+      "source_sha256": "e7452a460075f44e33b9e0a8ea81ff9ea7939a149a2191acea9230eca24eb0ed",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.sol",
+      "normalized_sha256": "8c447b2a7282b26735de11601dd33bab041bd51ef5634d0b51da46f4dad383f9",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IERC20.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 856,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IERC20.sol",
+      "source_sha256": "92caf3621f4aa8814e60b9993f51efc6aac791822d4f3d4c8e157706cffc6310",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.sol",
+      "normalized_sha256": "a878e2911d551b14ac18a10e11021a69d060d37f031b173dc9f7c587021b35f2",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__ISwapMining.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 191,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/ISwapMining.sol",
+      "source_sha256": "b52145ea11d09d00769e63983670277c4ad42a50d49d7abd0df67fd9b8f9b177",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.sol",
+      "normalized_sha256": "4639b5f6ef4f2b17d2797fbb69e07a1a4cf28d8df8780fdf7036325a3ec248e8",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__interfaces__IWETH.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 229,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/interfaces/IWETH.sol",
+      "source_sha256": "34ed7ef4ff0fb5f2e027f3c652ec6672ec52f159313f35a19c60ab57c08189cf",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.sol",
+      "normalized_sha256": "a26f3875108c06a878b345fce92410d6cce0285c65d03eafc9a6cc20bd824043",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__libraries__BabyLibrarySmartRouter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 6757,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/libraries/BabyLibrarySmartRouter.sol",
+      "source_sha256": "f9de22b5ad34fa256a37ece486fca9f147db7477c1867ad2b16d947aa921fa38",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.sol",
+      "normalized_sha256": "0da84271874a65ba332f8558a2fdc03058b9298a84f8423b2cb1f59f7cc83377",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__libraries__SafeMath.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 5817,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/libraries/SafeMath.sol",
+      "source_sha256": "d470abeade4c0346f3198eb7126413a25d4312b2ff5ac77e4bad12b5359b6fe4",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.sol",
+      "normalized_sha256": "96b11b1c7869a59f53e80211e406d98761e659dd101325900fd220f8552aafeb",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__libraries__TransferHelper.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1521,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/libraries/TransferHelper.sol",
+      "source_sha256": "b886e7183854bc07dcf0a2dba0febb8c0dfbc4e35ef61b08c73390e4201c5718",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.sol",
+      "normalized_sha256": "ed0a31874a07c8f5bfd32938cbdd12a9ae07ae9284920bbeebb6df4b7671604c",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__contracts__router__BabyBaseRouter.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 1182,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/router/BabyBaseRouter.sol",
+      "source_sha256": "0460c303b4905ad39f9c680c7cda76762a15472a7656fe203c5ecf1f9cfc1a42",
+      "status": "NO_FINDINGS"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 3,
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabySmartRouter.sol",
+        "stage": "auditor",
+        "status": "complete"
+      },
+      "critic_error_type": "RuntimeError",
+      "critic_status": {
+        "case_id": null,
+        "error_type": "ValueError",
+        "input_file": "proj-7f2ca22ae99a0db3__contracts__router__BabySmartRouter.json",
+        "stage": "critic",
+        "status": "error"
+      },
+      "error_log": "errors/06efdfd7c048-critic.txt",
+      "error_type": "ValueError",
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__contracts__router__BabySmartRouter.sol",
+      "normalized_sha256": "b9ee7ff43b871aabe8f19beedbe8af8d89b1935b58c40f4d017dd4e5fef88b09",
+      "ranker_status": {
+        "status": "NOT_RUN_PREDECESSOR_ERROR"
+      },
+      "source_bytes": 13301,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/contracts/router/BabySmartRouter.sol",
+      "source_sha256": "54d30f240b6f893ff328f4e4dd6a3695f2521c670ff246439ec6a5382d97389b",
+      "status": "CRITIC_ERROR"
+    },
+    {
+      "auditor_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__hardhat__console.sol",
+        "stage": "auditor",
+        "status": "no_findings"
+      },
+      "critic_status": {
+        "case_id": null,
+        "finding_count": 0,
+        "input_file": "proj-7f2ca22ae99a0db3__hardhat__console.json",
+        "stage": "critic",
+        "status": "skipped_empty_findings"
+      },
+      "input_id": "data/ACToolBench154/proj-7f2ca22ae99a0db3__hardhat__console.sol",
+      "normalized_sha256": "fe346e21e41b588957bf6f84f97302aec4cc4d24bb8d8006244fff3c799dfe5b",
+      "ranker_output": "ranker/proj-7f2ca22ae99a0db3__hardhat__console.json",
+      "ranker_status": {
+        "finding_count": 0,
+        "status": "complete"
+      },
+      "source_bytes": 62048,
+      "source_path": "datasets/actoolbench-cleaned-154/full/projects/proj-7f2ca22ae99a0db3/source_code/hardhat/console.sol",
+      "source_sha256": "27d7e349617dc857b040f2186bf577fe6169ede8bfc98be714ab4289b5793548",
+      "status": "NO_FINDINGS"
+    }
+  ],
+  "ground_truth_read": false,
+  "model_configuration": {
+    "automatic_retries": 0,
+    "direct_no_env_proxy": true,
+    "global_concurrency": 2,
+    "max_tokens": 65536,
+    "model": "deepseek-flash",
+    "project_timeout_seconds": 1200,
+    "provider": "deepseek",
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 300,
+    "temperature": null,
+    "thinking": {
+      "type": "enabled"
+    },
+    "top_p": null
+  },
+  "project_id": "proj-7f2ca22ae99a0db3",
+  "project_source_file_count": 16,
+  "prompt_identity": {
+    "layout": "prefix_stable_v2",
+    "sha256": "3912220feb1d59d980b1ef23261f927b4ecbf0645fdb1af0d89dc7cf93f30c37",
+    "version": "GPTLENS_NATIVE_AUDITOR_CRITIC_RANKER_V1"
+  },
+  "request_log": "requests.jsonl",
+  "schema": "GPTLENS_PROJECT_RESULT_V1",
+  "source_file_hashes_verified": true,
+  "source_hash_manifest_sha256": "bdc3ab09ab966300feeec6adc15e93cccc81e1bbd5f7182c0ced2923e90c6734",
+  "source_index_sha256": "9a103e37782f698e4aa6372a548ff25e39b8bf10be2119183add8240c7c9115e",
+  "started_utc": "2026-10-27T12:01:22.188612+00:00",
+  "status": "WITH_FAILURES",
+  "tool": "GPTLens",
+  "updated_utc": "2026-10-27T12:13:22.037377+00:00",
+  "usage": {
+    "completion_tokens": 124833,
+    "prompt_cache_hit_tokens": 5120,
+    "prompt_cache_miss_tokens": 54803,
+    "prompt_tokens": 59923,
+    "request_attempt_count": 18,
+    "usage_invalid_count": 0,
+    "usage_missing_count": 0
+  }
+}

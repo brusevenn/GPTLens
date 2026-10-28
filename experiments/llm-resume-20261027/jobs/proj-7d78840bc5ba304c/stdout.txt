@@ -1,0 +1,5 @@
+{"input_file": "proj-7d78840bc5ba304c__MainContractFlattened.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7d78840bc5ba304c__MainContractFlattened.json", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7d78840bc5ba304c__StakingRewards.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-7d78840bc5ba304c__StakingRewards.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-7d78840bc5ba304c", "case_ids": ["acb-211fb406a0478521"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 2, "failed_files": 0, "request_log": "requests.jsonl"}

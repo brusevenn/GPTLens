@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-c25baacfd4f5ff31__IERC20Metadata.json",
+  "stage": "critic",
+  "status": "skipped_empty_findings",
+  "finding_count": 0
+}

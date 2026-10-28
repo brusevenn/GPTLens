@@ -1,0 +1,34 @@
+{
+  "artifact": "experiments/llm-resume-20261027/jobs/proj-43d618cac604b1a8",
+  "case_ids": [
+    "acb-a09ce990683a40b5"
+  ],
+  "code_sha": "45b6797b6395436e563459e476d8396106890828",
+  "compile_config_sha256": "8fbade1a6cd55df8454d89ce411da9ba8331b1312165e30aa525d8eb36b65b5a",
+  "dataset": "ACToolBench154",
+  "ended_utc": "2026-10-27T10:52:58.003206+00:00",
+  "exit_code": 0,
+  "input_identity": "6b13c49b5d569ae87c0289e0804003f7d553f63730d94ad71c68e1a51ed9fd08",
+  "native_execution_status": "COMPLETE",
+  "native_output": "native/project-result.json",
+  "native_result_present": true,
+  "prior_request_attempts": 0,
+  "project_id": "proj-43d618cac604b1a8",
+  "prompt_layout": "prefix_stable_v2",
+  "source_file_inventory": [
+    [
+      "MainContractFlattened.sol",
+      "6d1a95086e726264bca68cb1b7c9eb6c0eaa36dc489bf6642e4c07fae308a1c2"
+    ],
+    [
+      "Token.sol",
+      "c11e4908ec21c06e2e967cde3b9f376e7952805b23bb61fe43d7036857e7bc85"
+    ]
+  ],
+  "source_hashes": [
+    "6d1a95086e726264bca68cb1b7c9eb6c0eaa36dc489bf6642e4c07fae308a1c2",
+    "c11e4908ec21c06e2e967cde3b9f376e7952805b23bb61fe43d7036857e7bc85"
+  ],
+  "status": "COMPLETE",
+  "tool": "GPTLens"
+}

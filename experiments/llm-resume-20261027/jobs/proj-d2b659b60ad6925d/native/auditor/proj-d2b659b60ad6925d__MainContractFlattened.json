@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "burn",
+    "code": "function burn(uint256 _value) public {\n    _burn(msg.sender, _value);\n}",
+    "vulnerability": "Arbitrary total supply destruction due to unit mismatch",
+    "reason": "The public `burn` function allows any user to pass an arbitrary `_value` to `_burn`, which treats `_value` as a reflection amount and subtracts it from both `_rOwned` and `_tTotal`. However, `_rOwned` is scaled by the reflection rate (`_rTotal / _tTotal`), which is typically enormous. Consequently, a user can pass `_value` equal to the entire `_tTotal` (token supply) while only losing a negligible amount of their `_rOwned`. The `require(_value <= _rOwned[msg.sender])` check will still pass because even a tiny token balance corresponds to a massive reflection amount. By calling `burn(_tTotal)`, an attacker can reduce `_tTotal` to zero, causing a division-by-zero in `_getRate` and permanently bricking all token transfers and balance queries. Even setting `_tTotal` to a very small value causes all balances to round to zero due to integer division, effectively destroying the token and locking any funds in external protocols (e.g., DEX liquidity pools or lending contracts). This is a critical, low-cost DoS and value-destruction vector.",
+    "file_name": "proj-d2b659b60ad6925d__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_burn",
+    "code": "function _burn(address _addr, uint256 _value) private {\n    require(_value <= _rOwned[_addr]);\n    _rOwned[_addr] = _rOwned[_addr].sub(_value);\n    _tTotal = _tTotal.sub(_value);\n    emit Transfer(_addr, dead, _value);\n}",
+    "vulnerability": "Reflection invariant break due to missing _rTotal update",
+    "reason": "The `_burn` function reduces `_rOwned` and `_tTotal` but does not reduce `_rTotal`. When called via the public `burn`, this leaves the total reflections `_rTotal` unchanged while decreasing the total token supply `_tTotal`. The reflection rate `_getRate()` is computed as `_rTotal / _tTotal`, so this causes the rate to increase dramatically. If `_tTotal` is set to zero, any call to `_getRate` reverts with a division by zero, permanently bricking the contract. If `_tTotal` is set to a very small value, the inflated rate causes `tokenFromReflection` to return zero for almost all accounts due to integer division, wiping out balances and effectively stealing value from all holders. This invariant break is easily exploitable by any token holder with a tiny balance, as the public `burn` allows burning the entire `_tTotal` with negligible `_rOwned` loss.",
+    "file_name": "proj-d2b659b60ad6925d__MainContractFlattened.sol"
+  },
+  {
+    "function_name": "_transferStandard",
+    "code": "function _transferStandard(address sender, address recipient, uint256 tAmount) private {\n    (uint256 rAmount, uint256 rTransferAmount, uint256 rFee, uint256 tTransferAmount, uint256 tFee, uint256 tDev, uint256 tBurn) = _getValues(tAmount);\n    _rOwned[sender] = _rOwned[sender].sub(rAmount);\n    _rOwned[recipient] = _rOwned[recipient].add(rTransferAmount);\n    _takeDev(tDev);\n    uint256 rBurn = tBurn.mul(_getRate());\n    _reflectFee(rFee, rBurn, tFee, tDev, tBurn);\n    _burn(sender, tBurn);\n    emit Transfer(sender, recipient, tTransferAmount);\n}",
+    "vulnerability": "Incorrect unit usage in _burn call breaks accounting and loses tokens",
+    "reason": "In `_transferStandard` (and similarly in `_transferToExcluded`, `_transferFromExcluded`, and `_transferBothExcluded`), after `_reflectFee` reduces `_rTotal` by `rFee + rBurn` and the sender's `_rOwned` is already reduced by `rAmount` (which includes `rBurn`), the code calls `_burn(sender, tBurn)`. The `_burn` function expects a reflection amount, but `tBurn` is a token amount. This subtracts an extra, incorrect amount from the sender's `_rOwned` without a corresponding reduction in `_rTotal`. This breaks the reflection invariant `sum(_rOwned) == _rTotal`, causing the sum of all balances to be less than `_tTotal`. Over time or with repeated transfers, this discrepancy grows, leading to understated balances and potential rounding-to-zero for holders. An attacker can repeatedly trigger transfers with burn fees to gradually devalue all token balances, griefing holders and potentially locking funds in external contracts that rely on accurate `balanceOf` values. The same flaw exists in all transfer variants that call `_burn(sender, tBurn)`.",
+    "file_name": "proj-d2b659b60ad6925d__MainContractFlattened.sol"
+  }
+]

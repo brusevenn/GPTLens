@@ -1,0 +1,3 @@
+{"input_file": "proj-6dbac1456fe465a2__Registry.sol", "status": "complete", "finding_count": 3}
+{"input_file": "proj-6dbac1456fe465a2__Registry.json", "status": "complete", "finding_count": 3}
+{"project_id": "proj-6dbac1456fe465a2", "case_ids": ["acb-744cdd02208a262f", "acb-9835454d49e10a38"], "status": "COMPLETE", "execution_status": "PROJECT_COMPLETE", "file_count": 1, "failed_files": 0, "request_log": "requests.jsonl"}

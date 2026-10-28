@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "mint",
+    "code": "function mint(address to_, uint256 id_, uint256 amount_, bytes memory data_) public onlyMinter {\n        _mint(to_, id_, amount_, data_);\n    }",
+    "vulnerability": "Broken onlyMinter modifier allows unrestricted minting",
+    "reason": "The onlyMinter modifier evaluates `msg.sender == minterAddress;` but does not use `require` or any revert mechanism, so the comparison result is discarded and execution always continues. Because `mint` is public and relies solely on this modifier for authorization, any attacker can call it with arbitrary `to_`, `id_`, and `amount_` values. This allows the attacker to mint unlimited tickets to themselves or any address, completely breaking the token supply and ownership model. The exploit is direct, on-chain, and requires no special privileges.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleTickets.sol"
+  },
+  {
+    "function_name": "mintBatch",
+    "code": "function mintBatch(\n        address to_,\n        uint256[] memory ids_,\n        uint256[] memory amounts_,\n        bytes memory data_\n    ) public onlyMinter {\n        _mintBatch(to_, ids_, amounts_, data_);\n    }",
+    "vulnerability": "Broken onlyMinter modifier allows unrestricted batch minting",
+    "reason": "The same broken onlyMinter modifier does not revert when `msg.sender` is not `minterAddress`. Therefore any attacker can call `mintBatch` and mint arbitrary arrays of token IDs and amounts to any recipient. This allows creating unlimited balances for any token ID in a single transaction, bypassing the intended minter authorization. It is directly exploitable and can be used to inflate supply, steal value tied to scarce tickets, or disrupt any marketplace relying on legitimate ticket balances.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleTickets.sol"
+  },
+  {
+    "function_name": "initialize",
+    "code": "function initialize(\n        address ticketRenderer_,\n        address royaltyRecipient_,\n        address minterAddress_,\n        uint royaltyFee_\n    ) public initializer {\n        __ERC1155_init('');\n        __Ownable_init();\n        __ERC1155Burnable_init();\n        royaltyRecipient = royaltyRecipient_;\n        minterAddress = minterAddress_;\n        royaltyFee = royaltyFee_;\n        TicketRendererContract = TicketRenderer(ticketRenderer_);\n    }",
+    "vulnerability": "Unprotected initializer can be front-run",
+    "reason": "`initialize` is public and protected only by the `initializer` modifier, with no check that `msg.sender` is the deployer or an authorized admin. In a typical proxy deployment, the proxy storage starts uninitialized even though the implementation constructor calls `_disableInitializers()`, because that call only affects the implementation contract's own storage. If the proxy is not initialized atomically in the deployment transaction, an attacker can front-run the legitimate initialization call and set `minterAddress_` to themselves, `royaltyRecipient_` to themselves, `royaltyFee_` to an arbitrary value, and `ticketRenderer_` to a malicious contract. This gives the attacker permanent control over minting, royalties, and metadata rendering, making it directly exploitable and highly beneficial to the attacker.",
+    "file_name": "proj-4681bde04cc701c1__RabbitHoleTickets.sol"
+  }
+]

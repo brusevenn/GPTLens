@@ -1,0 +1,23 @@
+[
+  {
+    "function_name": "initWallet",
+    "code": "function initWallet(address[] _owners, uint _required, uint _daylimit) only_uninitialized {\n    initDaylimit(_daylimit);\n    initMultiowned(_owners, _required);\n}",
+    "vulnerability": "Unprotected initialization of the WalletLibrary contract",
+    "reason": "The WalletLibrary contract itself has m_numOwners == 0 initially. The only_uninitialized modifier only checks whether m_numOwners > 0, which is false on the library contract. Therefore, anyone can call initWallet directly on the WalletLibrary contract and pass an array containing their own address and _required = 1. This sets m_owners[1] = msg.sender and m_ownerIndex[msg.sender] = 1, making the attacker an owner of the library with a requirement of 1 confirmation. Once the attacker is the owner of the library, they can call privileged functions such as kill. This is the root cause of the infamous Parity Wallet library takeover, which was exploited to freeze millions of dollars.",
+    "file_name": "proj-e100094fbbf78280__WalletLibrary.sol"
+  },
+  {
+    "function_name": "kill",
+    "code": "function kill(address _to) onlymanyowners(sha3(msg.data)) external {\n    suicide(_to);\n}",
+    "vulnerability": "Selfdestruct of WalletLibrary by unauthorized owner",
+    "reason": "The kill function uses onlymanyowners(sha3(msg.data)) to restrict access to the multi-signature owners of the library. However, because the library can be initialized by anyone via the initWallet vulnerability, an attacker can become the sole owner with m_required = 1. The attacker can then call kill(address) and the modifier will pass. The suicide(_to) call selfdestructs the WalletLibrary contract, removing its code permanently. Since every Wallet instance uses delegatecall to this fixed library address for all logic, and the fallback function does not check the success of the delegatecall, all wallets become non-functional. Any funds held in these wallets are permanently frozen because no code exists at the library address to execute withdrawal or ownership functions. This is the exact mechanism of the November 2017 Parity freeze.",
+    "file_name": "proj-e100094fbbf78280__WalletLibrary.sol"
+  },
+  {
+    "function_name": "isOwner",
+    "code": "function isOwner(address _addr) constant returns (bool) {\n    return _walletLibrary.delegatecall(msg.data);\n}",
+    "vulnerability": "Incorrect delegatecall return value handling causes isOwner to always return true",
+    "reason": "The isOwner function in the Wallet contract returns the result of a low-level delegatecall. In Solidity, delegatecall returns a boolean indicating whether the call succeeded, not the actual return value of the called function. The library's isOwner function returns a bool representing ownership, but the Wallet contract discards that return data and simply returns the success flag. Because the library's isOwner function does not throw for non-owners (it simply returns false), the delegatecall always succeeds, so the Wallet contract's isOwner always returns true for any address. The same bug exists in the hasConfirmed function. This breaks any external integration that relies on wallet.isOwner(addr) to check ownership, potentially allowing unauthorized users to be treated as owners. It also misleads users and dApps about the actual ownership and confirmation status of the wallet.",
+    "file_name": "proj-e100094fbbf78280__WalletLibrary.sol"
+  }
+]

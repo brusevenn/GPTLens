@@ -1,0 +1,7 @@
+{
+  "case_id": null,
+  "input_file": "proj-591a2b83b81e22c6__@openzeppelin__contracts-upgradeable__proxy__ERC1967__ERC1967UpgradeUpgradeable.sol",
+  "stage": "auditor",
+  "status": "no_findings",
+  "finding_count": 0
+}
